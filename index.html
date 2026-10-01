@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EEEBF3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16151E" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Memorándum, tu fábrica de recuerdos: guarda lo que vives, lees y escuchas con el color de cómo te hizo sentir.">
 <title>Memorándum</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +43,7 @@ img{max-width:100%}
 
 /* ---------- estructura ---------- */
 .wrap{max-width:760px;margin:0 auto;padding:0 20px 140px}
-header.top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:22px 0 8px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0 8px}
 .brand{display:flex;flex-direction:column;line-height:1}
 .brand b{font-family:var(--serif);font-weight:400;font-size:30px;letter-spacing:-.01em}
 .brand span{font-size:13px;color:var(--muted);margin-top:4px}
@@ -197,6 +200,9 @@ dialog::backdrop{background:rgba(20,18,32,.45)}
 .toast.on{opacity:1}
 @media (min-width:860px){.toast{bottom:32px}}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.me{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-family:var(--serif);font-size:20px;display:inline-flex;align-items:center;justify-content:center;padding:0;margin-left:auto}
+.me[aria-current="page"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+@media (min-width:860px){.me{margin-left:8px}}
 </style>
 </head>
 <body>
@@ -204,6 +210,7 @@ dialog::backdrop{background:rgba(20,18,32,.45)}
   <header class="top">
     <div class="brand"><b>Memorándum</b><span id="tagline"></span></div>
     <nav class="tabs" id="nav"></nav>
+    <button class="me" id="me" data-act="me"></button>
   </header>
   <main id="main"></main>
 </div>
@@ -271,6 +278,12 @@ es:{
   yourCopy:'Tu copia', copyText:'Copia este texto y guárdalo en un archivo .json.', copied:'Ya la he guardado',
   due:a=>`Toca guardar tu copia ${a}.`, dueLast:d=>` La última fue el ${d}.`, dueNone:' Aún no has guardado ninguna.', later:'Recordármelo mañana',
   noName:'Sin nombre',
+  meBtn:'Perfil y ajustes', meTitle:'Perfil y ajustes',
+  meLead:'Todo es opcional y solo lo ves tú. Sirve para que Memorándum te hable a ti y, más adelante, para que los informes con inteligencia artificial tengan un poco de contexto.',
+  pfName:'Nombre o alias', pfBirth:'Año de nacimiento', pfAge:n=>`Ahora tienes unos ${n} años.`, pfAbout:'Sobre ti',
+  pfAboutPh:'Un par de frases: a qué te dedicas, qué te mueve, qué etapa estás viviendo…',
+  onbName:'¿Cómo quieres que te llamemos?', onbNamePh:'Tu nombre o un alias (opcional)',
+  youWere:n=>`. Tenías ${n} años.`,
   otherType:'+ Otro tipo', newTypePh:'Por ejemplo: sueño, viaje, receta', createType:'Crear tipo', titleLbl:'Título', customPh:'Lo que quieras recordar de esto',
   typesTitle:'Tipos de recuerdo', typesLead:'Además de los siete tipos de siempre, puedes crear los tuyos: sueños, viajes, recetas, conciertos… Si borras uno, sus recuerdos pasan a Idea.',
   typeName:'Nombre del tipo', addType:'Añadir tipo', newTypeName:'Nombre del nuevo tipo', tTypeCreated:n=>`Tipo «${n}» creado.`,
@@ -368,6 +381,12 @@ ca:{
   yourCopy:'La teva còpia', copyText:`Copia aquest text i desa'l en un fitxer .json.`, copied:`Ja l'he desada`,
   due:a=>`Toca desar la teva còpia ${a}.`, dueLast:d=>` L'última va ser el ${d}.`, dueNone:` Encara no n'has desat cap.`, later:`Recorda-m'ho demà`,
   noName:'Sense nom',
+  meBtn:'Perfil i ajustos', meTitle:'Perfil i ajustos',
+  meLead:`Tot és opcional i només ho veus tu. Serveix perquè Memorándum et parli a tu i, més endavant, perquè els informes amb intel·ligència artificial tinguin una mica de context.`,
+  pfName:'Nom o àlies', pfBirth:'Any de naixement', pfAge:n=>`Ara tens uns ${n} anys.`, pfAbout:'Sobre tu',
+  pfAboutPh:`Un parell de frases: a què et dediques, què et mou, quina etapa estàs vivint…`,
+  onbName:'Com vols que et diguem?', onbNamePh:'El teu nom o un àlies (opcional)',
+  youWere:n=>`. Tenies ${n} anys.`,
   otherType:'+ Un altre tipus', newTypePh:'Per exemple: somni, viatge, recepta', createType:'Crea el tipus', titleLbl:'Títol', customPh:`El que vulguis recordar d'això`,
   typesTitle:'Tipus de record', typesLead:`A més dels set tipus de sempre, en pots crear de teus: somnis, viatges, receptes, concerts… Si n'esborres un, els seus records passen a Idea.`,
   typeName:'Nom del tipus', addType:'Afegeix un tipus', newTypeName:'Nom del nou tipus', tTypeCreated:n=>`Tipus «${n}» creat.`,
@@ -425,10 +444,10 @@ function guessLang(){try{return (navigator.language||'').toLowerCase().startsWit
 const DEFAULT_SETTINGS={backupFreq:'semana',lastBackup:null,snoozeUntil:null,onboarded:false,lang:guessLang()};
 function freshState(lang){
   const L=I18N[lang]||I18N.es;
-  return {emotions:DEFAULT_EMOTIONS.map(e=>({...e,name:L.defEmo[e.id]})),drawers:DEFAULT_DRAWERS.map(id=>({id,name:L.defDrawer[id]})),memories:[],customTypes:[],settings:{...DEFAULT_SETTINGS,lang}};
+  return {emotions:DEFAULT_EMOTIONS.map(e=>({...e,name:L.defEmo[e.id]})),drawers:DEFAULT_DRAWERS.map(id=>({id,name:L.defDrawer[id]})),memories:[],customTypes:[],profile:{name:'',birthYear:'',about:''},settings:{...DEFAULT_SETTINGS,lang}};
 }
 let S=freshState(DEFAULT_SETTINGS.lang);
-function ensureSettings(){if(!Array.isArray(S.customTypes))S.customTypes=[];S.settings={...DEFAULT_SETTINGS,...(S.settings||{})};if(!I18N[S.settings.lang])S.settings.lang='es'}
+function ensureSettings(){if(!Array.isArray(S.customTypes))S.customTypes=[];S.profile={name:'',birthYear:'',about:'',...(S.profile||{})};S.settings={...DEFAULT_SETTINGS,...(S.settings||{})};if(!I18N[S.settings.lang])S.settings.lang='es'}
 
 let view='hoy', firstHoy=true;
 let filters={q:'',emotion:null,type:'',drawer:'',tag:null,date:null};
@@ -498,7 +517,7 @@ const LS='memorandum.v1';
 let cloud=null; let downloads=null;
 function saveLocal(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
 function loadLocal(){try{const r=localStorage.getItem(LS);if(r){const p=JSON.parse(r);if(p&&Array.isArray(p.emotions)&&Array.isArray(p.memories))return p}}catch(e){}return null}
-async function savePalette(){saveLocal();if(!cloud)return;try{await cloud.paletteDoc.set({emotions:S.emotions,drawers:S.drawers,customTypes:S.customTypes||[],settings:S.settings})}catch(e){cloudFail()}}
+async function savePalette(){saveLocal();if(!cloud)return;try{await cloud.paletteDoc.set({emotions:S.emotions,drawers:S.drawers,customTypes:S.customTypes||[],profile:S.profile||{},settings:S.settings})}catch(e){cloudFail()}}
 async function saveMem(m){saveLocal();clearTimeout(window._snapT);window._snapT=setTimeout(autoSnapshot,1500);if(!cloud)return;try{await cloud.memCol.doc(m.id).set(clone(m))}catch(e){cloudFail()}}
 async function deleteMemCloud(id){saveLocal();if(!cloud)return;try{await cloud.memCol.doc(id).delete()}catch(e){cloudFail()}}
 function cloudFail(){toast(t('tCloudFail'))}
@@ -515,7 +534,7 @@ async function initCloud(){
     cloud={paletteDoc,memCol};
     if(p.exists){
       const d=p.data();
-      S.emotions=clone(d.emotions||S.emotions);S.drawers=clone(d.drawers||[]);S.customTypes=clone(d.customTypes||S.customTypes||[]);
+      S.emotions=clone(d.emotions||S.emotions);S.drawers=clone(d.drawers||[]);S.customTypes=clone(d.customTypes||S.customTypes||[]);S.profile={...(S.profile||{}),...(d.profile||{})};
       S.settings={...DEFAULT_SETTINGS,...S.settings,...(d.settings||{}),onboarded:!!(d.settings&&d.settings.onboarded)||S.settings.onboarded};
       S.memories=ms.docs.map(x=>clone(x.data()));
       ensureSettings();saveLocal();
@@ -539,6 +558,7 @@ const ICONS={
 function renderNav(){
   const n=$('#nav');n.setAttribute('aria-label',t('sections'));
   const tab=(v,k)=>`<button data-act="nav" data-v="${v}" aria-current="${view===v?'page':'false'}">${ICONS[v]}${t(k)}</button>`;
+  const me=$('#me');if(me){const nm=(S.profile&&S.profile.name||'').trim();me.innerHTML=nm?esc(nm.charAt(0).toUpperCase()):'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4.1-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg>';me.setAttribute('aria-label',t('meBtn'));me.setAttribute('aria-current',view==='perfil'?'page':'false')}
   n.innerHTML=tab('hoy','navHoy')+tab('archivo','navArchivo')+`<button class="plus" data-act="new" aria-label="${esc(t('navNew'))}">${ICONS.plus}<span>${t('navNew')}</span></button>`+tab('paleta','navPaleta')+tab('informe','navInforme');
 }
 function go(v){view=v;render();window.scrollTo(0,0)}
@@ -549,6 +569,7 @@ function render(){
   else if(view==='archivo'){m.innerHTML=vArchivo();if(archMode==='constelacion')drawSky()}
   else if(view==='paleta')m.innerHTML=vPaleta();
   else if(view==='informe')m.innerHTML=vInforme();
+  else if(view==='perfil')m.innerHTML=vPerfil();
 }
 
 /* ---------- Hoy ---------- */
@@ -570,7 +591,8 @@ function resurfPool(){
 function vHoy(){
   const grow=firstHoy;firstHoy=false;
   const today=iso(new Date());
-  let h=`<h1 class="greet">${t('hello',new Date().getHours())}.</h1>
+  const nm=(S.profile.name||'').trim();
+  let h=`<h1 class="greet">${t('hello',new Date().getHours())}${nm?', '+esc(nm):''}.</h1>
   <p class="today-date">${esc(cap(fmt(today,{weekday:'long',day:'numeric',month:'long'})))}</p>
   <div class="strip${grow?' grow':''}" aria-label="${esc(t('stripCap'))}">${stripHTML()}</div>
   <div class="strip-cap"><span>${t('stripCap')}</span><span>${t('today')}</span></div>
@@ -586,7 +608,8 @@ function vHoy(){
   if(pool.length){
     const m=pool[resurfIdx%pool.length];
     const sameDay=m.date.slice(5)===today.slice(5)&&m.date<today;
-    const when=sameDay?t('sameDay',m.date.slice(0,4)):t('fromArchive',fmt(m.date));
+    const by=parseInt(S.profile.birthYear,10);const ageThen=(by>1900&&by<=+m.date.slice(0,4))?(+m.date.slice(0,4)-by):null;
+    const when=(sameDay?t('sameDay',m.date.slice(0,4)):t('fromArchive',fmt(m.date)))+(ageThen!=null&&ageThen<120&&daysAgo(m.date)>=300?t('youWere',ageThen):'');
     h+=`<h2 class="sec">${t('backMem')}</h2>
     <div class="resurf" style="--c:${mainColor(m)}"><div class="when">${esc(when)}</div>
       <h3>${esc(memTitle(m))}</h3>
@@ -724,7 +747,21 @@ function vPaleta(){
   <p class="lead">${esc(t('typesLead'))}</p>
   <div class="drawers">${(S.customTypes||[]).map(c=>`<div class="drawer"><input value="${esc(c.name)}" data-field="type-name" data-id="${c.id}" aria-label="${esc(t('typeName'))}"><small>${S.memories.filter(m=>m.type===c.id).length}</small><button class="btn quiet" data-act="type-go" data-id="${c.id}">${t('open')}</button><button class="btn quiet danger" data-act="type-del" data-id="${c.id}">${t('del')}</button></div>`).join('')}
     <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newTypeName'))}" data-field="new-type-pal" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="type-add">${t('addType')}</button></div>
-  </div>
+  </div>`;
+}
+
+function vPerfil(){
+  const p=S.profile,by=parseInt(p.birthYear,10),now=new Date().getFullYear();
+  const age=(by>1900&&by<=now)?now-by:null;
+  return `<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${t('meTitle')}</h1>
+  <p class="lead">${esc(t('meLead'))}</p>
+  <label class="f" for="pf-name">${t('pfName')}</label>
+  <input class="in" id="pf-name" data-field="pf-name" value="${esc(p.name)}" maxlength="40" autocomplete="nickname">
+  <label class="f" for="pf-birth">${t('pfBirth')}</label>
+  <input class="in" id="pf-birth" data-field="pf-birthYear" value="${esc(p.birthYear)}" inputmode="numeric" maxlength="4" style="max-width:160px" placeholder="1988">
+  <p class="note" id="pf-age" style="margin-top:6px">${age!=null&&age<120?esc(t('pfAge',age)):''}</p>
+  <label class="f" for="pf-about">${t('pfAbout')}</label>
+  <textarea class="in" id="pf-about" data-field="pf-about" maxlength="600" placeholder="${esc(t('pfAboutPh'))}" style="min-height:100px">${esc(p.about)}</textarea>
   <h2 class="sec">${t('backupTitle')}</h2>
   <p class="note">${esc(cloud?t('savedCloud'):t('savedLocal'))} ${esc(t('backupNote'))}</p>
   <label class="f">${esc(t('remindMe'))}</label>
@@ -990,7 +1027,7 @@ $('#importer').addEventListener('change',async e=>{
     const p=JSON.parse(await f.text());
     if(!Array.isArray(p.emotions)||!Array.isArray(p.memories))throw 0;
     const oldIds=S.memories.map(m=>m.id);
-    S={emotions:p.emotions,drawers:p.drawers||[],memories:p.memories,customTypes:p.customTypes||[],settings:{...S.settings,...(p.settings||{}),onboarded:true,lang:lang()}};ensureSettings();
+    S={emotions:p.emotions,drawers:p.drawers||[],memories:p.memories,customTypes:p.customTypes||[],profile:p.profile||S.profile,settings:{...S.settings,...(p.settings||{}),onboarded:true,lang:lang()}};ensureSettings();
     render();toast(t('tImported',S.memories.length));
     await savePalette();
     if(cloud){for(const id of oldIds)if(!memOf(id))await deleteMemCloud(id);for(const m of S.memories)await saveMem(m)}
@@ -1050,7 +1087,9 @@ function openOnboarding(i=0){
   onb=i;onbOpen=true;const steps=t('onb');const last=onb===steps.length-1;
   const [title,body]=steps[onb];const txt=typeof body==='function'?body(!!cloud):body;
   openDlg(`<div class="dlg-head"><span class="note">${t('of',onb+1,steps.length)}</span>${last?'':`<button class="btn quiet" data-act="onb-done">${t('skip')}</button>`}</div>
-  ${onb===0?`<div style="margin-top:14px">${langChips(true)}</div>`:''}
+  ${onb===0?`<div style="margin-top:14px">${langChips(true)}</div>
+  <label class="f" for="onb-name" style="margin-top:20px">${t('onbName')}</label>
+  <input class="in" id="onb-name" data-field="pf-name" value="${esc(S.profile.name)}" maxlength="40" placeholder="${esc(t('onbNamePh'))}" autocomplete="nickname">`:''}
   <div style="margin:22px 0 6px">${onbArt(onb)}</div>
   <h2 class="detail-title" style="margin-top:22px">${esc(title)}</h2>
   <p class="detail-text" style="font-family:var(--sans);font-size:17px;margin:10px 0 0;max-width:46ch">${esc(txt)}</p>
@@ -1110,6 +1149,7 @@ document.addEventListener('click',e=>{
   const a=b.dataset.act,v=b.dataset.v,id=b.dataset.id;
   switch(a){
     case 'nav':closeDlg();go(v);break;
+    case 'me':closeDlg();go('perfil');break;
     case 'new':openEditor(null,{type:b.dataset.type,emo:b.dataset.emo});break;
     case 'open':openDetail(id);break;
     case 'close':closeDlg();break;
@@ -1172,6 +1212,7 @@ document.addEventListener('keydown',e=>{
     else if(el.matches('g.node')){e.preventDefault();openDetail(el.dataset.id)}
     else if(el.matches('[data-field="new-drawer-pal"]')){e.preventDefault();document.querySelector('[data-act="drawer-add"]').click()}
     else if(el.matches('[data-ed-newdrawer]')){e.preventDefault();document.querySelector('[data-act="ed-adddrawer"]').click()}
+    else if(el.id==='onb-name'){e.preventDefault();openOnboarding(onb+1)}
     else if(el.matches('[data-ed-newtype]')){e.preventDefault();document.querySelector('[data-act="ed-addtype"]').click()}
     else if(el.matches('[data-field="new-type-pal"]')){e.preventDefault();document.querySelector('[data-act="type-add"]').click()}
   }
@@ -1186,6 +1227,13 @@ document.addEventListener('input',e=>{
   if(el.matches('[data-ed-newtype]')){newTypeName=el.value;return}
   if(el.id==='story-q'){storyQuote=el.checked;drawStory();return}
   const f=el.dataset.field;if(!f)return;
+  if(f.startsWith('pf-')){
+    const k=f.slice(3);let v=el.value;
+    if(k==='birthYear'){v=v.replace(/\D/g,'').slice(0,4);if(el.value!==v)el.value=v;const by=parseInt(v,10),now=new Date().getFullYear();const ag=$('#pf-age');if(ag)ag.textContent=(by>1900&&by<=now&&now-by<120)?t('pfAge',now-by):''}
+    S.profile[k]=v;saveLocal();clearTimeout(saveT);saveT=setTimeout(savePalette,700);
+    if(k==='name')renderNav();
+    return;
+  }
   if(f==='q'){filters.q=el.value;if(archMode==='lista')$('#results').innerHTML=resultsHTML();else drawSky();return}
   if(f==='emo-name'||f==='emo-color'||f==='drawer-name'||f==='type-name'){
     const list=f==='drawer-name'?S.drawers:f==='type-name'?S.customTypes:S.emotions;const it=list.find(x=>x.id===el.dataset.id);if(!it)return;
@@ -1203,6 +1251,17 @@ document.addEventListener('change',e=>{
 /* =========================================================
    Arranque
    ========================================================= */
+if(!window.claude){
+  const add=(tag,attrs)=>{const el=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));document.head.appendChild(el)};
+  add('link',{rel:'manifest',href:'manifest.webmanifest'});
+  add('link',{rel:'icon',type:'image/png',sizes:'32x32',href:'icons/favicon-32.png'});
+  add('link',{rel:'apple-touch-icon',href:'icons/apple-touch-icon.png'});
+  add('meta',{name:'apple-mobile-web-app-capable',content:'yes'});
+  add('meta',{name:'mobile-web-app-capable',content:'yes'});
+  add('meta',{name:'apple-mobile-web-app-title',content:'Memorándum'});
+  add('meta',{name:'apple-mobile-web-app-status-bar-style',content:'default'});
+  if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
 const local=loadLocal();if(local)S=local;ensureSettings();
 applyLang();render();
 initCloud().catch(()=>{}).finally(()=>{ensureSettings();applyLang();autoSnapshot();render();if(!S.settings.onboarded)openOnboarding(0)});
