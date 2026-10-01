@@ -46,7 +46,7 @@ img{max-width:100%}
 header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0 8px}
 .brand{display:flex;flex-direction:column;line-height:1}
 .brand b{font-family:var(--serif);font-weight:400;font-size:30px;letter-spacing:-.01em}
-.brand span{font-size:13px;color:var(--muted);margin-top:4px}
+.brand>span{font-size:13px;color:var(--muted);margin-top:4px}
 
 nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--surface) 92%,transparent);
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);
@@ -203,12 +203,14 @@ dialog::backdrop{background:rgba(20,18,32,.45)}
 .me{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-family:var(--serif);font-size:20px;display:inline-flex;align-items:center;justify-content:center;padding:0;margin-left:auto}
 .me[aria-current="page"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 @media (min-width:860px){.me{margin-left:8px}}
+.brand b,.brand>span{white-space:nowrap}
+nav.tabs .plus span{white-space:nowrap}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <div class="brand"><b>Memorándum</b><span id="tagline"></span></div>
+    <div class="brand"><b id="brandname">Memorándum</b><span id="tagline"></span></div>
     <nav class="tabs" id="nav"></nav>
     <button class="me" id="me" data-act="me"></button>
   </header>
@@ -223,7 +225,7 @@ dialog::backdrop{background:rgba(20,18,32,.45)}
    ========================================================= */
 const I18N={
 es:{
-  locale:'es-ES', tagline:'fábrica de recuerdos', docTitle:'Memorándum — fábrica de recuerdos',
+  locale:'es-ES', brand:'Memorándum', tagline:'fábrica de recuerdos', docTitle:'Memorándum — fábrica de recuerdos',
   navHoy:'Hoy', navArchivo:'Archivo', navPaleta:'Paleta', navInforme:'Informe', navNew:'Guardar un recuerdo', sections:'Secciones',
   hello:h=>h<6?'Buenas noches':h<13?'Buenos días':h<21?'Buenas tardes':'Buenas noches',
   nMem:c=>`${c} recuerdo${c===1?'':'s'}`, nDays:c=>`${c} día${c===1?'':'s'}`,
@@ -326,7 +328,7 @@ es:{
   ]
 },
 ca:{
-  locale:'ca-ES', tagline:'fàbrica de records', docTitle:'Memorándum — fàbrica de records',
+  locale:'ca-ES', brand:'Memoràndum', tagline:'fàbrica de records', docTitle:'Memoràndum — fàbrica de records',
   navHoy:'Avui', navArchivo:'Arxiu', navPaleta:'Paleta', navInforme:'Informe', navNew:'Desa un record', sections:'Seccions',
   hello:h=>h<6?'Bona nit':h<13?'Bon dia':h<21?'Bona tarda':'Bona nit',
   nMem:c=>`${c} record${c===1?'':'s'}`, nDays:c=>c===1?'1 dia':`${c} dies`,
@@ -374,7 +376,7 @@ ca:{
   tSavedRel:x=>`Desat. Ressona amb «${x}».`, tSavedN:c=>`Desat. Ja tens ${c} record${c===1?'':'s'} a l'arxiu.`,
   tChanged:'Canvis desats.', tDeleted:'Record esborrat.', tLinked:'Enllaçats.', tSeed:'Exemples carregats. Els pots esborrar quan vulguis.',
   tCloudFail:`No s'ha pogut desar al teu compte. Queda desat en aquest dispositiu.`, tBackup:'Còpia desada.', tBackupMarked:'Còpia anotada.',
-  tImported:c=>`Còpia importada: ${c} record${c===1?'':'s'}.`, tBadFile:'Aquest fitxer no és una còpia de Memorándum.', tRestored:d=>`Còpia restaurada: ${d}.`,
+  tImported:c=>`Còpia importada: ${c} record${c===1?'':'s'}.`, tBadFile:'Aquest fitxer no és una còpia de Memoràndum.', tRestored:d=>`Còpia restaurada: ${d}.`,
   tImg:'Imatge desada.', tHold:'Mantén premuda la imatge per desar-la.', again:'Torna a prémer per esborrar', againRestore:'Torna a prémer per restaurar',
   storyTitle:'Targeta per a stories', storyAlt:'Previsualització de la targeta', includeQuote:'Inclou una frase:', saveImg:'Desa la imatge',
   cardTitle:p=>({semana:'La meva setmana',mes:'El meu mes',anio:'El meu any'}[p]), cardColor:'en color', cardWords:'Paraules que han tornat: ',
@@ -477,7 +479,10 @@ function setLang(l){
 }
 function applyLang(){
   document.documentElement.lang=lang();document.title=t('docTitle');
-  $('#tagline').textContent=t('tagline');renderNav();
+  $('#brandname').textContent=t('brand');$('#tagline').textContent=t('tagline');
+  const ml=$('#manifest-link');if(ml)ml.setAttribute('href',lang()==='ca'?'manifest-ca.webmanifest':'manifest.webmanifest');
+  const at=$('#apple-title');if(at)at.setAttribute('content',t('brand'));
+  renderNav();
 }
 
 /* =========================================================
@@ -980,7 +985,7 @@ async function drawStory(){
   const W=1080,H=1920,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
   const serif='"Instrument Serif", Georgia, serif',sans='Figtree, system-ui, sans-serif';
   x.fillStyle='#1C1A28';x.fillRect(0,0,W,H);
-  x.fillStyle='#A9A4C0';x.font=`52px ${serif}`;x.fillText('Memorándum',90,160);
+  x.fillStyle='#A9A4C0';x.font=`52px ${serif}`;x.fillText(t('brand'),90,160);
   x.fillStyle='#EFECF7';x.font=`128px ${serif}`;
   const title=t('cardTitle',rep.period);const tw=x.measureText(title).width;if(tw>900)x.font=`${Math.floor(128*900/tw)}px ${serif}`;
   x.fillText(title,90,340);x.font=`italic 128px ${serif}`;x.fillText(t('cardColor'),90,460);
@@ -1007,7 +1012,7 @@ async function deliverFile(name,data,mime){
   const blob=data instanceof Blob?data:new Blob([data],{type:mime});
   try{
     const f=new File([blob],name,{type:mime});
-    if(/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)&&navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Memorándum'});return 'ok'}
+    if(/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)&&navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:t('brand')});return 'ok'}
   }catch(e){if(e&&e.name==='AbortError')return 'declined'}
   const u=URL.createObjectURL(blob);const el=document.createElement('a');el.href=u;el.download=name;document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);
   return 'ok';
@@ -1253,12 +1258,12 @@ document.addEventListener('change',e=>{
    ========================================================= */
 if(!window.claude){
   const add=(tag,attrs)=>{const el=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));document.head.appendChild(el)};
-  add('link',{rel:'manifest',href:'manifest.webmanifest'});
+  add('link',{rel:'manifest',href:'manifest.webmanifest',id:'manifest-link'});
   add('link',{rel:'icon',type:'image/png',sizes:'32x32',href:'icons/favicon-32.png'});
   add('link',{rel:'apple-touch-icon',href:'icons/apple-touch-icon.png'});
   add('meta',{name:'apple-mobile-web-app-capable',content:'yes'});
   add('meta',{name:'mobile-web-app-capable',content:'yes'});
-  add('meta',{name:'apple-mobile-web-app-title',content:'Memorándum'});
+  add('meta',{name:'apple-mobile-web-app-title',content:t('brand'),id:'apple-title'});
   add('meta',{name:'apple-mobile-web-app-status-bar-style',content:'default'});
   if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 }

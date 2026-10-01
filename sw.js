@@ -1,7 +1,7 @@
 // Memorándum: funcionamiento sin conexión.
 // Cambia VERSION cada vez que subas un index.html nuevo para que los teléfonos se actualicen.
-const VERSION='memorandum-v5';
-const CORE=['./','index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png','icons/favicon-32.png'];
+const VERSION='memorandum-v7';
+const CORE=['./','index.html','manifest.webmanifest','manifest-ca.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png','icons/favicon-32.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
