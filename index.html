@@ -271,6 +271,9 @@ es:{
   yourCopy:'Tu copia', copyText:'Copia este texto y guárdalo en un archivo .json.', copied:'Ya la he guardado',
   due:a=>`Toca guardar tu copia ${a}.`, dueLast:d=>` La última fue el ${d}.`, dueNone:' Aún no has guardado ninguna.', later:'Recordármelo mañana',
   noName:'Sin nombre',
+  otherType:'+ Otro tipo', newTypePh:'Por ejemplo: sueño, viaje, receta', createType:'Crear tipo', titleLbl:'Título', customPh:'Lo que quieras recordar de esto',
+  typesTitle:'Tipos de recuerdo', typesLead:'Además de los siete tipos de siempre, puedes crear los tuyos: sueños, viajes, recetas, conciertos… Si borras uno, sus recuerdos pasan a Idea.',
+  typeName:'Nombre del tipo', addType:'Añadir tipo', newTypeName:'Nombre del nuevo tipo', tTypeCreated:n=>`Tipo «${n}» creado.`,
   of:(a,b)=>`${a} de ${b}`, skip:'Saltar', nextBtn:'Siguiente', back:'Atrás', start:'Empezar', startEx:'Empezar con ejemplos',
   onb:[
     ['Tu fábrica de recuerdos','Guarda lo que vives, lees, ves y escuchas, y ponle el color de cómo te hizo sentir. Con el tiempo, tu archivo se convierte en un mapa de tu memoria.'],
@@ -365,6 +368,9 @@ ca:{
   yourCopy:'La teva còpia', copyText:`Copia aquest text i desa'l en un fitxer .json.`, copied:`Ja l'he desada`,
   due:a=>`Toca desar la teva còpia ${a}.`, dueLast:d=>` L'última va ser el ${d}.`, dueNone:` Encara no n'has desat cap.`, later:`Recorda-m'ho demà`,
   noName:'Sense nom',
+  otherType:'+ Un altre tipus', newTypePh:'Per exemple: somni, viatge, recepta', createType:'Crea el tipus', titleLbl:'Títol', customPh:`El que vulguis recordar d'això`,
+  typesTitle:'Tipus de record', typesLead:`A més dels set tipus de sempre, en pots crear de teus: somnis, viatges, receptes, concerts… Si n'esborres un, els seus records passen a Idea.`,
+  typeName:'Nom del tipus', addType:'Afegeix un tipus', newTypeName:'Nom del nou tipus', tTypeCreated:n=>`Tipus «${n}» creat.`,
   of:(a,b)=>`${a} de ${b}`, skip:'Omet', nextBtn:'Següent', back:'Enrere', start:'Comença', startEx:'Comença amb exemples',
   onb:[
     ['La teva fàbrica de records',`Desa el que vius, llegeixes, mires i escoltes, i posa-hi el color de com et va fer sentir. Amb el temps, el teu arxiu es converteix en un mapa de la teva memòria.`],
@@ -419,24 +425,30 @@ function guessLang(){try{return (navigator.language||'').toLowerCase().startsWit
 const DEFAULT_SETTINGS={backupFreq:'semana',lastBackup:null,snoozeUntil:null,onboarded:false,lang:guessLang()};
 function freshState(lang){
   const L=I18N[lang]||I18N.es;
-  return {emotions:DEFAULT_EMOTIONS.map(e=>({...e,name:L.defEmo[e.id]})),drawers:DEFAULT_DRAWERS.map(id=>({id,name:L.defDrawer[id]})),memories:[],settings:{...DEFAULT_SETTINGS,lang}};
+  return {emotions:DEFAULT_EMOTIONS.map(e=>({...e,name:L.defEmo[e.id]})),drawers:DEFAULT_DRAWERS.map(id=>({id,name:L.defDrawer[id]})),memories:[],customTypes:[],settings:{...DEFAULT_SETTINGS,lang}};
 }
 let S=freshState(DEFAULT_SETTINGS.lang);
-function ensureSettings(){S.settings={...DEFAULT_SETTINGS,...(S.settings||{})};if(!I18N[S.settings.lang])S.settings.lang='es'}
+function ensureSettings(){if(!Array.isArray(S.customTypes))S.customTypes=[];S.settings={...DEFAULT_SETTINGS,...(S.settings||{})};if(!I18N[S.settings.lang])S.settings.lang='es'}
 
 let view='hoy', firstHoy=true;
 let filters={q:'',emotion:null,type:'',drawer:'',tag:null,date:null};
 let archMode='lista';
 let rep={period:'semana',offset:0};
 let resurfIdx=0;
-let draft=null, edErr='', linkQ='', newDrawerName='';
+let draft=null, edErr='', linkQ='', newDrawerName='', newTypeOpen=false, newTypeName='';
 
 /* =========================================================
    Idioma
    ========================================================= */
 function lang(){return (S.settings&&I18N[S.settings.lang])?S.settings.lang:'es'}
 function t(k,...a){const v=I18N[lang()][k]??I18N.es[k];return typeof v==='function'?v(...a):v}
-function typeOf(id){const ty=I18N[lang()].types;return {id:ty[id]?id:'dia',...(ty[id]||ty.dia)}}
+function typeOf(id){
+  const ty=I18N[lang()].types;if(ty[id])return {id,...ty[id]};
+  const c=(S.customTypes||[]).find(x=>x.id===id);
+  if(c)return {id,label:c.name,plural:c.name.toLowerCase(),t:t('titleLbl'),src:null,ph:t('customPh'),custom:true};
+  return {id:'dia',...ty.dia};
+}
+function allTypeIds(){return [...TYPE_IDS,...(S.customTypes||[]).map(c=>c.id)]}
 function setLang(l){
   if(!I18N[l]||l===lang())return;
   const from=I18N[lang()],to=I18N[l];
@@ -486,7 +498,7 @@ const LS='memorandum.v1';
 let cloud=null; let downloads=null;
 function saveLocal(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
 function loadLocal(){try{const r=localStorage.getItem(LS);if(r){const p=JSON.parse(r);if(p&&Array.isArray(p.emotions)&&Array.isArray(p.memories))return p}}catch(e){}return null}
-async function savePalette(){saveLocal();if(!cloud)return;try{await cloud.paletteDoc.set({emotions:S.emotions,drawers:S.drawers,settings:S.settings})}catch(e){cloudFail()}}
+async function savePalette(){saveLocal();if(!cloud)return;try{await cloud.paletteDoc.set({emotions:S.emotions,drawers:S.drawers,customTypes:S.customTypes||[],settings:S.settings})}catch(e){cloudFail()}}
 async function saveMem(m){saveLocal();clearTimeout(window._snapT);window._snapT=setTimeout(autoSnapshot,1500);if(!cloud)return;try{await cloud.memCol.doc(m.id).set(clone(m))}catch(e){cloudFail()}}
 async function deleteMemCloud(id){saveLocal();if(!cloud)return;try{await cloud.memCol.doc(id).delete()}catch(e){cloudFail()}}
 function cloudFail(){toast(t('tCloudFail'))}
@@ -503,7 +515,7 @@ async function initCloud(){
     cloud={paletteDoc,memCol};
     if(p.exists){
       const d=p.data();
-      S.emotions=clone(d.emotions||S.emotions);S.drawers=clone(d.drawers||[]);
+      S.emotions=clone(d.emotions||S.emotions);S.drawers=clone(d.drawers||[]);S.customTypes=clone(d.customTypes||S.customTypes||[]);
       S.settings={...DEFAULT_SETTINGS,...S.settings,...(d.settings||{}),onboarded:!!(d.settings&&d.settings.onboarded)||S.settings.onboarded};
       S.memories=ms.docs.map(x=>clone(x.data()));
       ensureSettings();saveLocal();
@@ -622,7 +634,7 @@ function vArchivo(){
   <div class="seg" role="group" aria-label="${esc(t('view'))}"><button data-act="mode" data-v="lista" aria-pressed="${archMode==='lista'}">${t('cards')}</button><button data-act="mode" data-v="constelacion" aria-pressed="${archMode==='constelacion'}">${t('sky')}</button></div>
   <div class="search">
     <input class="in" type="search" placeholder="${esc(t('search'))}" value="${esc(filters.q)}" data-field="q" aria-label="${esc(t('searchLbl'))}">
-    <select class="in" data-field="type" aria-label="${esc(t('typeLbl'))}"><option value="">${t('allTypes')}</option>${TYPE_IDS.map(id=>`<option value="${id}"${filters.type===id?' selected':''}>${typeOf(id).label}</option>`).join('')}</select>
+    <select class="in" data-field="type" aria-label="${esc(t('typeLbl'))}"><option value="">${t('allTypes')}</option>${allTypeIds().map(id=>`<option value="${id}"${filters.type===id?' selected':''}>${typeOf(id).label}</option>`).join('')}</select>
     <select class="in" data-field="drawer" aria-label="${esc(t('drawerLbl'))}"><option value="">${t('allDrawers')}</option>${S.drawers.map(d=>`<option value="${d.id}"${filters.drawer===d.id?' selected':''}>${esc(d.name)}</option>`).join('')}</select>
   </div>
   <div class="emorow" role="group" aria-label="${esc(t('byEmotion'))}">${S.emotions.map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo" data-v="${e.id}" aria-pressed="${filters.emotion===e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
@@ -707,6 +719,11 @@ function vPaleta(){
   <p class="lead">${esc(t('drawersLead'))}</p>
   <div class="drawers">${S.drawers.map(d=>`<div class="drawer"><input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${dcnt(d.id)}</small><button class="btn quiet" data-act="drawer-go" data-id="${d.id}">${t('open')}</button><button class="btn quiet danger" data-act="drawer-del" data-id="${d.id}">${t('del')}</button></div>`).join('')}
     <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newDrawerName'))}" data-field="new-drawer-pal" aria-label="${esc(t('newDrawerName'))}"><button class="btn" data-act="drawer-add">${t('addDrawer')}</button></div>
+  </div>
+  <h2 class="sec">${t('typesTitle')}</h2>
+  <p class="lead">${esc(t('typesLead'))}</p>
+  <div class="drawers">${(S.customTypes||[]).map(c=>`<div class="drawer"><input value="${esc(c.name)}" data-field="type-name" data-id="${c.id}" aria-label="${esc(t('typeName'))}"><small>${S.memories.filter(m=>m.type===c.id).length}</small><button class="btn quiet" data-act="type-go" data-id="${c.id}">${t('open')}</button><button class="btn quiet danger" data-act="type-del" data-id="${c.id}">${t('del')}</button></div>`).join('')}
+    <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newTypeName'))}" data-field="new-type-pal" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="type-add">${t('addType')}</button></div>
   </div>
   <h2 class="sec">${t('backupTitle')}</h2>
   <p class="note">${esc(cloud?t('savedCloud'):t('savedLocal'))} ${esc(t('backupNote'))}</p>
@@ -834,7 +851,7 @@ function openDetail(id){
 function openEditor(id,preset={}){
   const m=id?memOf(id):null;
   draft=m?clone(m):{id:null,type:preset.type||'dia',title:'',source:'',text:'',emotions:preset.emo?[preset.emo]:[],tags:[],drawer:(preset.type==='dia'&&drawerOf('d-diario'))?'d-diario':'',date:iso(new Date()),links:[]};
-  edErr='';linkQ='';newDrawerName='';renderEditor();
+  edErr='';linkQ='';newDrawerName='';newTypeOpen=false;newTypeName='';renderEditor();
 }
 function allTags(){const c={};S.memories.forEach(m=>(m.tags||[]).forEach(x=>c[x]=(c[x]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(x=>x[0])}
 function renderEditor(focusSel){
@@ -845,7 +862,8 @@ function renderEditor(focusSel){
   const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('remove'))}</span>`;
   openDlg(`<div class="dlg-head"><h2>${draft.id?t('editMem'):t('newMem')}</h2><button class="btn quiet" data-act="close">${t('cancel')}</button></div>
   <label class="f">${t('whatIs')}</label>
-  <div class="row">${TYPE_IDS.map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${typeOf(id).label}</button>`).join('')}</div>
+  <div class="row">${allTypeIds().map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${esc(typeOf(id).label)}</button>`).join('')}<button class="chip" data-act="ed-newtype-toggle" aria-expanded="${newTypeOpen}" style="border-style:dashed">${t('otherType')}</button></div>
+  ${newTypeOpen?`<div class="row" style="margin-top:8px"><input class="in" style="flex:1 1 180px" id="ed-newtype" data-ed-newtype placeholder="${esc(t('newTypePh'))}" value="${esc(newTypeName)}" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="ed-addtype">${t('createType')}</button></div>`:''}
   <label class="f" for="ed-title">${ty.t}</label>
   <input class="in" id="ed-title" data-ed="title" value="${esc(draft.title)}">
   ${ty.src?`<label class="f" for="ed-src">${ty.src} <small>${t('optional')}</small></label><input class="in" id="ed-src" data-ed="source" value="${esc(draft.source)}">`:''}
@@ -972,7 +990,7 @@ $('#importer').addEventListener('change',async e=>{
     const p=JSON.parse(await f.text());
     if(!Array.isArray(p.emotions)||!Array.isArray(p.memories))throw 0;
     const oldIds=S.memories.map(m=>m.id);
-    S={emotions:p.emotions,drawers:p.drawers||[],memories:p.memories,settings:{...S.settings,...(p.settings||{}),onboarded:true,lang:lang()}};ensureSettings();
+    S={emotions:p.emotions,drawers:p.drawers||[],memories:p.memories,customTypes:p.customTypes||[],settings:{...S.settings,...(p.settings||{}),onboarded:true,lang:lang()}};ensureSettings();
     render();toast(t('tImported',S.memories.length));
     await savePalette();
     if(cloud){for(const id of oldIds)if(!memOf(id))await deleteMemCloud(id);for(const m of S.memories)await saveMem(m)}
@@ -1071,6 +1089,13 @@ async function seed(){
   for(const m of ms)await saveMem(m);
 }
 
+function createType(name){
+  name=cut(name,30);
+  const ex=allTypeIds().map(typeOf).find(x=>x.label.toLowerCase()===name.toLowerCase());
+  if(ex)return ex;
+  const nt={id:mkid('t-'),name};S.customTypes.push(nt);savePalette();toast(t('tTypeCreated',name));return nt;
+}
+
 /* =========================================================
    Eventos
    ========================================================= */
@@ -1133,6 +1158,11 @@ document.addEventListener('click',e=>{
     case 'ed-link':{const i=draft.links.indexOf(v);if(i>=0)draft.links.splice(i,1);else draft.links.push(v);renderEditor('#ed-link');break}
     case 'ed-adddrawer':{const n=newDrawerName.trim();if(!n){$('#ed-newdrawer')?.focus();break}const nd={id:mkid('d-'),name:cut(n,40)};S.drawers.push(nd);draft.drawer=nd.id;newDrawerName='';savePalette();renderEditor();break}
     case 'ed-save':saveDraft();break;
+    case 'ed-newtype-toggle':newTypeOpen=!newTypeOpen;renderEditor(newTypeOpen?'#ed-newtype':null);break;
+    case 'ed-addtype':{const n=newTypeName.trim();if(!n){$('#ed-newtype')?.focus();break}const nt=createType(n);draft.type=nt.id;draft.source='';newTypeOpen=false;newTypeName='';renderEditor();break}
+    case 'type-add':{const inp=document.querySelector('[data-field="new-type-pal"]');const n=(inp?.value||'').trim();if(!n){inp?.focus();break}createType(n);render();break}
+    case 'type-go':filters={...NOFILTER(),type:id};go('archivo');break;
+    case 'type-del':armed(b,async()=>{S.customTypes=S.customTypes.filter(x=>x.id!==id);const tt=S.memories.filter(m=>m.type===id);tt.forEach(m=>m.type='idea');if(filters.type===id)filters.type='';render();await savePalette();for(const m of tt)await saveMem(m)});break;
   }
 });
 document.addEventListener('keydown',e=>{
@@ -1142,6 +1172,8 @@ document.addEventListener('keydown',e=>{
     else if(el.matches('g.node')){e.preventDefault();openDetail(el.dataset.id)}
     else if(el.matches('[data-field="new-drawer-pal"]')){e.preventDefault();document.querySelector('[data-act="drawer-add"]').click()}
     else if(el.matches('[data-ed-newdrawer]')){e.preventDefault();document.querySelector('[data-act="ed-adddrawer"]').click()}
+    else if(el.matches('[data-ed-newtype]')){e.preventDefault();document.querySelector('[data-act="ed-addtype"]').click()}
+    else if(el.matches('[data-field="new-type-pal"]')){e.preventDefault();document.querySelector('[data-act="type-add"]').click()}
   }
   if(e.key===','&&e.target.matches('[data-ed-tag]')){e.preventDefault();if(e.target.value.trim()){addTag(e.target.value);renderEditor('#ed-tag')}}
 });
@@ -1151,11 +1183,12 @@ document.addEventListener('input',e=>{
   if(el.dataset.ed&&draft){draft[el.dataset.ed]=el.value;return}
   if(el.matches('[data-ed-link]')){linkQ=el.value;renderEditor('#ed-link');return}
   if(el.matches('[data-ed-newdrawer]')){newDrawerName=el.value;return}
+  if(el.matches('[data-ed-newtype]')){newTypeName=el.value;return}
   if(el.id==='story-q'){storyQuote=el.checked;drawStory();return}
   const f=el.dataset.field;if(!f)return;
   if(f==='q'){filters.q=el.value;if(archMode==='lista')$('#results').innerHTML=resultsHTML();else drawSky();return}
-  if(f==='emo-name'||f==='emo-color'||f==='drawer-name'){
-    const list=f==='drawer-name'?S.drawers:S.emotions;const it=list.find(x=>x.id===el.dataset.id);if(!it)return;
+  if(f==='emo-name'||f==='emo-color'||f==='drawer-name'||f==='type-name'){
+    const list=f==='drawer-name'?S.drawers:f==='type-name'?S.customTypes:S.emotions;const it=list.find(x=>x.id===el.dataset.id);if(!it)return;
     if(f==='emo-color'){it.color=el.value;el.closest('.pal').style.setProperty('--c',el.value)}else it.name=el.value.slice(0,40)||t('noName');
     saveLocal();clearTimeout(saveT);saveT=setTimeout(savePalette,700);
   }
