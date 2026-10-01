@@ -1,0 +1,1179 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Memorándum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEEBF3; --surface:#F9F8FC; --ink:#26233D; --muted:#6C6884; --line:#D9D5E4;
+  --accent:#3D3A6B; --on-accent:#F9F8FC; --shadow:0 1px 0 rgba(38,35,61,.06), 0 8px 24px -16px rgba(38,35,61,.35);
+  --serif:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --sans:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#16151E; --surface:#211F2C; --ink:#ECE9F5; --muted:#A29EB8; --line:#363341;
+    --accent:#C9C3F0; --on-accent:#1B1A26; --shadow:0 1px 0 rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#16151E; --surface:#211F2C; --ink:#ECE9F5; --muted:#A29EB8; --line:#363341;
+  --accent:#C9C3F0; --on-accent:#1B1A26; --shadow:0 1px 0 rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+img{max-width:100%}
+
+/* ---------- estructura ---------- */
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 140px}
+header.top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:22px 0 8px}
+.brand{display:flex;flex-direction:column;line-height:1}
+.brand b{font-family:var(--serif);font-weight:400;font-size:30px;letter-spacing:-.01em}
+.brand span{font-size:13px;color:var(--muted);margin-top:4px}
+
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--surface) 92%,transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);
+  padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(5,1fr);align-items:center}
+nav.tabs button{background:none;border:0;padding:6px 0;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;color:var(--muted)}
+nav.tabs button svg{width:22px;height:22px}
+nav.tabs button[aria-current="page"]{color:var(--ink);font-weight:600}
+nav.tabs .plus{justify-self:center;width:52px;height:52px;border-radius:50%;background:var(--accent);color:var(--on-accent);padding:0;justify-content:center;margin-top:-18px;box-shadow:var(--shadow)}
+nav.tabs .plus span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (min-width:860px){
+  nav.tabs{position:static;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border:0;padding:0;display:flex;gap:4px}
+  nav.tabs button{flex-direction:row;font-size:15px;padding:8px 12px;border-radius:999px;gap:6px}
+  nav.tabs button svg{width:18px;height:18px}
+  nav.tabs button[aria-current="page"]{background:var(--surface)}
+  nav.tabs .plus{width:auto;height:auto;border-radius:999px;margin:0 0 0 8px;padding:8px 16px;order:9}
+  nav.tabs .plus span{position:static;width:auto;height:auto;overflow:visible;clip:auto}
+  .wrap{max-width:860px;padding-bottom:80px}
+}
+
+h2.sec{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.15;margin:40px 0 14px;letter-spacing:-.005em}
+p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
+
+/* ---------- hoy ---------- */
+.greet{font-family:var(--serif);font-weight:400;font-size:clamp(40px,9vw,64px);line-height:1;margin:26px 0 6px;letter-spacing:-.02em}
+.today-date{color:var(--muted);margin:0 0 22px}
+.strip{display:grid;grid-template-columns:repeat(35,1fr);gap:3px;height:150px;align-items:stretch}
+.day{border:0;padding:0;background:none;display:flex;flex-direction:column;gap:2px;border-radius:4px;overflow:hidden;min-width:0}
+.day i{flex:1;display:block}
+.day.empty{background:linear-gradient(var(--line),var(--line)) center bottom/100% 3px no-repeat}
+.day.today{box-shadow:0 0 0 1.5px var(--ink)}
+.day:hover:not(.empty){filter:brightness(1.06)}
+.strip-cap{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px}
+@media (prefers-reduced-motion:no-preference){
+  .strip.grow .day{transform-origin:bottom;animation:grow .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--n) * 18ms)}
+  @keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+}
+.checkin{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.swatch-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px 6px 6px;font-size:14px}
+.swatch-btn i{width:22px;height:22px;border-radius:50%;display:block;background:var(--c)}
+.swatch-btn[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+
+.resurf{position:relative;border-radius:18px;padding:26px 24px 22px;background:color-mix(in srgb,var(--c) 20%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 40%,var(--line))}
+.resurf .when{font-size:14px;color:var(--muted)}
+.resurf h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1;margin:6px 0 10px}
+.resurf p{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.4;margin:0 0 16px;max-width:52ch}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* ---------- fichas ---------- */
+.fichas{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.ficha{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:14px 16px 14px 22px;position:relative;display:flex;flex-direction:column;gap:4px;box-shadow:var(--shadow);min-height:130px}
+.ficha::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;border-radius:10px 0 0 10px;background:var(--band)}
+.ficha:hover{border-color:color-mix(in srgb,var(--ink) 30%,var(--line))}
+.ficha-meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+.ficha-title{font-family:var(--serif);font-size:22px;line-height:1.15}
+.ficha-source{font-size:13.5px;color:var(--muted);margin-top:-2px}
+.ficha-text{font-size:14.5px;color:color-mix(in srgb,var(--ink) 80%,var(--muted));display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ficha-tags{font-size:12.5px;color:var(--muted);margin-top:auto;padding-top:4px}
+.month{font-family:var(--serif);font-size:22px;margin:28px 0 10px;color:var(--muted)}
+.month:first-letter{text-transform:uppercase}
+
+/* ---------- botones y campos ---------- */
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 16px;font-size:15px;font-weight:500}
+.btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.btn.quiet{background:none;border-color:transparent;color:var(--muted);padding-left:8px;padding-right:8px}
+.btn.danger{color:#B23A48}
+.btn.armed{background:#B23A48;color:#fff;border-color:#B23A48}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:14px}
+.chip i{width:12px;height:12px;border-radius:50%;background:var(--c);display:block}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip .x{opacity:.6;margin-left:2px}
+label.f{display:block;font-size:14px;font-weight:500;margin:18px 0 6px}
+label.f small{font-weight:400;color:var(--muted)}
+.in,textarea.in,select.in{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px;font-size:16px}
+textarea.in{min-height:120px;resize:vertical;font-family:var(--serif);font-size:19px;line-height:1.45}
+.search{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}
+.search .in{flex:1 1 220px}
+.search select.in{flex:0 1 auto;width:auto}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.seg button{border:0;background:none;border-radius:999px;padding:6px 14px;font-size:14px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.emorow{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 10px}
+
+/* ---------- paleta ---------- */
+.palette{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.pal{border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden;display:flex;flex-direction:column}
+.pal .block{height:110px;background:var(--c);border:0;display:block;width:100%;position:relative}
+.pal .block span{position:absolute;right:10px;bottom:8px;font-size:13px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.pal .body{padding:8px 10px 10px;display:flex;flex-direction:column;gap:6px}
+.pal .name{border:0;background:none;font-family:var(--serif);font-size:22px;padding:2px 0;width:100%;border-bottom:1px dashed transparent}
+.pal .name:focus{border-bottom-color:var(--line);outline:none}
+.pal .tools{display:flex;justify-content:space-between;align-items:center}
+.pal input[type=color]{width:34px;height:28px;border:1px solid var(--line);border-radius:6px;padding:0;background:none}
+.drawers{display:flex;flex-direction:column;gap:8px}
+.drawer{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:6px 6px 6px 12px}
+.drawer input{flex:1;border:0;background:none;font-size:16px;padding:6px 0}
+.drawer small{color:var(--muted);white-space:nowrap}
+.note{font-size:14px;color:var(--muted);max-width:60ch}
+
+/* ---------- informe ---------- */
+.rep-head{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-top:24px}
+.period{display:flex;align-items:center;gap:6px}
+.period strong{font-family:var(--serif);font-weight:400;font-size:24px;min-width:9ch;text-align:center}
+.period strong:first-letter{text-transform:uppercase}
+.compo{display:flex;height:220px;border-radius:16px;overflow:hidden;margin:20px 0 10px;border:1px solid var(--line)}
+.compo div{background:var(--c);min-width:4px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.narr{font-family:var(--serif);font-size:24px;line-height:1.4;margin:26px 0 0;max-width:40ch}
+.words{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-top:6px}
+.words button{border:0;background:none;padding:0;font-family:var(--serif);color:var(--ink)}
+.quote{border-left:3px solid var(--c);padding:4px 0 4px 16px;margin:0}
+.quote p{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.4;margin:0 0 6px}
+.quote cite{font-style:normal;font-size:14px;color:var(--muted)}
+.link{border:0;background:none;padding:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line);font-family:var(--serif);font-size:inherit}
+
+/* ---------- constelación ---------- */
+.sky{border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
+.sky svg{display:block;width:100%;height:auto;max-height:70vh}
+.sky g.node{cursor:pointer}
+.sky g.node:focus{outline:none}
+.sky g.node:focus circle.dot{stroke:var(--ink);stroke-width:2}
+.sky text{fill:var(--muted);font-family:var(--sans)}
+
+/* ---------- diálogos ---------- */
+dialog{border:0;padding:0;background:var(--paper);color:var(--ink);width:min(680px,100%);max-height:100%;border-radius:18px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}
+dialog::backdrop{background:rgba(20,18,32,.45)}
+.dlg{padding:22px 22px 26px;overflow:auto;max-height:calc(100dvh - 40px)}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.dlg-head h2{font-family:var(--serif);font-weight:400;font-size:28px;margin:0}
+@media (max-width:640px){
+  dialog{width:100%;height:100%;max-width:100%;max-height:100%;border-radius:0;margin:0}
+  .dlg{max-height:100%;height:100%;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(26px + env(safe-area-inset-bottom,0px))}
+}
+.detail-title{font-family:var(--serif);font-weight:400;font-size:36px;line-height:1.08;margin:14px 0 4px}
+.detail-text{font-family:var(--serif);font-size:21px;line-height:1.5;white-space:pre-wrap;margin:18px 0}
+.wash{border-radius:14px;padding:18px;background:color-mix(in srgb,var(--c) 16%,var(--surface))}
+.mini{display:flex;flex-direction:column;gap:6px}
+.mini button{display:flex;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px}
+.mini button i{width:10px;align-self:stretch;border-radius:3px;background:var(--c);flex:none}
+.mini button span{display:flex;flex-direction:column;line-height:1.25}
+.mini button small{color:var(--muted)}
+.err{color:#B23A48;font-size:14px;margin-top:10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.empty-state{border:1px dashed var(--line);border-radius:16px;padding:28px 22px;margin-top:20px}
+.empty-state p{margin:0 0 14px;max-width:52ch}
+.story-prev{display:flex;justify-content:center;margin:14px 0}
+.story-prev img{width:min(300px,70vw);border-radius:14px;box-shadow:var(--shadow)}
+
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-size:15px;z-index:50;max-width:calc(100% - 32px);text-align:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.toast.on{opacity:1}
+@media (min-width:860px){.toast{bottom:32px}}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><b>Memorándum</b><span id="tagline"></span></div>
+    <nav class="tabs" id="nav"></nav>
+  </header>
+  <main id="main"></main>
+</div>
+<dialog id="dlg"><div class="dlg" id="dlg-body"></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="importer" accept="application/json,.json" class="vh" tabindex="-1">
+<script>
+/* =========================================================
+   Idiomas: castellano (es) y catalán (ca)
+   ========================================================= */
+const I18N={
+es:{
+  locale:'es-ES', tagline:'fábrica de recuerdos', docTitle:'Memorándum — fábrica de recuerdos',
+  navHoy:'Hoy', navArchivo:'Archivo', navPaleta:'Paleta', navInforme:'Informe', navNew:'Guardar un recuerdo', sections:'Secciones',
+  hello:h=>h<6?'Buenas noches':h<13?'Buenos días':h<21?'Buenas tardes':'Buenas noches',
+  nMem:c=>`${c} recuerdo${c===1?'':'s'}`, nDays:c=>`${c} día${c===1?'':'s'}`,
+  and:'y',
+  stripCap:'Tus últimos 35 días en color', today:'hoy', whichColor:'¿De qué color es hoy?',
+  emptyHoy:'Tu archivo está vacío. Empieza por algo pequeño: una frase de un libro, cómo fue tu día, una canción que te devolvió a otro sitio.',
+  loadExamples:'Cargar ejemplos para probar', backMem:'Vuelve un recuerdo',
+  sameDay:y=>`Un día como hoy, en ${y}`, fromArchive:d=>`Del archivo, ${d}`, open:'Abrir', another:'Otro',
+  latest:'Lo último que guardaste', seeAll:'Ver todo el archivo',
+  archTitle:'Archivo', archLead:c=>`${c} recuerdo${c===1?'':'s'} guardado${c===1?'':'s'}. Filtra por color, tipo o cajón, o mira cómo se conectan.`,
+  view:'Vista', cards:'Fichas', sky:'Constelación', search:'Buscar palabras, títulos, autores', searchLbl:'Buscar',
+  allTypes:'Todos los tipos', allDrawers:'Todos los cajones', typeLbl:'Tipo', drawerLbl:'Cajón', byEmotion:'Filtrar por emoción', removeFilter:'Quitar filtro',
+  skyNote:'Las líneas continuas son enlaces que tú hiciste. Las discontinuas unen recuerdos que comparten etiquetas. El color es la emoción principal.',
+  skyMin:'Hacen falta al menos dos recuerdos para ver conexiones.', skyLbl:'Constelación de recuerdos',
+  archEmpty:'Aquí se irán archivando tus recuerdos, ordenados por meses.', noMatch:'Nada coincide con estos filtros. Quita alguno o prueba otra palabra.', clearAll:'Quitar filtros',
+  palTitle:'Biblioteca de emociones', palLead:'Cada color es una emoción con el nombre que tú le des. Renómbralos, cambia el tono o crea los tuyos. Toca un color para ver todo lo que guarda.',
+  seeMemsOf:n=>`Ver recuerdos de ${n}`, emoName:'Nombre de la emoción', colorOf:n=>`Color de ${n}`, del:'Borrar',
+  newEmo:'Nueva emoción', newEmoHint:'Inventa una: «domingo de lluvia», «olor a casa»…',
+  drawersTitle:'Cajones', drawersLead:'Los sitios donde se archivan tus recuerdos.', drawerName:'Nombre del cajón', newDrawerName:'Nombre del nuevo cajón', addDrawer:'Añadir cajón',
+  backupTitle:'Copia de seguridad', savedCloud:'Tus recuerdos se guardan solos en tu cuenta y solo tú puedes verlos.', savedLocal:'Tus recuerdos se guardan solos en este dispositivo.',
+  backupNote:'Además, te avisaremos para guardar una copia en un archivo, que puedes llevar a Archivos, Drive o donde prefieras.',
+  remindMe:'Recordarme guardar una copia', freqLbl:'Frecuencia de la copia',
+  freq:{dia:'Cada día',semana:'Cada semana',mes:'Cada mes',nunca:'No avisarme'}, freqAdj:{dia:'diaria',semana:'semanal',mes:'mensual',nunca:''},
+  lastBackup:d=>`Última copia en archivo: ${d}.`, noBackup:'Todavía no has guardado ninguna copia en archivo.',
+  saveBackup:'Guardar copia ahora', importBackup:'Importar copia',
+  snapsLbl:'Copias automáticas en este dispositivo', snapsSmall:'se guardan solas, una al día, las últimas 7', restore:'Restaurar',
+  langTitle:'Idioma', helpTitle:'Ayuda', seeTutorial:'Ver el tutorial de nuevo',
+  repTitle:'Informe', period:'Periodo', weekly:'Semanal', monthly:'Mensual', yearly:'Anual', prev:'Periodo anterior', next:'Periodo siguiente',
+  word:(p,cur)=>({semana:cur?'Esta semana':'Aquella semana',mes:cur?'Este mes':'Aquel mes',anio:cur?'Este año':'Aquel año'}[p]),
+  repEmpty:w=>`${w} no guardaste nada. Un recuerdo pequeño ya cuenta: un color, una frase, un sitio.`,
+  compo:'Composición emocional',
+  narr1:(w,a,b,cur)=>`${w} fue sobre todo ${a}${b?`, con momentos de ${b}`:''}. `,
+  narr2:(n,d)=>`Guardaste ${n} en ${d}`, among:x=>`, entre ellos ${x}. `, more:x=>`Hubo más ${x} que en el periodo anterior.`,
+  words:'Palabras que volvieron', quoteOf:'Una frase del periodo', conn:'Una conexión que quizá no viste',
+  connTxt:(a,b,e,w)=>`${a} y ${b} comparten ${e} y la palabra «${w}».`, linkThem:'Enlazarlos',
+  share:'Compartir', shareLead:'Crea una tarjeta vertical para stories con tu paleta del periodo. Solo muestra colores y palabras, nunca lo que escribiste, salvo que elijas incluir una frase.',
+  makeCard:'Crear tarjeta para stories',
+  close:'Cerrar', inDrawer:n=>`cajón ${n}`, linkedWith:'Enlazado con', resonates:'También resuena con', edit:'Editar',
+  editMem:'Editar recuerdo', newMem:'Nuevo recuerdo', cancel:'Cancelar', whatIs:'Qué es', optional:'opcional', text:'Texto',
+  emotions:'Emociones', emoHint:'hasta 3, la primera es la principal', principal:'principal',
+  tags:'Etiquetas', tagHint:'escribe una palabra y pulsa Enter', tagPh:'mar, padre, verano…', remove:'Quitar',
+  drawer:'Cajón', noDrawer:'Sin cajón', date:'Fecha', orNewDrawer:'O crea un cajón nuevo', createDrawer:'Crear cajón',
+  linkWith:'Enlazar con otros recuerdos', linkPh:'Busca por título o palabra', nothing:'Nada coincide.',
+  errEmpty:'Escribe un título o un texto para guardar el recuerdo.', saveMem:'Guardar recuerdo', max3:'Elige como máximo tres emociones.',
+  tSavedRel:x=>`Guardado. Resuena con «${x}».`, tSavedN:c=>`Guardado. Ya tienes ${c} recuerdo${c===1?'':'s'} en el archivo.`,
+  tChanged:'Cambios guardados.', tDeleted:'Recuerdo borrado.', tLinked:'Enlazados.', tSeed:'Ejemplos cargados. Puedes borrarlos cuando quieras.',
+  tCloudFail:'No se pudo guardar en tu cuenta. Queda guardado en este dispositivo.', tBackup:'Copia guardada.', tBackupMarked:'Copia anotada.',
+  tImported:c=>`Copia importada: ${c} recuerdo${c===1?'':'s'}.`, tBadFile:'Ese archivo no es una copia de Memorándum.', tRestored:d=>`Copia restaurada: ${d}.`,
+  tImg:'Imagen guardada.', tHold:'Mantén pulsada la imagen para guardarla.', again:'Pulsa otra vez para borrar', againRestore:'Pulsa otra vez para restaurar',
+  storyTitle:'Tarjeta para stories', storyAlt:'Vista previa de la tarjeta', includeQuote:'Incluir una frase:', saveImg:'Guardar imagen',
+  cardTitle:p=>({semana:'Mi semana',mes:'Mi mes',anio:'Mi año'}[p]), cardColor:'en color', cardWords:'Palabras que volvieron: ',
+  yourCopy:'Tu copia', copyText:'Copia este texto y guárdalo en un archivo .json.', copied:'Ya la he guardado',
+  due:a=>`Toca guardar tu copia ${a}.`, dueLast:d=>` La última fue el ${d}.`, dueNone:' Aún no has guardado ninguna.', later:'Recordármelo mañana',
+  noName:'Sin nombre',
+  of:(a,b)=>`${a} de ${b}`, skip:'Saltar', nextBtn:'Siguiente', back:'Atrás', start:'Empezar', startEx:'Empezar con ejemplos',
+  onb:[
+    ['Tu fábrica de recuerdos','Guarda lo que vives, lees, ves y escuchas, y ponle el color de cómo te hizo sentir. Con el tiempo, tu archivo se convierte en un mapa de tu memoria.'],
+    ['Cada emoción es un color','Empiezas con ocho emociones. En Paleta puedes renombrarlas, cambiar su tono o crear las tuyas. En cada recuerdo eliges hasta tres, y la primera es la principal.'],
+    ['Archiva y conecta','Guarda cada recuerdo en un cajón, ponle etiquetas y enlázalo con otros. En el Archivo puedes verlos como una constelación: así un recuerdo te lleva a otro.'],
+    ['Vuelve a lo que sentiste','Cada día te devolvemos un recuerdo del archivo. En Informe ves tu semana, tu mes o tu año en color, y puedes crear una tarjeta para tus stories.'],
+    ['Tu copia de seguridad',c=>`Tus recuerdos se guardan solos ${c?'en tu cuenta':'en este dispositivo'}. Además, te avisaremos para guardar una copia en un archivo. ¿Cada cuánto quieres que te lo recordemos?`]
+  ],
+  types:{
+    dia:{label:'Día',plural:'días',t:'Título del día',src:null,ph:'¿Qué pasó? ¿Cómo te sentiste?'},
+    libro:{label:'Libro',plural:'libros',t:'Título del libro',src:'Autor',ph:'Una frase subrayada o lo que te removió'},
+    pelicula:{label:'Película',plural:'películas',t:'Película o serie',src:'Dirección',ph:'Con qué te quedaste al salir'},
+    cancion:{label:'Canción',plural:'canciones',t:'Canción',src:'Artista',ph:'Qué te trae cuando suena'},
+    lugar:{label:'Lugar',plural:'lugares',t:'Lugar',src:null,ph:'Cómo olía, cómo sonaba, con quién estabas'},
+    persona:{label:'Persona',plural:'personas',t:'Persona',src:null,ph:'Un gesto, una frase, una costumbre'},
+    idea:{label:'Idea',plural:'ideas',t:'Idea',src:null,ph:'Anótala antes de que se vaya'}
+  },
+  defEmo:{'e-nostalgia':'Nostalgia','e-calma':'Calma','e-alegria':'Alegría','e-melancolia':'Melancolía','e-ternura':'Ternura','e-asombro':'Asombro','e-inquietud':'Inquietud','e-fuerza':'Fuerza'},
+  defDrawer:{'d-lecturas':'Lecturas','d-diario':'Diario','d-pantalla':'Pantalla','d-musica':'Música','d-lugares':'Lugares'},
+  seed:[
+    ['Cien años de soledad','Releído en el tren. Me sigue pareciendo que la memoria de una familia es una casa que se repite una y otra vez.',['familia','memoria','tren']],
+    ['Domingo lento','Café en el balcón, nadie con prisa. Sonaba Bill Evans y la luz entraba de lado.',['domingo','jazz','casa']],
+    ['Aftersun','Salí del cine sin hablar. Unas vacaciones con un padre vistas desde muy lejos, como una foto que se revela tarde.',['padre','verano','memoria']],
+    ['Blue in Green','La pongo cuando quiero que el día baje de volumen.',['jazz','noche']],
+    ['Rompeolas al atardecer','Viento salado, gente pescando, un perro que no era de nadie.',['mar','verano']],
+    ['Ensayo que salió redondo','Por fin encajó el puente. Volví a casa tarareando todo el camino.',['música','ensayo']],
+    ['Archivar por color','¿Y si recordara las cosas por cómo se sintieron y no por cuándo pasaron?',['memoria','ideas']],
+    ['La abuela','Olía a membrillo y a laca. Contaba las mismas historias y cada vez eran distintas.',['familia','infancia']],
+    ['Stoner','Una vida pequeña contada con una dignidad enorme. Me dejó un silencio largo.',['trabajo','vida']],
+    ['Lunes con nudo','Demasiados correos, poca cabeza. Caminé media hora y algo se aflojó.',['trabajo','caminar']],
+    ['Perfect Days','Ganas de mirar los árboles al mediodía y de tener una rutina que sea mía.',['rutina','luz']],
+    ['La casa del pueblo','Las persianas verdes, el ruido de la nevera vieja, la siesta obligatoria.',['infancia','verano','casa']],
+    ['Noche sin dormir','Vueltas y vueltas a una conversación pendiente.',['noche']],
+    ['Mediterráneo','La cantaba mi padre conduciendo, con la ventanilla bajada.',['padre','mar','infancia']],
+    ['El infinito en un junco','Los libros como una manera de no estar solo a través de los siglos.',['memoria','libros']],
+    ['Primer día de otoño','Lluvia fina, sopa caliente y una libreta nueva sin estrenar.',['otoño','casa']]
+  ]
+},
+ca:{
+  locale:'ca-ES', tagline:'fàbrica de records', docTitle:'Memorándum — fàbrica de records',
+  navHoy:'Avui', navArchivo:'Arxiu', navPaleta:'Paleta', navInforme:'Informe', navNew:'Desa un record', sections:'Seccions',
+  hello:h=>h<6?'Bona nit':h<13?'Bon dia':h<21?'Bona tarda':'Bona nit',
+  nMem:c=>`${c} record${c===1?'':'s'}`, nDays:c=>c===1?'1 dia':`${c} dies`,
+  and:'i',
+  stripCap:'Els teus últims 35 dies en color', today:'avui', whichColor:'De quin color és avui?',
+  emptyHoy:`El teu arxiu és buit. Comença per alguna cosa petita: una frase d'un llibre, com t'ha anat el dia, una cançó que t'ha tornat a un altre lloc.`,
+  loadExamples:'Carrega exemples per provar', backMem:'Torna un record',
+  sameDay:y=>`Un dia com avui, el ${y}`, fromArchive:d=>`De l'arxiu, ${d}`, open:'Obre', another:'Un altre',
+  latest:`L'últim que has desat`, seeAll:`Veure tot l'arxiu`,
+  archTitle:'Arxiu', archLead:c=>`${c} record${c===1?'':'s'} desat${c===1?'':'s'}. Filtra per color, tipus o calaix, o mira com es connecten.`,
+  view:'Vista', cards:'Fitxes', sky:'Constel·lació', search:'Cerca paraules, títols, autors', searchLbl:'Cerca',
+  allTypes:'Tots els tipus', allDrawers:'Tots els calaixos', typeLbl:'Tipus', drawerLbl:'Calaix', byEmotion:'Filtra per emoció', removeFilter:'Treu el filtre',
+  skyNote:`Les línies contínues són enllaços que has fet tu. Les discontínues uneixen records que comparteixen etiquetes. El color és l'emoció principal.`,
+  skyMin:'Calen almenys dos records per veure connexions.', skyLbl:'Constel·lació de records',
+  archEmpty:`Aquí s'aniran arxivant els teus records, ordenats per mesos.`, noMatch:`No hi ha res que coincideixi amb aquests filtres. Treu-ne algun o prova una altra paraula.`, clearAll:'Treu els filtres',
+  palTitle:`Biblioteca d'emocions`, palLead:`Cada color és una emoció amb el nom que tu li donis. Canvia'ls el nom, el to o crea'n de teus. Toca un color per veure tot el que guarda.`,
+  seeMemsOf:n=>`Veure records de ${n}`, emoName:`Nom de l'emoció`, colorOf:n=>`Color de ${n}`, del:'Esborra',
+  newEmo:'Nova emoció', newEmoHint:`Inventa'n una: «diumenge de pluja», «olor de casa»…`,
+  drawersTitle:'Calaixos', drawersLead:`Els llocs on s'arxiven els teus records.`, drawerName:'Nom del calaix', newDrawerName:'Nom del nou calaix', addDrawer:'Afegeix un calaix',
+  backupTitle:'Còpia de seguretat', savedCloud:'Els teus records es desen sols al teu compte i només tu els pots veure.', savedLocal:'Els teus records es desen sols en aquest dispositiu.',
+  backupNote:`A més, t'avisarem per desar una còpia en un fitxer, que pots portar a Fitxers, Drive o on prefereixis.`,
+  remindMe:`Recorda'm de desar una còpia`, freqLbl:'Freqüència de la còpia',
+  freq:{dia:'Cada dia',semana:'Cada setmana',mes:'Cada mes',nunca:`No m'avisis`}, freqAdj:{dia:'diària',semana:'setmanal',mes:'mensual',nunca:''},
+  lastBackup:d=>`Última còpia en fitxer: ${d}.`, noBackup:'Encara no has desat cap còpia en fitxer.',
+  saveBackup:'Desa una còpia ara', importBackup:'Importa una còpia',
+  snapsLbl:'Còpies automàtiques en aquest dispositiu', snapsSmall:'es desen soles, una al dia, les últimes 7', restore:'Restaura',
+  langTitle:'Idioma', helpTitle:'Ajuda', seeTutorial:'Torna a veure el tutorial',
+  repTitle:'Informe', period:'Període', weekly:'Setmanal', monthly:'Mensual', yearly:'Anual', prev:'Període anterior', next:'Període següent',
+  word:(p,cur)=>({semana:cur?'Aquesta setmana':'Aquella setmana',mes:cur?'Aquest mes':'Aquell mes',anio:cur?'Aquest any':'Aquell any'}[p]),
+  repEmpty:w=>`${w} no hi ha cap record desat. Un record petit ja compta: un color, una frase, un lloc.`,
+  compo:'Composició emocional',
+  narr1:(w,a,b,cur)=>`${w} ${cur?'ha estat':'va ser'} sobretot ${a}${b?`, amb moments de ${b}`:''}. `,
+  narr2:(n,d)=>`Has desat ${n} en ${d}`, among:x=>`, entre ells ${x}. `, more:x=>`Hi ha hagut més ${x} que en el període anterior.`,
+  words:'Paraules que han tornat', quoteOf:'Una frase del període', conn:'Una connexió que potser no has vist',
+  connTxt:(a,b,e,w)=>`${a} i ${b} comparteixen ${e} i la paraula «${w}».`, linkThem:`Enllaça'ls`,
+  share:'Compartir', shareLead:`Crea una targeta vertical per a stories amb la paleta del període. Només mostra colors i paraules, mai el que has escrit, tret que triïs incloure-hi una frase.`,
+  makeCard:'Crea una targeta per a stories',
+  close:'Tanca', inDrawer:n=>`calaix ${n}`, linkedWith:'Enllaçat amb', resonates:'També ressona amb', edit:'Edita',
+  editMem:'Edita el record', newMem:'Nou record', cancel:'Cancel·la', whatIs:'Què és', optional:'opcional', text:'Text',
+  emotions:'Emocions', emoHint:'fins a 3, la primera és la principal', principal:'principal',
+  tags:'Etiquetes', tagHint:'escriu una paraula i prem Retorn', tagPh:'mar, pare, estiu…', remove:'Treu',
+  drawer:'Calaix', noDrawer:'Sense calaix', date:'Data', orNewDrawer:'O crea un calaix nou', createDrawer:'Crea el calaix',
+  linkWith:'Enllaça amb altres records', linkPh:'Cerca per títol o paraula', nothing:'No hi ha cap coincidència.',
+  errEmpty:'Escriu un títol o un text per desar el record.', saveMem:'Desa el record', max3:'Tria com a màxim tres emocions.',
+  tSavedRel:x=>`Desat. Ressona amb «${x}».`, tSavedN:c=>`Desat. Ja tens ${c} record${c===1?'':'s'} a l'arxiu.`,
+  tChanged:'Canvis desats.', tDeleted:'Record esborrat.', tLinked:'Enllaçats.', tSeed:'Exemples carregats. Els pots esborrar quan vulguis.',
+  tCloudFail:`No s'ha pogut desar al teu compte. Queda desat en aquest dispositiu.`, tBackup:'Còpia desada.', tBackupMarked:'Còpia anotada.',
+  tImported:c=>`Còpia importada: ${c} record${c===1?'':'s'}.`, tBadFile:'Aquest fitxer no és una còpia de Memorándum.', tRestored:d=>`Còpia restaurada: ${d}.`,
+  tImg:'Imatge desada.', tHold:'Mantén premuda la imatge per desar-la.', again:'Torna a prémer per esborrar', againRestore:'Torna a prémer per restaurar',
+  storyTitle:'Targeta per a stories', storyAlt:'Previsualització de la targeta', includeQuote:'Inclou una frase:', saveImg:'Desa la imatge',
+  cardTitle:p=>({semana:'La meva setmana',mes:'El meu mes',anio:'El meu any'}[p]), cardColor:'en color', cardWords:'Paraules que han tornat: ',
+  yourCopy:'La teva còpia', copyText:`Copia aquest text i desa'l en un fitxer .json.`, copied:`Ja l'he desada`,
+  due:a=>`Toca desar la teva còpia ${a}.`, dueLast:d=>` L'última va ser el ${d}.`, dueNone:` Encara no n'has desat cap.`, later:`Recorda-m'ho demà`,
+  noName:'Sense nom',
+  of:(a,b)=>`${a} de ${b}`, skip:'Omet', nextBtn:'Següent', back:'Enrere', start:'Comença', startEx:'Comença amb exemples',
+  onb:[
+    ['La teva fàbrica de records',`Desa el que vius, llegeixes, mires i escoltes, i posa-hi el color de com et va fer sentir. Amb el temps, el teu arxiu es converteix en un mapa de la teva memòria.`],
+    ['Cada emoció és un color',`Comences amb vuit emocions. A Paleta les pots reanomenar, canviar-ne el to o crear-ne de teves. En cada record en tries fins a tres, i la primera és la principal.`],
+    ['Arxiva i connecta',`Desa cada record en un calaix, posa-hi etiquetes i enllaça'l amb d'altres. A l'Arxiu els pots veure com una constel·lació: així un record et porta a un altre.`],
+    ['Torna al que vas sentir',`Cada dia et retornem un record de l'arxiu. A Informe veus la teva setmana, el teu mes o el teu any en color, i pots crear una targeta per a les teves stories.`],
+    ['La teva còpia de seguretat',c=>`Els teus records es desen sols ${c?'al teu compte':'en aquest dispositiu'}. A més, t'avisarem per desar una còpia en un fitxer. Cada quant vols que t'ho recordem?`]
+  ],
+  types:{
+    dia:{label:'Dia',plural:'dies',t:'Títol del dia',src:null,ph:`Què ha passat? Com t'has sentit?`},
+    libro:{label:'Llibre',plural:'llibres',t:'Títol del llibre',src:'Autor',ph:'Una frase subratllada o el que et va remoure'},
+    pelicula:{label:'Pel·lícula',plural:'pel·lícules',t:'Pel·lícula o sèrie',src:'Direcció',ph:'Amb què et vas quedar en sortir'},
+    cancion:{label:'Cançó',plural:'cançons',t:'Cançó',src:'Artista',ph:'Què et porta quan sona'},
+    lugar:{label:'Lloc',plural:'llocs',t:'Lloc',src:null,ph:'Com feia olor, com sonava, amb qui hi eres'},
+    persona:{label:'Persona',plural:'persones',t:'Persona',src:null,ph:'Un gest, una frase, un costum'},
+    idea:{label:'Idea',plural:'idees',t:'Idea',src:null,ph:`Apunta-la abans que se'n vagi`}
+  },
+  defEmo:{'e-nostalgia':'Nostàlgia','e-calma':'Calma','e-alegria':'Alegria','e-melancolia':'Malenconia','e-ternura':'Tendresa','e-asombro':'Meravella','e-inquietud':'Inquietud','e-fuerza':'Força'},
+  defDrawer:{'d-lecturas':'Lectures','d-diario':'Diari','d-pantalla':'Pantalla','d-musica':'Música','d-lugares':'Llocs'},
+  seed:[
+    ['Cien años de soledad',`Rellegit al tren. Encara em sembla que la memòria d'una família és una casa que es repeteix una vegada i una altra.`,['família','memòria','tren']],
+    ['Diumenge lent',`Cafè al balcó, ningú amb pressa. Sonava Bill Evans i la llum entrava de biaix.`,['diumenge','jazz','casa']],
+    ['Aftersun',`Vaig sortir del cinema sense parlar. Unes vacances amb un pare vistes des de molt lluny, com una foto que es revela tard.`,['pare','estiu','memòria']],
+    ['Blue in Green',`La poso quan vull que el dia abaixi el volum.`,['jazz','nit']],
+    ['Escullera al capvespre',`Vent salat, gent pescant, un gos que no era de ningú.`,['mar','estiu']],
+    ['Assaig rodó',`Per fi va encaixar el pont. Vaig tornar a casa taral·lejant tot el camí.`,['música','assaig']],
+    ['Arxivar per colors',`I si recordés les coses per com es van sentir i no per quan van passar?`,['memòria','idees']],
+    ["L'àvia",`Feia olor de codonyat i de laca. Explicava les mateixes històries i cada vegada eren diferents.`,['família','infància']],
+    ['Stoner',`Una vida petita explicada amb una dignitat enorme. Em va deixar un silenci llarg.`,['feina','vida']],
+    ['Dilluns amb un nus',`Massa correus, poc cap. Vaig caminar mitja hora i alguna cosa es va afluixar.`,['feina','caminar']],
+    ['Perfect Days',`Ganes de mirar els arbres al migdia i de tenir una rutina que sigui meva.`,['rutina','llum']],
+    ['La casa del poble',`Les persianes verdes, el soroll de la nevera vella, la migdiada obligatòria.`,['infància','estiu','casa']],
+    ['Nit sense dormir',`Voltes i més voltes a una conversa pendent.`,['nit']],
+    ['Mediterráneo',`La cantava el meu pare mentre conduïa, amb la finestreta abaixada.`,['pare','mar','infància']],
+    ['El infinito en un junco',`Els llibres com una manera de no estar sol a través dels segles.`,['memòria','llibres']],
+    ["Primer dia de tardor",`Pluja fina, sopa calenta i una llibreta nova per estrenar.`,['tardor','casa']]
+  ]
+}
+};
+
+/* =========================================================
+   Datos base
+   ========================================================= */
+const TYPE_IDS=['dia','libro','pelicula','cancion','lugar','persona','idea'];
+const DEFAULT_EMOTIONS=[
+  {id:'e-nostalgia',color:'#D4A373'},{id:'e-calma',color:'#8FA9C7'},{id:'e-alegria',color:'#E9C46A'},{id:'e-melancolia',color:'#5B5F97'},
+  {id:'e-ternura',color:'#E5A9B4'},{id:'e-asombro',color:'#7FB7A4'},{id:'e-inquietud',color:'#8E5572'},{id:'e-fuerza',color:'#B23A48'}
+];
+const DEFAULT_DRAWERS=['d-lecturas','d-diario','d-pantalla','d-musica','d-lugares'];
+const FREQ_DAYS={dia:1,semana:7,mes:30,nunca:0};
+function guessLang(){try{return (navigator.language||'').toLowerCase().startsWith('ca')?'ca':'es'}catch(e){return 'es'}}
+const DEFAULT_SETTINGS={backupFreq:'semana',lastBackup:null,snoozeUntil:null,onboarded:false,lang:guessLang()};
+function freshState(lang){
+  const L=I18N[lang]||I18N.es;
+  return {emotions:DEFAULT_EMOTIONS.map(e=>({...e,name:L.defEmo[e.id]})),drawers:DEFAULT_DRAWERS.map(id=>({id,name:L.defDrawer[id]})),memories:[],settings:{...DEFAULT_SETTINGS,lang}};
+}
+let S=freshState(DEFAULT_SETTINGS.lang);
+function ensureSettings(){S.settings={...DEFAULT_SETTINGS,...(S.settings||{})};if(!I18N[S.settings.lang])S.settings.lang='es'}
+
+let view='hoy', firstHoy=true;
+let filters={q:'',emotion:null,type:'',drawer:'',tag:null,date:null};
+let archMode='lista';
+let rep={period:'semana',offset:0};
+let resurfIdx=0;
+let draft=null, edErr='', linkQ='', newDrawerName='';
+
+/* =========================================================
+   Idioma
+   ========================================================= */
+function lang(){return (S.settings&&I18N[S.settings.lang])?S.settings.lang:'es'}
+function t(k,...a){const v=I18N[lang()][k]??I18N.es[k];return typeof v==='function'?v(...a):v}
+function typeOf(id){const ty=I18N[lang()].types;return {id:ty[id]?id:'dia',...(ty[id]||ty.dia)}}
+function setLang(l){
+  if(!I18N[l]||l===lang())return;
+  const from=I18N[lang()],to=I18N[l];
+  S.emotions.forEach(e=>{if(from.defEmo[e.id]&&e.name===from.defEmo[e.id])e.name=to.defEmo[e.id]});
+  S.drawers.forEach(d=>{if(from.defDrawer[d.id]&&d.name===from.defDrawer[d.id])d.name=to.defDrawer[d.id]});
+  S.settings.lang=l;applyLang();savePalette();
+}
+function applyLang(){
+  document.documentElement.lang=lang();document.title=t('docTitle');
+  $('#tagline').textContent=t('tagline');renderNav();
+}
+
+/* =========================================================
+   Utilidades
+   ========================================================= */
+function clone(x){return JSON.parse(JSON.stringify(x))}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const mkid=p=>p+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function fromIso(s){const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+function daysAgo(s){return Math.round((fromIso(iso(new Date()))-fromIso(s))/864e5)}
+function fmt(s,o={day:'numeric',month:'long',year:'numeric'}){return fromIso(s).toLocaleDateString(t('locale'),o)}
+function fmtD(d,o){return d.toLocaleDateString(t('locale'),o)}
+const emo=id=>S.emotions.find(e=>e.id===id);
+const drawerOf=id=>S.drawers.find(d=>d.id===id);
+const memOf=id=>S.memories.find(m=>m.id===id);
+function cut(s,n){s=String(s||'');return s.length>n?s.slice(0,n-1).trimEnd()+'…':s}
+function band(m){
+  const cs=(m.emotions||[]).map(emo).filter(Boolean);
+  if(!cs.length) return 'var(--line)';
+  return 'linear-gradient(to bottom,'+cs.map((c,i)=>`${c.color} ${i*100/cs.length}% ${(i+1)*100/cs.length}%`).join(',')+')';
+}
+function mainColor(m){const e=emo((m.emotions||[])[0]);return e?e.color:'#9A96AE'}
+function sorted(ms){return [...ms].sort((a,b)=>b.date.localeCompare(a.date)||(b.createdAt||0)-(a.createdAt||0))}
+function joinY(arr){if(arr.length<2)return arr.join('');return arr.slice(0,-1).join(', ')+' '+t('and')+' '+arr[arr.length-1]}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function memTitle(m){return m.title||typeOf(m.type).label}
+let toastT;
+function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('on'),2800)}
+
+/* =========================================================
+   Guardado: cuenta (db privada) o este dispositivo
+   ========================================================= */
+const LS='memorandum.v1';
+let cloud=null; let downloads=null;
+function saveLocal(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}}
+function loadLocal(){try{const r=localStorage.getItem(LS);if(r){const p=JSON.parse(r);if(p&&Array.isArray(p.emotions)&&Array.isArray(p.memories))return p}}catch(e){}return null}
+async function savePalette(){saveLocal();if(!cloud)return;try{await cloud.paletteDoc.set({emotions:S.emotions,drawers:S.drawers,settings:S.settings})}catch(e){cloudFail()}}
+async function saveMem(m){saveLocal();clearTimeout(window._snapT);window._snapT=setTimeout(autoSnapshot,1500);if(!cloud)return;try{await cloud.memCol.doc(m.id).set(clone(m))}catch(e){cloudFail()}}
+async function deleteMemCloud(id){saveLocal();if(!cloud)return;try{await cloud.memCol.doc(id).delete()}catch(e){cloudFail()}}
+function cloudFail(){toast(t('tCloudFail'))}
+async function initCloud(){
+  if(!window.claude||typeof window.claude.use!=='function')return;
+  claude.use('downloads').then(d=>{downloads=d||null}).catch(()=>{});
+  try{
+    const [db,user]=await Promise.all([claude.use('db'),claude.use('user')]);
+    if(!db||!user)return;
+    const uid=await user.id(); if(!uid)return;
+    const paletteDoc=db.doc('data/users/'+uid+'/paleta');
+    const memCol=db.doc('data/users/'+uid+'/archivo').collection('recuerdos');
+    const [p,ms]=await Promise.all([paletteDoc.get(),memCol.limit(1000).get()]);
+    cloud={paletteDoc,memCol};
+    if(p.exists){
+      const d=p.data();
+      S.emotions=clone(d.emotions||S.emotions);S.drawers=clone(d.drawers||[]);
+      S.settings={...DEFAULT_SETTINGS,...S.settings,...(d.settings||{}),onboarded:!!(d.settings&&d.settings.onboarded)||S.settings.onboarded};
+      S.memories=ms.docs.map(x=>clone(x.data()));
+      ensureSettings();saveLocal();
+    }else{
+      await savePalette();
+      for(const m of S.memories){await saveMem(m)}
+    }
+  }catch(e){cloud=null}
+}
+
+/* =========================================================
+   Navegación y render
+   ========================================================= */
+const ICONS={
+  hoy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>',
+  archivo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="4" width="17" height="6" rx="1.5"/><rect x="3.5" y="14" width="17" height="6" rx="1.5"/><path d="M10 7h4M10 17h4"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>',
+  paleta:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 1.6-2.1-.5-1.4.4-2.9 1.9-2.9H18a3 3 0 0 0 3-3c0-5.5-4-10-9-10Z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10.5" cy="7" r="1.2"/><circle cx="15" cy="7.5" r="1.2"/></svg>',
+  informe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>'
+};
+function renderNav(){
+  const n=$('#nav');n.setAttribute('aria-label',t('sections'));
+  const tab=(v,k)=>`<button data-act="nav" data-v="${v}" aria-current="${view===v?'page':'false'}">${ICONS[v]}${t(k)}</button>`;
+  n.innerHTML=tab('hoy','navHoy')+tab('archivo','navArchivo')+`<button class="plus" data-act="new" aria-label="${esc(t('navNew'))}">${ICONS.plus}<span>${t('navNew')}</span></button>`+tab('paleta','navPaleta')+tab('informe','navInforme');
+}
+function go(v){view=v;render();window.scrollTo(0,0)}
+function render(){
+  renderNav();
+  const m=$('#main');
+  if(view==='hoy')m.innerHTML=vHoy();
+  else if(view==='archivo'){m.innerHTML=vArchivo();if(archMode==='constelacion')drawSky()}
+  else if(view==='paleta')m.innerHTML=vPaleta();
+  else if(view==='informe')m.innerHTML=vInforme();
+}
+
+/* ---------- Hoy ---------- */
+function stripHTML(){
+  const now=new Date();let out='';
+  for(let i=34;i>=0;i--){
+    const k=iso(addDays(now,-i));const ms=S.memories.filter(m=>m.date===k);
+    const segs=ms.flatMap(m=>m.emotions||[]).map(emo).filter(Boolean);
+    out+=`<button class="day${segs.length?'':' empty'}${i===0?' today':''}" style="--n:${34-i}" data-act="filter-date" data-v="${k}" aria-label="${esc(fmt(k,{weekday:'long',day:'numeric',month:'long'}))}: ${esc(t('nMem',ms.length))}">${segs.map(e=>`<i style="background:${e.color}"></i>`).join('')}</button>`;
+  }
+  return out;
+}
+function resurfPool(){
+  const today=iso(new Date());
+  const same=S.memories.filter(m=>m.date.slice(5)===today.slice(5)&&m.date<today);
+  const old=S.memories.filter(m=>daysAgo(m.date)>=14&&!same.includes(m));
+  return [...sorted(same),...old];
+}
+function vHoy(){
+  const grow=firstHoy;firstHoy=false;
+  const today=iso(new Date());
+  let h=`<h1 class="greet">${t('hello',new Date().getHours())}.</h1>
+  <p class="today-date">${esc(cap(fmt(today,{weekday:'long',day:'numeric',month:'long'})))}</p>
+  <div class="strip${grow?' grow':''}" aria-label="${esc(t('stripCap'))}">${stripHTML()}</div>
+  <div class="strip-cap"><span>${t('stripCap')}</span><span>${t('today')}</span></div>
+  <h2 class="sec">${t('whichColor')}</h2>
+  <div class="checkin">${S.emotions.map(e=>`<button class="swatch-btn" style="--c:${e.color}" data-act="new" data-type="dia" data-emo="${e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>`;
+  if(!S.memories.length){
+    h+=`<div class="empty-state"><p>${esc(t('emptyHoy'))}</p>
+    <div class="row"><button class="btn primary" data-act="new">${t('navNew')}</button><button class="btn" data-act="seed">${t('loadExamples')}</button></div></div>`;
+    return h;
+  }
+  h+=backupBanner();
+  const pool=resurfPool();
+  if(pool.length){
+    const m=pool[resurfIdx%pool.length];
+    const sameDay=m.date.slice(5)===today.slice(5)&&m.date<today;
+    const when=sameDay?t('sameDay',m.date.slice(0,4)):t('fromArchive',fmt(m.date));
+    h+=`<h2 class="sec">${t('backMem')}</h2>
+    <div class="resurf" style="--c:${mainColor(m)}"><div class="when">${esc(when)}</div>
+      <h3>${esc(memTitle(m))}</h3>
+      ${m.text?`<p>${esc(cut(m.text,220))}</p>`:''}
+      <div class="row"><button class="btn" data-act="open" data-id="${m.id}">${t('open')}</button>${pool.length>1?`<button class="btn quiet" data-act="shuffle">${t('another')}</button>`:''}</div>
+    </div>`;
+  }
+  h+=`<h2 class="sec">${esc(t('latest'))}</h2><div class="fichas">${sorted(S.memories).slice(0,6).map(ficha).join('')}</div>
+  <div class="row" style="margin-top:14px"><button class="btn quiet" data-act="nav" data-v="archivo">${esc(t('seeAll'))}</button></div>`;
+  return h;
+}
+
+/* ---------- Ficha ---------- */
+function ficha(m){
+  const ty=typeOf(m.type);
+  return `<button class="ficha" data-act="open" data-id="${m.id}" style="--band:${band(m)}">
+    <span class="ficha-meta"><span>${ty.label}</span><span>${esc(fmt(m.date,{day:'numeric',month:'short'}))}</span></span>
+    <span class="ficha-title">${esc(memTitle(m))}</span>
+    ${m.source?`<span class="ficha-source">${esc(m.source)}</span>`:''}
+    ${m.text?`<span class="ficha-text">${esc(m.text)}</span>`:''}
+    ${(m.tags||[]).length?`<span class="ficha-tags">${m.tags.map(x=>'#'+esc(x)).join('  ')}</span>`:''}
+  </button>`;
+}
+
+/* ---------- Archivo ---------- */
+function filtered(){
+  const q=filters.q.trim().toLowerCase();
+  return sorted(S.memories.filter(m=>{
+    if(filters.emotion&&!(m.emotions||[]).includes(filters.emotion))return false;
+    if(filters.type&&m.type!==filters.type)return false;
+    if(filters.drawer&&m.drawer!==filters.drawer)return false;
+    if(filters.tag&&!(m.tags||[]).includes(filters.tag))return false;
+    if(filters.date&&m.date!==filters.date)return false;
+    if(q){const hay=[m.title,m.source,m.text,...(m.tags||[])].join(' ').toLowerCase();if(!hay.includes(q))return false}
+    return true;
+  }));
+}
+function vArchivo(){
+  const active=[];
+  const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('removeFilter'))}</span>`;
+  if(filters.tag)active.push(`<button class="chip" data-act="clear" data-k="tag">#${esc(filters.tag)} ${rm}</button>`);
+  if(filters.date)active.push(`<button class="chip" data-act="clear" data-k="date">${esc(fmt(filters.date))} ${rm}</button>`);
+  return `<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${t('archTitle')}</h1>
+  <p class="lead">${esc(t('archLead',S.memories.length))}</p>
+  <div class="seg" role="group" aria-label="${esc(t('view'))}"><button data-act="mode" data-v="lista" aria-pressed="${archMode==='lista'}">${t('cards')}</button><button data-act="mode" data-v="constelacion" aria-pressed="${archMode==='constelacion'}">${t('sky')}</button></div>
+  <div class="search">
+    <input class="in" type="search" placeholder="${esc(t('search'))}" value="${esc(filters.q)}" data-field="q" aria-label="${esc(t('searchLbl'))}">
+    <select class="in" data-field="type" aria-label="${esc(t('typeLbl'))}"><option value="">${t('allTypes')}</option>${TYPE_IDS.map(id=>`<option value="${id}"${filters.type===id?' selected':''}>${typeOf(id).label}</option>`).join('')}</select>
+    <select class="in" data-field="drawer" aria-label="${esc(t('drawerLbl'))}"><option value="">${t('allDrawers')}</option>${S.drawers.map(d=>`<option value="${d.id}"${filters.drawer===d.id?' selected':''}>${esc(d.name)}</option>`).join('')}</select>
+  </div>
+  <div class="emorow" role="group" aria-label="${esc(t('byEmotion'))}">${S.emotions.map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo" data-v="${e.id}" aria-pressed="${filters.emotion===e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
+  ${active.length?`<div class="row" style="margin-bottom:6px">${active.join('')}</div>`:''}
+  <div id="results">${archMode==='lista'?resultsHTML():`<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>`}</div>`;
+}
+function resultsHTML(){
+  const ms=filtered();
+  if(!S.memories.length)return `<div class="empty-state"><p>${esc(t('archEmpty'))}</p><button class="btn primary" data-act="new">${t('navNew')}</button></div>`;
+  if(!ms.length)return `<div class="empty-state"><p>${esc(t('noMatch'))}</p><button class="btn" data-act="clear-all">${t('clearAll')}</button></div>`;
+  let out='',cur='';
+  for(const m of ms){
+    const k=m.date.slice(0,7);
+    if(k!==cur){if(cur)out+='</div>';cur=k;out+=`<div class="month">${esc(fmt(k+'-01',{month:'long',year:'numeric'}))}</div><div class="fichas">`}
+    out+=ficha(m);
+  }
+  return out+'</div>';
+}
+
+/* ---------- Constelación ---------- */
+function drawSky(){
+  const box=$('#sky');if(!box)return;
+  const ms=filtered();
+  if(ms.length<2){box.innerHTML=`<div style="padding:24px"><p class="note">${esc(t('skyMin'))}</p></div>`;return}
+  const N=ms.length;
+  const nodes=ms.map((m,i)=>({m,x:Math.cos(i)*200+Math.random()*40,y:Math.sin(i)*140+Math.random()*40,vx:0,vy:0,deg:0}));
+  const idx=new Map(nodes.map((n,i)=>[n.m.id,i]));
+  const edges=[],seen=new Set();
+  nodes.forEach((n,i)=>(n.m.links||[]).forEach(l=>{const j=idx.get(l);if(j==null)return;const k=i<j?i+'-'+j:j+'-'+i;if(!seen.has(k)){seen.add(k);edges.push({a:i,b:j,s:true})}}));
+  for(let i=0;i<N&&edges.length<500;i++)for(let j=i+1;j<N;j++){
+    const k=i+'-'+j;if(seen.has(k))continue;
+    const ta=nodes[i].m.tags||[],tb=nodes[j].m.tags||[];
+    if(ta.some(x=>tb.includes(x))){seen.add(k);edges.push({a:i,b:j,s:false})}
+  }
+  edges.forEach(e=>{nodes[e.a].deg++;nodes[e.b].deg++});
+  for(let it=0;it<320;it++){
+    for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
+      const a=nodes[i],b=nodes[j];let dx=a.x-b.x,dy=a.y-b.y;const d2=Math.max(dx*dx+dy*dy,30);const f=2200/d2;const d=Math.sqrt(d2);
+      dx/=d;dy/=d;a.vx+=dx*f;a.vy+=dy*f;b.vx-=dx*f;b.vy-=dy*f;
+    }
+    for(const e of edges){
+      const a=nodes[e.a],b=nodes[e.b];const dx=b.x-a.x,dy=b.y-a.y;const d=Math.sqrt(dx*dx+dy*dy)||1;
+      const L=e.s?70:120,k=e.s?.03:.008;const f=(d-L)*k;a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f;
+    }
+    for(const n of nodes){n.vx-=n.x*.012;n.vy-=n.y*.012;n.vx*=.82;n.vy*=.82;n.x+=Math.max(-20,Math.min(20,n.vx));n.y+=Math.max(-20,Math.min(20,n.vy))}
+  }
+  let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;
+  nodes.forEach(n=>{x0=Math.min(x0,n.x);y0=Math.min(y0,n.y);x1=Math.max(x1,n.x);y1=Math.max(y1,n.y)});
+  const pad=60,w=Math.max(x1-x0,200)+pad*2,h=Math.max(y1-y0,160)+pad*2;
+  const fs=Math.max(10,w/62);const showLabels=N<=45;
+  let svg=`<svg viewBox="${x0-pad} ${y0-pad} ${w} ${h}" role="group" aria-label="${esc(t('skyLbl'))}">`;
+  for(const e of edges){const a=nodes[e.a],b=nodes[e.b];
+    svg+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${e.s?'var(--ink)':'var(--muted)'}" stroke-opacity="${e.s?.55:.3}" stroke-width="${e.s?1.6:1}"${e.s?'':' stroke-dasharray="4 4"'}/>`}
+  for(const n of nodes){
+    const r=6+Math.min(n.deg,8)*1.3;const e2=emo((n.m.emotions||[])[1]);
+    svg+=`<g class="node" data-act="open" data-id="${n.m.id}" tabindex="0" role="button" aria-label="${esc(memTitle(n.m))}">
+      ${e2?`<circle cx="${n.x}" cy="${n.y}" r="${r+3.5}" fill="none" stroke="${e2.color}" stroke-width="3"/>`:''}
+      <circle class="dot" cx="${n.x}" cy="${n.y}" r="${r}" fill="${mainColor(n.m)}"/>
+      ${showLabels?`<text x="${n.x}" y="${n.y+r+fs*1.2}" text-anchor="middle" font-size="${fs}">${esc(cut(memTitle(n.m),22))}</text>`:''}
+    </g>`;
+  }
+  box.innerHTML=svg+'</svg>';
+}
+
+/* ---------- Paleta ---------- */
+function vPaleta(){
+  const cnt=id=>S.memories.filter(m=>(m.emotions||[]).includes(id)).length;
+  const dcnt=id=>S.memories.filter(m=>m.drawer===id).length;
+  return `<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${esc(t('palTitle'))}</h1>
+  <p class="lead">${esc(t('palLead'))}</p>
+  <div class="palette">${S.emotions.map(e=>`<div class="pal" style="--c:${e.color}">
+    <button class="block" data-act="filter-emo-go" data-v="${e.id}" aria-label="${esc(t('seeMemsOf',e.name))}"><span>${esc(t('nMem',cnt(e.id)))}</span></button>
+    <div class="body">
+      <input class="name" value="${esc(e.name)}" data-field="emo-name" data-id="${e.id}" aria-label="${esc(t('emoName'))}">
+      <div class="tools"><input type="color" value="${e.color}" data-field="emo-color" data-id="${e.id}" aria-label="${esc(t('colorOf',e.name))}">
+      <button class="btn quiet danger" data-act="emo-del" data-id="${e.id}">${t('del')}</button></div>
+    </div></div>`).join('')}
+    <div class="pal" style="--c:var(--line)"><button class="block" data-act="emo-add" style="background:repeating-linear-gradient(45deg,var(--line) 0 6px,transparent 6px 12px)"><span style="color:var(--ink);text-shadow:none">${t('newEmo')}</span></button>
+    <div class="body"><span class="note">${esc(t('newEmoHint'))}</span></div></div>
+  </div>
+  <h2 class="sec">${t('drawersTitle')}</h2>
+  <p class="lead">${esc(t('drawersLead'))}</p>
+  <div class="drawers">${S.drawers.map(d=>`<div class="drawer"><input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${dcnt(d.id)}</small><button class="btn quiet" data-act="drawer-go" data-id="${d.id}">${t('open')}</button><button class="btn quiet danger" data-act="drawer-del" data-id="${d.id}">${t('del')}</button></div>`).join('')}
+    <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newDrawerName'))}" data-field="new-drawer-pal" aria-label="${esc(t('newDrawerName'))}"><button class="btn" data-act="drawer-add">${t('addDrawer')}</button></div>
+  </div>
+  <h2 class="sec">${t('backupTitle')}</h2>
+  <p class="note">${esc(cloud?t('savedCloud'):t('savedLocal'))} ${esc(t('backupNote'))}</p>
+  <label class="f">${esc(t('remindMe'))}</label>
+  ${freqChips('freq')}
+  <p class="note" style="margin-top:10px">${S.settings.lastBackup?esc(t('lastBackup',fmt(S.settings.lastBackup))):esc(t('noBackup'))}</p>
+  <div class="row" style="margin-top:10px"><button class="btn primary" data-act="export">${t('saveBackup')}</button><button class="btn" data-act="import">${t('importBackup')}</button></div>
+  ${snapsHTML()}
+  <h2 class="sec">${t('langTitle')}</h2>
+  ${langChips()}
+  <h2 class="sec">${t('helpTitle')}</h2>
+  <button class="btn" data-act="tutorial">${t('seeTutorial')}</button>`;
+}
+function freqChips(act,big){
+  return `<div class="row" role="group" aria-label="${esc(t('freqLbl'))}">${Object.keys(FREQ_DAYS).map(k=>`<button class="chip"${big?' style="font-size:16px;padding:8px 16px"':''} data-act="${act}" data-v="${k}" aria-pressed="${S.settings.backupFreq===k}">${esc(t('freq')[k])}</button>`).join('')}</div>`;
+}
+function langChips(big){
+  return `<div class="row" role="group" aria-label="Idioma">${[['es','Castellano'],['ca','Català']].map(([k,l])=>`<button class="chip"${big?' style="font-size:16px;padding:8px 16px"':''} data-act="lang" data-v="${k}" lang="${k}" aria-pressed="${lang()===k}">${l}</button>`).join('')}</div>`;
+}
+
+/* ---------- Informe ---------- */
+function range(p,o){
+  const now=new Date();now.setHours(0,0,0,0);let s,e,label;
+  if(p==='semana'){const dow=(now.getDay()+6)%7;s=addDays(now,-dow+o*7);e=addDays(s,6);
+    label=fmtD(s,{day:'numeric',month:'short'})+' – '+fmtD(e,{day:'numeric',month:'short'})}
+  else if(p==='mes'){s=new Date(now.getFullYear(),now.getMonth()+o,1);e=new Date(s.getFullYear(),s.getMonth()+1,0);label=fmtD(s,{month:'long',year:'numeric'})}
+  else{s=new Date(now.getFullYear()+o,0,1);e=new Date(s.getFullYear(),11,31);label=String(s.getFullYear())}
+  return {s:iso(s),e:iso(e),label};
+}
+function stats(r){
+  const ms=S.memories.filter(m=>m.date>=r.s&&m.date<=r.e);
+  const ec={},tc={},ty={};const days=new Set();
+  ms.forEach(m=>{days.add(m.date);(m.emotions||[]).forEach((id,i)=>{if(emo(id))ec[id]=(ec[id]||0)+(i===0?1:.5)});(m.tags||[]).forEach(x=>tc[x]=(tc[x]||0)+1);ty[m.type]=(ty[m.type]||0)+1});
+  const total=Object.values(ec).reduce((a,b)=>a+b,0);
+  const emos=Object.entries(ec).sort((a,b)=>b[1]-a[1]).map(([id,v])=>({e:emo(id),share:v/total}));
+  const tags=Object.entries(tc).sort((a,b)=>b[1]-a[1]);
+  const types=Object.entries(ty).sort((a,b)=>b[1]-a[1]);
+  return {ms,emos,tags,types,days:days.size};
+}
+function discovered(ms){
+  let best=null,bs=0;
+  for(const a of ms)for(const b of S.memories){
+    if(a.id===b.id||a.type===b.type||(a.links||[]).includes(b.id))continue;
+    const st=(a.tags||[]).filter(x=>(b.tags||[]).includes(x));const se=(a.emotions||[]).filter(e=>(b.emotions||[]).includes(e));
+    const sc=st.length*2+se.length;if(st.length&&se.length&&sc>bs){bs=sc;best={a,b,st,se}}
+  }
+  return best;
+}
+function vInforme(){
+  const r=range(rep.period,rep.offset),st=stats(r);
+  const ps=stats(range(rep.period,rep.offset-1));
+  const cur=rep.offset===0;const word=t('word',rep.period,cur);
+  let h=`<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${t('repTitle')}</h1>
+  <div class="rep-head">
+    <div class="seg" role="group" aria-label="${esc(t('period'))}">${[['semana','weekly'],['mes','monthly'],['anio','yearly']].map(([k,l])=>`<button data-act="period" data-v="${k}" aria-pressed="${rep.period===k}">${t(l)}</button>`).join('')}</div>
+    <div class="period"><button class="btn quiet" data-act="prev" aria-label="${esc(t('prev'))}">‹</button><strong>${esc(r.label)}</strong><button class="btn quiet" data-act="next" aria-label="${esc(t('next'))}"${rep.offset>=0?' disabled style="opacity:.3"':''}>›</button></div>
+  </div>`;
+  if(!st.ms.length){
+    return h+`<div class="empty-state"><p>${esc(t('repEmpty',word))}</p><button class="btn primary" data-act="new">${t('navNew')}</button></div>`;
+  }
+  h+=`<div class="compo" role="img" aria-label="${esc(t('compo'))}">${st.emos.map(x=>`<div style="--c:${x.e.color};flex:${x.share}" title="${esc(x.e.name)} ${Math.round(x.share*100)}%"></div>`).join('')}</div>
+  <div class="legend">${st.emos.map(x=>`<span style="--c:${x.e.color}"><i></i>${esc(x.e.name)} ${Math.round(x.share*100)}%</span>`).join('')}</div>`;
+  const e1=st.emos[0],e2=st.emos[1];
+  let n=e1?t('narr1',word,e1.e.name.toLowerCase(),e2?e2.e.name.toLowerCase():'',cur):'';
+  n+=t('narr2',t('nMem',st.ms.length),t('nDays',st.days));
+  const tys=st.types.filter(([x])=>x!=='dia').slice(0,3).map(([x,c])=>`${c} ${c===1?typeOf(x).label.toLowerCase():typeOf(x).plural}`);
+  n+=tys.length?t('among',joinY(tys)):'. ';
+  if(ps.emos.length&&st.emos.length){
+    let up=null,d=0;st.emos.forEach(x=>{const p=ps.emos.find(y=>y.e.id===x.e.id);const dd=x.share-(p?p.share:0);if(dd>d){d=dd;up=x}});
+    if(up&&d>.08)n+=t('more',up.e.name.toLowerCase());
+  }
+  h+=`<p class="narr">${esc(n)}</p>`;
+  if(st.tags.length){
+    const mx=st.tags[0][1];
+    h+=`<h2 class="sec">${t('words')}</h2><div class="words">${st.tags.slice(0,14).map(([x,c])=>`<button data-act="tag-go" data-v="${esc(x)}" style="font-size:${18+Math.round(c/mx*20)}px">${esc(x)}</button>`).join('')}</div>`;
+  }
+  const quotes=st.ms.filter(m=>m.type==='libro'&&m.text);
+  if(quotes.length){const q=quotes[Math.floor(Math.random()*quotes.length)];
+    h+=`<h2 class="sec">${t('quoteOf')}</h2><blockquote class="quote" style="--c:${mainColor(q)}"><p>${esc(cut(q.text,260))}</p><cite>${esc(q.title)}${q.source?', '+esc(q.source):''}</cite></blockquote>`}
+  const dsc=discovered(st.ms);
+  if(dsc){
+    const la=`<button class="link" data-act="open" data-id="${dsc.a.id}">${esc(memTitle(dsc.a))}</button>`;
+    const lb=`<button class="link" data-act="open" data-id="${dsc.b.id}">${esc(memTitle(dsc.b))}</button>`;
+    h+=`<h2 class="sec">${t('conn')}</h2><p class="narr" style="font-size:21px;margin-top:0">${t('connTxt',la,lb,esc(joinY(dsc.se.map(id=>emo(id).name.toLowerCase()))),esc(dsc.st[0]))}</p>
+    <button class="btn" data-act="link-pair" data-a="${dsc.a.id}" data-b="${dsc.b.id}">${esc(t('linkThem'))}</button>`;
+  }
+  h+=`<h2 class="sec">${t('share')}</h2><p class="lead">${esc(t('shareLead'))}</p>
+  <button class="btn primary" data-act="story">${t('makeCard')}</button>`;
+  return h;
+}
+
+/* =========================================================
+   Diálogos
+   ========================================================= */
+const dlg=$('#dlg');
+function openDlg(html){$('#dlg-body').innerHTML=html;if(!dlg.open)dlg.showModal();$('#dlg-body').scrollTop=0}
+function closeDlg(){if(dlg.open)dlg.close()}
+dlg.addEventListener('click',e=>{if(e.target===dlg)closeDlg()});
+dlg.addEventListener('close',()=>{if(onbOpen){onbOpen=false;if(!S.settings.onboarded){S.settings.onboarded=true;savePalette()}}});
+
+function related(m){
+  return S.memories.filter(o=>o.id!==m.id&&!(m.links||[]).includes(o.id)).map(o=>{
+    const st=(m.tags||[]).filter(x=>(o.tags||[]).includes(x)).length;const se=(m.emotions||[]).filter(x=>(o.emotions||[]).includes(x)).length;
+    return {o,s:st*2+se,st};
+  }).filter(x=>x.s>=2&&x.st>0).sort((a,b)=>b.s-a.s).slice(0,4).map(x=>x.o);
+}
+function miniList(ms){return `<div class="mini">${ms.map(o=>`<button data-act="open" data-id="${o.id}" style="--c:${mainColor(o)}"><i></i><span>${esc(memTitle(o))}<small>${typeOf(o.type).label}, ${esc(fmt(o.date,{day:'numeric',month:'short',year:'numeric'}))}</small></span></button>`).join('')}</div>`}
+function openDetail(id){
+  const m=memOf(id);if(!m)return;const ty=typeOf(m.type);const d=drawerOf(m.drawer);
+  const links=(m.links||[]).map(memOf).filter(Boolean);const rel=related(m);
+  openDlg(`<div class="dlg-head"><span class="note">${ty.label}, ${esc(fmt(m.date))}${d?`, ${esc(t('inDrawer',d.name))}`:''}</span><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  <div class="wash" style="--c:${mainColor(m)};margin-top:12px">
+    <h2 class="detail-title">${esc(memTitle(m))}</h2>
+    ${m.source?`<div class="note">${esc(m.source)}</div>`:''}
+    ${m.text?`<div class="detail-text">${esc(m.text)}</div>`:''}
+    <div class="row">${(m.emotions||[]).map(emo).filter(Boolean).map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo-go" data-v="${e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
+    ${(m.tags||[]).length?`<div class="row" style="margin-top:8px">${m.tags.map(x=>`<button class="chip" data-act="tag-go" data-v="${esc(x)}">#${esc(x)}</button>`).join('')}</div>`:''}
+  </div>
+  ${links.length?`<h3 class="month" style="margin-top:22px">${t('linkedWith')}</h3>${miniList(links)}`:''}
+  ${rel.length?`<h3 class="month" style="margin-top:22px">${t('resonates')}</h3>${miniList(rel)}`:''}
+  <div class="actions"><button class="btn primary" data-act="edit" data-id="${m.id}">${t('edit')}</button><button class="btn danger" data-act="del" data-id="${m.id}">${t('del')}</button></div>`);
+}
+
+/* ---------- Editor ---------- */
+function openEditor(id,preset={}){
+  const m=id?memOf(id):null;
+  draft=m?clone(m):{id:null,type:preset.type||'dia',title:'',source:'',text:'',emotions:preset.emo?[preset.emo]:[],tags:[],drawer:(preset.type==='dia'&&drawerOf('d-diario'))?'d-diario':'',date:iso(new Date()),links:[]};
+  edErr='';linkQ='';newDrawerName='';renderEditor();
+}
+function allTags(){const c={};S.memories.forEach(m=>(m.tags||[]).forEach(x=>c[x]=(c[x]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(x=>x[0])}
+function renderEditor(focusSel){
+  const ty=typeOf(draft.type);
+  const sugg=allTags().filter(x=>!draft.tags.includes(x)).slice(0,8);
+  const lq=linkQ.trim().toLowerCase();
+  const cands=S.memories.filter(o=>o.id!==draft.id&&!draft.links.includes(o.id)&&(!lq||[o.title,o.text,o.source,...(o.tags||[])].join(' ').toLowerCase().includes(lq)));
+  const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('remove'))}</span>`;
+  openDlg(`<div class="dlg-head"><h2>${draft.id?t('editMem'):t('newMem')}</h2><button class="btn quiet" data-act="close">${t('cancel')}</button></div>
+  <label class="f">${t('whatIs')}</label>
+  <div class="row">${TYPE_IDS.map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${typeOf(id).label}</button>`).join('')}</div>
+  <label class="f" for="ed-title">${ty.t}</label>
+  <input class="in" id="ed-title" data-ed="title" value="${esc(draft.title)}">
+  ${ty.src?`<label class="f" for="ed-src">${ty.src} <small>${t('optional')}</small></label><input class="in" id="ed-src" data-ed="source" value="${esc(draft.source)}">`:''}
+  <label class="f" for="ed-text">${t('text')}</label>
+  <textarea class="in" id="ed-text" data-ed="text" placeholder="${esc(ty.ph)}">${esc(draft.text)}</textarea>
+  <label class="f">${t('emotions')} <small>${t('emoHint')}</small></label>
+  <div class="row">${S.emotions.map(e=>{const i=draft.emotions.indexOf(e.id);return `<button class="chip" style="--c:${e.color}" data-act="ed-emo" data-v="${e.id}" aria-pressed="${i>=0}"><i></i>${esc(e.name)}${i===0&&draft.emotions.length>1?` <small>${t('principal')}</small>`:''}</button>`}).join('')}</div>
+  <label class="f" for="ed-tag">${t('tags')} <small>${t('tagHint')}</small></label>
+  ${draft.tags.length?`<div class="row" style="margin-bottom:8px">${draft.tags.map(x=>`<button class="chip" data-act="ed-untag" data-v="${esc(x)}">#${esc(x)} ${rm}</button>`).join('')}</div>`:''}
+  <input class="in" id="ed-tag" data-ed-tag placeholder="${esc(t('tagPh'))}">
+  ${sugg.length?`<div class="row" style="margin-top:8px">${sugg.map(x=>`<button class="chip" data-act="ed-tag" data-v="${esc(x)}">+ ${esc(x)}</button>`).join('')}</div>`:''}
+  <div class="row" style="gap:14px;align-items:flex-end">
+    <div style="flex:1 1 200px"><label class="f" for="ed-drawer">${t('drawer')}</label>
+      <select class="in" id="ed-drawer" data-ed="drawer"><option value="">${t('noDrawer')}</option>${S.drawers.map(d=>`<option value="${d.id}"${draft.drawer===d.id?' selected':''}>${esc(d.name)}</option>`).join('')}</select></div>
+    <div style="flex:1 1 160px"><label class="f" for="ed-date">${t('date')}</label><input class="in" type="date" id="ed-date" data-ed="date" value="${draft.date}"></div>
+  </div>
+  <div class="row" style="margin-top:8px"><input class="in" style="flex:1 1 180px" id="ed-newdrawer" data-ed-newdrawer placeholder="${esc(t('orNewDrawer'))}" value="${esc(newDrawerName)}"><button class="btn" data-act="ed-adddrawer">${t('createDrawer')}</button></div>
+  ${S.memories.length>(draft.id?1:0)?`<label class="f" for="ed-link">${t('linkWith')} <small>${t('optional')}</small></label>
+  ${draft.links.length?`<div class="row" style="margin-bottom:8px">${draft.links.map(memOf).filter(Boolean).map(o=>`<button class="chip" style="--c:${mainColor(o)}" data-act="ed-link" data-v="${o.id}" aria-pressed="true"><i></i>${esc(cut(memTitle(o),28))} <span class="x" aria-hidden="true">✕</span></button>`).join('')}</div>`:''}
+  <input class="in" type="search" id="ed-link" data-ed-link placeholder="${esc(t('linkPh'))}" value="${esc(linkQ)}">
+  ${lq?`<div class="row" style="margin-top:8px">${cands.slice(0,6).map(o=>`<button class="chip" style="--c:${mainColor(o)}" data-act="ed-link" data-v="${o.id}" aria-pressed="false"><i></i>${esc(cut(memTitle(o),28))}</button>`).join('')||`<span class="note">${esc(t('nothing'))}</span>`}</div>`:''}`:''}
+  ${edErr?`<div class="err" role="alert">${esc(edErr)}</div>`:''}
+  <div class="actions"><button class="btn primary" data-act="ed-save">${t('saveMem')}</button><button class="btn quiet" data-act="close">${t('cancel')}</button></div>`);
+  if(focusSel){const el=$(focusSel);if(el){el.focus();const v=el.value;if(el.setSelectionRange&&el.type!=='date')try{el.setSelectionRange(v.length,v.length)}catch(e){}}}
+}
+function addTag(raw){
+  raw.split(',').map(s=>s.trim().toLowerCase().replace(/^#/,'')).filter(Boolean).forEach(x=>{if(!draft.tags.includes(x))draft.tags.push(cut(x,40))});
+}
+async function saveDraft(){
+  const tagIn=$('#ed-tag');if(tagIn&&tagIn.value.trim())addTag(tagIn.value);
+  if(!draft.title.trim()&&!draft.text.trim()){edErr=t('errEmpty');renderEditor();return}
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(draft.date))draft.date=iso(new Date());
+  const isNew=!draft.id;const prev=isNew?null:memOf(draft.id);
+  const m={...draft,id:draft.id||mkid('m'),title:draft.title.trim(),source:(draft.source||'').trim(),text:draft.text.trim(),createdAt:prev?.createdAt||Date.now(),updatedAt:Date.now()};
+  if(!typeOf(m.type).src)m.source='';
+  if(isNew)S.memories.push(m);else S.memories[S.memories.findIndex(x=>x.id===m.id)]=m;
+  const before=prev?prev.links||[]:[];
+  const touched=[];
+  m.links.forEach(l=>{const o=memOf(l);if(o&&!(o.links||[]).includes(m.id)){o.links=[...(o.links||[]),m.id];touched.push(o)}});
+  before.filter(l=>!m.links.includes(l)).forEach(l=>{const o=memOf(l);if(o){o.links=(o.links||[]).filter(x=>x!==m.id);touched.push(o)}});
+  closeDlg();
+  const rel=related(m)[0];
+  toast(isNew?(rel?t('tSavedRel',cut(memTitle(rel),30)):t('tSavedN',S.memories.length)):t('tChanged'));
+  render();
+  await saveMem(m);for(const o of touched)await saveMem(o);
+}
+async function deleteMem(id){
+  const m=memOf(id);if(!m)return;
+  S.memories=S.memories.filter(x=>x.id!==id);
+  const touched=S.memories.filter(o=>(o.links||[]).includes(id));touched.forEach(o=>o.links=o.links.filter(x=>x!==id));
+  closeDlg();toast(t('tDeleted'));render();
+  await deleteMemCloud(id);for(const o of touched)await saveMem(o);
+}
+
+/* ---------- Tarjeta para stories ---------- */
+let storyQuote=false, storyBlob=null;
+function storyQuoteCandidate(st){const q=st.ms.filter(m=>m.type==='libro'&&m.text);return q[0]||st.ms.find(m=>m.text)||null}
+async function openStory(){
+  const st=stats(range(rep.period,rep.offset));
+  const q=storyQuoteCandidate(st);
+  openDlg(`<div class="dlg-head"><h2>${t('storyTitle')}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  <div class="story-prev"><img id="story-img" alt="${esc(t('storyAlt'))}"></div>
+  ${q?`<label class="row" style="justify-content:center;font-size:15px;gap:8px"><input type="checkbox" id="story-q"${storyQuote?' checked':''}> ${t('includeQuote')} «${esc(cut(q.text,50))}»</label>`:''}
+  <div class="actions" style="justify-content:center"><button class="btn primary" data-act="story-save">${(downloads||!window.claude)?t('saveImg'):esc(t('tHold'))}</button></div>`);
+  await drawStory();
+}
+function wrapLines(ctx,text,maxW,maxLines){
+  const words=text.split(/\s+/);const lines=[];let cur='';
+  for(const w of words){const tt=cur?cur+' '+w:w;if(ctx.measureText(tt).width>maxW&&cur){lines.push(cur);cur=w;if(lines.length===maxLines)break}else cur=tt}
+  if(lines.length<maxLines&&cur)lines.push(cur);
+  if(lines.length===maxLines&&words.join(' ').length>lines.join(' ').length)lines[maxLines-1]=lines[maxLines-1].replace(/\s*\S*$/,'')+'…';
+  return lines;
+}
+async function drawStory(){
+  const r=range(rep.period,rep.offset),st=stats(r);
+  try{await Promise.all([document.fonts.load('120px "Instrument Serif"'),document.fonts.load('italic 52px "Instrument Serif"'),document.fonts.load('500 40px Figtree')])}catch(e){}
+  const W=1080,H=1920,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const serif='"Instrument Serif", Georgia, serif',sans='Figtree, system-ui, sans-serif';
+  x.fillStyle='#1C1A28';x.fillRect(0,0,W,H);
+  x.fillStyle='#A9A4C0';x.font=`52px ${serif}`;x.fillText('Memorándum',90,160);
+  x.fillStyle='#EFECF7';x.font=`128px ${serif}`;
+  const title=t('cardTitle',rep.period);const tw=x.measureText(title).width;if(tw>900)x.font=`${Math.floor(128*900/tw)}px ${serif}`;
+  x.fillText(title,90,340);x.font=`italic 128px ${serif}`;x.fillText(t('cardColor'),90,460);
+  x.fillStyle='#A9A4C0';x.font=`500 38px ${sans}`;x.fillText(r.label,90,540);
+  const bx=90,by=600,bw=900,bh=640;
+  x.save();x.beginPath();if(x.roundRect)x.roundRect(bx,by,bw,bh,28);else x.rect(bx,by,bw,bh);x.clip();
+  if(st.emos.length){let cx=bx;st.emos.forEach((e,i)=>{const w=i===st.emos.length-1?bx+bw-cx:Math.round(bw*e.share);x.fillStyle=e.e.color;x.fillRect(cx,by,w,bh);cx+=w})}
+  else{x.fillStyle='#2C2A3A';x.fillRect(bx,by,bw,bh)}
+  x.restore();
+  let y=1330;x.font=`500 42px ${sans}`;
+  st.emos.slice(0,3).forEach(e=>{x.fillStyle=e.e.color;x.beginPath();x.arc(108,y-14,16,0,Math.PI*2);x.fill();x.fillStyle='#EFECF7';x.textAlign='left';x.fillText(e.e.name,145,y);x.textAlign='right';x.fillStyle='#A9A4C0';x.fillText(Math.round(e.share*100)+'%',990,y);x.textAlign='left';y+=72});
+  const incl=$('#story-q')?.checked;const q=storyQuoteCandidate(st);
+  if(incl&&q){x.fillStyle='#EFECF7';x.font=`italic 52px ${serif}`;const ls=wrapLines(x,'«'+cut(q.text,160)+'»',900,2);ls.forEach((l,i)=>x.fillText(l,90,1590+i*62))}
+  if(st.tags.length){x.fillStyle='#A9A4C0';x.font=`500 36px ${sans}`;x.fillText(wrapLines(x,t('cardWords')+st.tags.slice(0,4).map(z=>z[0]).join(', '),900,1)[0],90,1760)}
+  x.fillStyle='#6E6A86';x.font=`500 30px ${sans}`;x.fillText(t('tagline'),90,1860);
+  const img=$('#story-img');if(img)img.src=c.toDataURL('image/png');
+  storyBlob=await new Promise(res=>c.toBlob(res,'image/png'));
+}
+
+/* ---------- Copias ---------- */
+async function deliverFile(name,data,mime){
+  if(downloads){try{await downloads.save({filename:name,data});return 'ok'}catch(e){if(e&&e.code==='declined')return 'declined'}}
+  if(window.claude)return 'fallback';
+  const blob=data instanceof Blob?data:new Blob([data],{type:mime});
+  try{
+    const f=new File([blob],name,{type:mime});
+    if(/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)&&navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Memorándum'});return 'ok'}
+  }catch(e){if(e&&e.name==='AbortError')return 'declined'}
+  const u=URL.createObjectURL(blob);const el=document.createElement('a');el.href=u;el.download=name;document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);
+  return 'ok';
+}
+async function exportData(){
+  const data=JSON.stringify({app:'memorandum',version:1,exportedAt:new Date().toISOString(),...S},null,2);
+  const name='memorandum-'+iso(new Date())+'.json';
+  const r=await deliverFile(name,data,'application/json');
+  if(r==='ok'){S.settings.lastBackup=iso(new Date());S.settings.snoozeUntil=null;savePalette();toast(t('tBackup'));render();return}
+  if(r==='declined')return;
+  openDlg(`<div class="dlg-head"><h2>${t('yourCopy')}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><p class="note">${esc(t('copyText'))}</p><textarea class="in" readonly style="min-height:300px;font-family:monospace;font-size:13px">${esc(data)}</textarea>
+  <div class="actions"><button class="btn primary" data-act="mark-backup">${esc(t('copied'))}</button></div>`);
+}
+$('#importer').addEventListener('change',async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{
+    const p=JSON.parse(await f.text());
+    if(!Array.isArray(p.emotions)||!Array.isArray(p.memories))throw 0;
+    const oldIds=S.memories.map(m=>m.id);
+    S={emotions:p.emotions,drawers:p.drawers||[],memories:p.memories,settings:{...S.settings,...(p.settings||{}),onboarded:true,lang:lang()}};ensureSettings();
+    render();toast(t('tImported',S.memories.length));
+    await savePalette();
+    if(cloud){for(const id of oldIds)if(!memOf(id))await deleteMemCloud(id);for(const m of S.memories)await saveMem(m)}
+  }catch(err){toast(t('tBadFile'))}
+});
+
+/* ---------- Aviso de copia y copias automáticas ---------- */
+function backupDue(){
+  const d=FREQ_DAYS[S.settings.backupFreq];if(!d||!S.memories.length)return false;
+  const today=iso(new Date());
+  if(S.settings.snoozeUntil&&S.settings.snoozeUntil>today)return false;
+  if(!S.settings.lastBackup)return S.memories.length>=3;
+  return daysAgo(S.settings.lastBackup)>=d;
+}
+function backupBanner(){
+  if(!backupDue())return '';
+  const lb=S.settings.lastBackup;
+  return `<div class="wash" style="--c:var(--accent);margin-top:28px"><p style="margin:0 0 12px">${esc(t('due',t('freqAdj')[S.settings.backupFreq])+(lb?t('dueLast',fmt(lb,{day:'numeric',month:'long'})):t('dueNone')))}</p>
+  <div class="row"><button class="btn primary" data-act="export">${t('saveBackup')}</button><button class="btn quiet" data-act="backup-later">${esc(t('later'))}</button></div></div>`;
+}
+const SNAP='memorandum.snapshots';
+function getSnaps(){try{return JSON.parse(localStorage.getItem(SNAP)||'[]')}catch(e){return []}}
+function autoSnapshot(){
+  if(!S.memories.length)return;
+  const today=iso(new Date());let snaps=getSnaps();
+  if(snaps[0]&&snaps[0].date===today)snaps[0]={date:today,n:S.memories.length,data:S};
+  else snaps.unshift({date:today,n:S.memories.length,data:S});
+  snaps=snaps.slice(0,7);
+  while(snaps.length){try{localStorage.setItem(SNAP,JSON.stringify(snaps));break}catch(e){snaps.pop()}}
+}
+function snapsHTML(){
+  const snaps=getSnaps();if(!snaps.length)return '';
+  return `<label class="f">${t('snapsLbl')} <small>${t('snapsSmall')}</small></label>
+  <div class="drawers">${snaps.map((x,i)=>`<div class="drawer"><span style="flex:1;padding:6px 0">${esc(cap(fmt(x.date,{weekday:'long',day:'numeric',month:'long'})))}</span><small>${esc(t('nMem',x.n))}</small><button class="btn quiet" data-act="snap-restore" data-v="${i}">${t('restore')}</button></div>`).join('')}</div>`;
+}
+async function restoreSnap(i){
+  const sn=getSnaps()[i];if(!sn)return;
+  const oldIds=S.memories.map(m=>m.id);
+  const keep=S.settings;S=clone(sn.data);S.settings={...keep};ensureSettings();
+  render();toast(t('tRestored',fmt(sn.date,{day:'numeric',month:'long'})));
+  await savePalette();
+  if(cloud){for(const id of oldIds)if(!memOf(id))await deleteMemCloud(id);for(const m of S.memories)await saveMem(m)}
+}
+
+/* ---------- Tutorial ---------- */
+let onb=0, onbOpen=false;
+function onbArt(i){
+  const cols=S.emotions.map(e=>e.color);const pick=n=>cols[n%cols.length]||'#9A96AE';
+  if(i===0)return `<div class="strip" style="height:110px;grid-template-columns:repeat(21,1fr)">${Array.from({length:21},(_,k)=>((k*7+3)%5===0)?'<span class="day empty"></span>':`<span class="day">${Array.from({length:1+(k%3)},(_,j)=>`<i style="background:${pick(k*3+j*5)}"></i>`).join('')}</span>`).join('')}</div>`;
+  if(i===1)return `<div class="row">${S.emotions.map(e=>`<span class="chip" style="--c:${e.color}"><i></i>${esc(e.name)}</span>`).join('')}</div>`;
+  if(i===2){const pts=[[60,70],[150,40],[230,90],[120,130],[300,50],[330,130],[200,160]];const ln=[[0,1],[1,2],[0,3],[2,4],[4,5],[2,6],[3,6]];
+    return `<svg viewBox="0 0 380 200" style="width:100%;height:auto;display:block" aria-hidden="true">${ln.map(([a,b],k)=>`<line x1="${pts[a][0]}" y1="${pts[a][1]}" x2="${pts[b][0]}" y2="${pts[b][1]}" stroke="var(--muted)" stroke-opacity=".5"${k%2?' stroke-dasharray="4 4"':''}/>`).join('')}${pts.map((p,k)=>`<circle cx="${p[0]}" cy="${p[1]}" r="${9+(k%3)*3}" fill="${pick(k*2)}"/>`).join('')}</svg>`}
+  if(i===3)return `<div class="compo" style="height:110px;margin:0">${[.38,.24,.18,.12,.08].map((f,k)=>`<div style="--c:${pick(k)};flex:${f}"></div>`).join('')}</div>`;
+  return freqChips('freq-onb',true);
+}
+function openOnboarding(i=0){
+  onb=i;onbOpen=true;const steps=t('onb');const last=onb===steps.length-1;
+  const [title,body]=steps[onb];const txt=typeof body==='function'?body(!!cloud):body;
+  openDlg(`<div class="dlg-head"><span class="note">${t('of',onb+1,steps.length)}</span>${last?'':`<button class="btn quiet" data-act="onb-done">${t('skip')}</button>`}</div>
+  ${onb===0?`<div style="margin-top:14px">${langChips(true)}</div>`:''}
+  <div style="margin:22px 0 6px">${onbArt(onb)}</div>
+  <h2 class="detail-title" style="margin-top:22px">${esc(title)}</h2>
+  <p class="detail-text" style="font-family:var(--sans);font-size:17px;margin:10px 0 0;max-width:46ch">${esc(txt)}</p>
+  <div class="row" style="gap:6px;margin-top:22px" aria-hidden="true">${steps.map((_,j)=>`<span style="width:${j===onb?22:8}px;height:8px;border-radius:999px;background:${j===onb?'var(--ink)':'var(--line)'}"></span>`).join('')}</div>
+  <div class="actions">${onb>0?`<button class="btn" data-act="onb-prev">${t('back')}</button>`:''}
+    ${last?`<button class="btn primary" data-act="onb-done">${t('start')}</button>${S.memories.length?'':`<button class="btn" data-act="onb-seed">${t('startEx')}</button>`}`:`<button class="btn primary" data-act="onb-next">${t('nextBtn')}</button>`}</div>`);
+}
+function finishOnboarding(){S.settings.onboarded=true;savePalette();closeDlg()}
+
+/* ---------- Ejemplos ---------- */
+async function seed(){
+  const d=n=>iso(addDays(new Date(),-n));
+  const meta=[ // tipo, fuente, emociones, cajón, días atrás
+    ['libro','Gabriel García Márquez',['nostalgia','asombro'],'d-lecturas',2],
+    ['dia','',['calma','ternura'],'d-diario',3],
+    ['pelicula','Charlotte Wells',['melancolia','ternura'],'d-pantalla',5],
+    ['cancion','Miles Davis',['calma','melancolia'],'d-musica',6],
+    ['lugar','',['alegria','calma'],'d-lugares',1],
+    ['dia','',['alegria','fuerza'],'d-diario',0],
+    ['idea','',['asombro'],'',8],
+    ['persona','',['nostalgia','ternura'],'',10],
+    ['libro','John Williams',['melancolia'],'d-lecturas',12],
+    ['dia','',['inquietud','calma'],'d-diario',15],
+    ['pelicula','Wim Wenders',['calma','alegria'],'d-pantalla',19],
+    ['lugar','',['nostalgia'],'d-lugares',22],
+    ['dia','',['inquietud'],'d-diario',26],
+    ['cancion','Joan Manuel Serrat',['nostalgia','ternura'],'d-musica',30],
+    ['libro','Irene Vallejo',['asombro','ternura'],'d-lecturas',33],
+    ['dia','',['calma','nostalgia'],'d-diario',365]
+  ];
+  const txt=t('seed');const now=Date.now();
+  const ms=meta.map((e,i)=>({id:mkid('m')+i,type:e[0],title:txt[i][0],source:e[1],text:txt[i][1],emotions:e[2].map(x=>'e-'+x).filter(id=>emo(id)),tags:txt[i][2],drawer:drawerOf(e[3])?e[3]:'',date:d(e[4]),links:[],createdAt:now-i*1000}));
+  const link=(a,b)=>{ms[a].links.push(ms[b].id);ms[b].links.push(ms[a].id)};
+  link(2,13);link(0,7);link(11,7);
+  S.memories.push(...ms);render();toast(t('tSeed'));
+  for(const m of ms)await saveMem(m);
+}
+
+/* =========================================================
+   Eventos
+   ========================================================= */
+function armed(btn,fn){
+  if(btn.dataset.armed){fn();return}
+  btn.dataset.armed='1';const old=btn.textContent;btn.textContent=btn.dataset.act==='snap-restore'?t('againRestore'):t('again');btn.classList.add('armed');
+  setTimeout(()=>{if(btn.isConnected){delete btn.dataset.armed;btn.textContent=old;btn.classList.remove('armed')}},3500);
+}
+const NOFILTER=()=>({q:'',emotion:null,type:'',drawer:'',tag:null,date:null});
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;
+  const a=b.dataset.act,v=b.dataset.v,id=b.dataset.id;
+  switch(a){
+    case 'nav':closeDlg();go(v);break;
+    case 'new':openEditor(null,{type:b.dataset.type,emo:b.dataset.emo});break;
+    case 'open':openDetail(id);break;
+    case 'close':closeDlg();break;
+    case 'edit':openEditor(id);break;
+    case 'del':armed(b,()=>deleteMem(id));break;
+    case 'shuffle':{const n=resurfPool().length;resurfIdx=(resurfIdx+1+Math.floor(Math.random()*Math.max(1,n-1)))%Math.max(1,n);render();break}
+    case 'seed':seed();break;
+    case 'filter-date':filters={...NOFILTER(),date:v};archMode='lista';go('archivo');break;
+    case 'filter-emo':filters.emotion=filters.emotion===v?null:v;render();break;
+    case 'filter-emo-go':closeDlg();filters={...NOFILTER(),emotion:v};go('archivo');break;
+    case 'tag-go':closeDlg();filters={...NOFILTER(),tag:v};go('archivo');break;
+    case 'drawer-go':filters={...NOFILTER(),drawer:id};go('archivo');break;
+    case 'clear':filters[b.dataset.k]=null;render();break;
+    case 'clear-all':filters=NOFILTER();render();break;
+    case 'mode':archMode=v;render();break;
+    case 'period':rep={period:v,offset:0};render();break;
+    case 'prev':rep.offset--;render();break;
+    case 'next':if(rep.offset<0){rep.offset++;render()}break;
+    case 'story':openStory();break;
+    case 'story-save':
+      if(storyBlob){deliverFile('memorandum-'+rep.period+'-'+iso(new Date())+'.png',storyBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}
+      break;
+    case 'link-pair':{const x=memOf(b.dataset.a),y=memOf(b.dataset.b);if(x&&y){x.links=[...new Set([...(x.links||[]),y.id])];y.links=[...new Set([...(y.links||[]),x.id])];toast(t('tLinked'));render();saveMem(x).then(()=>saveMem(y))}break}
+    case 'emo-add':{const pal=['#A3B18A','#F4A261','#9D8189','#6D9DC5','#C08497','#84A59D'];const ne={id:mkid('e-'),name:t('newEmo'),color:pal[S.emotions.length%pal.length]};S.emotions.push(ne);render();savePalette();setTimeout(()=>{const el=document.querySelector(`[data-field="emo-name"][data-id="${ne.id}"]`);if(el){el.focus();el.select()}},30);break}
+    case 'emo-del':armed(b,async()=>{S.emotions=S.emotions.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.emotions||[]).includes(id));tt.forEach(m=>m.emotions=m.emotions.filter(x=>x!==id));if(filters.emotion===id)filters.emotion=null;render();await savePalette();for(const m of tt)await saveMem(m)});break;
+    case 'drawer-add':{const inp=document.querySelector('[data-field="new-drawer-pal"]');const n=(inp?.value||'').trim();if(!n){inp?.focus();break}S.drawers.push({id:mkid('d-'),name:cut(n,40)});render();savePalette();break}
+    case 'drawer-del':armed(b,async()=>{S.drawers=S.drawers.filter(x=>x.id!==id);const tt=S.memories.filter(m=>m.drawer===id);tt.forEach(m=>m.drawer='');render();await savePalette();for(const m of tt)await saveMem(m)});break;
+    case 'export':exportData();break;
+    case 'import':$('#importer').click();break;
+    case 'mark-backup':S.settings.lastBackup=iso(new Date());S.settings.snoozeUntil=null;savePalette();closeDlg();render();toast(t('tBackupMarked'));break;
+    case 'backup-later':S.settings.snoozeUntil=iso(addDays(new Date(),1));savePalette();render();break;
+    case 'freq':S.settings.backupFreq=v;S.settings.snoozeUntil=null;savePalette();render();break;
+    case 'freq-onb':S.settings.backupFreq=v;savePalette();openOnboarding(onb);break;
+    case 'lang':setLang(v);render();if(onbOpen&&dlg.open)openOnboarding(onb);break;
+    case 'snap-restore':armed(b,()=>restoreSnap(+v));break;
+    case 'tutorial':openOnboarding(0);break;
+    case 'onb-next':openOnboarding(onb+1);break;
+    case 'onb-prev':openOnboarding(Math.max(0,onb-1));break;
+    case 'onb-done':finishOnboarding();break;
+    case 'onb-seed':finishOnboarding();seed();break;
+    // editor
+    case 'ed-type':draft.type=v;if(!typeOf(v).src)draft.source='';renderEditor();break;
+    case 'ed-emo':{const i=draft.emotions.indexOf(v);if(i>=0)draft.emotions.splice(i,1);else if(draft.emotions.length<3)draft.emotions.push(v);else toast(t('max3'));renderEditor();break}
+    case 'ed-tag':addTag(v);renderEditor('#ed-tag');break;
+    case 'ed-untag':draft.tags=draft.tags.filter(x=>x!==v);renderEditor();break;
+    case 'ed-link':{const i=draft.links.indexOf(v);if(i>=0)draft.links.splice(i,1);else draft.links.push(v);renderEditor('#ed-link');break}
+    case 'ed-adddrawer':{const n=newDrawerName.trim();if(!n){$('#ed-newdrawer')?.focus();break}const nd={id:mkid('d-'),name:cut(n,40)};S.drawers.push(nd);draft.drawer=nd.id;newDrawerName='';savePalette();renderEditor();break}
+    case 'ed-save':saveDraft();break;
+  }
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    const el=e.target;
+    if(el.matches('[data-ed-tag]')){e.preventDefault();if(el.value.trim()){addTag(el.value);renderEditor('#ed-tag')}}
+    else if(el.matches('g.node')){e.preventDefault();openDetail(el.dataset.id)}
+    else if(el.matches('[data-field="new-drawer-pal"]')){e.preventDefault();document.querySelector('[data-act="drawer-add"]').click()}
+    else if(el.matches('[data-ed-newdrawer]')){e.preventDefault();document.querySelector('[data-act="ed-adddrawer"]').click()}
+  }
+  if(e.key===','&&e.target.matches('[data-ed-tag]')){e.preventDefault();if(e.target.value.trim()){addTag(e.target.value);renderEditor('#ed-tag')}}
+});
+let saveT;
+document.addEventListener('input',e=>{
+  const el=e.target;
+  if(el.dataset.ed&&draft){draft[el.dataset.ed]=el.value;return}
+  if(el.matches('[data-ed-link]')){linkQ=el.value;renderEditor('#ed-link');return}
+  if(el.matches('[data-ed-newdrawer]')){newDrawerName=el.value;return}
+  if(el.id==='story-q'){storyQuote=el.checked;drawStory();return}
+  const f=el.dataset.field;if(!f)return;
+  if(f==='q'){filters.q=el.value;if(archMode==='lista')$('#results').innerHTML=resultsHTML();else drawSky();return}
+  if(f==='emo-name'||f==='emo-color'||f==='drawer-name'){
+    const list=f==='drawer-name'?S.drawers:S.emotions;const it=list.find(x=>x.id===el.dataset.id);if(!it)return;
+    if(f==='emo-color'){it.color=el.value;el.closest('.pal').style.setProperty('--c',el.value)}else it.name=el.value.slice(0,40)||t('noName');
+    saveLocal();clearTimeout(saveT);saveT=setTimeout(savePalette,700);
+  }
+});
+document.addEventListener('change',e=>{
+  const el=e.target;
+  if(el.id==='story-q'){storyQuote=el.checked;drawStory();return}
+  const f=el.dataset.field;
+  if(f==='type'||f==='drawer'){filters[f]=el.value;render()}
+});
+
+/* =========================================================
+   Arranque
+   ========================================================= */
+const local=loadLocal();if(local)S=local;ensureSettings();
+applyLang();render();
+initCloud().catch(()=>{}).finally(()=>{ensureSettings();applyLang();autoSnapshot();render();if(!S.settings.onboarded)openOnboarding(0)});
+
+</script>
+</body>
+</html>
