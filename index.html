@@ -261,6 +261,23 @@ a.btn{text-decoration:none;display:inline-block}
 .locked-inner{filter:blur(7px) saturate(.9);opacity:.75;pointer-events:none;user-select:none;max-height:520px;overflow:hidden}
 .locked-cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px}
 .locked-cta p{max-width:34ch;margin:0;background:var(--surface);padding:14px 16px;border-radius:14px;box-shadow:var(--shadow);font-size:15px}
+.ficha-quote{font-family:var(--serif);font-style:italic;font-size:16.5px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px}
+.ymap{display:grid;gap:3px;align-items:center}
+.ymap .h{font-size:11px;color:var(--muted);text-align:center;line-height:1.6}
+.ymap .dl{font-size:10px;color:var(--muted);text-align:right;padding-right:3px;line-height:1}
+.ycell{aspect-ratio:1;border-radius:4px;border:0;padding:0;background:color-mix(in srgb,var(--line) 60%,transparent);display:block;width:100%}
+.ycell.none{background:transparent}
+.ycell.today{box-shadow:0 0 0 1.5px var(--ink)}
+.ycell.has:hover{filter:brightness(1.07)}
+.wmap .ycell{font-size:11px;color:var(--muted);text-align:left;padding:4px 5px;display:flex;align-items:flex-start}
+.wmap .ycell.has{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.map-scroll{overflow-x:auto;padding-bottom:4px}
+.daystrip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.daystrip button{border:0;padding:0;background:none;display:flex;flex-direction:column;gap:4px;align-items:stretch;font-size:11px;color:var(--muted)}
+.daystrip i{display:block;height:44px;border-radius:6px;background:color-mix(in srgb,var(--line) 60%,transparent)}
+.daystrip .cur i{box-shadow:0 0 0 2px var(--ink)}
+.daynav{display:flex;gap:8px;align-items:center;margin:12px 0 4px}
+.daynav input{flex:1}
 </style>
 </head>
 <body>
@@ -300,7 +317,7 @@ es:{
   palTitle:'Biblioteca de emociones', palLead:'Cada color es una emoción con el nombre que tú le des. Renómbralos, cambia el tono o crea los tuyos. Toca un color para ver todo lo que guarda.',
   seeMemsOf:n=>`Ver recuerdos de ${n}`, emoName:'Nombre de la emoción', colorOf:n=>`Color de ${n}`, del:'Borrar',
   newEmo:'Nueva emoción', newEmoHint:'Inventa una: «domingo de lluvia», «olor a casa»…',
-  drawersTitle:'Cajones', drawersLead:'Los sitios donde se archivan tus recuerdos.', drawerName:'Nombre del cajón', newDrawerName:'Nombre del nuevo cajón', addDrawer:'Añadir cajón',
+  drawersTitle:'Cajones', drawersLead:'Los sitios donde se archivan tus recuerdos. Un recuerdo puede vivir en varios a la vez.', drawerName:'Nombre del cajón', newDrawerName:'Nombre del nuevo cajón', addDrawer:'Añadir cajón',
   backupTitle:'Copia de seguridad', savedCloud:'Tus recuerdos se guardan solos en tu cuenta y solo tú puedes verlos.', savedLocal:'Tus recuerdos se guardan solos en este dispositivo.',
   backupNote:'Además, te avisaré para guardar una copia en un archivo, que puedes llevar a Archivos, Drive o donde prefieras.',
   remindMe:'Recordarme guardar una copia', freqLbl:'Frecuencia de la copia',
@@ -319,7 +336,7 @@ es:{
   connTxt:(a,b,e,w)=>`${a} y ${b} comparten ${e} y la palabra «${w}».`, linkThem:'Enlazarlos',
   share:'Compartir', shareLead:'Crea una tarjeta vertical para stories con tu paleta del periodo. Solo muestra colores y palabras, nunca lo que escribiste, salvo que elijas incluir una frase.',
   makeCard:'Crear tarjeta para stories',
-  close:'Cerrar', inDrawer:n=>`cajón ${n}`, linkedWith:'Enlazado con', resonates:'También resuena con', edit:'Editar',
+  close:'Cerrar', pageLbl:'Página', pageAbbr:n=>`p. ${n}`, moreFrom:x=>`Más notas de «${x}»`, inDrawer:n=>`cajón ${n}`, inDrawers:n=>`cajones ${n}`, byTags:'Conectado por etiquetas', seeAllTag:n=>`Ver los ${n}`, drawersHint:'puedes elegir varios', linkedWith:'Enlazado con', resonates:'También resuena con', edit:'Editar',
   editMem:'Editar recuerdo', newMem:'Nuevo recuerdo', cancel:'Cancelar', whatIs:'Qué es', optional:'opcional', text:'Texto',
   emotions:'Emociones', emoHint:'hasta 3, la primera es la principal', principal:'principal',
   tags:'Etiquetas', tagHint:'escribe una palabra y pulsa Enter', tagPh:'mar, padre, verano…', remove:'Quitar',
@@ -346,7 +363,7 @@ es:{
   galleryTitle:'Tus fotos por emoción', galleryEmpty:'Todavía no hay fotos en tus recuerdos.', galleryLocked:'Con Plus, todas tus fotos se ordenan por emoción en un mosaico de tu año.',
   noEmotion:'Sin emoción', allYears:'Todos los años',
   plusLead:'Para quien quiere ir más allá, y para apoyar que esta app siga creciendo.',
-  plusFeatures:['Estadísticas con gráficos: quesitos y barras de tus emociones, tus días, tus horas, tus palabras y mucho más.','Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
+  plusFeatures:['El mapa en color de cualquier año o de las fechas que quieras, para guardarlo como imagen.','Estadísticas con gráficos: quesitos y barras de tus emociones, tus días, tus horas, tus palabras y mucho más.','Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
   plusPrice:'Pago único de 12,99 €, para siempre. Precio de fundadores: 7,99 €.', plusGet:'Conseguir Plus', plusSoon:'Muy pronto podrás conseguirlo aquí.',
   plusHaveCode:'¿Tienes un código?', plusCodePh:'Pega aquí tu código', plusActivate:'Activar', plusMore:'Ver Plus',
   plusBadCode:'Ese código no es válido. Cópialo entero, sin espacios.', plusActive:b=>`Tienes Plus. Gracias por apoyar ${b}.`, plusThanks:'Plus activado. ¡Gracias!',
@@ -358,6 +375,11 @@ es:{
   stStreak:'Racha actual', stBest:'Racha más larga', stDays:'Días con recuerdos', stPerWeek:'Recuerdos por semana', stPhoto:'Con foto',
   nDaysShort:n=>`${n} ${n===1?'día':'días'}`, prevShort:'Anterior', nowShort:'Ahora', noDataYet:'Aún no hay suficientes recuerdos para esta gráfica.',
   dayparts:{madrugada:'Madrugada',manana:'Mañana',tarde:'Tarde',noche:'Noche'},
+  mapTitle:'Mapa en color', mapLead:'Cada cuadrado es un día, pintado con lo que sentiste. Toca uno para ver sus recuerdos.',
+  mapThisYear:'Este año', mapCustom:'Otras fechas', mapFrom:'Desde', mapTo:'Hasta', mapApply:'Ver', mapSeeYear:'Ver el mapa de tu año',
+  mapSave:'Guardar imagen', mapLocked:'Con Plus, puedes ver el mapa de cualquier año o de las fechas que quieras, y guardarlo como imagen.',
+  mapDaysWith:(a,b)=>`${a} de ${b} días con recuerdos.`, mapCardCustom:'Mis días', mapBadRange:'Elige una fecha de inicio anterior a la de final.',
+  goDay:'Ir a un día', dayEmpty:'No guardaste nada este día.', dayAdd:'Guardar un recuerdo en este día', daySameOther:'Ese mismo día, otros años', dayAround:'Días cercanos', prevDay:'Día anterior', nextDay:'Día siguiente',
   hadMemories:'¿Ya tenías recuerdos? Recupéralos con tu copia', restoreBtn:'Recuperar mis recuerdos', tSavedDownloads:'Copia guardada en Descargas.',
   careTitle:'Cuida tus recuerdos', careWhy:'¿Por qué es importante?',
   careLead:'Tus recuerdos solo viven en este teléfono: no hay ninguna copia en ningún otro sitio. Eso los hace privados, pero también significa que, si se pierden aquí, no puedo recuperarlos. Estas cinco cosas los mantienen a salvo:',
@@ -402,9 +424,9 @@ es:{
   ],
   types:{
     dia:{label:'Día',plural:'días',t:'Título del día',src:null,ph:'¿Qué pasó? ¿Cómo te sentiste?'},
-    libro:{label:'Libro',plural:'libros',t:'Título del libro',src:'Autor',ph:'Una frase subrayada o lo que te removió'},
-    pelicula:{label:'Película',plural:'películas',t:'Película o serie',src:'Dirección',ph:'Con qué te quedaste al salir'},
-    cancion:{label:'Canción',plural:'canciones',t:'Canción',src:'Artista',ph:'Qué te trae cuando suena'},
+    libro:{label:'Libro',plural:'libros',t:'Título del libro',src:'Autor',q:'Cita',qph:'La frase subrayada, tal cual',page:true,ph:'Lo que te removió, lo que pensaste al leerla'},
+    pelicula:{label:'Película',plural:'películas',t:'Película o serie',src:'Dirección',q:'Una frase',qph:'Algo que dijo alguien en la película',ph:'Con qué te quedaste al salir'},
+    cancion:{label:'Canción',plural:'canciones',t:'Canción',src:'Artista',q:'Un verso',qph:'El verso que se te quedó',ph:'Qué te trae cuando suena'},
     lugar:{label:'Lugar',plural:'lugares',t:'Lugar',src:null,ph:'Cómo olía, cómo sonaba, con quién estabas'},
     persona:{label:'Persona',plural:'personas',t:'Persona',src:null,ph:'Un gesto, una frase, una costumbre'},
     idea:{label:'Idea',plural:'ideas',t:'Idea',src:null,ph:'Anótala antes de que se vaya'}
@@ -450,7 +472,7 @@ en:{
   palTitle:'Library of emotions', palLead:'Each colour is an emotion with whatever name you give it. Rename them, change their shade or create your own. Tap a colour to see everything it holds.',
   seeMemsOf:n=>`See memories of ${n}`, emoName:'Emotion name', colorOf:n=>`Colour of ${n}`, del:'Delete',
   newEmo:'New emotion', newEmoHint:'Invent one: “rainy Sunday”, “smell of home”…',
-  drawersTitle:'Drawers', drawersLead:'The places where your memories are filed.', drawerName:'Drawer name', newDrawerName:'New drawer name', addDrawer:'Add drawer',
+  drawersTitle:'Drawers', drawersLead:'The places where your memories are filed. A memory can live in several at once.', drawerName:'Drawer name', newDrawerName:'New drawer name', addDrawer:'Add drawer',
   backupTitle:'Backup', savedCloud:'Your memories are saved automatically to your account and only you can see them.', savedLocal:'Your memories are saved automatically on this device.',
   backupNote:'I will also remind you to save a copy as a file, which you can keep in Files, Drive or wherever you like.',
   remindMe:'Remind me to save a copy', freqLbl:'Backup frequency',
@@ -469,7 +491,7 @@ en:{
   connTxt:(a,b,e,w)=>`${a} and ${b} share ${e} and the word “${w}”.`, linkThem:'Link them',
   share:'Share', shareLead:'Create a vertical card for stories with your palette for the period. It only shows colours and words, never what you wrote, unless you choose to include a line.',
   makeCard:'Create a card for stories',
-  close:'Close', inDrawer:n=>`drawer ${n}`, linkedWith:'Linked to', resonates:'Also resonates with', edit:'Edit',
+  close:'Close', pageLbl:'Page', pageAbbr:n=>`p. ${n}`, moreFrom:x=>`More notes from “${x}”`, inDrawer:n=>`drawer ${n}`, inDrawers:n=>`drawers ${n}`, byTags:'Connected by tags', seeAllTag:n=>`See all ${n}`, drawersHint:'you can choose several', linkedWith:'Linked to', resonates:'Also resonates with', edit:'Edit',
   editMem:'Edit memory', newMem:'New memory', cancel:'Cancel', whatIs:'What is it', optional:'optional', text:'Text',
   emotions:'Emotions', emoHint:'up to 3, the first is the main one', principal:'main',
   tags:'Tags', tagHint:'type a word and press Enter', tagPh:'sea, father, summer…', remove:'Remove',
@@ -496,7 +518,7 @@ en:{
   galleryTitle:'Your photos by emotion', galleryEmpty:'There are no photos in your memories yet.', galleryLocked:'With Plus, all your photos are arranged by emotion into a mosaic of your year.',
   noEmotion:'No emotion', allYears:'All years',
   plusLead:'For those who want to go further, and to help this app keep growing.',
-  plusFeatures:['Statistics with charts: pies and bars of your emotions, your days, your hours, your words and much more.','Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
+  plusFeatures:['The colour map of any year or any dates you like, to save as an image.','Statistics with charts: pies and bars of your emotions, your days, your hours, your words and much more.','Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
   plusPrice:"A one-off payment of €12.99, forever. Founders' price: €7.99.", plusGet:'Get Plus', plusSoon:'Coming here very soon.',
   plusHaveCode:'Have a code?', plusCodePh:'Paste your code here', plusActivate:'Activate', plusMore:'See Plus',
   plusBadCode:"That code isn't valid. Copy all of it, with no spaces.", plusActive:b=>`You have Plus. Thank you for supporting ${b}.`, plusThanks:'Plus activated. Thank you!',
@@ -508,6 +530,11 @@ en:{
   stStreak:'Current streak', stBest:'Longest streak', stDays:'Days with memories', stPerWeek:'Memories per week', stPhoto:'With a photo',
   nDaysShort:n=>`${n} ${n===1?'day':'days'}`, prevShort:'Before', nowShort:'Now', noDataYet:'Not enough memories for this chart yet.',
   dayparts:{madrugada:'Small hours',manana:'Morning',tarde:'Afternoon',noche:'Night'},
+  mapTitle:'Colour map', mapLead:'Each square is a day, painted with what you felt. Tap one to see its memories.',
+  mapThisYear:'This year', mapCustom:'Other dates', mapFrom:'From', mapTo:'To', mapApply:'Show', mapSeeYear:'See the map of your year',
+  mapSave:'Save image', mapLocked:'With Plus, you can see the map of any year or any dates you like, and save it as an image.',
+  mapDaysWith:(a,b)=>`${a} of ${b} days with memories.`, mapCardCustom:'My days', mapBadRange:'Choose a start date before the end date.',
+  goDay:'Go to a day', dayEmpty:"You didn't save anything on this day.", dayAdd:'Save a memory on this day', daySameOther:'This same day, other years', dayAround:'Nearby days', prevDay:'Previous day', nextDay:'Next day',
   hadMemories:'Already had memories? Get them back with your copy', restoreBtn:'Recover my memories', tSavedDownloads:'Copy saved to Downloads.',
   careTitle:'Look after your memories', careWhy:'Why does it matter?',
   careLead:"Your memories only live on this phone: there's no copy anywhere else. That keeps them private, but it also means that if they're lost here, I can't get them back. These five things keep them safe:",
@@ -552,9 +579,9 @@ en:{
   ],
   types:{
     dia:{label:'Day',plural:'days',t:'Title of the day',src:null,ph:'What happened? How did you feel?'},
-    libro:{label:'Book',plural:'books',t:'Book title',src:'Author',ph:'An underlined line or what stirred you'},
-    pelicula:{label:'Film',plural:'films',t:'Film or series',src:'Director',ph:'What stayed with you as you walked out'},
-    cancion:{label:'Song',plural:'songs',t:'Song',src:'Artist',ph:'What it brings back when it plays'},
+    libro:{label:'Book',plural:'books',t:'Book title',src:'Author',q:'Quote',qph:'The underlined line, word for word',page:true,ph:'What stirred you, what you thought as you read it'},
+    pelicula:{label:'Film',plural:'films',t:'Film or series',src:'Director',q:'A line',qph:'Something someone said in the film',ph:'What stayed with you as you walked out'},
+    cancion:{label:'Song',plural:'songs',t:'Song',src:'Artist',q:'A lyric',qph:'The line that stayed with you',ph:'What it brings back when it plays'},
     lugar:{label:'Place',plural:'places',t:'Place',src:null,ph:'How it smelled, how it sounded, who you were with'},
     persona:{label:'Person',plural:'people',t:'Person',src:null,ph:'A gesture, a phrase, a habit'},
     idea:{label:'Idea',plural:'ideas',t:'Idea',src:null,ph:'Write it down before it slips away'}
@@ -600,7 +627,7 @@ ca:{
   palTitle:`Biblioteca d'emocions`, palLead:`Cada color és una emoció amb el nom que tu li donis. Canvia'ls el nom, el to o crea'n de teus. Toca un color per veure tot el que guarda.`,
   seeMemsOf:n=>`Veure records de ${n}`, emoName:`Nom de l'emoció`, colorOf:n=>`Color de ${n}`, del:'Esborra',
   newEmo:'Nova emoció', newEmoHint:`Inventa'n una: «diumenge de pluja», «olor de casa»…`,
-  drawersTitle:'Calaixos', drawersLead:`Els llocs on s'arxiven els teus records.`, drawerName:'Nom del calaix', newDrawerName:'Nom del nou calaix', addDrawer:'Afegeix un calaix',
+  drawersTitle:'Calaixos', drawersLead:`Els llocs on s'arxiven els teus records. Un record pot viure en diversos alhora.`, drawerName:'Nom del calaix', newDrawerName:'Nom del nou calaix', addDrawer:'Afegeix un calaix',
   backupTitle:'Còpia de seguretat', savedCloud:'Els teus records es desen sols al teu compte i només tu els pots veure.', savedLocal:'Els teus records es desen sols en aquest dispositiu.',
   backupNote:`A més, t'avisaré per desar una còpia en un fitxer, que pots portar a Fitxers, Drive o on prefereixis.`,
   remindMe:`Recorda'm de desar una còpia`, freqLbl:'Freqüència de la còpia',
@@ -619,7 +646,7 @@ ca:{
   connTxt:(a,b,e,w)=>`${a} i ${b} comparteixen ${e} i la paraula «${w}».`, linkThem:`Enllaça'ls`,
   share:'Compartir', shareLead:`Crea una targeta vertical per a stories amb la paleta del període. Només mostra colors i paraules, mai el que has escrit, tret que triïs incloure-hi una frase.`,
   makeCard:'Crea una targeta per a stories',
-  close:'Tanca', inDrawer:n=>`calaix ${n}`, linkedWith:'Enllaçat amb', resonates:'També ressona amb', edit:'Edita',
+  close:'Tanca', pageLbl:'Pàgina', pageAbbr:n=>`pàg. ${n}`, moreFrom:x=>`Més notes de «${x}»`, inDrawer:n=>`calaix ${n}`, inDrawers:n=>`calaixos ${n}`, byTags:'Connectat per etiquetes', seeAllTag:n=>`Veure'ls tots (${n})`, drawersHint:'en pots triar diversos', linkedWith:'Enllaçat amb', resonates:'També ressona amb', edit:'Edita',
   editMem:'Edita el record', newMem:'Nou record', cancel:'Cancel·la', whatIs:'Què és', optional:'opcional', text:'Text',
   emotions:'Emocions', emoHint:'fins a 3, la primera és la principal', principal:'principal',
   tags:'Etiquetes', tagHint:'escriu una paraula i prem Retorn', tagPh:'mar, pare, estiu…', remove:'Treu',
@@ -646,7 +673,7 @@ ca:{
   galleryTitle:'Les teves fotos per emoció', galleryEmpty:'Encara no hi ha fotos als teus records.', galleryLocked:`Amb Plus, totes les teves fotos s'ordenen per emoció en un mosaic del teu any.`,
   noEmotion:'Sense emoció', allYears:'Tots els anys',
   plusLead:'Per a qui vol anar més enllà, i per ajudar que aquesta app continuï creixent.',
-  plusFeatures:['Estadístiques amb gràfics: formatges i barres de les teves emocions, els teus dies, les teves hores, les teves paraules i molt més.','Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
+  plusFeatures:['El mapa en color de qualsevol any o de les dates que vulguis, per desar-lo com a imatge.','Estadístiques amb gràfics: formatges i barres de les teves emocions, els teus dies, les teves hores, les teves paraules i molt més.','Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
   plusPrice:'Pagament únic de 12,99 €, per sempre. Preu de fundadors: 7,99 €.', plusGet:'Aconsegueix Plus', plusSoon:'Molt aviat el podràs aconseguir aquí.',
   plusHaveCode:'Tens un codi?', plusCodePh:'Enganxa aquí el teu codi', plusActivate:'Activa', plusMore:'Veure Plus',
   plusBadCode:`Aquest codi no és vàlid. Copia'l sencer, sense espais.`, plusActive:b=>`Tens Plus. Gràcies per donar suport a ${b}.`, plusThanks:'Plus activat. Gràcies!',
@@ -658,6 +685,11 @@ ca:{
   stStreak:'Ratxa actual', stBest:'Ratxa més llarga', stDays:'Dies amb records', stPerWeek:'Records per setmana', stPhoto:'Amb foto',
   nDaysShort:n=>`${n} ${n===1?'dia':'dies'}`, prevShort:'Anterior', nowShort:'Ara', noDataYet:'Encara no hi ha prou records per a aquest gràfic.',
   dayparts:{madrugada:'Matinada',manana:'Matí',tarde:'Tarda',noche:'Nit'},
+  mapTitle:'Mapa en color', mapLead:"Cada quadrat és un dia, pintat amb el que vas sentir. Toca'n un per veure'n els records.",
+  mapThisYear:'Aquest any', mapCustom:'Altres dates', mapFrom:'Des de', mapTo:'Fins a', mapApply:'Veure', mapSeeYear:"Veure el mapa del teu any",
+  mapSave:'Desa la imatge', mapLocked:"Amb Plus, pots veure el mapa de qualsevol any o de les dates que vulguis, i desar-lo com a imatge.",
+  mapDaysWith:(a,b)=>`${a} de ${b} dies amb records.`, mapCardCustom:'Els meus dies', mapBadRange:"Tria una data d'inici anterior a la de final.",
+  goDay:'Anar a un dia', dayEmpty:'No vas desar res aquest dia.', dayAdd:'Desa un record en aquest dia', daySameOther:'Aquest mateix dia, altres anys', dayAround:'Dies propers', prevDay:'Dia anterior', nextDay:'Dia següent',
   hadMemories:`Ja tenies records? Recupera'ls amb la teva còpia`, restoreBtn:'Recupera els meus records', tSavedDownloads:'Còpia desada a Baixades.',
   careTitle:'Té cura dels teus records', careWhy:'Per què és important?',
   careLead:`Els teus records només viuen en aquest telèfon: no n'hi ha cap còpia enlloc més. Això els fa privats, però també vol dir que, si es perden aquí, no els puc recuperar. Aquestes cinc coses els mantenen a recer:`,
@@ -702,9 +734,9 @@ ca:{
   ],
   types:{
     dia:{label:'Dia',plural:'dies',t:'Títol del dia',src:null,ph:`Què ha passat? Com t'has sentit?`},
-    libro:{label:'Llibre',plural:'llibres',t:'Títol del llibre',src:'Autor',ph:'Una frase subratllada o el que et va remoure'},
-    pelicula:{label:'Pel·lícula',plural:'pel·lícules',t:'Pel·lícula o sèrie',src:'Direcció',ph:'Amb què et vas quedar en sortir'},
-    cancion:{label:'Cançó',plural:'cançons',t:'Cançó',src:'Artista',ph:'Què et porta quan sona'},
+    libro:{label:'Llibre',plural:'llibres',t:'Títol del llibre',src:'Autor',q:'Cita',qph:'La frase subratllada, tal qual',page:true,ph:'El que et va remoure, el que vas pensar en llegir-la'},
+    pelicula:{label:'Pel·lícula',plural:'pel·lícules',t:'Pel·lícula o sèrie',src:'Direcció',q:'Una frase',qph:'Alguna cosa que va dir algú a la pel·lícula',ph:'Amb què et vas quedar en sortir'},
+    cancion:{label:'Cançó',plural:'cançons',t:'Cançó',src:'Artista',q:'Un vers',qph:`El vers que se t'ha quedat`,ph:'Què et porta quan sona'},
     lugar:{label:'Lloc',plural:'llocs',t:'Lloc',src:null,ph:'Com feia olor, com sonava, amb qui hi eres'},
     persona:{label:'Persona',plural:'persones',t:'Persona',src:null,ph:'Un gest, una frase, un costum'},
     idea:{label:'Idea',plural:'idees',t:'Idea',src:null,ph:`Apunta-la abans que se'n vagi`}
@@ -749,7 +781,8 @@ function freshState(lang){
   return {emotions:DEFAULT_EMOTIONS.map(e=>({...e,name:L.defEmo[e.id]})),drawers:DEFAULT_DRAWERS.map(id=>({id,name:L.defDrawer[id]})),memories:[],customTypes:[],profile:{name:'',birthYear:'',about:''},settings:{...DEFAULT_SETTINGS,lang}};
 }
 let S=freshState(DEFAULT_SETTINGS.lang);
-function ensureSettings(){if(!Array.isArray(S.customTypes))S.customTypes=[];S.profile={name:'',birthYear:'',about:'',...(S.profile||{})};S.settings={...DEFAULT_SETTINGS,...(S.settings||{})};if(!I18N[S.settings.lang])S.settings.lang='es'}
+function normDrawers(m){if(!m)return;if(!Array.isArray(m.drawers))m.drawers=m.drawer?[m.drawer]:[];m.drawers=[...new Set(m.drawers.filter(Boolean))];m.drawer=m.drawers[0]||''}
+function ensureSettings(){(S.memories||[]).forEach(normDrawers);if(!Array.isArray(S.customTypes))S.customTypes=[];S.profile={name:'',birthYear:'',about:'',...(S.profile||{})};S.settings={...DEFAULT_SETTINGS,...(S.settings||{})};if(!I18N[S.settings.lang])S.settings.lang='es'}
 
 let view='hoy', firstHoy=true;
 let filters={q:'',emotion:null,type:'',drawer:'',tag:null,date:null};
@@ -875,6 +908,7 @@ function render(){
   else if(view==='paleta')m.innerHTML=vPaleta();
   else if(view==='informe')m.innerHTML=vInforme();
   else if(view==='perfil')m.innerHTML=vPerfil();
+  else if(view==='mapa')m.innerHTML=vMapa();
   hydratePhotos(m);
 }
 
@@ -884,7 +918,7 @@ function stripHTML(){
   for(let i=34;i>=0;i--){
     const k=iso(addDays(now,-i));const ms=S.memories.filter(m=>m.date===k);
     const segs=ms.flatMap(m=>m.emotions||[]).map(emo).filter(Boolean);
-    out+=`<button class="day${segs.length?'':' empty'}${i===0?' today':''}" style="--n:${34-i}" data-act="filter-date" data-v="${k}" aria-label="${esc(fmt(k,{weekday:'long',day:'numeric',month:'long'}))}: ${esc(t('nMem',ms.length))}">${segs.map(e=>`<i style="background:${e.color}"></i>`).join('')}</button>`;
+    out+=`<button class="day${segs.length?'':' empty'}${i===0?' today':''}" style="--n:${34-i}" data-act="day" data-v="${k}" aria-label="${esc(fmt(k,{weekday:'long',day:'numeric',month:'long'}))}: ${esc(t('nMem',ms.length))}">${segs.map(e=>`<i style="background:${e.color}"></i>`).join('')}</button>`;
   }
   return out;
 }
@@ -902,6 +936,7 @@ function vHoy(){
   <p class="today-date">${esc(cap(fmt(today,{weekday:'long',day:'numeric',month:'long'})))}</p>
   <div class="strip${grow?' grow':''}" aria-label="${esc(t('stripCap'))}">${stripHTML()}</div>
   <div class="strip-cap"><span>${t('stripCap')}</span><span>${t('today')}</span></div>
+  <button class="link-plain" data-act="go-map" style="margin-top:10px">${esc(t('mapSeeYear'))}</button>
   <h2 class="sec">${t('whichColor')}</h2>
   <div class="checkin">${S.emotions.map(e=>`<button class="swatch-btn" style="--c:${e.color}" data-act="new" data-type="dia" data-emo="${e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>`;
   h+=installBanner();
@@ -938,6 +973,7 @@ function ficha(m){
     <span class="ficha-meta"><span>${ty.label}</span><span>${esc(fmt(m.date,{day:'numeric',month:'short'}))}</span></span>
     <span class="ficha-title">${esc(memTitle(m))}</span>
     ${m.source?`<span class="ficha-source">${esc(m.source)}</span>`:''}
+    ${m.quote?`<span class="ficha-quote">«${esc(m.quote)}»</span>`:''}
     ${m.text?`<span class="ficha-text">${esc(m.text)}</span>`:''}
     ${(m.tags||[]).length?`<span class="ficha-tags">${m.tags.map(x=>'#'+esc(x)).join('  ')}</span>`:''}
   </button>`;
@@ -949,10 +985,10 @@ function filtered(){
   return sorted(S.memories.filter(m=>{
     if(filters.emotion&&!(m.emotions||[]).includes(filters.emotion))return false;
     if(filters.type&&m.type!==filters.type)return false;
-    if(filters.drawer&&m.drawer!==filters.drawer)return false;
+    if(filters.drawer&&!(m.drawers||[]).includes(filters.drawer))return false;
     if(filters.tag&&!(m.tags||[]).includes(filters.tag))return false;
     if(filters.date&&m.date!==filters.date)return false;
-    if(q){const hay=[m.title,m.source,m.text,...(m.tags||[])].join(' ').toLowerCase();if(!hay.includes(q))return false}
+    if(q){const hay=[m.title,m.source,m.text,m.quote,...(m.tags||[])].join(' ').toLowerCase();if(!hay.includes(q))return false}
     return true;
   }));
 }
@@ -969,6 +1005,7 @@ function vArchivo(){
     <select class="in" data-field="type" aria-label="${esc(t('typeLbl'))}"><option value="">${t('allTypes')}</option>${allTypeIds().map(id=>`<option value="${id}"${filters.type===id?' selected':''}>${typeOf(id).label}</option>`).join('')}</select>
     <select class="in" data-field="drawer" aria-label="${esc(t('drawerLbl'))}"><option value="">${t('allDrawers')}</option>${S.drawers.map(d=>`<option value="${d.id}"${filters.drawer===d.id?' selected':''}>${esc(d.name)}</option>`).join('')}</select>
   </div>
+  <div class="row" style="margin:-2px 0 12px;align-items:center"><label for="goday" class="note" style="font-size:14px">${esc(t('goDay'))}</label><input class="in" type="date" id="goday" data-dayjump style="flex:0 1 190px;width:auto"></div>
   <div class="emorow" role="group" aria-label="${esc(t('byEmotion'))}">${S.emotions.map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo" data-v="${e.id}" aria-pressed="${filters.emotion===e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
   ${active.length?`<div class="row" style="margin-bottom:6px">${active.join('')}</div>`:''}
   <div id="results">${archMode==='lista'?resultsHTML():archMode==='fotos'?galleryHTML():`<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>`}</div>`;
@@ -1034,7 +1071,7 @@ function drawSky(){
 /* ---------- Paleta ---------- */
 function vPaleta(){
   const cnt=id=>S.memories.filter(m=>(m.emotions||[]).includes(id)).length;
-  const dcnt=id=>S.memories.filter(m=>m.drawer===id).length;
+  const dcnt=id=>S.memories.filter(m=>(m.drawers||[]).includes(id)).length;
   return `<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${esc(t('palTitle'))}</h1>
   <p class="lead">${esc(t('palLead'))}</p>
   <div class="palette">${S.emotions.map(e=>`<div class="pal" style="--c:${e.color}">
@@ -1145,14 +1182,14 @@ function vInforme(){
     let up=null,d=0;st.emos.forEach(x=>{const p=ps.emos.find(y=>y.e.id===x.e.id);const dd=x.share-(p?p.share:0);if(dd>d){d=dd;up=x}});
     if(up&&d>.08)n+=t('more',up.e.name.toLowerCase());
   }
-  h+=`<p class="narr">${esc(n)}</p>`;
+  h+=`<p class="narr">${esc(n)}</p><div class="row" style="margin-top:16px"><button class="btn" data-act="go-map">${esc(t('mapSeeYear'))}</button></div>`;
   if(st.tags.length){
     const mx=st.tags[0][1];
     h+=`<h2 class="sec">${t('words')}</h2><div class="words">${st.tags.slice(0,14).map(([x,c])=>`<button data-act="tag-go" data-v="${esc(x)}" style="font-size:${18+Math.round(c/mx*20)}px">${esc(x)}</button>`).join('')}</div>`;
   }
-  const quotes=st.ms.filter(m=>m.type==='libro'&&m.text);
+  let quotes=st.ms.filter(m=>m.quote);if(!quotes.length)quotes=st.ms.filter(m=>m.type==='libro'&&m.text);
   if(quotes.length){const q=quotes[Math.floor(Math.random()*quotes.length)];
-    h+=`<h2 class="sec">${t('quoteOf')}</h2><blockquote class="quote" style="--c:${mainColor(q)}"><p>${esc(cut(q.text,260))}</p><cite>${esc(q.title)}${q.source?', '+esc(q.source):''}</cite></blockquote>`}
+    h+=`<h2 class="sec">${t('quoteOf')}</h2><blockquote class="quote" style="--c:${mainColor(q)}"><p>${esc(cut(q.quote||q.text,260))}</p><cite>${esc(q.title)}${q.source?', '+esc(q.source):''}</cite></blockquote>`}
   const dsc=discovered(st.ms);
   if(dsc){
     const la=`<button class="link" data-act="open" data-id="${dsc.a.id}">${esc(memTitle(dsc.a))}</button>`;
@@ -1182,27 +1219,37 @@ function related(m){
   }).filter(x=>x.s>=2&&x.st>0).sort((a,b)=>b.s-a.s).slice(0,4).map(x=>x.o);
 }
 function miniList(ms){return `<div class="mini">${ms.map(o=>`<button data-act="open" data-id="${o.id}" style="--c:${mainColor(o)}"><i></i><span>${esc(memTitle(o))}<small>${typeOf(o.type).label}, ${esc(fmt(o.date,{day:'numeric',month:'short',year:'numeric'}))}</small></span></button>`).join('')}</div>`}
+function sameWork(m){const k=(m.title||'').trim().toLowerCase();if(!k||!typeOf(m.type).src)return [];return sorted(S.memories.filter(o=>o.id!==m.id&&o.type===m.type&&(o.title||'').trim().toLowerCase()===k))}
+function moreFromBlock(m){const ms=sameWork(m);if(!ms.length)return '';return `<h3 class="month" style="margin-top:22px">${esc(t('moreFrom',m.title))}</h3><div class="mini">${ms.map(o=>`<button data-act="open" data-id="${o.id}" style="--c:${mainColor(o)}"><i></i><span>${esc(cut(o.quote||o.text||o.title,90))}<small>${esc(fmt(o.date,{day:'numeric',month:'short',year:'numeric'}))}${o.page?', '+esc(t('pageAbbr',o.page)):''}</small></span></button>`).join('')}</div>`}
+function tagBlock(m){
+  const groups=(m.tags||[]).map(tg=>({tg,ms:sorted(S.memories.filter(o=>o.id!==m.id&&(o.tags||[]).includes(tg)))})).filter(g=>g.ms.length);
+  if(!groups.length)return '';
+  return `<h3 class="month" style="margin-top:22px">${esc(t('byTags'))}</h3>`+groups.map(g=>`<div style="margin:10px 0 16px"><button class="chip" data-act="tag-go" data-v="${esc(g.tg)}" style="margin-bottom:8px">#${esc(g.tg)} (${g.ms.length})</button>${miniList(g.ms.slice(0,5))}${g.ms.length>5?`<button class="btn quiet" data-act="tag-go" data-v="${esc(g.tg)}">${esc(t('seeAllTag',g.ms.length))}</button>`:''}</div>`).join('');
+}
 function openDetail(id){
-  const m=memOf(id);if(!m)return;const ty=typeOf(m.type);const d=drawerOf(m.drawer);
+  const m=memOf(id);if(!m)return;const ty=typeOf(m.type);const ds=(m.drawers||[]).map(drawerOf).filter(Boolean);
   const links=(m.links||[]).map(memOf).filter(Boolean);const rel=related(m);
-  openDlg(`<div class="dlg-head"><span class="note">${ty.label}, ${esc(fmt(m.date))}${timeOf(m)?', '+timeOf(m):''}${d?`, ${esc(t('inDrawer',d.name))}`:''}</span><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  openDlg(`<div class="dlg-head"><span class="note">${ty.label}, ${esc(fmt(m.date))}${timeOf(m)?', '+timeOf(m):''}${ds.length?`, ${esc(ds.length>1?t('inDrawers',joinY(ds.map(x=>x.name))):t('inDrawer',ds[0].name))}`:''}</span><button class="btn quiet" data-act="close">${t('close')}</button></div>
   <div class="wash" style="--c:${mainColor(m)};margin-top:12px">
     ${(m.photos||[]).length?`<div class="photos${m.photos.length>1?' multi':''}">${m.photos.map(pid=>`<div class="photos-item"><img data-photo="${pid}" alt="${esc(t('photoAlt'))}"></div>`).join('')}</div>`:''}
     <h2 class="detail-title">${esc(memTitle(m))}</h2>
     ${m.source?`<div class="note">${esc(m.source)}</div>`:''}
+    ${m.quote?`<blockquote class="quote" style="--c:${mainColor(m)};margin:16px 0 0"><p>«${esc(m.quote)}»</p>${m.page?`<cite>${esc(t('pageAbbr',m.page))}</cite>`:''}</blockquote>`:''}
     ${m.text?`<div class="detail-text">${esc(m.text)}</div>`:''}
     <div class="row">${(m.emotions||[]).map(emo).filter(Boolean).map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo-go" data-v="${e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
     ${(m.tags||[]).length?`<div class="row" style="margin-top:8px">${m.tags.map(x=>`<button class="chip" data-act="tag-go" data-v="${esc(x)}">#${esc(x)}</button>`).join('')}</div>`:''}
   </div>
   ${links.length?`<h3 class="month" style="margin-top:22px">${t('linkedWith')}</h3>${miniList(links)}`:''}
-  ${rel.length?`<h3 class="month" style="margin-top:22px">${t('resonates')}</h3>${miniList(rel)}`:''}
+  ${moreFromBlock(m)}
+  ${tagBlock(m)}
   <div class="actions"><button class="btn primary" data-act="edit" data-id="${m.id}">${t('edit')}</button><button class="btn danger" data-act="del" data-id="${m.id}">${t('del')}</button></div>`);
 }
 
 /* ---------- Editor ---------- */
 function openEditor(id,preset={}){
   const m=id?memOf(id):null;
-  draft=m?clone(m):{id:null,type:preset.type||'dia',title:'',source:'',text:'',emotions:preset.emo?[preset.emo]:[],tags:[],drawer:(preset.type==='dia'&&drawerOf('d-diario'))?'d-diario':'',date:iso(new Date()),time:(()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')})(),links:[]};
+  draft=m?clone(m):{id:null,type:preset.type||'dia',title:'',source:'',text:'',emotions:preset.emo?[preset.emo]:[],tags:[],drawers:(preset.type==='dia'&&drawerOf('d-diario'))?['d-diario']:[],date:preset.date||iso(new Date()),time:(()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')})(),links:[]};
+  normDrawers(draft);
   if(!draft.time)draft.time=timeOf(draft)||'';
   draft.photos=[...(draft.photos||[])];draft._new=[];draft._saved=false;draft._colors=null;
   edErr='';linkQ='';newDrawerName='';newTypeOpen=false;newTypeName='';renderEditor();
@@ -1212,15 +1259,18 @@ function renderEditor(focusSel){
   const ty=typeOf(draft.type);
   const sugg=allTags().filter(x=>!draft.tags.includes(x)).slice(0,8);
   const lq=linkQ.trim().toLowerCase();
-  const cands=S.memories.filter(o=>o.id!==draft.id&&!draft.links.includes(o.id)&&(!lq||[o.title,o.text,o.source,...(o.tags||[])].join(' ').toLowerCase().includes(lq)));
+  const cands=S.memories.filter(o=>o.id!==draft.id&&!draft.links.includes(o.id)&&(!lq||[o.title,o.text,o.source,o.quote,...(o.tags||[])].join(' ').toLowerCase().includes(lq)));
   const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('remove'))}</span>`;
   openDlg(`<div class="dlg-head"><h2>${draft.id?t('editMem'):t('newMem')}</h2><button class="btn quiet" data-act="close">${t('cancel')}</button></div>
   <label class="f">${t('whatIs')}</label>
   <div class="row">${allTypeIds().map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${esc(typeOf(id).label)}</button>`).join('')}<button class="chip" data-act="ed-newtype-toggle" aria-expanded="${newTypeOpen}" style="border-style:dashed">${t('otherType')}</button></div>
   ${newTypeOpen?`<div class="row" style="margin-top:8px"><input class="in" style="flex:1 1 180px" id="ed-newtype" data-ed-newtype placeholder="${esc(t('newTypePh'))}" value="${esc(newTypeName)}" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="ed-addtype">${t('createType')}</button></div>`:''}
   <label class="f" for="ed-title">${ty.t}</label>
-  <input class="in" id="ed-title" data-ed="title" value="${esc(draft.title)}">
+  <input class="in" id="ed-title" data-ed="title" value="${esc(draft.title)}" list="ed-titles" autocomplete="off">
+  <datalist id="ed-titles">${[...new Set(S.memories.filter(o=>o.type===draft.type&&o.title).map(o=>o.title))].map(x=>`<option value="${esc(x)}"></option>`).join('')}</datalist>
   ${ty.src?`<label class="f" for="ed-src">${ty.src} <small>${t('optional')}</small></label><input class="in" id="ed-src" data-ed="source" value="${esc(draft.source)}">`:''}
+  ${ty.q?`<label class="f" for="ed-quote">${ty.q} <small>${t('optional')}</small></label><textarea class="in" id="ed-quote" data-ed="quote" placeholder="${esc(ty.qph)}" style="min-height:80px;font-style:italic">${esc(draft.quote||'')}</textarea>`:''}
+  ${ty.page?`<label class="f" for="ed-page">${t('pageLbl')} <small>${t('optional')}</small></label><input class="in" id="ed-page" data-ed="page" value="${esc(draft.page||'')}" inputmode="numeric" maxlength="8" style="max-width:120px">`:''}
   <label class="f" for="ed-text">${t('text')}</label>
   <textarea class="in" id="ed-text" data-ed="text" placeholder="${esc(ty.ph)}">${esc(draft.text)}</textarea>
   <label class="f">${t('photos')} <small>${esc(isPlus()?t('photoHintPlus',draft.photos.length):t('photoHintFree'))}</small></label>
@@ -1232,13 +1282,13 @@ function renderEditor(focusSel){
   ${draft.tags.length?`<div class="row" style="margin-bottom:8px">${draft.tags.map(x=>`<button class="chip" data-act="ed-untag" data-v="${esc(x)}">#${esc(x)} ${rm}</button>`).join('')}</div>`:''}
   <input class="in" id="ed-tag" data-ed-tag placeholder="${esc(t('tagPh'))}">
   ${sugg.length?`<div class="row" style="margin-top:8px">${sugg.map(x=>`<button class="chip" data-act="ed-tag" data-v="${esc(x)}">+ ${esc(x)}</button>`).join('')}</div>`:''}
+  <label class="f">${t('drawersTitle')} <small>${esc(t('drawersHint'))}</small></label>
+  <div class="row">${S.drawers.map(d=>`<button class="chip" data-act="ed-drawer" data-v="${d.id}" aria-pressed="${draft.drawers.includes(d.id)}">${esc(d.name)}</button>`).join('')}</div>
+  <div class="row" style="margin-top:8px"><input class="in" style="flex:1 1 180px" id="ed-newdrawer" data-ed-newdrawer placeholder="${esc(t('orNewDrawer'))}" value="${esc(newDrawerName)}"><button class="btn" data-act="ed-adddrawer">${t('createDrawer')}</button></div>
   <div class="row" style="gap:14px;align-items:flex-end">
-    <div style="flex:1 1 200px"><label class="f" for="ed-drawer">${t('drawer')}</label>
-      <select class="in" id="ed-drawer" data-ed="drawer"><option value="">${t('noDrawer')}</option>${S.drawers.map(d=>`<option value="${d.id}"${draft.drawer===d.id?' selected':''}>${esc(d.name)}</option>`).join('')}</select></div>
     <div style="flex:1 1 160px"><label class="f" for="ed-date">${t('date')}</label><input class="in" type="date" id="ed-date" data-ed="date" value="${draft.date}"></div>
     <div style="flex:0 1 130px"><label class="f" for="ed-time">${t('time')}</label><input class="in" type="time" id="ed-time" data-ed="time" value="${esc(draft.time||'')}"></div>
   </div>
-  <div class="row" style="margin-top:8px"><input class="in" style="flex:1 1 180px" id="ed-newdrawer" data-ed-newdrawer placeholder="${esc(t('orNewDrawer'))}" value="${esc(newDrawerName)}"><button class="btn" data-act="ed-adddrawer">${t('createDrawer')}</button></div>
   ${S.memories.length>(draft.id?1:0)?`<label class="f" for="ed-link">${t('linkWith')} <small>${t('optional')}</small></label>
   ${draft.links.length?`<div class="row" style="margin-bottom:8px">${draft.links.map(memOf).filter(Boolean).map(o=>`<button class="chip" style="--c:${mainColor(o)}" data-act="ed-link" data-v="${o.id}" aria-pressed="true"><i></i>${esc(cut(memTitle(o),28))} <span class="x" aria-hidden="true">✕</span></button>`).join('')}</div>`:''}
   <input class="in" type="search" id="ed-link" data-ed-link placeholder="${esc(t('linkPh'))}" value="${esc(linkQ)}">
@@ -1257,7 +1307,8 @@ async function saveDraft(){
   const isNew=!draft.id;const prev=isNew?null:memOf(draft.id);
   const m={...draft,id:draft.id||mkid('m'),title:draft.title.trim(),source:(draft.source||'').trim(),text:draft.text.trim(),createdAt:prev?.createdAt||Date.now(),updatedAt:Date.now()};
   if(!typeOf(m.type).src)m.source='';
-  delete m._new;delete m._saved;delete m._colors;m.photos=[...(draft.photos||[])];draft._saved=true;
+  m.quote=typeOf(m.type).q?(draft.quote||'').trim():'';m.page=typeOf(m.type).page?String(draft.page||'').trim():'';if(!m.quote)delete m.quote;if(!m.page)delete m.page;
+  delete m._new;delete m._saved;delete m._colors;m.drawers=[...(draft.drawers||[])];normDrawers(m);m.photos=[...(draft.photos||[])];draft._saved=true;
   (prev&&prev.photos||[]).filter(x=>!m.photos.includes(x)).forEach(dropPhoto);(draft._new||[]).filter(x=>!m.photos.includes(x)).forEach(dropPhoto);
   if(isNew)S.memories.push(m);else S.memories[S.memories.findIndex(x=>x.id===m.id)]=m;
   const before=prev?prev.links||[]:[];
@@ -1280,13 +1331,13 @@ async function deleteMem(id){
 
 /* ---------- Tarjeta para stories ---------- */
 let storyQuote=false, storyBlob=null;
-function storyQuoteCandidate(st){const q=st.ms.filter(m=>m.type==='libro'&&m.text);return q[0]||st.ms.find(m=>m.text)||null}
+function storyQuoteCandidate(st){return st.ms.find(m=>m.quote)||st.ms.find(m=>m.type==='libro'&&m.text)||st.ms.find(m=>m.text)||null}
 async function openStory(){
   const st=stats(range(rep.period,rep.offset));
   const q=storyQuoteCandidate(st);
   openDlg(`<div class="dlg-head"><h2>${t('storyTitle')}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
   <div class="story-prev"><img id="story-img" alt="${esc(t('storyAlt'))}"></div>
-  ${q?`<label class="row" style="justify-content:center;font-size:15px;gap:8px"><input type="checkbox" id="story-q"${storyQuote?' checked':''}> ${t('includeQuote')} «${esc(cut(q.text,50))}»</label>`:''}
+  ${q?`<label class="row" style="justify-content:center;font-size:15px;gap:8px"><input type="checkbox" id="story-q"${storyQuote?' checked':''}> ${t('includeQuote')} «${esc(cut(q.quote||q.text,50))}»</label>`:''}
   <div class="actions" style="justify-content:center"><button class="btn primary" data-act="story-save">${(downloads||!window.claude)?t('saveImg'):esc(t('tHold'))}</button></div>`);
   await drawStory();
 }
@@ -1316,7 +1367,7 @@ async function drawStory(){
   let y=1330;x.font=`500 42px ${sans}`;
   st.emos.slice(0,3).forEach(e=>{x.fillStyle=e.e.color;x.beginPath();x.arc(108,y-14,16,0,Math.PI*2);x.fill();x.fillStyle='#EFECF7';x.textAlign='left';x.fillText(e.e.name,145,y);x.textAlign='right';x.fillStyle='#A9A4C0';x.fillText(Math.round(e.share*100)+'%',990,y);x.textAlign='left';y+=72});
   const incl=$('#story-q')?.checked;const q=storyQuoteCandidate(st);
-  if(incl&&q){x.fillStyle='#EFECF7';x.font=`italic 52px ${serif}`;const ls=wrapLines(x,'«'+cut(q.text,160)+'»',900,2);ls.forEach((l,i)=>x.fillText(l,90,1590+i*62))}
+  if(incl&&q){x.fillStyle='#EFECF7';x.font=`italic 52px ${serif}`;const ls=wrapLines(x,'«'+cut(q.quote||q.text,160)+'»',900,2);ls.forEach((l,i)=>x.fillText(l,90,1590+i*62))}
   if(st.tags.length){x.fillStyle='#A9A4C0';x.font=`500 36px ${sans}`;x.fillText(wrapLines(x,t('cardWords')+st.tags.slice(0,4).map(z=>z[0]).join(', '),900,1)[0],90,1760)}
   x.fillStyle='#6E6A86';x.font=`500 30px ${sans}`;x.fillText(t('tagline'),90,1860);
   const img=$('#story-img');if(img)img.src=c.toDataURL('image/png');
@@ -1506,6 +1557,96 @@ function galleryHTML(){
   return h;
 }
 
+/* ---------- Mapa en color e «Ir a un día» ---------- */
+let mapRange=null, mapCustomOpen=false;
+function mapDefault(){const y=new Date().getFullYear();return {kind:'year',year:y,s:`${y}-01-01`,e:`${y}-12-31`,label:String(y)}}
+function byDate(){const ix={};S.memories.forEach(m=>{(ix[m.date]=ix[m.date]||[]).push(m)});return ix}
+function dayColorsFrom(ms){const c={};(ms||[]).forEach(m=>emoWeights(m).forEach(([id,w])=>c[id]=(c[id]||0)+w));return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([id])=>emo(id).color)}
+function fillCss(cols){if(!cols.length)return '';if(cols.length===1)return `background:${cols[0]}`;return 'background:linear-gradient(to bottom,'+cols.map((c,i)=>`${c} ${i*100/cols.length}% ${(i+1)*100/cols.length}%`).join(',')+')'}
+function monthsGrid(r,ix){
+  const s=fromIso(r.s),e=fromIso(r.e),today=iso(new Date());const months=[];
+  for(let d=new Date(s.getFullYear(),s.getMonth(),1);d<=e;d=new Date(d.getFullYear(),d.getMonth()+1,1))months.push([d.getFullYear(),d.getMonth()]);
+  const M=months.length;let h=`<div class="ymap" style="grid-template-columns:1.7em repeat(${M},minmax(18px,1fr));${M>12?`min-width:${M*24+30}px`:''}"><span></span>`;
+  months.forEach(([y,mo])=>{h+=`<span class="h">${esc(fmtD(new Date(y,mo,1),{month:'narrow'}))}</span>`});
+  for(let dd=1;dd<=31;dd++){
+    h+=`<span class="dl">${dd%5===1||dd===31?dd:''}</span>`;
+    months.forEach(([y,mo])=>{const dt=new Date(y,mo,dd);const k=iso(dt);
+      if(dt.getMonth()!==mo||k<r.s||k>r.e){h+=`<span class="ycell none"></span>`;return}
+      const ms=ix[k];const cols=dayColorsFrom(ms);
+      h+=`<button class="ycell${cols.length?' has':''}${k===today?' today':''}" style="${fillCss(cols)}" data-act="day" data-v="${k}" aria-label="${esc(fmt(k))}: ${esc(t('nMem',(ms||[]).length))}"></button>`});
+  }
+  return `<div class="map-scroll">${h}</div></div>`;
+}
+function weeksGrid(r,ix){
+  const s=fromIso(r.s),e=fromIso(r.e),today=iso(new Date());const start=addDays(s,-((s.getDay()+6)%7));const mon=new Date(2024,0,1);
+  let h=`<div class="ymap wmap" style="grid-template-columns:repeat(7,1fr)">`+[0,1,2,3,4,5,6].map(i=>`<span class="h">${esc(fmtD(addDays(mon,i),{weekday:'short'}).replace('.',''))}</span>`).join('');
+  for(let d=new Date(start);d<=e||((d.getDay()+6)%7)!==0;d=addDays(d,1)){const k=iso(d);
+    if(k<r.s||k>r.e){h+=`<span class="ycell none"></span>`;continue}
+    const ms=ix[k];const cols=dayColorsFrom(ms);
+    h+=`<button class="ycell${cols.length?' has':''}${k===today?' today':''}" style="${fillCss(cols)}" data-act="day" data-v="${k}" aria-label="${esc(fmt(k))}: ${esc(t('nMem',(ms||[]).length))}">${d.getDate()}</button>`}
+  return h+'</div>';
+}
+function rangeDays(r){return Math.round((fromIso(r.e)-fromIso(r.s))/864e5)+1}
+function vMapa(){
+  if(!mapRange)mapRange=mapDefault();
+  const r=mapRange,ix=byDate(),cy=new Date().getFullYear();
+  const years=[...new Set([cy,...S.memories.map(m=>+m.date.slice(0,4))])].sort((a,b)=>b-a);
+  const total=rangeDays(r);let withM=0;for(let d=fromIso(r.s);iso(d)<=r.e;d=addDays(d,1))if(ix[iso(d)])withM++;
+  const em={};Object.keys(ix).filter(k=>k>=r.s&&k<=r.e).forEach(k=>ix[k].forEach(m=>emoWeights(m).forEach(([id,w])=>em[id]=(em[id]||0)+w)));
+  const leg=Object.entries(em).sort((a,b)=>b[1]-a[1]).map(([id])=>emo(id));
+  const lock=isPlus()?'':' '+plusBadge();
+  let h=`<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${esc(t('mapTitle'))}</h1><p class="lead">${esc(t('mapLead'))}</p>
+  <div class="row" style="margin-bottom:10px">${years.map(y=>`<button class="chip" data-act="map-year" data-v="${y}" aria-pressed="${r.kind==='year'&&r.year===y}">${y===cy?esc(t('mapThisYear')):y}${y!==cy&&!isPlus()?lock:''}</button>`).join('')}<button class="chip" data-act="map-custom" aria-pressed="${r.kind==='custom'}">${esc(t('mapCustom'))}${lock}</button></div>`;
+  if(mapCustomOpen&&isPlus())h+=`<div class="row" style="align-items:flex-end;margin-bottom:12px"><div style="flex:1 1 140px"><label class="f" for="map-from">${esc(t('mapFrom'))}</label><input class="in" type="date" id="map-from" value="${r.kind==='custom'?r.s:''}"></div><div style="flex:1 1 140px"><label class="f" for="map-to">${esc(t('mapTo'))}</label><input class="in" type="date" id="map-to" value="${r.kind==='custom'?r.e:''}"></div><button class="btn" data-act="map-apply">${esc(t('mapApply'))}</button></div>`;
+  h+=`<p class="note">${r.kind==='custom'?esc(r.label)+'. ':''}${esc(t('mapDaysWith',withM,total))}</p>`;
+  h+=(total<=70?weeksGrid(r,ix):monthsGrid(r,ix));
+  if(leg.length)h+=`<div class="legend" style="margin-top:14px">${leg.map(e=>`<span style="--c:${e.color}"><i></i>${esc(e.name)}</span>`).join('')}</div>`;
+  h+=`<div class="actions">${isPlus()?`<button class="btn primary" data-act="map-save">${esc(t('mapSave'))}</button>`:`<button class="btn" data-act="go-plus">${esc(t('mapSave'))} ${plusBadge()}</button>`}</div>`;
+  if(!isPlus())h+=`<p class="note" style="margin-top:8px">${esc(t('mapLocked'))}</p>`;
+  return h;
+}
+async function saveMapImage(){
+  const r=mapRange||mapDefault(),ix=byDate();
+  try{await Promise.all([document.fonts.load('120px "Instrument Serif"'),document.fonts.load('italic 52px "Instrument Serif"'),document.fonts.load('500 40px "Instrument Sans"')])}catch(e){}
+  const W=1080,H=1920,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const serif='"Instrument Serif", Georgia, serif',sans='"Instrument Sans", system-ui, sans-serif';
+  x.fillStyle='#1C1A28';x.fillRect(0,0,W,H);
+  x.fillStyle='#A9A4C0';x.font=`52px ${serif}`;x.fillText(t('brand'),90,150);
+  x.fillStyle='#EFECF7';x.font=`120px ${serif}`;x.fillText(r.kind==='year'?t('cardTitle','anio'):t('mapCardCustom'),90,300);x.font=`italic 120px ${serif}`;x.fillText(t('cardColor'),90,410);
+  x.fillStyle='#A9A4C0';x.font=`500 38px ${sans}`;x.fillText(r.label,90,480);
+  const gx=90,gy=540,gw=900,gh=1150;const empty='#2C2A3A';
+  const paint=(px,py,w,h,cols)=>{if(!cols.length){x.fillStyle=empty;x.beginPath();x.roundRect?x.roundRect(px,py,w,h,Math.min(6,w/4)):x.rect(px,py,w,h);x.fill();return}
+    x.save();x.beginPath();x.roundRect?x.roundRect(px,py,w,h,Math.min(6,w/4)):x.rect(px,py,w,h);x.clip();cols.forEach((col,i)=>{x.fillStyle=col;x.fillRect(px,py+i*h/cols.length,w,h/cols.length+1)});x.restore()};
+  if(rangeDays(r)<=70){
+    const s=fromIso(r.s),e=fromIso(r.e),start=addDays(s,-((s.getDay()+6)%7));const weeks=Math.ceil((Math.round((e-start)/864e5)+1)/7);
+    const cs=Math.min((gw-6*10)/7,(gh-(weeks-1)*10)/weeks);
+    for(let i=0;i<weeks*7;i++){const d=addDays(start,i),k=iso(d);if(k<r.s||k>r.e)continue;paint(gx+(i%7)*(cs+10),gy+Math.floor(i/7)*(cs+10),cs,cs,dayColorsFrom(ix[k]))}
+  }else{
+    const s=fromIso(r.s),e=fromIso(r.e);const months=[];for(let d=new Date(s.getFullYear(),s.getMonth(),1);d<=e;d=new Date(d.getFullYear(),d.getMonth()+1,1))months.push([d.getFullYear(),d.getMonth()]);
+    const M=months.length,gap=M>12?3:6,cw=(gw-(M-1)*gap)/M,ch=(gh-30*5)/31;
+    months.forEach(([y,mo],j)=>{for(let dd=1;dd<=31;dd++){const dt=new Date(y,mo,dd),k=iso(dt);if(dt.getMonth()!==mo||k<r.s||k>r.e)continue;paint(gx+j*(cw+gap),gy+(dd-1)*(ch+5),cw,ch,dayColorsFrom(ix[k]))}});
+  }
+  const em={};Object.keys(ix).filter(k=>k>=r.s&&k<=r.e).forEach(k=>ix[k].forEach(m=>emoWeights(m).forEach(([id,w])=>em[id]=(em[id]||0)+w)));
+  const tot=Object.values(em).reduce((a,b)=>a+b,0)||1;let lx=90;x.font=`500 34px ${sans}`;
+  Object.entries(em).sort((a,b)=>b[1]-a[1]).slice(0,3).forEach(([id,v])=>{const e=emo(id);const label=`${e.name} ${Math.round(v/tot*100)}%`;x.fillStyle=e.color;x.beginPath();x.arc(lx+14,1772,14,0,Math.PI*2);x.fill();x.fillStyle='#EFECF7';x.fillText(label,lx+38,1784);lx+=38+x.measureText(label).width+40});
+  x.fillStyle='#6E6A86';x.font=`500 30px ${sans}`;x.fillText(t('tagline'),90,1860);
+  const blob=await new Promise(res=>c.toBlob(res,'image/png'));
+  const res=await deliverFile('memorandum-mapa-'+r.s+'.png',blob,'image/png');
+  if(res==='ok')toast(t('tImg'));else if(res==='fallback'){openDlg(`<div class="dlg-head"><h2>${esc(t('mapTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><div class="story-prev"><img src="${c.toDataURL('image/png')}" alt=""></div><p class="note" style="text-align:center">${esc(t('tHold'))}</p>`)}
+}
+function openDay(k){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(k||''))return;
+  const d=fromIso(k),ix=byDate(),ms=sorted(ix[k]||[]);
+  const others=sorted(S.memories.filter(m=>m.date!==k&&m.date.slice(5)===k.slice(5)));
+  const around=[-3,-2,-1,0,1,2,3].map(n=>iso(addDays(d,n)));
+  openDlg(`<div class="dlg-head"><h2>${esc(cap(fmt(k,{weekday:'long',day:'numeric',month:'long',year:'numeric'})))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  <div class="daynav"><button class="btn quiet" data-act="day" data-v="${iso(addDays(d,-1))}" aria-label="${esc(t('prevDay'))}">‹</button><input class="in" type="date" data-dayjump value="${k}" aria-label="${esc(t('goDay'))}"><button class="btn quiet" data-act="day" data-v="${iso(addDays(d,1))}" aria-label="${esc(t('nextDay'))}">›</button></div>
+  ${ms.length?`<div class="fichas" style="margin-top:12px">${ms.map(ficha).join('')}</div>`:`<div class="empty-state" style="margin-top:12px"><p>${esc(t('dayEmpty'))}</p><button class="btn primary" data-act="day-add" data-v="${k}">${esc(t('dayAdd'))}</button></div>`}
+  ${others.length?`<h3 class="month" style="margin-top:22px">${esc(t('daySameOther'))}</h3>${miniList(others)}`:''}
+  <h3 class="month" style="margin-top:22px">${esc(t('dayAround'))}</h3>
+  <div class="daystrip">${around.map(a=>`<button data-act="day" data-v="${a}" class="${a===k?'cur':''}"><i style="${fillCss(dayColorsFrom(ix[a]))}"></i>${esc(fmtD(fromIso(a),{weekday:'short'}).replace('.',''))} ${fromIso(a).getDate()}</button>`).join('')}</div>`);
+}
+
 /* ---------- Estadísticas Plus ---------- */
 function timeOf(m){if(m.time&&/^\d{2}:\d{2}$/.test(m.time))return m.time;if(m.createdAt){const d=new Date(m.createdAt);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}return null}
 function daypartOf(m){const tm=timeOf(m);if(!tm)return null;const h=+tm.slice(0,2);return h<6?'madrugada':h<12?'manana':h<20?'tarde':'noche'}
@@ -1584,7 +1725,7 @@ function plusStatsHTML(r,st,ps){
   if(et.length)cards.push(card(t('chEmoType'),et.map(x=>`<div class="hbar"><span>${x.label}</span><div class="hb-track"><i style="width:${(x.value*100).toFixed(1)}%;background:${x.color}"></i></div><b style="color:var(--ink)">${x.text}</b></div>`).join('')));
   // palabras y cajones
   if(st.tags.length)cards.push(card(t('chTags'),hbars(st.tags.slice(0,10).map(([w,c])=>({label:esc(w),value:c})))));
-  const dc={};ms.forEach(m=>{if(m.drawer&&drawerOf(m.drawer))dc[m.drawer]=(dc[m.drawer]||0)+1});
+  const dc={};ms.forEach(m=>(m.drawers||[]).forEach(id=>{if(drawerOf(id))dc[id]=(dc[id]||0)+1}));
   const dr=Object.entries(dc).sort((a,b)=>b[1]-a[1]);if(dr.length)cards.push(card(t('chDrawers'),hbars(dr.map(([id,c])=>({label:esc(drawerOf(id).name),value:c})))));
   const grid=`<div class="stats-grid">${cards.join('')}</div>`;
   const head=`<h2 class="sec">${esc(t('statsTitle'))} ${plusBadge()}</h2>`;
@@ -1711,7 +1852,7 @@ async function seed(){
     ['dia','',['calma','nostalgia'],'d-diario',365]
   ];
   const txt=t('seed');const now=Date.now();
-  const ms=meta.map((e,i)=>({id:mkid('m')+i,type:e[0],title:txt[i][0],source:e[1],text:txt[i][1],emotions:e[2].map(x=>'e-'+x).filter(id=>emo(id)),tags:txt[i][2],drawer:drawerOf(e[3])?e[3]:'',date:d(e[4]),time:['22:40','10:15','23:30','00:45','20:05','21:30','16:20','19:10','23:55','08:40','13:30','17:45','03:10','11:20','22:15','09:05'][i],links:[],createdAt:now-i*1000}));
+  const ms=meta.map((e,i)=>({id:mkid('m')+i,type:e[0],title:txt[i][0],source:e[1],text:txt[i][1],emotions:e[2].map(x=>'e-'+x).filter(id=>emo(id)),tags:txt[i][2],drawers:drawerOf(e[3])?[e[3]]:[],drawer:drawerOf(e[3])?e[3]:'',date:d(e[4]),time:['22:40','10:15','23:30','00:45','20:05','21:30','16:20','19:10','23:55','08:40','13:30','17:45','03:10','11:20','22:15','09:05'][i],links:[],createdAt:now-i*1000}));
   const link=(a,b)=>{ms[a].links.push(ms[b].id);ms[b].links.push(ms[a].id)};
   link(2,13);link(0,7);link(11,7);
   S.memories.push(...ms);render();toast(t('tSeed'));
@@ -1771,12 +1912,19 @@ document.addEventListener('click',e=>{
     case 'emo-add':{const pal=['#A3B18A','#F4A261','#9D8189','#6D9DC5','#C08497','#84A59D'];const ne={id:mkid('e-'),name:t('newEmo'),color:pal[S.emotions.length%pal.length]};S.emotions.push(ne);render();savePalette();setTimeout(()=>{const el=document.querySelector(`[data-field="emo-name"][data-id="${ne.id}"]`);if(el){el.focus();el.select()}},30);break}
     case 'emo-del':armed(b,async()=>{S.emotions=S.emotions.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.emotions||[]).includes(id));tt.forEach(m=>m.emotions=m.emotions.filter(x=>x!==id));if(filters.emotion===id)filters.emotion=null;render();await savePalette();for(const m of tt)await saveMem(m)});break;
     case 'drawer-add':{const inp=document.querySelector('[data-field="new-drawer-pal"]');const n=(inp?.value||'').trim();if(!n){inp?.focus();break}S.drawers.push({id:mkid('d-'),name:cut(n,40)});render();savePalette();break}
-    case 'drawer-del':armed(b,async()=>{S.drawers=S.drawers.filter(x=>x.id!==id);const tt=S.memories.filter(m=>m.drawer===id);tt.forEach(m=>m.drawer='');render();await savePalette();for(const m of tt)await saveMem(m)});break;
+    case 'drawer-del':armed(b,async()=>{S.drawers=S.drawers.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.drawers||[]).includes(id));tt.forEach(m=>{m.drawers=m.drawers.filter(x=>x!==id);normDrawers(m)});render();await savePalette();for(const m of tt)await saveMem(m)});break;
     case 'export':exportData(true);break;
     case 'export-light':exportData(false);break;
     case 'ed-unphoto':draft.photos=draft.photos.filter(x=>x!==v);if(!draft.photos.length)draft._colors=null;renderEditor();break;
     case 'ed-use-suggest':if(draft._colors){draft.emotions=draft._colors.suggest.filter(id=>emo(id)).slice(0,3);renderEditor()}break;
     case 'go-plus':goPlus();break;
+    case 'day':openDay(v);break;
+    case 'day-add':closeDlg();openEditor(null,{date:v});break;
+    case 'go-map':closeDlg();mapRange=null;mapCustomOpen=false;go('mapa');break;
+    case 'map-year':{const y=+v;if(y!==new Date().getFullYear()&&!isPlus()){goPlus();break}mapRange={kind:'year',year:y,s:`${y}-01-01`,e:`${y}-12-31`,label:String(y)};mapCustomOpen=false;render();break}
+    case 'map-custom':if(!isPlus()){goPlus();break}mapCustomOpen=true;render();break;
+    case 'map-apply':{const a=($('#map-from')||{}).value,z=($('#map-to')||{}).value;if(!a||!z||a>z){toast(t('mapBadRange'));break}if(rangeDays({s:a,e:z})>1100){toast(t('mapBadRange'));break}mapRange={kind:'custom',s:a,e:z,label:fmt(a,{day:'numeric',month:'short',year:'numeric'})+' – '+fmt(z,{day:'numeric',month:'short',year:'numeric'})};render();break}
+    case 'map-save':if(isPlus())saveMapImage();else goPlus();break;
     case 'plus-activate':activatePlus(($('#plus-code')||{}).value);break;
     case 'gal-year':galYear=v;render();break;
     case 'import':$('#importer').click();break;
@@ -1797,8 +1945,9 @@ document.addEventListener('click',e=>{
     case 'ed-tag':addTag(v);renderEditor('#ed-tag');break;
     case 'ed-untag':draft.tags=draft.tags.filter(x=>x!==v);renderEditor();break;
     case 'ed-link':{const i=draft.links.indexOf(v);if(i>=0)draft.links.splice(i,1);else draft.links.push(v);renderEditor('#ed-link');break}
-    case 'ed-adddrawer':{const n=newDrawerName.trim();if(!n){$('#ed-newdrawer')?.focus();break}const nd={id:mkid('d-'),name:cut(n,40)};S.drawers.push(nd);draft.drawer=nd.id;newDrawerName='';savePalette();renderEditor();break}
+    case 'ed-adddrawer':{const n=newDrawerName.trim();if(!n){$('#ed-newdrawer')?.focus();break}const nd={id:mkid('d-'),name:cut(n,40)};S.drawers.push(nd);draft.drawers.push(nd.id);newDrawerName='';savePalette();renderEditor();break}
     case 'ed-save':saveDraft();break;
+    case 'ed-drawer':{const i=draft.drawers.indexOf(v);if(i>=0)draft.drawers.splice(i,1);else draft.drawers.push(v);renderEditor();break}
     case 'ed-newtype-toggle':newTypeOpen=!newTypeOpen;renderEditor(newTypeOpen?'#ed-newtype':null);break;
     case 'ed-addtype':{const n=newTypeName.trim();if(!n){$('#ed-newtype')?.focus();break}const nt=createType(n);draft.type=nt.id;draft.source='';newTypeOpen=false;newTypeName='';renderEditor();break}
     case 'type-add':{const inp=document.querySelector('[data-field="new-type-pal"]');const n=(inp?.value||'').trim();if(!n){inp?.focus();break}createType(n);render();break}
@@ -1822,7 +1971,9 @@ document.addEventListener('keydown',e=>{
 let saveT;
 document.addEventListener('input',e=>{
   const el=e.target;
-  if(el.dataset.ed&&draft){draft[el.dataset.ed]=el.value;return}
+  if(el.dataset.ed&&draft){draft[el.dataset.ed]=el.value;
+    if(el.dataset.ed==='title'&&typeOf(draft.type).src&&!(draft.source||'').trim()){const k=el.value.trim().toLowerCase();const f=k&&S.memories.find(o=>o.type===draft.type&&o.id!==draft.id&&(o.title||'').trim().toLowerCase()===k&&o.source);if(f){draft.source=f.source;const si=$('#ed-src');if(si)si.value=f.source}}
+    return}
   if(el.matches('[data-ed-link]')){linkQ=el.value;renderEditor('#ed-link');return}
   if(el.matches('[data-ed-newdrawer]')){newDrawerName=el.value;return}
   if(el.matches('[data-ed-newtype]')){newTypeName=el.value;return}
@@ -1844,6 +1995,7 @@ document.addEventListener('input',e=>{
 });
 document.addEventListener('change',e=>{
   const el=e.target;
+  if(el.matches('[data-dayjump]')){if(el.value)openDay(el.value);return}
   if(el.matches('[data-ed-photo]')){const f=el.files&&el.files[0];el.value='';addPhotoToDraft(f);return}
   if(el.id==='story-q'){storyQuote=el.checked;drawStory();return}
   const f=el.dataset.field;
