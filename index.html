@@ -213,6 +213,27 @@ ol.steps li{margin:0 0 10px;padding-left:4px}
 ol.care{font-size:15.5px;color:color-mix(in srgb,var(--ink) 82%,var(--muted))}
 ol.care li{margin-bottom:14px}
 ol.care strong{display:block;color:var(--ink);font-weight:600}
+.plus-badge{display:inline-block;align-self:flex-start;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--ink);color:var(--paper);vertical-align:middle;line-height:1.5}
+.ficha-photo{display:block;margin:-14px -16px 10px -14px;aspect-ratio:16/9;overflow:hidden;border-radius:0 10px 0 0;background:var(--line)}
+.ficha-photo img,.resurf-photo img,.g-tile img,.pe img,.photos-item img{width:100%;height:100%;object-fit:cover;display:block}
+.resurf-photo{margin:-26px -24px 18px;aspect-ratio:3/2;overflow:hidden;border-radius:18px 18px 0 0;background:var(--line)}
+.photos{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;margin:-18px -18px 16px;border-radius:14px 14px 0 0}
+.photos-item{flex:0 0 100%;scroll-snap-align:start;aspect-ratio:4/3;background:var(--line)}
+.photos.multi .photos-item{flex-basis:86%}
+.photo-edit{display:flex;gap:10px;flex-wrap:wrap}
+.pe,.pe-add{position:relative;width:88px;height:88px;border-radius:12px;overflow:hidden;background:var(--line);flex:none}
+.pe-x{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(20,18,32,.72);color:#fff;font-size:13px;padding:0}
+.pe-add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1.5px dashed color-mix(in srgb,var(--ink) 25%,var(--line));background:var(--surface);cursor:pointer;color:var(--muted);font-size:26px;line-height:1;padding:0}
+.pe-add small{font-size:12px;line-height:1.2;text-align:center;padding:0 4px}
+.colors-box{display:flex;flex-direction:column;gap:8px;margin-top:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.sw{width:30px;height:30px;border-radius:8px;display:inline-block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.link-plain{border:0;background:none;padding:0;text-align:left;color:var(--ink);font-size:14px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--ink) 30%,transparent)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:6px}
+.g-tile{border:0;padding:0;aspect-ratio:1;overflow:hidden;border-radius:8px;background:var(--line);position:relative}
+.g-tile::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--c)}
+.missing img{visibility:hidden}
+.plus-list{margin:10px 0 0;padding-left:1.2em;line-height:1.7}
+a.btn{text-decoration:none;display:inline-block}
 </style>
 </head>
 <body>
@@ -259,7 +280,7 @@ es:{
   freq:{dia:'Cada día',semana:'Cada semana',mes:'Cada mes',nunca:'No avisarme'}, freqAdj:{dia:'diaria',semana:'semanal',mes:'mensual',nunca:''},
   lastBackup:d=>`Última copia en archivo: ${d}.`, noBackup:'Todavía no has guardado ninguna copia en archivo.',
   saveBackup:'Guardar copia ahora', importBackup:'Importar copia',
-  snapsLbl:'Copias automáticas en este dispositivo', snapsSmall:'se guardan solas, una al día, las últimas 7', restore:'Restaurar',
+  snapsLbl:'Copias automáticas en este dispositivo', snapsSmall:'se guardan solas, una al día, las últimas 7, sin fotos', restore:'Restaurar',
   langTitle:'Idioma', helpTitle:'Ayuda', seeTutorial:'Ver el tutorial de nuevo',
   repTitle:'Informe', period:'Periodo', weekly:'Semanal', monthly:'Mensual', yearly:'Anual', prev:'Periodo anterior', next:'Periodo siguiente',
   word:(p,cur)=>({semana:cur?'Esta semana':'Aquella semana',mes:cur?'Este mes':'Aquel mes',anio:cur?'Este año':'Aquel año'}[p]),
@@ -288,6 +309,22 @@ es:{
   yourCopy:'Tu copia', copyText:'Copia este texto y guárdalo en un archivo .json.', copied:'Ya la he guardado',
   due:a=>`Toca guardar tu copia ${a}.`, dueLast:d=>` La última fue el ${d}.`, dueNone:' Aún no has guardado ninguna.', later:'Recordármelo mañana',
   noName:'Sin nombre',
+  photos:'Fotos', addPhoto:'Añadir foto', removePhoto:'Quitar foto', photoAlt:'Foto del recuerdo',
+  photoHintFree:'1 foto por recuerdo. Con Plus, hasta 5.', photoHintPlus:n=>`Hasta 5 fotos por recuerdo (${n}/5).`,
+  photoErr:'No he podido abrir esa imagen. Prueba con otra.', photoProcessing:'Preparando la foto…', exportPreparing:'Preparando la copia con tus fotos…',
+  limitFree:'Con Plus puedes añadir hasta 5 fotos por recuerdo.',
+  photoColors:'Colores de tu foto', suggestEmo:'Se parecen a', useSuggest:'Usar estas emociones', suggestNote:'Solo es una sugerencia: tú decides.',
+  photoBW:'Foto en blanco y negro: aquí no hay colores que leer, así que los pones tú.', photoNoMatch:'Sus colores no se parecen a ninguna de tus emociones. Elige tú.',
+  suggestLocked:'Con Plus, te sugiero emociones a partir de los colores de la foto.',
+  galleryTitle:'Tus fotos por emoción', galleryEmpty:'Todavía no hay fotos en tus recuerdos.', galleryLocked:'Con Plus, todas tus fotos se ordenan por emoción en un mosaico de tu año.',
+  noEmotion:'Sin emoción', allYears:'Todos los años',
+  plusLead:'Para quien quiere ir más allá, y para apoyar que esta app siga creciendo.',
+  plusFeatures:['Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
+  plusPrice:'Pago único de 12,99 €, para siempre. Precio de fundadores: 7,99 €.', plusGet:'Conseguir Plus', plusSoon:'Muy pronto podrás conseguirlo aquí.',
+  plusHaveCode:'¿Tienes un código?', plusCodePh:'Pega aquí tu código', plusActivate:'Activar', plusMore:'Ver Plus',
+  plusBadCode:'Ese código no es válido. Cópialo entero, sin espacios.', plusActive:b=>`Tienes Plus. Gracias por apoyar ${b}.`, plusThanks:'Plus activado. ¡Gracias!',
+  saveFull:'Guardar copia completa', saveLight:'Copia ligera, sin fotos',
+  backupKinds:'La copia completa incluye tus fotos y puede ocupar bastante. La ligera guarda solo los textos y pesa muy poco.',
   hadMemories:'¿Ya tenías recuerdos? Recupéralos con tu copia', restoreBtn:'Recuperar mis recuerdos', tSavedDownloads:'Copia guardada en Descargas.',
   careTitle:'Cuida tus recuerdos', careWhy:'¿Por qué es importante?',
   careLead:'Tus recuerdos solo viven en este teléfono: no hay ninguna copia en ningún otro sitio. Eso los hace privados, pero también significa que, si se pierden aquí, no puedo recuperarlos. Estas cinco cosas los mantienen a salvo:',
@@ -360,6 +397,150 @@ es:{
     ['Primer día de otoño','Lluvia fina, sopa caliente y una libreta nueva sin estrenar.',['otoño','casa']]
   ]
 },
+en:{
+  locale:'en-GB', brand:'Memorandum', tagline:'a factory of memories', docTitle:'Memorandum — a factory of memories',
+  navHoy:'Today', navArchivo:'Archive', navPaleta:'Palette', navInforme:'Report', navNew:'Save a memory', sections:'Sections',
+  hello:h=>h<5?'Good night':h<12?'Good morning':h<18?'Good afternoon':'Good evening',
+  nMem:c=>`${c} memor${c===1?'y':'ies'}`, nDays:c=>`${c} day${c===1?'':'s'}`,
+  and:'and',
+  stripCap:'Your last 35 days in colour', today:'today', whichColor:'What colour is today?',
+  emptyHoy:'Your archive is empty. Start with something small: a line from a book, how your day went, a song that took you somewhere else.',
+  loadExamples:'Load examples to try it out', backMem:'A memory comes back',
+  sameDay:y=>`On this day, in ${y}`, fromArchive:d=>`From the archive, ${d}`, open:'Open', another:'Another',
+  latest:'The last things you saved', seeAll:'See the whole archive',
+  archTitle:'Archive', archLead:c=>`${c} memor${c===1?'y':'ies'} saved. Filter by colour, type or drawer, or see how they connect.`,
+  view:'View', cards:'Cards', sky:'Constellation', search:'Search words, titles, authors', searchLbl:'Search',
+  allTypes:'All types', allDrawers:'All drawers', typeLbl:'Type', drawerLbl:'Drawer', byEmotion:'Filter by emotion', removeFilter:'Remove filter',
+  skyNote:'Solid lines are links you made. Dashed lines join memories that share tags. The colour is the main emotion.',
+  skyMin:'You need at least two memories to see connections.', skyLbl:'Constellation of memories',
+  archEmpty:'Your memories will be filed here, month by month.', noMatch:'Nothing matches these filters. Remove one or try another word.', clearAll:'Clear filters',
+  palTitle:'Library of emotions', palLead:'Each colour is an emotion with whatever name you give it. Rename them, change their shade or create your own. Tap a colour to see everything it holds.',
+  seeMemsOf:n=>`See memories of ${n}`, emoName:'Emotion name', colorOf:n=>`Colour of ${n}`, del:'Delete',
+  newEmo:'New emotion', newEmoHint:'Invent one: “rainy Sunday”, “smell of home”…',
+  drawersTitle:'Drawers', drawersLead:'The places where your memories are filed.', drawerName:'Drawer name', newDrawerName:'New drawer name', addDrawer:'Add drawer',
+  backupTitle:'Backup', savedCloud:'Your memories are saved automatically to your account and only you can see them.', savedLocal:'Your memories are saved automatically on this device.',
+  backupNote:'I will also remind you to save a copy as a file, which you can keep in Files, Drive or wherever you like.',
+  remindMe:'Remind me to save a copy', freqLbl:'Backup frequency',
+  freq:{dia:'Every day',semana:'Every week',mes:'Every month',nunca:"Don't remind me"}, freqAdj:{dia:'daily',semana:'weekly',mes:'monthly',nunca:''},
+  lastBackup:d=>`Last file backup: ${d}.`, noBackup:"You haven't saved a file backup yet.",
+  saveBackup:'Save a copy now', importBackup:'Import a copy',
+  snapsLbl:'Automatic copies on this device', snapsSmall:'saved automatically, one a day, the last 7, without photos', restore:'Restore',
+  langTitle:'Language', helpTitle:'Help', seeTutorial:'See the tutorial again',
+  repTitle:'Report', period:'Period', weekly:'Weekly', monthly:'Monthly', yearly:'Yearly', prev:'Previous period', next:'Next period',
+  word:(p,cur)=>({semana:cur?'This week':'That week',mes:cur?'This month':'That month',anio:cur?'This year':'That year'}[p]),
+  repEmpty:w=>`Nothing saved ${w.toLowerCase()}. A small memory already counts: a colour, a sentence, a place.`,
+  compo:'Emotional composition',
+  narr1:(w,a,b,cur)=>`${w} ${cur?'has been':'was'} mostly ${a}${b?`, with moments of ${b}`:''}. `,
+  narr2:(n,d)=>`You saved ${n} across ${d}`, among:x=>`, including ${x}. `, more:x=>`There was more ${x} than in the previous period.`,
+  words:'Words that kept coming back', quoteOf:'A line from this period', conn:'A connection you might have missed',
+  connTxt:(a,b,e,w)=>`${a} and ${b} share ${e} and the word “${w}”.`, linkThem:'Link them',
+  share:'Share', shareLead:'Create a vertical card for stories with your palette for the period. It only shows colours and words, never what you wrote, unless you choose to include a line.',
+  makeCard:'Create a card for stories',
+  close:'Close', inDrawer:n=>`drawer ${n}`, linkedWith:'Linked to', resonates:'Also resonates with', edit:'Edit',
+  editMem:'Edit memory', newMem:'New memory', cancel:'Cancel', whatIs:'What is it', optional:'optional', text:'Text',
+  emotions:'Emotions', emoHint:'up to 3, the first is the main one', principal:'main',
+  tags:'Tags', tagHint:'type a word and press Enter', tagPh:'sea, father, summer…', remove:'Remove',
+  drawer:'Drawer', noDrawer:'No drawer', date:'Date', orNewDrawer:'Or create a new drawer', createDrawer:'Create drawer',
+  linkWith:'Link to other memories', linkPh:'Search by title or word', nothing:'Nothing matches.',
+  errEmpty:'Write a title or some text to save the memory.', saveMem:'Save memory', max3:'Choose three emotions at most.',
+  tSavedRel:x=>`Saved. It resonates with “${x}”.`, tSavedN:c=>`Saved. You now have ${c} memor${c===1?'y':'ies'} in the archive.`,
+  tChanged:'Changes saved.', tDeleted:'Memory deleted.', tLinked:'Linked.', tSeed:'Examples loaded. You can delete them whenever you like.',
+  tCloudFail:"Couldn't save to your account. It's saved on this device.", tBackup:'Copy saved.', tBackupMarked:'Copy noted.',
+  tImported:c=>`Copy imported: ${c} memor${c===1?'y':'ies'}.`, tBadFile:"That file isn't a Memorandum copy.", tRestored:d=>`Copy restored: ${d}.`,
+  tImg:'Image saved.', tHold:'Press and hold the image to save it.', again:'Tap again to delete', againRestore:'Tap again to restore',
+  storyTitle:'Card for stories', storyAlt:'Card preview', includeQuote:'Include a line:', saveImg:'Save image',
+  cardTitle:p=>({semana:'My week',mes:'My month',anio:'My year'}[p]), cardColor:'in colour', cardWords:'Words that came back: ',
+  yourCopy:'Your copy', copyText:'Copy this text and save it in a .json file.', copied:"I've saved it",
+  due:a=>`Time to save your ${a} copy.`, dueLast:d=>` The last one was on ${d}.`, dueNone:" You haven't saved one yet.", later:'Remind me tomorrow',
+  noName:'Untitled',
+  photos:'Photos', addPhoto:'Add photo', removePhoto:'Remove photo', photoAlt:'Photo of the memory',
+  photoHintFree:'1 photo per memory. With Plus, up to 5.', photoHintPlus:n=>`Up to 5 photos per memory (${n}/5).`,
+  photoErr:"I couldn't open that image. Try another one.", photoProcessing:'Preparing the photo…', exportPreparing:'Preparing the copy with your photos…',
+  limitFree:'With Plus you can add up to 5 photos per memory.',
+  photoColors:'Colours in your photo', suggestEmo:'They look like', useSuggest:'Use these emotions', suggestNote:"It's only a suggestion: you decide.",
+  photoBW:'A black-and-white photo: there are no colours to read here, so you choose them.', photoNoMatch:"Its colours don't look like any of your emotions. You choose.",
+  suggestLocked:'With Plus, I suggest emotions from the colours in your photo.',
+  galleryTitle:'Your photos by emotion', galleryEmpty:'There are no photos in your memories yet.', galleryLocked:'With Plus, all your photos are arranged by emotion into a mosaic of your year.',
+  noEmotion:'No emotion', allYears:'All years',
+  plusLead:'For those who want to go further, and to help this app keep growing.',
+  plusFeatures:['Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
+  plusPrice:"A one-off payment of €12.99, forever. Founders' price: €7.99.", plusGet:'Get Plus', plusSoon:'Coming here very soon.',
+  plusHaveCode:'Have a code?', plusCodePh:'Paste your code here', plusActivate:'Activate', plusMore:'See Plus',
+  plusBadCode:"That code isn't valid. Copy all of it, with no spaces.", plusActive:b=>`You have Plus. Thank you for supporting ${b}.`, plusThanks:'Plus activated. Thank you!',
+  saveFull:'Save a full copy', saveLight:'Light copy, no photos',
+  backupKinds:'The full copy includes your photos and can be quite large. The light one saves only the text and weighs very little.',
+  hadMemories:'Already had memories? Get them back with your copy', restoreBtn:'Recover my memories', tSavedDownloads:'Copy saved to Downloads.',
+  careTitle:'Look after your memories', careWhy:'Why does it matter?',
+  careLead:"Your memories only live on this phone: there's no copy anywhere else. That keeps them private, but it also means that if they're lost here, I can't get them back. These five things keep them safe:",
+  careItems:[
+    ['Install me on your home screen.',"If you only open me in the browser, your phone may delete my data if you don't come back for a while."],
+    ['Save a copy every now and then.','I remind you as often as you choose. Keep it in Files, in Drive or email it to yourself: it is your lifeline.'],
+    ['Before changing phones, save a copy.','On the new one, install me, go to Profile and settings and tap “Import a copy”. Everything goes back where it was.'],
+    ["Don't clear your browser data without a copy.",'On Android, if you clear “Cookies and site data” in Chrome, your memories are gone even if I am installed. On iPhone, they are gone if you remove my icon from the home screen.'],
+    ['Always come in through memorandumapp.com.','Your memories are tied to this address. From any other, you would start with an empty archive.']
+  ],
+  careCloud:"Your memories are saved to your account, so they don't depend on this phone. Even so, save a copy every now and then: it is your lifeline if something ever goes wrong.",
+  privTitle:'Only yours',
+  privOnb:c=>c?'Your memories are saved to your account and are private: nobody else can see them, not even whoever made this app.':"Your memories only live on this phone. I don't send them anywhere: no servers, no ads, nobody reading. Not even I can see them.",
+  privSec:'Your privacy',
+  privText:c=>c?'Everything you write (memories, emotions, tags, drawers and your profile) is saved to your account and only you can see it. Nothing leaves here unless you choose to share it, like a backup or a card for stories.':"Everything you write (memories, emotions, tags, drawers and your profile) is saved only on this device. I have no server, no analytics and no ads, and I only connect to the internet to update myself. Nothing leaves here unless you decide: a backup or a card for stories. That said, anyone with your unlocked phone could open me, like any other app.",
+  instTitle:'Install me on your home screen',
+  instText:"If you only use me in the browser, your phone could delete your memories if you go a while without opening me. Installed, they're safe and I open like any other app.",
+  instNow:'Install', instHow:'How to install me', notNow:'Not now', instSec:'Install on your phone',
+  installed:"I'm already installed on your home screen. Your memories are safe.",
+  instIosWarn:"Important on iPhone: the installed app can't see what you saved in the browser. If you already have memories here, save a copy first and, when you open me from the icon, import it in Profile and settings.",
+  stepsIos:['Open me in Safari.','Tap the Share button, the square with an arrow pointing up. In Chrome it is at the top right.','Scroll down and choose “Add to Home Screen”.','Tap “Add”. Now you have me with my icon.'],
+  stepsAndroid:['Open me in Chrome.','Tap the ⋮ menu at the top right.','Choose “Install app” or “Add to Home screen”.','Confirm. Now you have me with my icon.'],
+  stepsDesktop:['Open me in Chrome or Edge.','Click the install icon on the right of the address bar.','Confirm with “Install”.'],
+  tInstalled:'Installed! You now have me on your home screen.',
+  meBtn:'Profile and settings', meTitle:'Profile and settings',
+  meLead:'Everything is optional and only you can see it. It helps me talk to you and, later on, gives AI reports a little context.',
+  pfName:'Name or nickname', pfBirth:'Year of birth', pfAge:n=>`You are about ${n} now.`, pfAbout:'About you',
+  pfAboutPh:"A couple of sentences: what you do, what moves you, what stage of life you're in…",
+  onbName:'What should I call you?', onbNamePh:'Your name or a nickname (optional)',
+  youWere:n=>`. You were ${n}.`,
+  otherType:'+ Another type', newTypePh:'For example: dream, trip, recipe', createType:'Create type', titleLbl:'Title', customPh:'Whatever you want to remember about it',
+  typesTitle:'Types of memory', typesLead:'As well as the seven usual types, you can create your own: dreams, trips, recipes, concerts… If you delete one, its memories become Ideas.',
+  typeName:'Type name', addType:'Add type', newTypeName:'New type name', tTypeCreated:n=>`Type “${n}” created.`,
+  of:(a,b)=>`${a} of ${b}`, skip:'Skip', nextBtn:'Next', back:'Back', start:'Start', startEx:'Start with examples',
+  onb:[
+    ['Your factory of memories','Save what you live, read, watch and listen to, and give it the colour of how it made you feel. Over time, your archive becomes a map of your memory.'],
+    ['Only yours',c=>I18N.en.privOnb(c)],
+    ['Each emotion is a colour','You start with eight emotions. In Palette you can rename them, change their shade or create your own. For each memory you choose up to three, and the first is the main one.'],
+    ['File and connect','Put each memory in a drawer, give it tags and link it to others. In the Archive you can see them as a constellation: that is how one memory leads to another.'],
+    ['Go back to what you felt','Every day I bring back a memory from the archive. In Report you see your week, month or year in colour, and you can create a card for your stories.'],
+    ['Your backup',c=>`Your memories are saved automatically ${c?'to your account':'on this device'}. I will also remind you to save a copy as a file. How often would you like me to remind you?`]
+  ],
+  types:{
+    dia:{label:'Day',plural:'days',t:'Title of the day',src:null,ph:'What happened? How did you feel?'},
+    libro:{label:'Book',plural:'books',t:'Book title',src:'Author',ph:'An underlined line or what stirred you'},
+    pelicula:{label:'Film',plural:'films',t:'Film or series',src:'Director',ph:'What stayed with you as you walked out'},
+    cancion:{label:'Song',plural:'songs',t:'Song',src:'Artist',ph:'What it brings back when it plays'},
+    lugar:{label:'Place',plural:'places',t:'Place',src:null,ph:'How it smelled, how it sounded, who you were with'},
+    persona:{label:'Person',plural:'people',t:'Person',src:null,ph:'A gesture, a phrase, a habit'},
+    idea:{label:'Idea',plural:'ideas',t:'Idea',src:null,ph:'Write it down before it slips away'}
+  },
+  defEmo:{'e-nostalgia':'Nostalgia','e-calma':'Calm','e-alegria':'Joy','e-melancolia':'Melancholy','e-ternura':'Tenderness','e-asombro':'Wonder','e-inquietud':'Restlessness','e-fuerza':'Strength'},
+  defDrawer:{'d-lecturas':'Reading','d-diario':'Diary','d-pantalla':'Screen','d-musica':'Music','d-lugares':'Places'},
+  seed:[
+    ['One Hundred Years of Solitude','Reread on the train. It still feels to me like a family’s memory is a house that keeps repeating itself.',['family','memory','train']],
+    ['Slow Sunday','Coffee on the balcony, nobody in a hurry. Bill Evans was playing and the light came in sideways.',['sunday','jazz','home']],
+    ['Aftersun','I left the cinema without speaking. A holiday with a father seen from very far away, like a photo developed too late.',['father','summer','memory']],
+    ['Blue in Green','I put it on when I want the day to turn its volume down.',['jazz','night']],
+    ['Breakwater at sunset','Salty wind, people fishing, a dog that belonged to nobody.',['sea','summer']],
+    ['A rehearsal that just worked','The bridge finally clicked. I hummed all the way home.',['music','rehearsal']],
+    ['Filing by colour','What if I remembered things by how they felt and not by when they happened?',['memory','ideas']],
+    ['Grandma','She smelled of quince and hairspray. She told the same stories and every time they were different.',['family','childhood']],
+    ['Stoner','A small life told with enormous dignity. It left me with a long silence.',['work','life']],
+    ['Monday with a knot','Too many emails, not enough headspace. I walked for half an hour and something loosened.',['work','walking']],
+    ['Perfect Days','Wanting to look at the trees at midday and have a routine of my own.',['routine','light']],
+    ['The village house','The green shutters, the hum of the old fridge, the compulsory siesta.',['childhood','summer','home']],
+    ['Sleepless night','Going round and round a conversation still waiting to happen.',['night']],
+    ['Mediterráneo','My father used to sing it while driving, with the window down.',['father','sea','childhood']],
+    ['Papyrus','Books as a way of not being alone across the centuries.',['memory','books']],
+    ['First day of autumn','Light rain, hot soup and a brand-new notebook.',['autumn','home']]
+  ]
+},
 ca:{
   locale:'ca-ES', brand:'Memoràndum', tagline:'fàbrica de records', docTitle:'Memoràndum — fàbrica de records',
   navHoy:'Avui', navArchivo:'Arxiu', navPaleta:'Paleta', navInforme:'Informe', navNew:'Desa un record', sections:'Seccions',
@@ -387,7 +568,7 @@ ca:{
   freq:{dia:'Cada dia',semana:'Cada setmana',mes:'Cada mes',nunca:`No m'avisis`}, freqAdj:{dia:'diària',semana:'setmanal',mes:'mensual',nunca:''},
   lastBackup:d=>`Última còpia en fitxer: ${d}.`, noBackup:'Encara no has desat cap còpia en fitxer.',
   saveBackup:'Desa una còpia ara', importBackup:'Importa una còpia',
-  snapsLbl:'Còpies automàtiques en aquest dispositiu', snapsSmall:'es desen soles, una al dia, les últimes 7', restore:'Restaura',
+  snapsLbl:'Còpies automàtiques en aquest dispositiu', snapsSmall:'es desen soles, una al dia, les últimes 7, sense fotos', restore:'Restaura',
   langTitle:'Idioma', helpTitle:'Ajuda', seeTutorial:'Torna a veure el tutorial',
   repTitle:'Informe', period:'Període', weekly:'Setmanal', monthly:'Mensual', yearly:'Anual', prev:'Període anterior', next:'Període següent',
   word:(p,cur)=>({semana:cur?'Aquesta setmana':'Aquella setmana',mes:cur?'Aquest mes':'Aquell mes',anio:cur?'Aquest any':'Aquell any'}[p]),
@@ -416,6 +597,22 @@ ca:{
   yourCopy:'La teva còpia', copyText:`Copia aquest text i desa'l en un fitxer .json.`, copied:`Ja l'he desada`,
   due:a=>`Toca desar la teva còpia ${a}.`, dueLast:d=>` L'última va ser el ${d}.`, dueNone:` Encara no n'has desat cap.`, later:`Recorda-m'ho demà`,
   noName:'Sense nom',
+  photos:'Fotos', addPhoto:'Afegeix una foto', removePhoto:'Treu la foto', photoAlt:'Foto del record',
+  photoHintFree:'1 foto per record. Amb Plus, fins a 5.', photoHintPlus:n=>`Fins a 5 fotos per record (${n}/5).`,
+  photoErr:`No he pogut obrir aquesta imatge. Prova'n una altra.`, photoProcessing:'Preparant la foto…', exportPreparing:'Preparant la còpia amb les teves fotos…',
+  limitFree:'Amb Plus pots afegir fins a 5 fotos per record.',
+  photoColors:'Colors de la teva foto', suggestEmo:`S'assemblen a`, useSuggest:'Fes servir aquestes emocions', suggestNote:'Només és un suggeriment: tu decideixes.',
+  photoBW:'Foto en blanc i negre: aquí no hi ha colors per llegir, així que els poses tu.', photoNoMatch:`Els seus colors no s'assemblen a cap de les teves emocions. Tria tu.`,
+  suggestLocked:'Amb Plus, et suggereixo emocions a partir dels colors de la foto.',
+  galleryTitle:'Les teves fotos per emoció', galleryEmpty:'Encara no hi ha fotos als teus records.', galleryLocked:`Amb Plus, totes les teves fotos s'ordenen per emoció en un mosaic del teu any.`,
+  noEmotion:'Sense emoció', allYears:'Tots els anys',
+  plusLead:'Per a qui vol anar més enllà, i per ajudar que aquesta app continuï creixent.',
+  plusFeatures:['Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
+  plusPrice:'Pagament únic de 12,99 €, per sempre. Preu de fundadors: 7,99 €.', plusGet:'Aconsegueix Plus', plusSoon:'Molt aviat el podràs aconseguir aquí.',
+  plusHaveCode:'Tens un codi?', plusCodePh:'Enganxa aquí el teu codi', plusActivate:'Activa', plusMore:'Veure Plus',
+  plusBadCode:`Aquest codi no és vàlid. Copia'l sencer, sense espais.`, plusActive:b=>`Tens Plus. Gràcies per donar suport a ${b}.`, plusThanks:'Plus activat. Gràcies!',
+  saveFull:'Desa una còpia completa', saveLight:'Còpia lleugera, sense fotos',
+  backupKinds:'La còpia completa inclou les teves fotos i pot ocupar força. La lleugera desa només els textos i pesa molt poc.',
   hadMemories:`Ja tenies records? Recupera'ls amb la teva còpia`, restoreBtn:'Recupera els meus records', tSavedDownloads:'Còpia desada a Baixades.',
   careTitle:'Té cura dels teus records', careWhy:'Per què és important?',
   careLead:`Els teus records només viuen en aquest telèfon: no n'hi ha cap còpia enlloc més. Això els fa privats, però també vol dir que, si es perden aquí, no els puc recuperar. Aquestes cinc coses els mantenen a recer:`,
@@ -500,7 +697,7 @@ const DEFAULT_EMOTIONS=[
 ];
 const DEFAULT_DRAWERS=['d-lecturas','d-diario','d-pantalla','d-musica','d-lugares'];
 const FREQ_DAYS={dia:1,semana:7,mes:30,nunca:0};
-function guessLang(){try{return (navigator.language||'').toLowerCase().startsWith('ca')?'ca':'es'}catch(e){return 'es'}}
+function guessLang(){try{const l=(navigator.language||'').toLowerCase();if(l.startsWith('ca'))return 'ca';if(/^(es|gl|eu)/.test(l))return 'es';return 'en'}catch(e){return 'es'}}
 const DEFAULT_SETTINGS={backupFreq:'semana',lastBackup:null,snoozeUntil:null,onboarded:false,lang:guessLang()};
 function freshState(lang){
   const L=I18N[lang]||I18N.es;
@@ -538,7 +735,7 @@ function setLang(l){
 function applyLang(){
   document.documentElement.lang=lang();document.title=t('docTitle');
   $('#brandname').textContent=t('brand');$('#tagline').textContent=t('tagline');
-  const ml=$('#manifest-link');if(ml)ml.setAttribute('href',lang()==='ca'?'manifest-ca.webmanifest':'manifest.webmanifest');
+  const ml=$('#manifest-link');if(ml)ml.setAttribute('href',({ca:'manifest-ca.webmanifest',en:'manifest-en.webmanifest'}[lang()]||'manifest.webmanifest'));
   const at=$('#apple-title');if(at)at.setAttribute('content',t('brand'));
   renderNav();
 }
@@ -633,6 +830,7 @@ function render(){
   else if(view==='paleta')m.innerHTML=vPaleta();
   else if(view==='informe')m.innerHTML=vInforme();
   else if(view==='perfil')m.innerHTML=vPerfil();
+  hydratePhotos(m);
 }
 
 /* ---------- Hoy ---------- */
@@ -676,6 +874,7 @@ function vHoy(){
     const when=(sameDay?t('sameDay',m.date.slice(0,4)):t('fromArchive',fmt(m.date)))+(ageThen!=null&&ageThen<120&&daysAgo(m.date)>=300?t('youWere',ageThen):'');
     h+=`<h2 class="sec">${t('backMem')}</h2>
     <div class="resurf" style="--c:${mainColor(m)}"><div class="when">${esc(when)}</div>
+      ${(m.photos||[]).length?`<div class="resurf-photo"><img data-photo="${m.photos[0]}" alt=""></div>`:''}
       <h3>${esc(memTitle(m))}</h3>
       ${m.text?`<p>${esc(cut(m.text,220))}</p>`:''}
       <div class="row"><button class="btn" data-act="open" data-id="${m.id}">${t('open')}</button>${pool.length>1?`<button class="btn quiet" data-act="shuffle">${t('another')}</button>`:''}</div>
@@ -690,6 +889,7 @@ function vHoy(){
 function ficha(m){
   const ty=typeOf(m.type);
   return `<button class="ficha" data-act="open" data-id="${m.id}" style="--band:${band(m)}">
+    ${(m.photos||[]).length?`<span class="ficha-photo"><img data-photo="${m.photos[0]}" alt=""></span>`:''}
     <span class="ficha-meta"><span>${ty.label}</span><span>${esc(fmt(m.date,{day:'numeric',month:'short'}))}</span></span>
     <span class="ficha-title">${esc(memTitle(m))}</span>
     ${m.source?`<span class="ficha-source">${esc(m.source)}</span>`:''}
@@ -718,7 +918,7 @@ function vArchivo(){
   if(filters.date)active.push(`<button class="chip" data-act="clear" data-k="date">${esc(fmt(filters.date))} ${rm}</button>`);
   return `<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${t('archTitle')}</h1>
   <p class="lead">${esc(t('archLead',S.memories.length))}</p>
-  <div class="seg" role="group" aria-label="${esc(t('view'))}"><button data-act="mode" data-v="lista" aria-pressed="${archMode==='lista'}">${t('cards')}</button><button data-act="mode" data-v="constelacion" aria-pressed="${archMode==='constelacion'}">${t('sky')}</button></div>
+  <div class="seg" role="group" aria-label="${esc(t('view'))}"><button data-act="mode" data-v="lista" aria-pressed="${archMode==='lista'}">${t('cards')}</button><button data-act="mode" data-v="constelacion" aria-pressed="${archMode==='constelacion'}">${t('sky')}</button><button data-act="mode" data-v="fotos" aria-pressed="${archMode==='fotos'}">${t('photos')}</button></div>
   <div class="search">
     <input class="in" type="search" placeholder="${esc(t('search'))}" value="${esc(filters.q)}" data-field="q" aria-label="${esc(t('searchLbl'))}">
     <select class="in" data-field="type" aria-label="${esc(t('typeLbl'))}"><option value="">${t('allTypes')}</option>${allTypeIds().map(id=>`<option value="${id}"${filters.type===id?' selected':''}>${typeOf(id).label}</option>`).join('')}</select>
@@ -726,7 +926,7 @@ function vArchivo(){
   </div>
   <div class="emorow" role="group" aria-label="${esc(t('byEmotion'))}">${S.emotions.map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo" data-v="${e.id}" aria-pressed="${filters.emotion===e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
   ${active.length?`<div class="row" style="margin-bottom:6px">${active.join('')}</div>`:''}
-  <div id="results">${archMode==='lista'?resultsHTML():`<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>`}</div>`;
+  <div id="results">${archMode==='lista'?resultsHTML():archMode==='fotos'?galleryHTML():`<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>`}</div>`;
 }
 function resultsHTML(){
   const ms=filtered();
@@ -826,6 +1026,7 @@ function vPerfil(){
   <p class="note" id="pf-age" style="margin-top:6px">${age!=null&&age<120?esc(t('pfAge',age)):''}</p>
   <label class="f" for="pf-about">${t('pfAbout')}</label>
   <textarea class="in" id="pf-about" data-field="pf-about" maxlength="600" placeholder="${esc(t('pfAboutPh'))}" style="min-height:100px">${esc(p.about)}</textarea>
+  ${plusSection()}
   ${privacySection()}
   ${careSection()}
   ${installSection()}
@@ -834,7 +1035,7 @@ function vPerfil(){
   <label class="f">${esc(t('remindMe'))}</label>
   ${freqChips('freq')}
   <p class="note" style="margin-top:10px">${S.settings.lastBackup?esc(t('lastBackup',fmt(S.settings.lastBackup))):esc(t('noBackup'))}</p>
-  <div class="row" style="margin-top:10px"><button class="btn primary" data-act="export">${t('saveBackup')}</button><button class="btn" data-act="import">${t('importBackup')}</button></div>
+  <p class="note" style="margin-top:10px">${esc(t('backupKinds'))}</p><div class="row" style="margin-top:10px"><button class="btn primary" data-act="export">${t('saveFull')}</button><button class="btn" data-act="export-light">${t('saveLight')}</button><button class="btn" data-act="import">${t('importBackup')}</button></div>
   ${snapsHTML()}
   <h2 class="sec">${t('langTitle')}</h2>
   ${langChips()}
@@ -845,7 +1046,7 @@ function freqChips(act,big){
   return `<div class="row" role="group" aria-label="${esc(t('freqLbl'))}">${Object.keys(FREQ_DAYS).map(k=>`<button class="chip"${big?' style="font-size:16px;padding:8px 16px"':''} data-act="${act}" data-v="${k}" aria-pressed="${S.settings.backupFreq===k}">${esc(t('freq')[k])}</button>`).join('')}</div>`;
 }
 function langChips(big){
-  return `<div class="row" role="group" aria-label="Idioma">${[['es','Castellano'],['ca','Català']].map(([k,l])=>`<button class="chip"${big?' style="font-size:16px;padding:8px 16px"':''} data-act="lang" data-v="${k}" lang="${k}" aria-pressed="${lang()===k}">${l}</button>`).join('')}</div>`;
+  return `<div class="row" role="group" aria-label="${esc(t('langTitle'))}">${[['es','Castellano'],['ca','Català'],['en','English']].map(([k,l])=>`<button class="chip"${big?' style="font-size:16px;padding:8px 16px"':''} data-act="lang" data-v="${k}" lang="${k}" aria-pressed="${lang()===k}">${l}</button>`).join('')}</div>`;
 }
 
 /* ---------- Informe ---------- */
@@ -923,10 +1124,10 @@ function vInforme(){
    Diálogos
    ========================================================= */
 const dlg=$('#dlg');
-function openDlg(html){$('#dlg-body').innerHTML=html;if(!dlg.open)dlg.showModal();$('#dlg-body').scrollTop=0}
+function openDlg(html){const keep=$('#dlg-body').scrollTop,same=dlg.open&&draft&&html.includes('data-act="ed-save"');$('#dlg-body').innerHTML=html;if(!dlg.open)dlg.showModal();$('#dlg-body').scrollTop=same?keep:0;hydratePhotos($('#dlg-body'))}
 function closeDlg(){if(dlg.open)dlg.close()}
 dlg.addEventListener('click',e=>{if(e.target===dlg)closeDlg()});
-dlg.addEventListener('close',()=>{if(onbOpen){onbOpen=false;if(!S.settings.onboarded){S.settings.onboarded=true;savePalette()}}});
+dlg.addEventListener('close',()=>{if(draft&&!draft._saved&&draft._new&&draft._new.length){draft._new.forEach(dropPhoto);draft._new=[]}if(onbOpen){onbOpen=false;if(!S.settings.onboarded){S.settings.onboarded=true;savePalette()}}});
 
 function related(m){
   return S.memories.filter(o=>o.id!==m.id&&!(m.links||[]).includes(o.id)).map(o=>{
@@ -940,6 +1141,7 @@ function openDetail(id){
   const links=(m.links||[]).map(memOf).filter(Boolean);const rel=related(m);
   openDlg(`<div class="dlg-head"><span class="note">${ty.label}, ${esc(fmt(m.date))}${d?`, ${esc(t('inDrawer',d.name))}`:''}</span><button class="btn quiet" data-act="close">${t('close')}</button></div>
   <div class="wash" style="--c:${mainColor(m)};margin-top:12px">
+    ${(m.photos||[]).length?`<div class="photos${m.photos.length>1?' multi':''}">${m.photos.map(pid=>`<div class="photos-item"><img data-photo="${pid}" alt="${esc(t('photoAlt'))}"></div>`).join('')}</div>`:''}
     <h2 class="detail-title">${esc(memTitle(m))}</h2>
     ${m.source?`<div class="note">${esc(m.source)}</div>`:''}
     ${m.text?`<div class="detail-text">${esc(m.text)}</div>`:''}
@@ -955,6 +1157,7 @@ function openDetail(id){
 function openEditor(id,preset={}){
   const m=id?memOf(id):null;
   draft=m?clone(m):{id:null,type:preset.type||'dia',title:'',source:'',text:'',emotions:preset.emo?[preset.emo]:[],tags:[],drawer:(preset.type==='dia'&&drawerOf('d-diario'))?'d-diario':'',date:iso(new Date()),links:[]};
+  draft.photos=[...(draft.photos||[])];draft._new=[];draft._saved=false;draft._colors=null;
   edErr='';linkQ='';newDrawerName='';newTypeOpen=false;newTypeName='';renderEditor();
 }
 function allTags(){const c={};S.memories.forEach(m=>(m.tags||[]).forEach(x=>c[x]=(c[x]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(x=>x[0])}
@@ -973,6 +1176,9 @@ function renderEditor(focusSel){
   ${ty.src?`<label class="f" for="ed-src">${ty.src} <small>${t('optional')}</small></label><input class="in" id="ed-src" data-ed="source" value="${esc(draft.source)}">`:''}
   <label class="f" for="ed-text">${t('text')}</label>
   <textarea class="in" id="ed-text" data-ed="text" placeholder="${esc(ty.ph)}">${esc(draft.text)}</textarea>
+  <label class="f">${t('photos')} <small>${esc(isPlus()?t('photoHintPlus',draft.photos.length):t('photoHintFree'))}</small></label>
+  <div class="photo-edit">${draft.photos.map(pid=>`<div class="pe"><img data-photo="${pid}" alt=""><button class="pe-x" data-act="ed-unphoto" data-v="${pid}" aria-label="${esc(t('removePhoto'))}">✕</button></div>`).join('')}${draft.photos.length<photoLimit()?`<label class="pe-add"><input type="file" accept="image/*" data-ed-photo class="vh"><span aria-hidden="true">+</span><small>${esc(t('addPhoto'))}</small></label>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('limitFree'))}"><span aria-hidden="true">+</span><small>${plusBadge()}</small></button>`:'')}</div>
+  ${colorsBlock()}
   <label class="f">${t('emotions')} <small>${t('emoHint')}</small></label>
   <div class="row">${S.emotions.map(e=>{const i=draft.emotions.indexOf(e.id);return `<button class="chip" style="--c:${e.color}" data-act="ed-emo" data-v="${e.id}" aria-pressed="${i>=0}"><i></i>${esc(e.name)}${i===0&&draft.emotions.length>1?` <small>${t('principal')}</small>`:''}</button>`}).join('')}</div>
   <label class="f" for="ed-tag">${t('tags')} <small>${t('tagHint')}</small></label>
@@ -1003,6 +1209,8 @@ async function saveDraft(){
   const isNew=!draft.id;const prev=isNew?null:memOf(draft.id);
   const m={...draft,id:draft.id||mkid('m'),title:draft.title.trim(),source:(draft.source||'').trim(),text:draft.text.trim(),createdAt:prev?.createdAt||Date.now(),updatedAt:Date.now()};
   if(!typeOf(m.type).src)m.source='';
+  delete m._new;delete m._saved;delete m._colors;m.photos=[...(draft.photos||[])];draft._saved=true;
+  (prev&&prev.photos||[]).filter(x=>!m.photos.includes(x)).forEach(dropPhoto);(draft._new||[]).filter(x=>!m.photos.includes(x)).forEach(dropPhoto);
   if(isNew)S.memories.push(m);else S.memories[S.memories.findIndex(x=>x.id===m.id)]=m;
   const before=prev?prev.links||[]:[];
   const touched=[];
@@ -1016,7 +1224,7 @@ async function saveDraft(){
 }
 async function deleteMem(id){
   const m=memOf(id);if(!m)return;
-  S.memories=S.memories.filter(x=>x.id!==id);
+  S.memories=S.memories.filter(x=>x.id!==id);(m.photos||[]).forEach(dropPhoto);
   const touched=S.memories.filter(o=>(o.links||[]).includes(id));touched.forEach(o=>o.links=o.links.filter(x=>x!==id));
   closeDlg();toast(t('tDeleted'));render();
   await deleteMemCloud(id);for(const o of touched)await saveMem(o);
@@ -1080,9 +1288,11 @@ async function deliverFile(name,data,mime,opts={}){
   const u=URL.createObjectURL(blob);const el=document.createElement('a');el.href=u;el.download=name;document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);
   return 'ok';
 }
-async function exportData(){
-  const data=JSON.stringify({app:'memorandum',version:1,exportedAt:new Date().toISOString(),...S},null,2);
-  const name='memorandum-'+iso(new Date())+'.json';
+async function exportData(full){
+  const payload={app:'memorandum',version:2,exportedAt:new Date().toISOString(),...S};
+  if(full!==false&&hasPhotos()){toast(t('exportPreparing'));const photos={};for(const pid of new Set(S.memories.flatMap(m=>m.photos||[]))){try{const b=await IDB.get(pid);if(b)photos[pid]=await blobToDataURL(b)}catch(e){}}payload.photos=photos}
+  const data=JSON.stringify(payload);
+  const name='memorandum-'+iso(new Date())+(payload.photos?'-fotos':'')+'.json';
   const r=await deliverFile(name,data,'application/json',{download:true});
   if(r==='ok'){S.settings.lastBackup=iso(new Date());S.settings.snoozeUntil=null;savePalette();toast(!window.claude&&platform()==='android'?t('tSavedDownloads'):t('tBackup'));render();return}
   if(r==='declined')return;
@@ -1100,10 +1310,12 @@ $('#importer').addEventListener('change',async e=>{
     const mm=new Map(S.memories.map(x=>[x.id,x]));
     p.memories.forEach(x=>{if(!x||!x.id)return;const c=mm.get(x.id);if(!c||(x.updatedAt||x.createdAt||0)>(c.updatedAt||c.createdAt||0))mm.set(x.id,x)});
     S.memories=[...mm.values()];
+    if(p.photos&&typeof p.photos==='object'){for(const [pid,u] of Object.entries(p.photos)){try{if(typeof u==='string'&&u.startsWith('data:image/'))await IDB.put(pid,dataURLToBlob(u))}catch(err){}}}
     if(p.profile)Object.keys(p.profile).forEach(k=>{if(!S.profile[k])S.profile[k]=p.profile[k]});
     if(!S.settings.lastBackup&&typeof p.exportedAt==='string')S.settings.lastBackup=p.exportedAt.slice(0,10);
     if(p.settings){if(p.settings.lastBackup&&!S.settings.lastBackup)S.settings.lastBackup=p.settings.lastBackup;if(fresh&&p.settings.backupFreq)S.settings.backupFreq=p.settings.backupFreq}
-    S.settings.onboarded=true;ensureSettings();
+    if(p.settings&&p.settings.plus&&p.settings.plus.code&&!(S.settings.plus&&S.settings.plus.code))S.settings.plus=p.settings.plus;
+    S.settings.onboarded=true;ensureSettings();checkPlus();
     if(dlg.open){onbOpen=false;closeDlg()}
     applyLang();render();toast(t('tImported',S.memories.length));
     await savePalette();for(const m of S.memories)await saveMem(m);
@@ -1147,6 +1359,135 @@ async function restoreSnap(i){
   await savePalette();
   if(cloud){for(const id of oldIds)if(!memOf(id))await deleteMemCloud(id);for(const m of S.memories)await saveMem(m)}
 }
+
+/* ---------- Fotos: se guardan solo en este dispositivo (IndexedDB) ---------- */
+const PHOTO_MAX_FREE=1, PHOTO_MAX_PLUS=5;
+const IDB={db:null,
+  open(){if(this.db)return Promise.resolve(this.db);return new Promise((res,rej)=>{let r;try{r=indexedDB.open('memorandum',1)}catch(e){rej(e);return}r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains('photos'))r.result.createObjectStore('photos')};r.onsuccess=()=>{this.db=r.result;res(this.db)};r.onerror=()=>rej(r.error)})},
+  async tx(mode,fn){const db=await this.open();return new Promise((res,rej)=>{const tx=db.transaction('photos',mode);const rq=fn(tx.objectStore('photos'));let out;if(rq)rq.onsuccess=()=>{out=rq.result};tx.oncomplete=()=>res(out);tx.onerror=()=>rej(tx.error);tx.onabort=()=>rej(tx.error)})},
+  put(id,blob){return this.tx('readwrite',st=>st.put(blob,id))},
+  get(id){return this.tx('readonly',st=>st.get(id))},
+  del(id){return this.tx('readwrite',st=>st.delete(id))}
+};
+const photoURLs=new Map();
+async function photoURL(id){if(photoURLs.has(id))return photoURLs.get(id);try{const b=await IDB.get(id);if(!b)return null;const u=URL.createObjectURL(b);photoURLs.set(id,u);return u}catch(e){return null}}
+function dropPhoto(id){const u=photoURLs.get(id);if(u){URL.revokeObjectURL(u);photoURLs.delete(id)}IDB.del(id).catch(()=>{})}
+function hydratePhotos(root){(root||document).querySelectorAll('img[data-photo]:not([src])').forEach(async img=>{const u=await photoURL(img.dataset.photo);if(u)img.src=u;else if(img.parentElement)img.parentElement.classList.add('missing')})}
+function photoLimit(){return isPlus()?PHOTO_MAX_PLUS:PHOTO_MAX_FREE}
+function hasPhotos(){return S.memories.some(m=>(m.photos||[]).length)}
+function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src})}
+async function processPhoto(file){
+  const url=URL.createObjectURL(file);
+  try{
+    const img=await loadImg(url);
+    let w=img.naturalWidth,h=img.naturalHeight;if(!w||!h)throw 0;
+    const k=Math.min(1,1600/Math.max(w,h));w=Math.round(w*k);h=Math.round(h*k);
+    const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
+    const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',0.82));if(!blob)throw 0;
+    const s=document.createElement('canvas');s.width=48;s.height=48;const sx=s.getContext('2d',{willReadFrequently:true});sx.drawImage(img,0,0,48,48);
+    return {blob,colors:analyzeColors(sx.getImageData(0,0,48,48).data)};
+  }finally{URL.revokeObjectURL(url)}
+}
+function hexToRgb(h){const n=parseInt(h.slice(1),16);return [n>>16&255,n>>8&255,n&255]}
+function rgbToHex(c){return '#'+c.map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('')}
+function cdist(a,b){const rm=(a[0]+b[0])/2,dr=a[0]-b[0],dg=a[1]-b[1],db=a[2]-b[2];return Math.sqrt((2+rm/256)*dr*dr+4*dg*dg+(2+(255-rm)/256)*db*db)}
+function satOf(c){const mx=Math.max(...c),mn=Math.min(...c);return mx?(mx-mn)/mx:0}
+function analyzeColors(px){
+  const pts=[];for(let i=0;i<px.length;i+=4){if(px[i+3]>127)pts.push([px[i],px[i+1],px[i+2]])}
+  if(!pts.length)return null;
+  // ¿Blanco y negro? Si casi ningún píxel tiene color, no se sugiere nada.
+  const colourful=pts.filter(p=>satOf(p)>0.18&&Math.max(...p)>40).length/pts.length;
+  const K=5;let cs=Array.from({length:K},(_,k)=>pts[Math.floor((k+.5)*pts.length/K)].slice());const asg=new Array(pts.length).fill(0);
+  for(let it=0;it<10;it++){
+    pts.forEach((p,i)=>{let bi=0,bd=Infinity;cs.forEach((c,j)=>{const d=cdist(p,c);if(d<bd){bd=d;bi=j}});asg[i]=bi});
+    const sum=cs.map(()=>[0,0,0,0]);pts.forEach((p,i)=>{const s=sum[asg[i]];s[0]+=p[0];s[1]+=p[1];s[2]+=p[2];s[3]++});
+    cs=cs.map((c,j)=>sum[j][3]?[sum[j][0]/sum[j][3],sum[j][1]/sum[j][3],sum[j][2]/sum[j][3]]:c);
+  }
+  const cl=cs.map((c,j)=>({c,n:asg.filter(a=>a===j).length})).filter(x=>x.n>0).sort((a,b)=>b.n-a.n);
+  const palette=cl.map(x=>rgbToHex(x.c));
+  if(colourful<0.06)return {palette,suggest:[],bw:true};
+  // Solo cuentan los tonos con color: grises, blancos y negros no deciden.
+  const score={};
+  cl.forEach(({c,n})=>{const sat=satOf(c),mx=Math.max(...c);if(sat<0.15||mx<45)return;
+    let best=null,bd=Infinity;S.emotions.forEach(e=>{const d=cdist(c,hexToRgb(e.color));if(d<bd){bd=d;best=e.id}});
+    if(best&&bd<330)score[best]=(score[best]||0)+n*(0.4+sat)});
+  const tot=Object.values(score).reduce((a,b)=>a+b,0);
+  const suggest=tot?Object.entries(score).sort((a,b)=>b[1]-a[1]).filter(([,v])=>v/tot>.15).slice(0,3).map(x=>x[0]):[];
+  return {palette,suggest,bw:false};
+}
+async function addPhotoToDraft(file){
+  if(!draft||!file)return;
+  if(draft.photos.length>=photoLimit()){toast(t('limitFree'));return}
+  toast(t('photoProcessing'));
+  try{
+    const {blob,colors}=await processPhoto(file);
+    const id=mkid('p');await IDB.put(id,blob);
+    draft.photos.push(id);draft._new.push(id);
+    if(colors)draft._colors=colors;
+    renderEditor();
+  }catch(e){toast(t('photoErr'))}
+}
+function colorsBlock(){
+  const c=draft&&draft._colors;if(!c)return '';
+  const sw=`<div class="row" style="gap:6px">${c.palette.map(h=>`<span class="sw" style="background:${h}"></span>`).join('')}</div>`;
+  if(c.bw)return `<div class="colors-box"><span class="note">${esc(t('photoColors'))}</span>${sw}<span class="note">${esc(t('photoBW'))}</span></div>`;
+  if(!isPlus())return `<div class="colors-box"><span class="note">${esc(t('photoColors'))}</span>${sw}<button class="link-plain" data-act="go-plus">${esc(t('suggestLocked'))} ${plusBadge()}</button></div>`;
+  const sg=c.suggest.map(emo).filter(Boolean);
+  if(!sg.length)return `<div class="colors-box"><span class="note">${esc(t('photoColors'))}</span>${sw}<span class="note">${esc(t('photoNoMatch'))}</span></div>`;
+  return `<div class="colors-box"><span class="note">${esc(t('photoColors'))}</span>${sw}<span class="note">${esc(t('suggestEmo'))}</span><div class="row">${sg.map(e=>`<span class="chip" style="--c:${e.color}"><i></i>${esc(e.name)}</span>`).join('')}</div><div class="row"><button class="btn" data-act="ed-use-suggest">${esc(t('useSuggest'))}</button></div><span class="note" style="font-size:13px">${esc(t('suggestNote'))}</span></div>`;
+}
+function blobToDataURL(b){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(b)})}
+function dataURLToBlob(u){const i=u.indexOf(',');const mime=(u.slice(0,i).match(/data:([^;]+)/)||[])[1]||'image/jpeg';const bin=atob(u.slice(i+1));const a=new Uint8Array(bin.length);for(let k=0;k<bin.length;k++)a[k]=bin.charCodeAt(k);return new Blob([a],{type:mime})}
+
+/* ---------- Galería por emoción (Plus) ---------- */
+let galYear='';
+function galleryHTML(){
+  if(!isPlus())return `<div class="empty-state"><p>${esc(t('galleryLocked'))} ${plusBadge()}</p><button class="btn primary" data-act="go-plus">${esc(t('plusMore'))}</button></div>`;
+  const all=filtered().filter(m=>(m.photos||[]).length);
+  if(!all.length)return `<div class="empty-state"><p>${esc(t('galleryEmpty'))}</p></div>`;
+  const years=[...new Set(all.map(m=>m.date.slice(0,4)))].sort().reverse();
+  if(galYear&&!years.includes(galYear))galYear='';
+  const ms=galYear?all.filter(m=>m.date.startsWith(galYear)):all;
+  const groups=new Map();ms.forEach(m=>{const k=(m.emotions||[]).find(id=>emo(id))||'_';if(!groups.has(k))groups.set(k,[]);groups.get(k).push(m)});
+  const order=[...S.emotions.map(e=>e.id),'_'].filter(k=>groups.has(k));
+  let h=`<h2 class="sec" style="margin-top:20px">${esc(t('galleryTitle'))}</h2>`;
+  if(years.length>1)h+=`<div class="row" style="margin-bottom:8px"><button class="chip" data-act="gal-year" data-v="" aria-pressed="${!galYear}">${esc(t('allYears'))}</button>${years.map(y=>`<button class="chip" data-act="gal-year" data-v="${y}" aria-pressed="${galYear===y}">${y}</button>`).join('')}</div>`;
+  order.forEach(k=>{const e=emo(k);
+    h+=`<div class="month" style="display:flex;align-items:center;gap:10px"><i style="width:14px;height:14px;border-radius:50%;background:${e?e.color:'var(--line)'};display:inline-block"></i>${esc(e?e.name:t('noEmotion'))}</div>
+    <div class="gallery">${groups.get(k).flatMap(m=>(m.photos||[]).map(pid=>`<button class="g-tile" data-act="open" data-id="${m.id}" style="--c:${mainColor(m)}"><img data-photo="${pid}" alt="${esc(memTitle(m))}"></button>`)).join('')}</div>`});
+  return h;
+}
+
+/* ---------- Plus: códigos firmados que se comprueban sin conexión ---------- */
+const PLUS_PUBLIC_KEY={"kty":"EC","crv":"P-256","x":"huFeF33CNI2LNXtYfnpk8Np2bbBGDUQzWi-bgHJVcDs","y":"GMj5omm6XUKcW_QKEpJH8ZkB0hfTA2Y-o6X-k_ZGOoU"};
+const PLUS_URL='';
+let plusOK=false;
+function isPlus(){return plusOK}
+function plusBadge(){return `<span class="plus-badge">Plus</span>`}
+function b64uToBytes(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';const bin=atob(s);const a=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return a}
+async function verifyPlusCode(code){
+  try{
+    code=String(code||'').replace(/\s+/g,'');if(!code.startsWith('PLUS-'))return null;
+    const [p,sg]=code.slice(5).split('.');if(!p||!sg)return null;
+    if(!(window.crypto&&crypto.subtle))return null;
+    const key=await crypto.subtle.importKey('jwk',PLUS_PUBLIC_KEY,{name:'ECDSA',namedCurve:'P-256'},false,['verify']);
+    const ok=await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},key,b64uToBytes(sg),new TextEncoder().encode(p));
+    return ok?JSON.parse(new TextDecoder().decode(b64uToBytes(p))):null;
+  }catch(e){return null}
+}
+async function checkPlus(){const c=S.settings.plus&&S.settings.plus.code;const info=c?await verifyPlusCode(c):null;const was=plusOK;plusOK=!!info;if(was!==plusOK)render()}
+async function activatePlus(code){const info=await verifyPlusCode(code);if(!info){toast(t('plusBadCode'));return}S.settings.plus={code:String(code).replace(/\s+/g,''),name:info.n||'',since:iso(new Date())};plusOK=true;savePalette();render();toast(t('plusThanks'))}
+function plusSection(){
+  const head=`<h2 class="sec" id="plus-sec">${esc(t('brand'))} Plus ${plusBadge()}</h2>`;
+  if(isPlus())return head+`<p class="note" style="font-size:15px">${esc(t('plusActive',t('brand')))}</p>`;
+  return head+`<p class="note" style="font-size:15px">${esc(t('plusLead'))}</p>
+  <ul class="plus-list">${t('plusFeatures').map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+  <p style="margin:12px 0">${esc(t('plusPrice'))}</p>
+  ${PLUS_URL?`<a class="btn primary" href="${PLUS_URL}" target="_blank" rel="noopener">${esc(t('plusGet'))}</a>`:`<p class="note">${esc(t('plusSoon'))}</p>`}
+  <label class="f" for="plus-code">${esc(t('plusHaveCode'))}</label>
+  <div class="row"><input class="in" id="plus-code" style="flex:1 1 220px" placeholder="${esc(t('plusCodePh'))}" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn" data-act="plus-activate">${esc(t('plusActivate'))}</button></div>`;
+}
+function goPlus(){closeDlg();go('perfil');setTimeout(()=>{const el=$('#plus-sec');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},80)}
 
 /* ---------- Instalación y privacidad ---------- */
 let installEvt=null;
@@ -1297,7 +1638,13 @@ document.addEventListener('click',e=>{
     case 'emo-del':armed(b,async()=>{S.emotions=S.emotions.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.emotions||[]).includes(id));tt.forEach(m=>m.emotions=m.emotions.filter(x=>x!==id));if(filters.emotion===id)filters.emotion=null;render();await savePalette();for(const m of tt)await saveMem(m)});break;
     case 'drawer-add':{const inp=document.querySelector('[data-field="new-drawer-pal"]');const n=(inp?.value||'').trim();if(!n){inp?.focus();break}S.drawers.push({id:mkid('d-'),name:cut(n,40)});render();savePalette();break}
     case 'drawer-del':armed(b,async()=>{S.drawers=S.drawers.filter(x=>x.id!==id);const tt=S.memories.filter(m=>m.drawer===id);tt.forEach(m=>m.drawer='');render();await savePalette();for(const m of tt)await saveMem(m)});break;
-    case 'export':exportData();break;
+    case 'export':exportData(true);break;
+    case 'export-light':exportData(false);break;
+    case 'ed-unphoto':draft.photos=draft.photos.filter(x=>x!==v);if(!draft.photos.length)draft._colors=null;renderEditor();break;
+    case 'ed-use-suggest':if(draft._colors){draft.emotions=draft._colors.suggest.filter(id=>emo(id)).slice(0,3);renderEditor()}break;
+    case 'go-plus':goPlus();break;
+    case 'plus-activate':activatePlus(($('#plus-code')||{}).value);break;
+    case 'gal-year':galYear=v;render();break;
     case 'import':$('#importer').click();break;
     case 'mark-backup':S.settings.lastBackup=iso(new Date());S.settings.snoozeUntil=null;savePalette();closeDlg();render();toast(t('tBackupMarked'));break;
     case 'backup-later':S.settings.snoozeUntil=iso(addDays(new Date(),1));savePalette();render();break;
@@ -1354,7 +1701,7 @@ document.addEventListener('input',e=>{
     if(k==='name')renderNav();
     return;
   }
-  if(f==='q'){filters.q=el.value;if(archMode==='lista')$('#results').innerHTML=resultsHTML();else drawSky();return}
+  if(f==='q'){filters.q=el.value;if(archMode==='lista'){$('#results').innerHTML=resultsHTML();hydratePhotos($('#results'))}else if(archMode==='fotos'){$('#results').innerHTML=galleryHTML();hydratePhotos($('#results'))}else drawSky();return}
   if(f==='emo-name'||f==='emo-color'||f==='drawer-name'||f==='type-name'){
     const list=f==='drawer-name'?S.drawers:f==='type-name'?S.customTypes:S.emotions;const it=list.find(x=>x.id===el.dataset.id);if(!it)return;
     if(f==='emo-color'){it.color=el.value;el.closest('.pal').style.setProperty('--c',el.value)}else it.name=el.value.slice(0,40)||t('noName');
@@ -1363,6 +1710,7 @@ document.addEventListener('input',e=>{
 });
 document.addEventListener('change',e=>{
   const el=e.target;
+  if(el.matches('[data-ed-photo]')){const f=el.files&&el.files[0];el.value='';addPhotoToDraft(f);return}
   if(el.id==='story-q'){storyQuote=el.checked;drawStory();return}
   const f=el.dataset.field;
   if(f==='type'||f==='drawer'){filters[f]=el.value;render()}
@@ -1385,7 +1733,8 @@ if(!window.claude){
 const local=loadLocal();if(local)S=local;ensureSettings();
 applyLang();render();
 if(!window.claude&&navigator.storage&&navigator.storage.persist){navigator.storage.persisted().then(x=>{if(!x)return navigator.storage.persist()}).catch(()=>{})}
-initCloud().catch(()=>{}).finally(()=>{ensureSettings();applyLang();autoSnapshot();render();if(!S.settings.onboarded)openOnboarding(0)});
+checkPlus();
+initCloud().catch(()=>{}).finally(()=>{checkPlus();ensureSettings();applyLang();autoSnapshot();render();if(!S.settings.onboarded)openOnboarding(0)});
 
 </script>
 </body>
