@@ -234,6 +234,33 @@ ol.care strong{display:block;color:var(--ink);font-weight:600}
 .missing img{visibility:hidden}
 .plus-list{margin:10px 0 0;padding-left:1.2em;line-height:1.7}
 a.btn{text-decoration:none;display:inline-block}
+.stats-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin-top:6px}
+.card{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:14px 16px}
+.card h3{font-family:var(--serif);font-weight:400;font-size:20px;margin:0 0 10px}
+.chart{display:block;width:100%;height:auto}
+.ch-t{fill:var(--muted);font-family:var(--sans);font-size:9px}
+.ch-axis{stroke:var(--line);stroke-width:1}
+.donut-wrap{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.donut{width:150px;height:150px;flex:none}
+.d-big{fill:var(--ink);font-family:var(--serif);font-size:34px}
+.d-small{fill:var(--muted);font-family:var(--sans);font-size:11px}
+.hbar{display:grid;grid-template-columns:minmax(70px,34%) 1fr auto;gap:8px;align-items:center;font-size:14px;margin:6px 0}
+.hbar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb-track{height:10px;border-radius:999px;background:color-mix(in srgb,var(--line) 60%,transparent);overflow:hidden}
+.hb-track i{display:block;height:100%;border-radius:999px}
+.hbar b{font-weight:500;color:var(--muted);font-size:13px;min-width:2.2em;text-align:right}
+.cmp{margin:8px 0}
+.cmp-name{font-size:14px;display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.cmp-name i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.cmp-row{display:grid;grid-template-columns:4.6em 1fr 2.8em;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.tile{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--paper)}
+.tile b{display:block;font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1}
+.tile span{font-size:13px;color:var(--muted)}
+.locked{position:relative}
+.locked-inner{filter:blur(7px) saturate(.9);opacity:.75;pointer-events:none;user-select:none;max-height:520px;overflow:hidden}
+.locked-cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px}
+.locked-cta p{max-width:34ch;margin:0;background:var(--surface);padding:14px 16px;border-radius:14px;box-shadow:var(--shadow);font-size:15px}
 </style>
 </head>
 <body>
@@ -319,12 +346,18 @@ es:{
   galleryTitle:'Tus fotos por emoción', galleryEmpty:'Todavía no hay fotos en tus recuerdos.', galleryLocked:'Con Plus, todas tus fotos se ordenan por emoción en un mosaico de tu año.',
   noEmotion:'Sin emoción', allYears:'Todos los años',
   plusLead:'Para quien quiere ir más allá, y para apoyar que esta app siga creciendo.',
-  plusFeatures:['Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
+  plusFeatures:['Estadísticas con gráficos: quesitos y barras de tus emociones, tus días, tus horas, tus palabras y mucho más.','Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
   plusPrice:'Pago único de 12,99 €, para siempre. Precio de fundadores: 7,99 €.', plusGet:'Conseguir Plus', plusSoon:'Muy pronto podrás conseguirlo aquí.',
   plusHaveCode:'¿Tienes un código?', plusCodePh:'Pega aquí tu código', plusActivate:'Activar', plusMore:'Ver Plus',
   plusBadCode:'Ese código no es válido. Cópialo entero, sin espacios.', plusActive:b=>`Tienes Plus. Gracias por apoyar ${b}.`, plusThanks:'Plus activado. ¡Gracias!',
   saveFull:'Guardar copia completa', saveLight:'Copia ligera, sin fotos',
   backupKinds:'La copia completa incluye tus fotos y puede ocupar bastante. La ligera guarda solo los textos y pesa muy poco.',
+  time:'Hora', statsTitle:'Estadísticas', statsLocked:'Con Plus, ves todo esto con detalle: tus emociones, tus días, tus horas y mucho más.',
+  chEmotions:'Tus emociones', chWeekday:'Qué días guardas recuerdos', chDaypart:'En qué momento del día', chEvolution:'Cómo cambian tus emociones',
+  chVsPrev:'Comparado con el periodo anterior', chTypes:'Qué guardas', chTags:'Tus palabras', chDrawers:'Tus cajones', chEmoType:'La emoción de cada tipo',
+  stStreak:'Racha actual', stBest:'Racha más larga', stDays:'Días con recuerdos', stPerWeek:'Recuerdos por semana', stPhoto:'Con foto',
+  nDaysShort:n=>`${n} ${n===1?'día':'días'}`, prevShort:'Anterior', nowShort:'Ahora', noDataYet:'Aún no hay suficientes recuerdos para esta gráfica.',
+  dayparts:{madrugada:'Madrugada',manana:'Mañana',tarde:'Tarde',noche:'Noche'},
   hadMemories:'¿Ya tenías recuerdos? Recupéralos con tu copia', restoreBtn:'Recuperar mis recuerdos', tSavedDownloads:'Copia guardada en Descargas.',
   careTitle:'Cuida tus recuerdos', careWhy:'¿Por qué es importante?',
   careLead:'Tus recuerdos solo viven en este teléfono: no hay ninguna copia en ningún otro sitio. Eso los hace privados, pero también significa que, si se pierden aquí, no puedo recuperarlos. Estas cinco cosas los mantienen a salvo:',
@@ -463,12 +496,18 @@ en:{
   galleryTitle:'Your photos by emotion', galleryEmpty:'There are no photos in your memories yet.', galleryLocked:'With Plus, all your photos are arranged by emotion into a mosaic of your year.',
   noEmotion:'No emotion', allYears:'All years',
   plusLead:'For those who want to go further, and to help this app keep growing.',
-  plusFeatures:['Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
+  plusFeatures:['Statistics with charts: pies and bars of your emotions, your days, your hours, your words and much more.','Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
   plusPrice:"A one-off payment of €12.99, forever. Founders' price: €7.99.", plusGet:'Get Plus', plusSoon:'Coming here very soon.',
   plusHaveCode:'Have a code?', plusCodePh:'Paste your code here', plusActivate:'Activate', plusMore:'See Plus',
   plusBadCode:"That code isn't valid. Copy all of it, with no spaces.", plusActive:b=>`You have Plus. Thank you for supporting ${b}.`, plusThanks:'Plus activated. Thank you!',
   saveFull:'Save a full copy', saveLight:'Light copy, no photos',
   backupKinds:'The full copy includes your photos and can be quite large. The light one saves only the text and weighs very little.',
+  time:'Time', statsTitle:'Statistics', statsLocked:'With Plus, you see all of this in detail: your emotions, your days, your hours and much more.',
+  chEmotions:'Your emotions', chWeekday:'Which days you save memories', chDaypart:'What time of day', chEvolution:'How your emotions change',
+  chVsPrev:'Compared with the previous period', chTypes:'What you save', chTags:'Your words', chDrawers:'Your drawers', chEmoType:'The emotion of each type',
+  stStreak:'Current streak', stBest:'Longest streak', stDays:'Days with memories', stPerWeek:'Memories per week', stPhoto:'With a photo',
+  nDaysShort:n=>`${n} ${n===1?'day':'days'}`, prevShort:'Before', nowShort:'Now', noDataYet:'Not enough memories for this chart yet.',
+  dayparts:{madrugada:'Small hours',manana:'Morning',tarde:'Afternoon',noche:'Night'},
   hadMemories:'Already had memories? Get them back with your copy', restoreBtn:'Recover my memories', tSavedDownloads:'Copy saved to Downloads.',
   careTitle:'Look after your memories', careWhy:'Why does it matter?',
   careLead:"Your memories only live on this phone: there's no copy anywhere else. That keeps them private, but it also means that if they're lost here, I can't get them back. These five things keep them safe:",
@@ -607,12 +646,18 @@ ca:{
   galleryTitle:'Les teves fotos per emoció', galleryEmpty:'Encara no hi ha fotos als teus records.', galleryLocked:`Amb Plus, totes les teves fotos s'ordenen per emoció en un mosaic del teu any.`,
   noEmotion:'Sense emoció', allYears:'Tots els anys',
   plusLead:'Per a qui vol anar més enllà, i per ajudar que aquesta app continuï creixent.',
-  plusFeatures:['Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
+  plusFeatures:['Estadístiques amb gràfics: formatges i barres de les teves emocions, els teus dies, les teves hores, les teves paraules i molt més.','Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
   plusPrice:'Pagament únic de 12,99 €, per sempre. Preu de fundadors: 7,99 €.', plusGet:'Aconsegueix Plus', plusSoon:'Molt aviat el podràs aconseguir aquí.',
   plusHaveCode:'Tens un codi?', plusCodePh:'Enganxa aquí el teu codi', plusActivate:'Activa', plusMore:'Veure Plus',
   plusBadCode:`Aquest codi no és vàlid. Copia'l sencer, sense espais.`, plusActive:b=>`Tens Plus. Gràcies per donar suport a ${b}.`, plusThanks:'Plus activat. Gràcies!',
   saveFull:'Desa una còpia completa', saveLight:'Còpia lleugera, sense fotos',
   backupKinds:'La còpia completa inclou les teves fotos i pot ocupar força. La lleugera desa només els textos i pesa molt poc.',
+  time:'Hora', statsTitle:'Estadístiques', statsLocked:'Amb Plus, veus tot això amb detall: les teves emocions, els teus dies, les teves hores i molt més.',
+  chEmotions:'Les teves emocions', chWeekday:'Quins dies deses records', chDaypart:'En quin moment del dia', chEvolution:'Com canvien les teves emocions',
+  chVsPrev:'Comparat amb el període anterior', chTypes:'Què deses', chTags:'Les teves paraules', chDrawers:'Els teus calaixos', chEmoType:"L'emoció de cada tipus",
+  stStreak:'Ratxa actual', stBest:'Ratxa més llarga', stDays:'Dies amb records', stPerWeek:'Records per setmana', stPhoto:'Amb foto',
+  nDaysShort:n=>`${n} ${n===1?'dia':'dies'}`, prevShort:'Anterior', nowShort:'Ara', noDataYet:'Encara no hi ha prou records per a aquest gràfic.',
+  dayparts:{madrugada:'Matinada',manana:'Matí',tarde:'Tarda',noche:'Nit'},
   hadMemories:`Ja tenies records? Recupera'ls amb la teva còpia`, restoreBtn:'Recupera els meus records', tSavedDownloads:'Còpia desada a Baixades.',
   careTitle:'Té cura dels teus records', careWhy:'Per què és important?',
   careLead:`Els teus records només viuen en aquest telèfon: no n'hi ha cap còpia enlloc més. Això els fa privats, però també vol dir que, si es perden aquí, no els puc recuperar. Aquestes cinc coses els mantenen a recer:`,
@@ -1115,6 +1160,7 @@ function vInforme(){
     h+=`<h2 class="sec">${t('conn')}</h2><p class="narr" style="font-size:21px;margin-top:0">${t('connTxt',la,lb,esc(joinY(dsc.se.map(id=>emo(id).name.toLowerCase()))),esc(dsc.st[0]))}</p>
     <button class="btn" data-act="link-pair" data-a="${dsc.a.id}" data-b="${dsc.b.id}">${esc(t('linkThem'))}</button>`;
   }
+  h+=plusStatsHTML(r,st,ps);
   h+=`<h2 class="sec">${t('share')}</h2><p class="lead">${esc(t('shareLead'))}</p>
   <button class="btn primary" data-act="story">${t('makeCard')}</button>`;
   return h;
@@ -1139,7 +1185,7 @@ function miniList(ms){return `<div class="mini">${ms.map(o=>`<button data-act="o
 function openDetail(id){
   const m=memOf(id);if(!m)return;const ty=typeOf(m.type);const d=drawerOf(m.drawer);
   const links=(m.links||[]).map(memOf).filter(Boolean);const rel=related(m);
-  openDlg(`<div class="dlg-head"><span class="note">${ty.label}, ${esc(fmt(m.date))}${d?`, ${esc(t('inDrawer',d.name))}`:''}</span><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  openDlg(`<div class="dlg-head"><span class="note">${ty.label}, ${esc(fmt(m.date))}${timeOf(m)?', '+timeOf(m):''}${d?`, ${esc(t('inDrawer',d.name))}`:''}</span><button class="btn quiet" data-act="close">${t('close')}</button></div>
   <div class="wash" style="--c:${mainColor(m)};margin-top:12px">
     ${(m.photos||[]).length?`<div class="photos${m.photos.length>1?' multi':''}">${m.photos.map(pid=>`<div class="photos-item"><img data-photo="${pid}" alt="${esc(t('photoAlt'))}"></div>`).join('')}</div>`:''}
     <h2 class="detail-title">${esc(memTitle(m))}</h2>
@@ -1156,7 +1202,8 @@ function openDetail(id){
 /* ---------- Editor ---------- */
 function openEditor(id,preset={}){
   const m=id?memOf(id):null;
-  draft=m?clone(m):{id:null,type:preset.type||'dia',title:'',source:'',text:'',emotions:preset.emo?[preset.emo]:[],tags:[],drawer:(preset.type==='dia'&&drawerOf('d-diario'))?'d-diario':'',date:iso(new Date()),links:[]};
+  draft=m?clone(m):{id:null,type:preset.type||'dia',title:'',source:'',text:'',emotions:preset.emo?[preset.emo]:[],tags:[],drawer:(preset.type==='dia'&&drawerOf('d-diario'))?'d-diario':'',date:iso(new Date()),time:(()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')})(),links:[]};
+  if(!draft.time)draft.time=timeOf(draft)||'';
   draft.photos=[...(draft.photos||[])];draft._new=[];draft._saved=false;draft._colors=null;
   edErr='';linkQ='';newDrawerName='';newTypeOpen=false;newTypeName='';renderEditor();
 }
@@ -1189,6 +1236,7 @@ function renderEditor(focusSel){
     <div style="flex:1 1 200px"><label class="f" for="ed-drawer">${t('drawer')}</label>
       <select class="in" id="ed-drawer" data-ed="drawer"><option value="">${t('noDrawer')}</option>${S.drawers.map(d=>`<option value="${d.id}"${draft.drawer===d.id?' selected':''}>${esc(d.name)}</option>`).join('')}</select></div>
     <div style="flex:1 1 160px"><label class="f" for="ed-date">${t('date')}</label><input class="in" type="date" id="ed-date" data-ed="date" value="${draft.date}"></div>
+    <div style="flex:0 1 130px"><label class="f" for="ed-time">${t('time')}</label><input class="in" type="time" id="ed-time" data-ed="time" value="${esc(draft.time||'')}"></div>
   </div>
   <div class="row" style="margin-top:8px"><input class="in" style="flex:1 1 180px" id="ed-newdrawer" data-ed-newdrawer placeholder="${esc(t('orNewDrawer'))}" value="${esc(newDrawerName)}"><button class="btn" data-act="ed-adddrawer">${t('createDrawer')}</button></div>
   ${S.memories.length>(draft.id?1:0)?`<label class="f" for="ed-link">${t('linkWith')} <small>${t('optional')}</small></label>
@@ -1458,6 +1506,92 @@ function galleryHTML(){
   return h;
 }
 
+/* ---------- Estadísticas Plus ---------- */
+function timeOf(m){if(m.time&&/^\d{2}:\d{2}$/.test(m.time))return m.time;if(m.createdAt){const d=new Date(m.createdAt);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}return null}
+function daypartOf(m){const tm=timeOf(m);if(!tm)return null;const h=+tm.slice(0,2);return h<6?'madrugada':h<12?'manana':h<20?'tarde':'noche'}
+function emoWeights(m){return (m.emotions||[]).filter(id=>emo(id)).map((id,i)=>[id,i===0?1:.5])}
+function stackFor(ms){const c={};ms.forEach(m=>emoWeights(m).forEach(([id,w])=>c[id]=(c[id]||0)+w));return S.emotions.filter(e=>c[e.id]).map(e=>({color:e.color,value:c[e.id]}))}
+function svgDonut(items,center,sub){
+  const tot=items.reduce((a,b)=>a+b.value,0);if(!tot)return '';
+  const c=100,r=90,ri=58;let a0=-Math.PI/2,paths='';
+  const P=(a,rad)=>[(c+rad*Math.cos(a)).toFixed(2),(c+rad*Math.sin(a)).toFixed(2)];
+  items.forEach(it=>{const f=it.value/tot;if(f>=.9999){paths+=`<circle cx="100" cy="100" r="${(r+ri)/2}" fill="none" stroke="${it.color}" stroke-width="${r-ri}"/>`;return}
+    const a1=a0+f*Math.PI*2,lg=f>.5?1:0,[x0,y0]=P(a0,r),[x1,y1]=P(a1,r),[x2,y2]=P(a1,ri),[x3,y3]=P(a0,ri);
+    paths+=`<path d="M${x0} ${y0}A${r} ${r} 0 ${lg} 1 ${x1} ${y1}L${x2} ${y2}A${ri} ${ri} 0 ${lg} 0 ${x3} ${y3}Z" fill="${it.color}"/>`;a0=a1});
+  return `<svg viewBox="0 0 200 200" class="donut" aria-hidden="true">${paths}<text x="100" y="104" text-anchor="middle" class="d-big">${esc(center)}</text><text x="100" y="124" text-anchor="middle" class="d-small">${esc(sub)}</text></svg>`;
+}
+function svgStack(labels,stacks){
+  const W=320,H=150,top=10,bottom=22,pad=6,n=labels.length;
+  const max=Math.max(1,...stacks.map(s=>s.reduce((a,b)=>a+b.value,0)));
+  const bw=(W-pad*2)/n,gap=Math.min(6,bw*.25),step=Math.ceil(n/8);let g=`<line class="ch-axis" x1="${pad}" x2="${W-pad}" y1="${H-bottom}" y2="${H-bottom}"/>`;
+  stacks.forEach((s,i)=>{let y=H-bottom;s.forEach(seg=>{const h=seg.value/max*(H-top-bottom);y-=h;g+=`<rect x="${(pad+i*bw+gap/2).toFixed(1)}" y="${y.toFixed(1)}" width="${Math.max(1,bw-gap).toFixed(1)}" height="${Math.max(0,h).toFixed(1)}" fill="${seg.color}" rx="2"/>`})});
+  labels.forEach((l,i)=>{if(i%step===0||n<=8)g+=`<text class="ch-t" x="${(pad+i*bw+bw/2).toFixed(1)}" y="${H-7}" text-anchor="middle">${esc(l)}</text>`});
+  return `<svg viewBox="0 0 ${W} ${H}" class="chart" aria-hidden="true">${g}</svg>`;
+}
+function hbars(rows){const mx=Math.max(1,...rows.map(r=>r.value));return rows.map(r=>`<div class="hbar"><span>${r.label}</span><div class="hb-track"><i style="width:${(r.value/mx*100).toFixed(1)}%;background:${r.color||'var(--accent)'}"></i></div><b>${r.text??r.value}</b></div>`).join('')}
+function streaks(){
+  const days=new Set(S.memories.map(m=>m.date));let best=0,cur=0;
+  const sorted=[...days].sort();let run=0,prev=null;
+  sorted.forEach(d=>{run=(prev&&daysAgo(prev)-daysAgo(d)===1)?run+1:1;best=Math.max(best,run);prev=d});
+  let d=new Date();if(!days.has(iso(d)))d=addDays(d,-1);while(days.has(iso(d))){cur++;d=addDays(d,-1)}
+  return {cur,best};
+}
+function subBuckets(r){
+  const s=fromIso(r.s),e=fromIso(r.e),out=[];
+  if(rep.period==='anio'){for(let mth=0;mth<12;mth++){const a=new Date(s.getFullYear(),mth,1),b=new Date(s.getFullYear(),mth+1,0);out.push({label:fmtD(a,{month:'narrow'}),s:iso(a),e:iso(b)})}}
+  else{for(let d=new Date(s);d<=e;d=addDays(d,1)){out.push({label:rep.period==='semana'?fmtD(d,{weekday:'narrow'}):String(d.getDate()),s:iso(d),e:iso(d)})}}
+  return out;
+}
+function plusStatsHTML(r,st,ps){
+  const ms=st.ms;const L=t('dayparts');
+  const card=(title,body)=>`<div class="card"><h3>${esc(title)}</h3>${body}</div>`;
+  const cards=[];
+  // cifras
+  const sk=streaks();const s0=fromIso(r.s),today=fromIso(iso(new Date()));const e0=fromIso(r.e)<today?fromIso(r.e):today;
+  const span=Math.max(1,Math.round((e0-s0)/864e5)+1);const perW=(ms.length/span*7);
+  const withPh=ms.length?Math.round(ms.filter(m=>(m.photos||[]).length).length/ms.length*100):0;
+  cards.push(`<div class="card" style="grid-column:1/-1"><div class="tiles">
+    <div class="tile"><b>${sk.cur}</b><span>${esc(t('stStreak'))} · ${esc(t('nDaysShort',sk.cur))}</span></div>
+    <div class="tile"><b>${sk.best}</b><span>${esc(t('stBest'))}</span></div>
+    <div class="tile"><b>${st.days}</b><span>${esc(t('stDays'))}</span></div>
+    <div class="tile"><b>${perW.toFixed(perW<10?1:0).replace('.',t('locale')==='en-GB'?'.':',')}</b><span>${esc(t('stPerWeek'))}</span></div>
+    <div class="tile"><b>${withPh}%</b><span>${esc(t('stPhoto'))}</span></div></div></div>`);
+  // quesito
+  const items=st.emos.map(x=>({color:x.e.color,value:x.share,label:x.e.name}));
+  cards.push(card(t('chEmotions'),`<div class="donut-wrap">${svgDonut(items,String(ms.length),t('nMem',ms.length).replace(/^\d+\s*/,''))}<div class="legend" style="flex-direction:column;gap:4px">${st.emos.map(x=>`<span style="--c:${x.e.color}"><i></i>${esc(x.e.name)} ${Math.round(x.share*100)}%</span>`).join('')}</div></div>`));
+  // evolución
+  const sb=subBuckets(r);cards.push(card(t('chEvolution'),svgStack(sb.map(b=>b.label),sb.map(b=>stackFor(ms.filter(m=>m.date>=b.s&&m.date<=b.e))))));
+  // días de la semana
+  const mon=new Date(2024,0,1);const wd=[0,1,2,3,4,5,6].map(i=>fmtD(addDays(mon,i),{weekday:'short'}).replace('.',''));
+  cards.push(card(t('chWeekday'),svgStack(wd,wd.map((_,i)=>stackFor(ms.filter(m=>(fromIso(m.date).getDay()+6)%7===i))))));
+  // momento del día
+  const dp=['madrugada','manana','tarde','noche'];
+  cards.push(card(t('chDaypart'),svgStack(dp.map(k=>L[k]),dp.map(k=>stackFor(ms.filter(m=>daypartOf(m)===k))))));
+  // comparación
+  if(ps.emos.length){
+    const ids=[...new Set([...st.emos.map(x=>x.e.id),...ps.emos.map(x=>x.e.id)])].map(emo).filter(Boolean);
+    cards.push(card(t('chVsPrev'),ids.map(e=>{const a=(ps.emos.find(x=>x.e.id===e.id)||{share:0}).share,b=(st.emos.find(x=>x.e.id===e.id)||{share:0}).share;
+      return `<div class="cmp" style="--c:${e.color}"><div class="cmp-name"><i></i>${esc(e.name)}</div>
+      <div class="cmp-row"><span>${esc(t('prevShort'))}</span><div class="hb-track"><i style="width:${(a*100).toFixed(1)}%;background:${e.color};opacity:.4"></i></div><span>${Math.round(a*100)}%</span></div>
+      <div class="cmp-row"><span>${esc(t('nowShort'))}</span><div class="hb-track"><i style="width:${(b*100).toFixed(1)}%;background:${e.color}"></i></div><span>${Math.round(b*100)}%</span></div></div>`}).join('')));
+  }
+  // tipos
+  cards.push(card(t('chTypes'),hbars(st.types.map(([ty,c])=>({label:esc(typeOf(ty).label),value:c})))));
+  // la emoción de cada tipo
+  const et=st.types.map(([ty])=>{const sub=ms.filter(m=>m.type===ty);const sk2=stackFor(sub);const tot=sk2.reduce((a,b)=>a+b.value,0);if(!tot)return null;
+    const c={};sub.forEach(m=>emoWeights(m).forEach(([id,w])=>c[id]=(c[id]||0)+w));const [bid,bv]=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];const e=emo(bid);
+    return {label:esc(typeOf(ty).label),value:bv/tot,color:e.color,text:`${esc(e.name)} ${Math.round(bv/tot*100)}%`}}).filter(Boolean);
+  if(et.length)cards.push(card(t('chEmoType'),et.map(x=>`<div class="hbar"><span>${x.label}</span><div class="hb-track"><i style="width:${(x.value*100).toFixed(1)}%;background:${x.color}"></i></div><b style="color:var(--ink)">${x.text}</b></div>`).join('')));
+  // palabras y cajones
+  if(st.tags.length)cards.push(card(t('chTags'),hbars(st.tags.slice(0,10).map(([w,c])=>({label:esc(w),value:c})))));
+  const dc={};ms.forEach(m=>{if(m.drawer&&drawerOf(m.drawer))dc[m.drawer]=(dc[m.drawer]||0)+1});
+  const dr=Object.entries(dc).sort((a,b)=>b[1]-a[1]);if(dr.length)cards.push(card(t('chDrawers'),hbars(dr.map(([id,c])=>({label:esc(drawerOf(id).name),value:c})))));
+  const grid=`<div class="stats-grid">${cards.join('')}</div>`;
+  const head=`<h2 class="sec">${esc(t('statsTitle'))} ${plusBadge()}</h2>`;
+  if(isPlus())return head+grid;
+  return head+`<div class="locked"><div class="locked-inner" aria-hidden="true">${grid}</div><div class="locked-cta"><p>${esc(t('statsLocked'))}</p><button class="btn primary" data-act="go-plus">${esc(t('plusMore'))}</button></div></div>`;
+}
+
 /* ---------- Plus: códigos firmados que se comprueban sin conexión ---------- */
 const PLUS_PUBLIC_KEY={"kty":"EC","crv":"P-256","x":"huFeF33CNI2LNXtYfnpk8Np2bbBGDUQzWi-bgHJVcDs","y":"GMj5omm6XUKcW_QKEpJH8ZkB0hfTA2Y-o6X-k_ZGOoU"};
 const PLUS_URL='';
@@ -1577,7 +1711,7 @@ async function seed(){
     ['dia','',['calma','nostalgia'],'d-diario',365]
   ];
   const txt=t('seed');const now=Date.now();
-  const ms=meta.map((e,i)=>({id:mkid('m')+i,type:e[0],title:txt[i][0],source:e[1],text:txt[i][1],emotions:e[2].map(x=>'e-'+x).filter(id=>emo(id)),tags:txt[i][2],drawer:drawerOf(e[3])?e[3]:'',date:d(e[4]),links:[],createdAt:now-i*1000}));
+  const ms=meta.map((e,i)=>({id:mkid('m')+i,type:e[0],title:txt[i][0],source:e[1],text:txt[i][1],emotions:e[2].map(x=>'e-'+x).filter(id=>emo(id)),tags:txt[i][2],drawer:drawerOf(e[3])?e[3]:'',date:d(e[4]),time:['22:40','10:15','23:30','00:45','20:05','21:30','16:20','19:10','23:55','08:40','13:30','17:45','03:10','11:20','22:15','09:05'][i],links:[],createdAt:now-i*1000}));
   const link=(a,b)=>{ms[a].links.push(ms[b].id);ms[b].links.push(ms[a].id)};
   link(2,13);link(0,7);link(11,7);
   S.memories.push(...ms);render();toast(t('tSeed'));
