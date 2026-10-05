@@ -2384,7 +2384,7 @@ function plusStatsHTML(r,st,ps){
 
 /* ---------- Plus: códigos firmados que se comprueban sin conexión ---------- */
 const PLUS_PUBLIC_KEY={"kty":"EC","crv":"P-256","x":"huFeF33CNI2LNXtYfnpk8Np2bbBGDUQzWi-bgHJVcDs","y":"GMj5omm6XUKcW_QKEpJH8ZkB0hfTA2Y-o6X-k_ZGOoU"};
-const KOFI_URL='https://ko-fi.com/memorandumapp', KOFI_ON=false;
+const KOFI_URL='https://ko-fi.com/memorandumapp', KOFI_ON=false, BUY_ON=false;
 function supportSection(){if(!KOFI_ON)return '';return `<h2 class="sec">${esc(t('supportTitle',t('brand')))}</h2><p class="note" style="font-size:15px">${esc(t('supportText',t('brand')))}</p><a class="btn" href="${KOFI_URL}" target="_blank" rel="noopener">☕ ${esc(t('supportBtn'))}</a>`}
 const PLUS_URL_YEAR='https://payhip.com/b/K1sxI', PLUS_URL_LIFE='https://payhip.com/b/0d23m';
 function plusBadge(){return `<span class="plus-badge">Plus</span>`}
@@ -2445,7 +2445,7 @@ function plusBanner(){
 function plusSection(){
   const head=`<h2 class="sec" id="plus-sec">${esc(t('brand'))} Plus ${plusBadge()}</h2>`;const st=plusState(),p=plusInfo();
   const codeRow=(lbl)=>`<label class="f" for="plus-code">${esc(lbl)}</label><div class="row"><input class="in" id="plus-code" style="flex:1 1 220px" placeholder="${esc(t('plusCodePh'))}" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn" data-act="plus-activate">${esc(t('plusActivate'))}</button></div>`;
-  const buy=`<div class="row" style="margin:4px 0 6px"><a class="btn primary" href="${PLUS_URL_YEAR}" target="_blank" rel="noopener">${esc(t('plusBuyYear'))}</a><a class="btn" href="${PLUS_URL_LIFE}" target="_blank" rel="noopener">${esc(t('plusBuyLife'))}</a></div>`;
+  const buy=!BUY_ON?`<p class="note">${esc(t('plusSoon'))}</p>`:`<div class="row" style="margin:4px 0 6px"><a class="btn primary" href="${PLUS_URL_YEAR}" target="_blank" rel="noopener">${esc(t('plusBuyYear'))}</a><a class="btn" href="${PLUS_URL_LIFE}" target="_blank" rel="noopener">${esc(t('plusBuyLife'))}</a></div>`;
   if(st==='active'&&p.plan!=='year')return head+`<p class="note" style="font-size:15px">${esc(t('plusActiveLife',t('brand')))}</p>`;
   if(st==='active')return head+`<p class="note" style="font-size:15px">${esc(t('plusActiveYear',fmt(p.exp),t('brand')))}</p><p class="note">${esc(t('plusNoAuto'))}</p>${buy}${codeRow(t('plusRenewCode'))}`;
   const intro=st==='expired'?`<p class="note" style="font-size:15px">${esc(t('plusExpired',fmt(p.exp)))}</p>`:(trialActive()?`<div class="wash" style="--c:var(--accent);margin-bottom:12px"><p style="margin:0">${esc(t('trialActive',trialLeft()))}</p></div>`:'')+`<p class="note" style="font-size:15px">${esc(t('plusLead'))}</p>`;
