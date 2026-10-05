@@ -167,13 +167,19 @@ textarea.in{min-height:120px;resize:vertical;font-family:var(--serif);font-size:
 .link{border:0;background:none;padding:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line);font-family:var(--serif);font-size:inherit}
 
 /* ---------- constelación ---------- */
-.sky{border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
-.sky svg{display:block;width:100%;height:auto;max-height:70vh}
-@media (max-width:600px){.sky svg{max-height:none}}
-.sky g.node{cursor:pointer}
+.sky{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:background .2s}
+.sky svg{display:block;width:100%;height:auto;max-height:72vh;user-select:none;-webkit-user-select:none}
+@media (max-width:600px){.sky svg{max-height:none;min-height:60vh}}
+.sky g.node{cursor:pointer;transition:opacity .2s}
 .sky g.node:focus{outline:none}
-.sky g.node:focus circle.dot{stroke:var(--ink);stroke-width:2}
-.sky text{fill:var(--muted);font-family:var(--sans)}
+.sky g.node:focus circle.dot{stroke:currentColor;stroke-width:2}
+.sky text{font-family:var(--sans);pointer-events:none}
+.sky line.edge{transition:opacity .2s}
+#skysvg.has-sel g.node:not(.lit){opacity:.14}
+#skysvg.has-sel line.edge:not(.lit){opacity:.06}
+.sky-ctrl{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:6px}
+.sky-ctrl button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(128,124,150,.35);background:rgba(249,248,252,.88);color:#26233D;font-size:19px;line-height:1;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.sky-info{position:absolute;left:10px;right:10px;bottom:10px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
 
 /* ---------- diálogos ---------- */
 dialog{border:0;padding:0;background:var(--paper);color:var(--ink);width:min(680px,100%);max-height:100%;border-radius:18px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}
@@ -327,7 +333,7 @@ es:{
   archTitle:'Archivo', archLead:c=>`${c} recuerdo${c===1?'':'s'} guardado${c===1?'':'s'}. Filtra por color, tipo o cajón, o mira cómo se conectan.`,
   view:'Vista', cards:'Fichas', sky:'Constelación', search:'Buscar palabras, títulos, autores', searchLbl:'Buscar',
   allTypes:'Todos los tipos', allDrawers:'Todos los cajones', typeLbl:'Tipo', drawerLbl:'Cajón', byEmotion:'Filtrar por emoción', removeFilter:'Quitar filtro',
-  skyNote:'Las líneas continuas son enlaces que tú hiciste. Las discontinuas unen recuerdos que comparten etiquetas. El color es la emoción principal.',
+  skyNote:'Pellizca o usa + y − para acercarte: al acercarte aparecen los nombres. Toca una estrella para ver sus conexiones. Las líneas continuas son enlaces que tú hiciste; las de puntos siguen cada etiqueta de un recuerdo al siguiente, con el color de la emoción que comparten.',
   skyMin:'Hacen falta al menos dos recuerdos para ver conexiones.', skyLbl:'Constelación de recuerdos',
   archEmpty:'Aquí se irán archivando tus recuerdos, ordenados por meses.', noMatch:'Nada coincide con estos filtros. Quita alguno o prueba otra palabra.', clearAll:'Quitar filtros',
   palTitle:'Biblioteca de emociones', palLead:'Cada color es una emoción con el nombre que tú le des. Renómbralos, cambia el tono o crea los tuyos. Toca un color para ver todo lo que guarda.',
@@ -372,7 +378,9 @@ es:{
   cardsLead:'Las imágenes que creas se guardan aquí, solo en este móvil. Nadie las ve hasta que tú decidas compartirlas.',
   cardsEmpty:'Todavía no has guardado ninguna. Puedes crearlas desde un recuerdo, un día, el Informe o el mapa.',
   cardShare:'Compartir', cardDownload:'Descargar', tCardDeleted:'Tarjeta borrada.', tCardErr:'No he podido guardar la imagen.',
-  cardKinds:{story:'Periodo',mem:'Recuerdo',day:'Día',conn:'Conexión',stat:'Estadística',map:'Mapa'},
+  cardKinds:{sky:'Cielo',story:'Periodo',mem:'Recuerdo',day:'Día',conn:'Conexión',stat:'Estadística',map:'Mapa'},
+  skyAll:'Siempre', skyMonth:'Este mes', skyYear:'Este año', skyShowing:'Mostrando', skyAllLbl:'todos tus recuerdos', skyZoomIn:'Acercar', skyZoomOut:'Alejar', skyReset:'Ver todo',
+  skyOpen:'Abrir', skyMake:'Crear imagen de este cielo', skyCardTitle:'Mi cielo', skyStats:(n,c)=>`${n} recuerdos y ${c} conexiones`, inclNames:'Incluir los nombres', seeSky:'Ver su cielo',
   shareBtn:'Crear imagen', shareTitle:'Crear una imagen', shareNote:'La imagen se crea en tu móvil y se guarda en tus tarjetas. Nada sale de aquí hasta que tú decidas compartirla.', shareShowLbl:'Botones para crear imágenes', shareShowOn:'Mostrar', shareShowOff:'Ocultar', shareShowHint:'Si los ocultas, no aparecerán en los recuerdos, los días, el informe ni las estadísticas.', inclPhoto:'Incluir la foto', inclQuote:'Incluir la cita', inclText:'Incluir lo que escribí',
   cardConn:'Una conexión que no buscaba', cardConnTxt:(e,w)=>`Comparten ${e} y la palabra «${w}».`, cardSameDay:y=>`Un día como hoy, en ${y}`,
   statOfMine:'de mis emociones', statDay:d=>`Su día: el ${d}.`, statPart:p=>`Su momento: ${p}.`, statMostly:(e,p)=>`Sobre todo ${e}, un ${p}%.`,
@@ -510,7 +518,7 @@ en:{
   archTitle:'Archive', archLead:c=>`${c} memor${c===1?'y':'ies'} saved. Filter by colour, type or drawer, or see how they connect.`,
   view:'View', cards:'Cards', sky:'Constellation', search:'Search words, titles, authors', searchLbl:'Search',
   allTypes:'All types', allDrawers:'All drawers', typeLbl:'Type', drawerLbl:'Drawer', byEmotion:'Filter by emotion', removeFilter:'Remove filter',
-  skyNote:'Solid lines are links you made. Dashed lines join memories that share tags. The colour is the main emotion.',
+  skyNote:'Pinch or use + and − to zoom in: names appear as you get closer. Tap a star to see its connections. Solid lines are links you made; dotted lines follow each tag from one memory to the next, in the colour of the emotion they share.',
   skyMin:'You need at least two memories to see connections.', skyLbl:'Constellation of memories',
   archEmpty:'Your memories will be filed here, month by month.', noMatch:'Nothing matches these filters. Remove one or try another word.', clearAll:'Clear filters',
   palTitle:'Library of emotions', palLead:'Each colour is an emotion with whatever name you give it. Rename them, change their shade or create your own. Tap a colour to see everything it holds.',
@@ -555,7 +563,9 @@ en:{
   cardsLead:'The images you create are kept here, only on this phone. Nobody sees them until you decide to share them.',
   cardsEmpty:"You haven't saved any yet. You can create them from a memory, a day, the Report or the map.",
   cardShare:'Share', cardDownload:'Download', tCardDeleted:'Card deleted.', tCardErr:"I couldn't save the image.",
-  cardKinds:{story:'Period',mem:'Memory',day:'Day',conn:'Connection',stat:'Statistic',map:'Map'},
+  cardKinds:{sky:'Sky',story:'Period',mem:'Memory',day:'Day',conn:'Connection',stat:'Statistic',map:'Map'},
+  skyAll:'All time', skyMonth:'This month', skyYear:'This year', skyShowing:'Showing', skyAllLbl:'all your memories', skyZoomIn:'Zoom in', skyZoomOut:'Zoom out', skyReset:'Show all',
+  skyOpen:'Open', skyMake:'Create an image of this sky', skyCardTitle:'My sky', skyStats:(n,c)=>`${n} memories and ${c} connections`, inclNames:'Include the names', seeSky:'See its sky',
   shareBtn:'Create image', shareTitle:'Create an image', shareNote:'The image is created on your phone and kept in your cards. Nothing leaves here until you decide to share it.', shareShowLbl:'Buttons to create images', shareShowOn:'Show', shareShowOff:'Hide', shareShowHint:"If you hide them, they won't appear in memories, days, the report or statistics.", inclPhoto:'Include the photo', inclQuote:'Include the quote', inclText:'Include what I wrote',
   cardConn:"A connection I wasn't looking for", cardConnTxt:(e,w)=>`They share ${e} and the word “${w}”.`, cardSameDay:y=>`On this day, in ${y}`,
   statOfMine:'of my emotions', statDay:d=>`Its day: ${d}.`, statPart:p=>`Its time: ${p}.`, statMostly:(e,p)=>`Mostly ${e}, ${p}%.`,
@@ -693,7 +703,7 @@ ca:{
   archTitle:'Arxiu', archLead:c=>`${c} record${c===1?'':'s'} desat${c===1?'':'s'}. Filtra per color, tipus o calaix, o mira com es connecten.`,
   view:'Vista', cards:'Fitxes', sky:'Constel·lació', search:'Cerca paraules, títols, autors', searchLbl:'Cerca',
   allTypes:'Tots els tipus', allDrawers:'Tots els calaixos', typeLbl:'Tipus', drawerLbl:'Calaix', byEmotion:'Filtra per emoció', removeFilter:'Treu el filtre',
-  skyNote:`Les línies contínues són enllaços que has fet tu. Les discontínues uneixen records que comparteixen etiquetes. El color és l'emoció principal.`,
+  skyNote:`Pessiga o fes servir + i − per apropar-te: en apropar-te apareixen els noms. Toca una estrella per veure'n les connexions. Les línies contínues són enllaços que has fet tu; les de punts segueixen cada etiqueta d'un record al següent, amb el color de l'emoció que comparteixen.`,
   skyMin:'Calen almenys dos records per veure connexions.', skyLbl:'Constel·lació de records',
   archEmpty:`Aquí s'aniran arxivant els teus records, ordenats per mesos.`, noMatch:`No hi ha res que coincideixi amb aquests filtres. Treu-ne algun o prova una altra paraula.`, clearAll:'Treu els filtres',
   palTitle:`Biblioteca d'emocions`, palLead:`Cada color és una emoció amb el nom que tu li donis. Canvia'ls el nom, el to o crea'n de teus. Toca un color per veure tot el que guarda.`,
@@ -738,7 +748,9 @@ ca:{
   cardsLead:"Les imatges que crees es desen aquí, només en aquest mòbil. Ningú no les veu fins que tu decideixis compartir-les.",
   cardsEmpty:"Encara no n'has desat cap. Les pots crear des d'un record, un dia, l'Informe o el mapa.",
   cardShare:'Compartir', cardDownload:'Descarrega', tCardDeleted:'Targeta esborrada.', tCardErr:"No he pogut desar la imatge.",
-  cardKinds:{story:'Període',mem:'Record',day:'Dia',conn:'Connexió',stat:'Estadística',map:'Mapa'},
+  cardKinds:{sky:'Cel',story:'Període',mem:'Record',day:'Dia',conn:'Connexió',stat:'Estadística',map:'Mapa'},
+  skyAll:'Sempre', skyMonth:'Aquest mes', skyYear:'Aquest any', skyShowing:'Mostrant', skyAllLbl:'tots els teus records', skyZoomIn:'Apropa', skyZoomOut:'Allunya', skyReset:"Veure-ho tot",
+  skyOpen:'Obre', skyMake:"Crea una imatge d'aquest cel", skyCardTitle:'El meu cel', skyStats:(n,c)=>`${n} records i ${c} connexions`, inclNames:'Inclou els noms', seeSky:'Veure el seu cel',
   shareBtn:'Crea una imatge', shareTitle:'Crea una imatge', shareNote:"La imatge es crea al teu mòbil i es desa a les teves targetes. Res no surt d'aquí fins que tu decideixis compartir-la.", shareShowLbl:'Botons per crear imatges', shareShowOn:'Mostra', shareShowOff:'Amaga', shareShowHint:'Si els amagues, no apareixeran als records, als dies, a l’informe ni a les estadístiques.', inclPhoto:'Inclou la foto', inclQuote:'Inclou la cita', inclText:'Inclou el que vaig escriure',
   cardConn:'Una connexió que no buscava', cardConnTxt:(e,w)=>`Comparteixen ${e} i la paraula «${w}».`, cardSameDay:y=>`Un dia com avui, el ${y}`,
   statOfMine:'de les meves emocions', statDay:d=>`El seu dia: el ${d}.`, statPart:p=>`El seu moment: ${p}.`, statMostly:(e,p)=>`Sobretot ${e}, un ${p}%.`,
@@ -1109,7 +1121,7 @@ function vArchivo(){
   <div class="row goday-row" style="margin:-2px 0 12px;align-items:center"><label for="goday" class="note" style="font-size:14px">${esc(t('goDay'))}</label><input class="in" type="date" id="goday" data-dayjump style="flex:0 1 190px;width:auto"></div>
   <div class="emorow" role="group" aria-label="${esc(t('byEmotion'))}">${S.emotions.map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo" data-v="${e.id}" aria-pressed="${filters.emotion===e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
   ${active.length?`<div class="row active-filters" style="margin-bottom:6px">${active.join('')}</div>`:''}
-  <div id="results">${archMode==='lista'?resultsHTML():archMode==='fotos'?galleryHTML():archMode==='tarjetas'?cardsHTML():`<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>`}</div>`;
+  <div id="results">${archMode==='lista'?resultsHTML():archMode==='fotos'?galleryHTML():archMode==='tarjetas'?cardsHTML():`${skyHeaderHTML()}<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>${skyButtonsHTML()}`}</div>`;
 }
 function resultsHTML(){
   const ms=filtered();
@@ -1125,49 +1137,112 @@ function resultsHTML(){
 }
 
 /* ---------- Constelación ---------- */
-function drawSky(){
-  const box=$('#sky');if(!box)return;
-  const ms=filtered();
-  if(ms.length<2){box.innerHTML=`<div style="padding:24px"><p class="note">${esc(t('skyMin'))}</p></div>`;return}
-  const N=ms.length;const narrow=(box.clientWidth||340)<600;const gx=narrow?.03:.012,gy=narrow?.0035:.012;
-  const nodes=ms.map((m,i)=>({m,x:Math.cos(i)*200+Math.random()*40,y:Math.sin(i)*140+Math.random()*40,vx:0,vy:0,deg:0}));
-  const idx=new Map(nodes.map((n,i)=>[n.m.id,i]));
-  const edges=[],seen=new Set();
-  nodes.forEach((n,i)=>(n.m.links||[]).forEach(l=>{const j=idx.get(l);if(j==null)return;const k=i<j?i+'-'+j:j+'-'+i;if(!seen.has(k)){seen.add(k);edges.push({a:i,b:j,s:true})}}));
-  for(let i=0;i<N&&edges.length<500;i++)for(let j=i+1;j<N;j++){
-    const k=i+'-'+j;if(seen.has(k))continue;
-    const ta=nodes[i].m.tags||[],tb=nodes[j].m.tags||[];
-    if(ta.some(x=>tb.includes(x))){seen.add(k);edges.push({a:i,b:j,s:false})}
-  }
+function skyThemeNow(){if(S.settings&&S.settings.skyTheme)return S.settings.skyTheme;const forced=document.documentElement.getAttribute('data-theme');if(forced)return forced;try{return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch(e){return 'light'}}
+let skyPeriod={kind:'all'}, skyView={z:1,tx:0,ty:0}, skySel=null, skyLast=null;
+function skyRange(){const now=new Date();
+  if(skyPeriod.kind==='month'){const s=new Date(now.getFullYear(),now.getMonth(),1),e=new Date(now.getFullYear(),now.getMonth()+1,0);return {s:iso(s),e:iso(e),label:fmtD(s,{month:'long',year:'numeric'})}}
+  if(skyPeriod.kind==='year'){const y=now.getFullYear();return {s:`${y}-01-01`,e:`${y}-12-31`,label:String(y)}}
+  if(skyPeriod.kind==='range')return skyPeriod;return null}
+function skyLabel(){const parts=[];
+  if(filters.emotion&&emo(filters.emotion))parts.push(emo(filters.emotion).name);
+  if(filters.tag)parts.push('#'+filters.tag);
+  if(filters.drawer&&drawerOf(filters.drawer))parts.push(drawerOf(filters.drawer).name);
+  if(filters.type)parts.push(cap(typeOf(filters.type).plural));
+  if(filters.date)parts.push(fmt(filters.date));
+  if(filters.q.trim())parts.push('«'+filters.q.trim()+'»');
+  const r=skyRange();if(r)parts.push(r.label);
+  return parts.length?parts.join(', '):t('skyAllLbl')}
+function skyHeaderHTML(){
+  const th=skyThemeNow();const pk=skyPeriod.kind;
+  return `<div class="row" style="justify-content:space-between;align-items:center;margin:4px 0 10px">
+  <div class="row" role="group" aria-label="${esc(t('period'))}">${[['all','skyAll'],['month','skyMonth'],['year','skyYear']].map(([k,l])=>`<button class="chip" data-act="sky-period" data-v="${k}" aria-pressed="${pk===k}">${esc(t(l))}</button>`).join('')}${pk==='range'?`<button class="chip" aria-pressed="true">${esc(skyPeriod.label)}</button>`:''}</div>
+  <div class="seg" role="group"><button data-act="sky-theme" data-v="light" aria-pressed="${th==='light'}">${esc(t('themeLight'))}</button><button data-act="sky-theme" data-v="dark" aria-pressed="${th==='dark'}">${esc(t('themeDark'))}</button></div></div>
+  <p class="note" style="margin:0 0 10px"><b style="font-weight:600;color:var(--ink)">${esc(t('skyShowing'))}:</b> ${esc(skyLabel())}</p>`;
+}
+function skyGraph(){
+  let ms=filtered();const r=skyRange();if(r)ms=ms.filter(m=>m.date>=r.s&&m.date<=r.e);
+  const idx=new Map(ms.map((m,i)=>[m.id,i]));const edges=[],seen=new Map();
+  const add=(i,j,strong,tag)=>{const k=i<j?i+'-'+j:j+'-'+i;const ex=seen.get(k);if(ex){if(strong)ex.strong=true;return}
+    const a=ms[i],b=ms[j];const sh=(a.emotions||[]).find(x=>(b.emotions||[]).includes(x)&&emo(x));const e={a:i,b:j,strong,color:sh?emo(sh).color:null};seen.set(k,e);edges.push(e)};
+  ms.forEach((m,i)=>(m.links||[]).forEach(l=>{const j=idx.get(l);if(j!=null&&j!==i)add(i,j,true)}));
+  const byTag={};ms.forEach((m,i)=>(m.tags||[]).forEach(tg=>(byTag[tg]=byTag[tg]||[]).push(i)));
+  Object.values(byTag).forEach(list=>{list.sort((x,y)=>ms[x].date.localeCompare(ms[y].date)||(ms[x].createdAt||0)-(ms[y].createdAt||0));for(let q=1;q<list.length;q++)add(list[q-1],list[q],false)});
+  return {ms,edges};
+}
+function skyLayout(ms,edges,narrow){
+  const N=ms.length;const nodes=ms.map((m,i)=>{const a=i*2.399963,rad=30*Math.sqrt(i+1);return {m,x:Math.cos(a)*rad,y:Math.sin(a)*rad,vx:0,vy:0,deg:0}});
   edges.forEach(e=>{nodes[e.a].deg++;nodes[e.b].deg++});
-  for(let it=0;it<320;it++){
-    for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
-      const a=nodes[i],b=nodes[j];let dx=a.x-b.x,dy=a.y-b.y;const d2=Math.max(dx*dx+dy*dy,30);const f=2200/d2;const d=Math.sqrt(d2);
-      dx/=d;dy/=d;a.vx+=dx*f;a.vy+=dy*f;b.vx-=dx*f;b.vy-=dy*f;
-    }
-    for(const e of edges){
-      const a=nodes[e.a],b=nodes[e.b];const dx=b.x-a.x,dy=b.y-a.y;const d=Math.sqrt(dx*dx+dy*dy)||1;
-      const L=e.s?70:120,k=e.s?.03:.008;const f=(d-L)*k;a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f;
-    }
+  const gx=narrow==='card'?.016:narrow?.026:.012,gy=narrow==='card'?.0075:narrow?.004:.012;
+  for(let it=0;it<380;it++){
+    for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){const a=nodes[i],b=nodes[j];let dx=a.x-b.x,dy=a.y-b.y;const d2=Math.max(dx*dx+dy*dy,30);const f=3200/d2;const d=Math.sqrt(d2);dx/=d;dy/=d;a.vx+=dx*f;a.vy+=dy*f;b.vx-=dx*f;b.vy-=dy*f}
+    for(const e of edges){const a=nodes[e.a],b=nodes[e.b];const dx=b.x-a.x,dy=b.y-a.y;const d=Math.sqrt(dx*dx+dy*dy)||1;const L=e.strong?80:110,k=e.strong?.03:.015;const f=(d-L)*k;a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f}
     for(const n of nodes){n.vx-=n.x*gx;n.vy-=n.y*gy;n.vx*=.82;n.vy*=.82;n.x+=Math.max(-20,Math.min(20,n.vx));n.y+=Math.max(-20,Math.min(20,n.vy))}
   }
-  let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;
-  nodes.forEach(n=>{x0=Math.min(x0,n.x);y0=Math.min(y0,n.y);x1=Math.max(x1,n.x);y1=Math.max(y1,n.y)});
-  const pad=60,w=Math.max(x1-x0,200)+pad*2,h=Math.max(y1-y0,160)+pad*2;
-  const k=w/Math.max(260,box.clientWidth||340);const fs=(narrow?11:12)*k;const showLabels=N<=45;
-  let svg=`<svg viewBox="${x0-pad} ${y0-pad} ${w} ${h}" role="group" aria-label="${esc(t('skyLbl'))}">`;
-  for(const e of edges){const a=nodes[e.a],b=nodes[e.b];
-    svg+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${e.s?'var(--ink)':'var(--muted)'}" stroke-opacity="${e.s?.7:.6}" stroke-width="${(e.s?2:1.5)*k}"${e.s?'':` stroke-dasharray="${5*k} ${4*k}"`} stroke-linecap="round"/>`}
-  for(const n of nodes){
-    const r=(6+Math.min(n.deg,8)*1.1)*k;const e2=emo((n.m.emotions||[])[1]);
-    svg+=`<g class="node" data-act="open" data-id="${n.m.id}" tabindex="0" role="button" aria-label="${esc(memTitle(n.m))}">
-      ${e2?`<circle cx="${n.x}" cy="${n.y}" r="${r+3.5*k}" fill="none" stroke="${e2.color}" stroke-width="${3*k}"/>`:''}
-      <circle class="dot" cx="${n.x}" cy="${n.y}" r="${r}" fill="${mainColor(n.m)}"/>
-      ${showLabels?`<text x="${n.x}" y="${n.y+r+fs*1.2}" text-anchor="middle" font-size="${fs}">${esc(cut(memTitle(n.m),narrow?16:22))}</text>`:''}
-    </g>`;
-  }
-  box.innerHTML=svg+'</svg>';
+  return nodes;
 }
+function skyColors(th){return th==='dark'?{bg:'#14131D',dust:'rgba(255,255,255,.28)',line:'rgba(220,215,240,.38)',strong:'rgba(240,236,250,.8)',label:'#D3CFE3',halo:.55,lineA:.7}:{bg:'#F4F2F8',dust:'rgba(38,35,61,.16)',line:'rgba(38,35,61,.28)',strong:'rgba(38,35,61,.72)',label:'#4A4660',halo:.35,lineA:.85}}
+function drawSky(){
+  const box=$('#sky');if(!box)return;
+  const {ms,edges}=skyGraph();const th=skyThemeNow();const C=skyColors(th);
+  box.style.background=C.bg;box.style.borderColor=th==='dark'?'#2A2838':'var(--line)';
+  if(ms.length<2){box.innerHTML=`<div style="padding:24px"><p class="note" style="color:${C.label}">${esc(t('skyMin'))}</p></div>`;skyLast=null;return}
+  const narrow=(box.clientWidth||340)<600;const nodes=skyLayout(ms,edges,narrow);
+  let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;nodes.forEach(n=>{x0=Math.min(x0,n.x);y0=Math.min(y0,n.y);x1=Math.max(x1,n.x);y1=Math.max(y1,n.y)});
+  const pad=70,w=Math.max(x1-x0,220)+pad*2,h=Math.max(y1-y0,180)+pad*2,vx=x0-pad,vy=y0-pad;
+  skyLast={nodes,edges,bbox:{x:vx,y:vy,w,h},label:skyLabel(),n:ms.length};
+  const used=[...new Set(ms.flatMap(m=>(m.emotions||[]).filter(id=>emo(id))))];
+  const defs=used.map(id=>`<radialGradient id="glow-${id}"><stop offset="0" stop-color="${emo(id).color}" stop-opacity="${C.halo}"/><stop offset="1" stop-color="${emo(id).color}" stop-opacity="0"/></radialGradient>`).join('');
+  let seed=7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+  let dust='';for(let i=0;i<Math.min(260,40+ms.length*8);i++){dust+=`<circle cx="${(vx-w*.3+rnd()*w*1.6).toFixed(1)}" cy="${(vy-h*.3+rnd()*h*1.6).toFixed(1)}" r="${(0.4+rnd()*1.1).toFixed(2)}" fill="${C.dust}" class="dust"/>`}
+  let el='';edges.forEach((e,i)=>{const a=nodes[e.a],b=nodes[e.b];const col=e.strong?C.strong:(e.color||C.line);
+    el+=`<line class="edge" data-a="${e.a}" data-b="${e.b}" x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" stroke="${col}" stroke-opacity="${e.strong?1:(e.color?C.lineA:1)}" stroke-width="${e.strong?2:1.4}" vector-effect="non-scaling-stroke" stroke-linecap="round"${e.strong?'':' stroke-dasharray="3 5"'}/>`});
+  let nd='';nodes.forEach((n,i)=>{const e1=emo((n.m.emotions||[])[0]),e2=emo((n.m.emotions||[])[1]);const col=e1?e1.color:'#9A96AE';
+    nd+=`<g class="node" data-i="${i}" data-id="${n.m.id}" tabindex="0" role="button" aria-label="${esc(memTitle(n.m))}">${e1?`<circle class="halo" cx="${n.x}" cy="${n.y}" r="1" fill="url(#glow-${e1.id})"/>`:''}${e2?`<circle class="ring" cx="${n.x}" cy="${n.y}" r="1" fill="none" stroke="${e2.color}" stroke-width="2" vector-effect="non-scaling-stroke"/>`:''}<circle class="dot" cx="${n.x}" cy="${n.y}" r="1" fill="${col}"/><text x="${n.x}" y="${n.y}" text-anchor="middle" fill="${C.label}">${esc(cut(memTitle(n.m),narrow?18:24))}</text></g>`});
+  box.innerHTML=`<svg id="skysvg" viewBox="${vx} ${vy} ${w} ${h}" style="touch-action:none" aria-label="${esc(t('skyLbl'))}"><defs>${defs}</defs><g id="skyworld">${dust}${el}${nd}</g></svg>
+  <div class="sky-ctrl"><button data-act="sky-zoom" data-v="in" aria-label="${esc(t('skyZoomIn'))}">+</button><button data-act="sky-zoom" data-v="out" aria-label="${esc(t('skyZoomOut'))}">−</button><button data-act="sky-zoom" data-v="reset" aria-label="${esc(t('skyReset'))}">⤢</button></div>
+  <div class="sky-info" id="skyinfo" hidden></div>`;
+  const rank=nodes.map((n,i)=>[i,n.deg]).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);const order=new Map(rank.map((i,p)=>[i,p]));
+  skyLast.order=order;skyView={z:1,tx:0,ty:0};skySel=null;
+  skyApply();skyBind();
+}
+function skyApply(){
+  const svg=$('#skysvg');if(!svg||!skyLast)return;const box=$('#sky');const {z,tx,ty}=skyView;
+  $('#skyworld').setAttribute('transform',`translate(${tx} ${ty}) scale(${z})`);
+  const k=skyLast.bbox.w/Math.max(260,box.clientWidth||340);const u=k/z;const N=skyLast.nodes.length;
+  const limit=N<=12?N:Math.round(6*z*z);const lit=skySel!=null?new Set([skySel,...skyLast.edges.filter(e=>e.a===skySel||e.b===skySel).map(e=>e.a===skySel?e.b:e.a)]):null;
+  svg.querySelectorAll('g.node').forEach(g=>{const i=+g.dataset.i,n=skyLast.nodes[i];const rpx=(4.5+Math.min(n.deg,8)*.9)*Math.min(1.6,Math.pow(z,.25));const r=rpx*u;
+    g.querySelector('.dot').setAttribute('r',r);const h=g.querySelector('.halo');if(h)h.setAttribute('r',r*3.2);const ring=g.querySelector('.ring');if(ring)ring.setAttribute('r',r+3*u);
+    const tx2=g.querySelector('text');tx2.setAttribute('font-size',12*u);tx2.setAttribute('y',n.y+r+16*u);
+    const show=(lit&&lit.has(i))||skyLast.order.get(i)<limit;tx2.style.display=show?'':'none';
+    g.classList.toggle('lit',!!(lit&&lit.has(i)))});
+  svg.classList.toggle('has-sel',skySel!=null);
+  svg.querySelectorAll('line.edge').forEach(l=>{const a=+l.dataset.a,b=+l.dataset.b;l.classList.toggle('lit',skySel!=null&&(a===skySel||b===skySel))});
+}
+function skyToUser(svg,cx,cy){const p=svg.createSVGPoint();p.x=cx;p.y=cy;return p.matrixTransform(svg.getScreenCTM().inverse())}
+function skyZoomAt(f,nz){nz=Math.max(1,Math.min(10,nz));const {z,tx,ty}=skyView;skyView={z:nz,tx:f.x-(f.x-tx)*(nz/z),ty:f.y-(f.y-ty)*(nz/z)};if(nz===1){skyView.tx=0;skyView.ty=0}skyApply()}
+function skySelect(i){
+  skySel=i;skyApply();const box=$('#skyinfo');if(!box)return;
+  if(i==null){box.hidden=true;return}
+  const m=skyLast.nodes[i].m;const cs=(m.emotions||[]).map(emo).filter(Boolean);
+  box.innerHTML=`<div style="display:flex;gap:10px;align-items:flex-start;justify-content:space-between"><div style="min-width:0"><div style="font-family:var(--serif);font-size:20px;line-height:1.15">${esc(memTitle(m))}</div><div class="note" style="font-size:13px">${esc(typeOf(m.type).label)}, ${esc(fmt(m.date,{day:'numeric',month:'short',year:'numeric'}))}</div><div class="row" style="gap:6px;margin-top:6px">${cs.map(e=>`<span class="chip" style="--c:${e.color};font-size:12px;padding:2px 10px"><i></i>${esc(e.name)}</span>`).join('')}</div></div><button class="btn quiet" data-act="sky-clear" aria-label="${esc(t('close'))}">✕</button></div><div class="row" style="margin-top:8px"><button class="btn primary" data-act="open" data-id="${m.id}">${esc(t('skyOpen'))}</button></div>`;
+  box.hidden=false;
+}
+function skyBind(){
+  const svg=$('#skysvg');if(!svg)return;const pts=new Map();let start=null,moved=0,pinch=null;
+  svg.addEventListener('pointerdown',e=>{svg.setPointerCapture(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY});moved=0;
+    if(pts.size===1)start={x:e.clientX,y:e.clientY,tx:skyView.tx,ty:skyView.ty,target:e.target};
+    if(pts.size===2){const [a,b]=[...pts.values()];pinch={d:Math.hypot(a.x-b.x,a.y-b.y),z:skyView.z}}});
+  svg.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pts.size===2&&pinch){const [a,b]=[...pts.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);const f=skyToUser(svg,(a.x+b.x)/2,(a.y+b.y)/2);skyZoomAt(f,pinch.z*d/pinch.d);moved=99;return}
+    if(pts.size===1&&start){const p0=skyToUser(svg,start.x,start.y),p1=skyToUser(svg,e.clientX,e.clientY);moved=Math.max(moved,Math.hypot(e.clientX-start.x,e.clientY-start.y));
+      if(skyView.z>1&&moved>4){skyView.tx=start.tx+(p1.x-p0.x);skyView.ty=start.ty+(p1.y-p0.y);skyApply()}}});
+  const end=e=>{const was=pts.size;pts.delete(e.pointerId);if(pts.size<2)pinch=null;
+    if(was===1&&start&&moved<6){const g=start.target&&start.target.closest?start.target.closest('g.node'):null;skySelect(g?+g.dataset.i:null)}
+    if(pts.size===0)start=null};
+  svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+  svg.addEventListener('wheel',e=>{if(!(e.ctrlKey||e.metaKey||Math.abs(e.deltaY)>0))return;e.preventDefault();const f=skyToUser(svg,e.clientX,e.clientY);skyZoomAt(f,skyView.z*Math.exp(-e.deltaY*.0025))},{passive:false});
+}
+function skyButtonsHTML(){return showShare()?`<div class="row" style="margin-top:12px"><button class="btn quiet" data-act="sky-make">${IMG_ICON}${esc(t('skyMake'))}</button></div>`:''}
 
 /* ---------- Paleta ---------- */
 function vPaleta(){
@@ -1656,7 +1731,7 @@ async function deleteCard(id){S.cards=(S.cards||[]).filter(x=>x.id!==id);saveLoc
 /* ---------- Compartir cualquier cosa: recuerdo, día, conexión, estadística ---------- */
 let shareState=null, shareBlob=null;
 function openShare(kind,data){
-  shareState={kind,data,theme:shareState?shareState.theme:'dark',photo:true,quote:true,text:false,style:'tipo'};
+  shareState={kind,data,theme:kind==='sky'?skyThemeNow():(shareState?shareState.theme:'dark'),photo:true,quote:true,text:false,style:'tipo',names:false};
   openDlg(`<div class="dlg-head"><h2>${esc(t('shareTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
   <div class="story-prev"><img id="share-img" alt="${esc(t('storyAlt'))}"></div>
   <p class="note" style="text-align:center;font-size:13.5px;margin:8px auto 0;max-width:34ch">${esc(t('shareNote'))}</p>
@@ -1666,6 +1741,7 @@ function openShare(kind,data){
 }
 function shareControls(){
   const s=shareState;let h=`<div class="row" style="justify-content:center;margin-top:12px"><div class="seg" role="group"><button data-act="share-theme" data-v="dark" aria-pressed="${s.theme==='dark'}">${esc(t('themeDark'))}</button><button data-act="share-theme" data-v="light" aria-pressed="${s.theme==='light'}">${esc(t('themeLight'))}</button></div></div>`;
+  if(s.kind==='sky')h+=`<label class="row" style="justify-content:center;font-size:15px;gap:8px;margin-top:8px"><input type="checkbox" data-share-opt="names"${s.names?' checked':''}> ${esc(t('inclNames'))}</label>`;
   if(s.kind==='mem'){const m=memOf(s.data);if(m&&t('tplSpecial')[m.type])h=`<div class="row" style="justify-content:center;margin-top:12px"><button class="chip" data-act="share-style" data-v="tipo" aria-pressed="${s.style==='tipo'}">${esc(t('tplSpecial')[m.type])}</button><button class="chip" data-act="share-style" data-v="clasico" aria-pressed="${s.style!=='tipo'}">${esc(t('tplClassic'))}</button></div>`+h;if(m){const box=(k,lbl)=>`<label class="row" style="justify-content:center;font-size:15px;gap:8px;margin-top:8px"><input type="checkbox" data-share-opt="${k}"${s[k]?' checked':''}> ${esc(lbl)}</label>`;
     if((m.photos||[]).length&&!(s.style==='tipo'&&(m.type==='libro'||m.type==='pelicula')))h+=box('photo',t('inclPhoto'));if(m.quote)h+=box('quote',t('inclQuote'));if(m.text)h+=box('text',t('inclText'))}}
   return h;
@@ -1750,6 +1826,25 @@ async function drawShare(){
       let y=1520;x.font=`500 40px ${sans}`;emos.slice(1,4).forEach(e=>{x.fillStyle=e.color;x.beginPath();x.arc(108,y-14,16,0,Math.PI*2);x.fill();x.fillStyle=TX;x.fillText(e.name,145,y);x.textAlign='right';x.fillStyle=MU;x.fillText(Math.round(c[e.id]/tot*100)+'%',990,y);x.textAlign='left';y+=70});
     }
     footer();
+  }else if(s.kind==='sky'){
+    const L=skyLast;if(!L)return;const C=skyColors(s.theme);
+    x.fillStyle=C.bg;x.fillRect(0,0,W,H);
+    let seed=11;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};for(let i=0;i<420;i++){x.fillStyle=C.dust;x.beginPath();x.arc(rnd()*W,rnd()*H,0.8+rnd()*2.2,0,Math.PI*2);x.fill()}
+    const TXs=s.theme==='dark'?'#EFECF7':'#26233D',MUs=s.theme==='dark'?'#A9A4C0':'#6C6884';
+    x.fillStyle=MUs;x.font=`48px ${serif}`;x.fillText(t('brand'),90,150);
+    x.fillStyle=TXs;x.font=`130px ${serif}`;x.fillText(t('skyCardTitle'),90,330);
+    x.fillStyle=MUs;x.font=`500 38px ${sans}`;wrapLines(x,cap(L.label),900,2).forEach((l,i)=>x.fillText(l,90,410+i*48));
+    const cn=skyLayout(L.nodes.map(n=>n.m),L.edges,'card');let bx0=Infinity,by0=Infinity,bx1=-Infinity,by1=-Infinity;cn.forEach(n=>{bx0=Math.min(bx0,n.x);by0=Math.min(by0,n.y);bx1=Math.max(bx1,n.x);by1=Math.max(by1,n.y)});
+    const bw=Math.max(bx1-bx0,1),bh=Math.max(by1-by0,1);const AX=130,AY=520,AW=820,AH=1120;const sc=Math.min(AW/bw,AH/bh);const ox=AX+(AW-bw*sc)/2,oy=AY+(AH-bh*sc)/2;
+    const P=(n)=>{const c=cn[L.nodes.indexOf(n)];return [ox+(c.x-bx0)*sc,oy+(c.y-by0)*sc]};
+    L.edges.forEach(e=>{const [ax,ay]=P(L.nodes[e.a]),[bx,by]=P(L.nodes[e.b]);x.strokeStyle=e.strong?C.strong:(e.color?rgba(e.color,C.lineA):C.line);x.lineWidth=e.strong?4:2.6;x.setLineDash(e.strong?[]:[6,10]);x.lineCap='round';x.beginPath();x.moveTo(ax,ay);x.lineTo(bx,by);x.stroke()});x.setLineDash([]);
+    L.nodes.forEach(n=>{const [px,py]=P(n);const e1=emo((n.m.emotions||[])[0]),e2=emo((n.m.emotions||[])[1]);const col=e1?e1.color:'#9A96AE';const r=10+Math.min(n.deg,8)*2;
+      const g=x.createRadialGradient(px,py,0,px,py,r*3.4);g.addColorStop(0,rgba(col,C.halo));g.addColorStop(1,rgba(col,0));x.fillStyle=g;x.beginPath();x.arc(px,py,r*3.4,0,Math.PI*2);x.fill();
+      if(e2){x.strokeStyle=e2.color;x.lineWidth=4;x.beginPath();x.arc(px,py,r+7,0,Math.PI*2);x.stroke()}
+      x.fillStyle=col;x.beginPath();x.arc(px,py,r,0,Math.PI*2);x.fill()});
+    if(s.names){x.font=`500 25px ${sans}`;x.fillStyle=C.label;x.textAlign='center';[...L.order.entries()].filter(([,p])=>p<10).forEach(([i])=>{const n=L.nodes[i];const [px,py]=P(n);x.fillText(cut(memTitle(n.m),20),px,py+(10+Math.min(n.deg,8)*2)+38)});x.textAlign='left'}
+    x.fillStyle=MUs;x.font=`500 34px ${sans}`;x.fillText(t('skyStats',L.n,L.edges.length),90,1740);
+    x.font=`500 30px ${sans}`;x.fillText(t('tagline'),90,1850);x.textAlign='right';x.fillText('memorandumapp.com',990,1850);x.textAlign='left';
   }
   const im=$('#share-img');if(im)im.src=c.toDataURL('image/png');
   window._shareCanvas=c;shareBlob=await new Promise(res=>c.toBlob(res,'image/png'));
@@ -2027,7 +2122,7 @@ function openDay(k){
   ${others.length?`<h3 class="month" style="margin-top:22px">${esc(t('daySameOther'))}</h3>${miniList(others)}`:''}
   <h3 class="month" style="margin-top:22px">${esc(t('dayAround'))}</h3>
   <div class="daystrip">${around.map(a=>`<button data-act="day" data-v="${a}" class="${a===k?'cur':''}"><i style="${fillCss(dayColorsFrom(ix[a]))}"></i>${esc(fmtD(fromIso(a),{weekday:'short'}).replace('.',''))} ${fromIso(a).getDate()}</button>`).join('')}</div>
-  ${ms.length&&showShare()?`<div class="actions"><button class="btn quiet" data-act="share-day" data-v="${k}">${IMG_ICON}${esc(t('shareBtn'))}</button></div>`:''}`);
+  ${ms.length?`<div class="actions">${ms.length>1?`<button class="btn quiet" data-act="sky-view" data-m="day" data-v="${k}">${esc(t('seeSky'))}</button>`:''}${showShare()?`<button class="btn quiet" data-act="share-day" data-v="${k}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div>`:''}`);
 }
 
 /* ---------- Estadísticas Plus ---------- */
@@ -2140,7 +2235,7 @@ function exploreTypeCard(r,st){
   </div>
   <div><h4 style="font-family:var(--serif);font-weight:400;font-size:18px;margin:18px 0 6px">${esc(t('exCompareType'))}</h4>${cmp}</div>
   ${sub(t('exMems'),miniList(inT.slice(0,12)))}
-  <div class="row" style="margin-top:10px"><button class="btn" data-act="type-go" data-id="${statType}">${esc(t('exSeeAll'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="type" data-v="${statType}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
+  <div class="row" style="margin-top:10px"><button class="btn" data-act="type-go" data-id="${statType}">${esc(t('exSeeAll'))}</button><button class="btn quiet" data-act="sky-view" data-m="type" data-v="${statType}">${esc(t('seeSky'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="type" data-v="${statType}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
 }
 function exploreDrawerCard(r,st){
   const ms=st.ms;const head=`<h3>${esc(t('chExploreDrawer'))}</h3>${exSeg()}<p class="note" style="margin-top:-4px">${esc(t('exHintDrawer'))}</p>`;
@@ -2171,7 +2266,7 @@ function exploreDrawerCard(r,st){
   </div>
   ${compareDrawersHTML(ms,dr.id)}
   ${sub(t('exMems'),miniList(inD.slice(0,12)))}
-  <div class="row" style="margin-top:10px"><button class="btn" data-act="drawer-go" data-id="${dr.id}">${esc(t('exSeeAll'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="drawer" data-v="${dr.id}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
+  <div class="row" style="margin-top:10px"><button class="btn" data-act="drawer-go" data-id="${dr.id}">${esc(t('exSeeAll'))}</button><button class="btn quiet" data-act="sky-view" data-m="drawer" data-v="${dr.id}">${esc(t('seeSky'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="drawer" data-v="${dr.id}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
 }
 function exploreCard(r,st){
   const ms=st.ms;const present=st.emos.map(x=>x.e);
@@ -2198,7 +2293,7 @@ function exploreCard(r,st){
     ${tags.length?sub(t('exWords'),hbars(tags.map(([w,c])=>({label:esc(w),value:c,color:e.color})))):''}
   </div>
   ${sub(t('exMems'),miniList(withE.slice(0,12)))}
-  <div class="row" style="margin-top:10px"><button class="btn" data-act="filter-emo-go" data-v="${e.id}">${esc(t('exSeeAll'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="emo" data-v="${e.id}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
+  <div class="row" style="margin-top:10px"><button class="btn" data-act="filter-emo-go" data-v="${e.id}">${esc(t('exSeeAll'))}</button><button class="btn quiet" data-act="sky-view" data-m="emo" data-v="${e.id}">${esc(t('seeSky'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="emo" data-v="${e.id}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
 }
 function plusStatsHTML(r,st,ps){
   const ms=st.ms;const L=t('dayparts');
@@ -2429,12 +2524,19 @@ document.addEventListener('click',e=>{
     case 'share-stat':if(!isPlus()){goPlus();break}openShare('stat',{mode:b.dataset.m,id:v});break;
     case 'share-style':if(shareState){shareState.style=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'share-show':S.settings.share=v==='on';savePalette();render();break;
-    case 'card-save':{const k=b.dataset.k;if(k==='story'){saveCardFromCanvas(window._storyCanvas,{kind:'story',label:range(rep.period,rep.offset).label})}else if(shareState){const sd=shareState;let label='';if(sd.kind==='mem'){const m=memOf(sd.data);label=m?memTitle(m):''}else if(sd.kind==='day')label=fmt(sd.data);else if(sd.kind==='stat'){const d=sd.data;label=d.mode==='emo'?(emo(d.id)||{}).name:d.mode==='drawer'?(drawerOf(d.id)||{}).name:cap(typeOf(d.id).plural)}else if(sd.kind==='conn'){const a1=memOf(sd.data.a),b1=memOf(sd.data.b);label=a1&&b1?memTitle(a1)+' + '+memTitle(b1):''}saveCardFromCanvas(window._shareCanvas,{kind:sd.kind,label:label||''})}break}
+    case 'card-save':{const k=b.dataset.k;if(k==='story'){saveCardFromCanvas(window._storyCanvas,{kind:'story',label:range(rep.period,rep.offset).label})}else if(shareState){const sd=shareState;let label='';if(sd.kind==='mem'){const m=memOf(sd.data);label=m?memTitle(m):''}else if(sd.kind==='day')label=fmt(sd.data);else if(sd.kind==='stat'){const d=sd.data;label=d.mode==='emo'?(emo(d.id)||{}).name:d.mode==='drawer'?(drawerOf(d.id)||{}).name:cap(typeOf(d.id).plural)}else if(sd.kind==='conn'){const a1=memOf(sd.data.a),b1=memOf(sd.data.b);label=a1&&b1?memTitle(a1)+' + '+memTitle(b1):''}else if(sd.kind==='sky')label=skyLast?cap(skyLast.label):'';saveCardFromCanvas(window._shareCanvas,{kind:sd.kind,label:label||''})}break}
     case 'go-cards':closeDlg();archMode='tarjetas';go('archivo');break;
     case 'card-open':openCard(id);break;
     case 'card-share':shareCard(id,false);break;
     case 'card-download':shareCard(id,true);break;
     case 'card-del':armed(b,()=>deleteCard(id));break;
+    case 'sky-period':skyPeriod={kind:v};render();break;
+    case 'sky-theme':S.settings.skyTheme=v;savePalette();render();break;
+    case 'sky-zoom':{const svg=$('#skysvg');if(!svg||!skyLast)break;if(v==='reset'){skyView={z:1,tx:0,ty:0};skyApply();break}const bb=skyLast.bbox;skyZoomAt({x:bb.x+bb.w/2,y:bb.y+bb.h/2},skyView.z*(v==='in'?1.6:1/1.6));break}
+    case 'sky-clear':skySelect(null);break;
+    case 'sky-make':if(skyLast)openShare('sky',{});break;
+    case 'sky-view':{closeDlg();const m2=b.dataset.m;filters=NOFILTER();if(m2==='emo')filters.emotion=v;else if(m2==='drawer')filters.drawer=v;else if(m2==='type')filters.type=v;else if(m2==='day')filters.date=v;
+      if(m2==='day')skyPeriod={kind:'all'};else{const rr=range(rep.period,rep.offset);skyPeriod={kind:'range',s:rr.s,e:rr.e,label:rr.label}}archMode='constelacion';go('archivo');break}
     case 'share-theme':if(shareState){shareState.theme=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'share-save':if(shareBlob){const nm=shareState?shareState.kind:'tarjeta';deliverFile('memorandum-'+nm+'-'+iso(new Date())+'.png',shareBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}break;
     case 'story-tpl':{const pl=STORY_TPLS.find(z=>z[0]===v);if(pl&&pl[1]&&!isPlus()){goPlus();break}storyTpl=v;refreshStoryControls();drawStory();break}
