@@ -401,6 +401,9 @@ es:{
   noEmotion:'Sin emoción', allYears:'Todos los años',
   plusLead:'Para quien quiere ir más allá, y para apoyar que esta app siga creciendo.',
   plusFeatures:['Más diseños para compartir en Instagram: mosaico de tus días y tus fotos en polaroid.','Explora cada emoción, cada cajón y cada tipo de recuerdo: cuándo aparecen, qué días, a qué hora y con qué recuerdos.','El mapa en color de cualquier año o de las fechas que quieras, para guardarlo como imagen.','Estadísticas con gráficos: quesitos y barras de tus emociones, tus días, tus horas, tus palabras y mucho más.','Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
+  trialActive:n=>`Estás probando Plus gratis: te ${n===1?'queda 1 día':'quedan '+n+' días'}. Todo lo que crees durante la prueba se queda contigo.`,
+  trialWelcome:'Tienes 14 días de Plus gratis para probarlo todo: estadísticas, hasta 5 fotos por recuerdo, el mapa de cualquier año y más. Sin dar ningún dato.',
+  trialSoon:n=>`Tu prueba de Plus termina en ${n===1?'1 día':n+' días'}. Todo lo que creaste se queda contigo.`, trialEnded:'Tu prueba de Plus ha terminado. Todo lo que creaste sigue aquí.', gotIt:'Entendido',
   plusBuyYear:'Un año · 9,99 €', plusBuyLife:'Para siempre · 24,99 €',
   plusActiveLife:b=>`Tienes Plus para siempre. Gracias por apoyar ${b}.`, plusActiveYear:(d,b)=>`Tienes Plus hasta el ${d}. Gracias por apoyar ${b}.`,
   plusExpired:d=>`Tu Plus terminó el ${d}. Todo lo que creaste sigue aquí; renuévalo cuando quieras para volver a usar las funciones Plus.`,
@@ -593,6 +596,9 @@ en:{
   noEmotion:'No emotion', allYears:'All years',
   plusLead:'For those who want to go further, and to help this app keep growing.',
   plusFeatures:['More designs to share on Instagram: a mosaic of your days and your photos as polaroids.','Explore each emotion, each drawer and each type of memory: when they appear, which days, what time and in which memories.','The colour map of any year or any dates you like, to save as an image.','Statistics with charts: pies and bars of your emotions, your days, your hours, your words and much more.','Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
+  trialActive:n=>`You're trying Plus for free: ${n===1?'1 day':n+' days'} left. Everything you create during the trial stays with you.`,
+  trialWelcome:'You have 14 days of Plus for free to try everything: statistics, up to 5 photos per memory, the map of any year and more. No details needed.',
+  trialSoon:n=>`Your Plus trial ends in ${n===1?'1 day':n+' days'}. Everything you created stays with you.`, trialEnded:'Your Plus trial has ended. Everything you created is still here.', gotIt:'Got it',
   plusBuyYear:'One year · €9.99', plusBuyLife:'Forever · €24.99',
   plusActiveLife:b=>`You have Plus forever. Thank you for supporting ${b}.`, plusActiveYear:(d,b)=>`You have Plus until ${d}. Thank you for supporting ${b}.`,
   plusExpired:d=>`Your Plus ended on ${d}. Everything you created is still here; renew whenever you like to use Plus features again.`,
@@ -785,6 +791,9 @@ ca:{
   noEmotion:'Sense emoció', allYears:'Tots els anys',
   plusLead:'Per a qui vol anar més enllà, i per ajudar que aquesta app continuï creixent.',
   plusFeatures:['Més dissenys per compartir a Instagram: mosaic dels teus dies i les teves fotos en polaroid.','Explora cada emoció, cada calaix i cada tipus de record: quan apareixen, quins dies, a quina hora i amb quins records.','El mapa en color de qualsevol any o de les dates que vulguis, per desar-lo com a imatge.','Estadístiques amb gràfics: formatges i barres de les teves emocions, els teus dies, les teves hores, les teves paraules i molt més.','Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
+  trialActive:n=>`Estàs provant Plus gratis: et ${n===1?'queda 1 dia':'queden '+n+' dies'}. Tot el que creïs durant la prova es queda amb tu.`,
+  trialWelcome:"Tens 14 dies de Plus gratis per provar-ho tot: estadístiques, fins a 5 fotos per record, el mapa de qualsevol any i més. Sense donar cap dada.",
+  trialSoon:n=>`La teva prova de Plus acaba d'aquí a ${n===1?'1 dia':n+' dies'}. Tot el que has creat es queda amb tu.`, trialEnded:'La teva prova de Plus ha acabat. Tot el que vas crear continua aquí.', gotIt:'Entesos',
   plusBuyYear:'Un any · 9,99 €', plusBuyLife:'Per sempre · 24,99 €',
   plusActiveLife:b=>`Tens Plus per sempre. Gràcies per donar suport a ${b}.`, plusActiveYear:(d,b)=>`Tens Plus fins al ${d}. Gràcies per donar suport a ${b}.`,
   plusExpired:d=>`El teu Plus va acabar el ${d}. Tot el que vas crear continua aquí; renova'l quan vulguis per tornar a fer servir les funcions Plus.`,
@@ -915,7 +924,7 @@ function freshState(lang){
 }
 let S=freshState(DEFAULT_SETTINGS.lang);
 function normDrawers(m){if(!m)return;if(!Array.isArray(m.drawers))m.drawers=m.drawer?[m.drawer]:[];m.drawers=[...new Set(m.drawers.filter(Boolean))];m.drawer=m.drawers[0]||''}
-function ensureSettings(){if(!Array.isArray(S.cards))S.cards=[];(S.memories||[]).forEach(normDrawers);if(!Array.isArray(S.customTypes))S.customTypes=[];S.profile={name:'',birthYear:'',about:'',...(S.profile||{})};S.settings={...DEFAULT_SETTINGS,...(S.settings||{})};if(!I18N[S.settings.lang])S.settings.lang='es'}
+function ensureSettings(){if(S.settings&&!S.settings.trialStart)S.settings.trialStart=iso(new Date());if(!Array.isArray(S.cards))S.cards=[];(S.memories||[]).forEach(normDrawers);if(!Array.isArray(S.customTypes))S.customTypes=[];S.profile={name:'',birthYear:'',about:'',...(S.profile||{})};S.settings={...DEFAULT_SETTINGS,...(S.settings||{})};if(!I18N[S.settings.lang])S.settings.lang='es'}
 
 let view='hoy', firstHoy=true;
 let filters={q:'',emotion:null,type:'',drawer:'',tag:null,date:null};
@@ -2396,7 +2405,10 @@ async function verifyPlusCode(code){
 function plusInfo(){return (S.settings&&S.settings.plus)||null}
 function plusState(){const p=plusInfo();if(!p||!plusSigOK)return 'none';if(p.plan==='year'&&p.exp&&p.exp<iso(new Date()))return 'expired';return 'active'}
 let plusSigOK=false;
-function isPlus(){return plusState()==='active'}
+const TRIAL_DAYS=14;
+function trialLeft(){const ts=S.settings&&S.settings.trialStart;if(!ts)return 0;return TRIAL_DAYS-Math.round((fromIso(iso(new Date()))-fromIso(ts))/864e5)}
+function trialActive(){return !plusInfo()&&trialLeft()>0}
+function isPlus(){return plusState()==='active'||trialActive()}
 function codeKey(c){return String(c).replace(/\s+/g,'').slice(-24)}
 async function checkPlus(){const p=plusInfo();const info=p&&p.code?await verifyPlusCode(p.code):null;const was=isPlus();plusSigOK=!!info;if(info&&p&&!p.plan){p.plan=info.p==='year'?'year':'life'}if(was!==isPlus())render()}
 async function activatePlus(code){
@@ -2408,7 +2420,16 @@ async function activatePlus(code){
   const base=(cur&&cur.plan==='year'&&cur.exp&&cur.exp>=today)?fromIso(cur.exp):fromIso(today);const exp=iso(addDays(base,365));
   S.settings.plus={code:clean,name:info.n||'',since:(cur&&cur.since)||today,plan:'year',exp,used:[...used,key]};plusSigOK=true;savePalette();render();toast(t('tPlusExtended',fmt(exp)));
 }
+function trialBanner(){
+  if(plusInfo())return '';const left=trialLeft(),st=S.settings;const today=iso(new Date());
+  const box=(msg,btns)=>`<div class="wash" style="--c:var(--accent);margin-top:28px"><p style="margin:0 0 12px">${esc(msg)}</p><div class="row">${btns}</div></div>`;
+  if(left>=TRIAL_DAYS-1&&!st.trialWelcomeSeen)return box(t('trialWelcome'),`<button class="btn primary" data-act="trial-ok" data-v="welcome">${esc(t('gotIt'))}</button><button class="btn quiet" data-act="go-plus">${esc(t('plusMore'))}</button>`);
+  if(left>0&&left<=2&&!(st.plusSnooze&&st.plusSnooze>today))return box(t('trialSoon',left),`<button class="btn primary" data-act="go-plus">${esc(t('plusMore'))}</button><button class="btn quiet" data-act="plus-later">${esc(t('later'))}</button>`);
+  if(left<=0&&left>-7&&!st.trialEndSeen)return box(t('trialEnded'),`<button class="btn primary" data-act="go-plus">${esc(t('plusMore'))}</button><button class="btn quiet" data-act="trial-ok" data-v="end">${esc(t('gotIt'))}</button>`);
+  return '';
+}
 function plusBanner(){
+  if(!plusInfo())return trialBanner();
   const p=plusInfo();if(!p||!plusSigOK||p.plan!=='year'||!p.exp)return '';const today=iso(new Date());
   if(S.settings.plusSnooze&&S.settings.plusSnooze>today)return '';
   const left=Math.round((fromIso(p.exp)-fromIso(today))/864e5);
@@ -2421,7 +2442,7 @@ function plusSection(){
   const buy=`<div class="row" style="margin:4px 0 6px"><a class="btn primary" href="${PLUS_URL_YEAR}" target="_blank" rel="noopener">${esc(t('plusBuyYear'))}</a><a class="btn" href="${PLUS_URL_LIFE}" target="_blank" rel="noopener">${esc(t('plusBuyLife'))}</a></div>`;
   if(st==='active'&&p.plan!=='year')return head+`<p class="note" style="font-size:15px">${esc(t('plusActiveLife',t('brand')))}</p>`;
   if(st==='active')return head+`<p class="note" style="font-size:15px">${esc(t('plusActiveYear',fmt(p.exp),t('brand')))}</p><p class="note">${esc(t('plusNoAuto'))}</p>${buy}${codeRow(t('plusRenewCode'))}`;
-  const intro=st==='expired'?`<p class="note" style="font-size:15px">${esc(t('plusExpired',fmt(p.exp)))}</p>`:`<p class="note" style="font-size:15px">${esc(t('plusLead'))}</p>`;
+  const intro=st==='expired'?`<p class="note" style="font-size:15px">${esc(t('plusExpired',fmt(p.exp)))}</p>`:(trialActive()?`<div class="wash" style="--c:var(--accent);margin-bottom:12px"><p style="margin:0">${esc(t('trialActive',trialLeft()))}</p></div>`:'')+`<p class="note" style="font-size:15px">${esc(t('plusLead'))}</p>`;
   return head+intro+`<ul class="plus-list">${t('plusFeatures').map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
   <p style="margin:12px 0 4px">${esc(t('plusPrice'))}</p><p class="note" style="margin:0 0 12px">${esc(t('plusNoAuto'))}</p>${buy}${codeRow(st==='expired'?t('plusRenewCode'):t('plusHaveCode'))}`;
 }
@@ -2604,6 +2625,7 @@ document.addEventListener('click',e=>{
     case 'ed-unphoto':draft.photos=draft.photos.filter(x=>x!==v);if(!draft.photos.length)draft._colors=null;renderEditor();break;
     case 'ed-use-suggest':if(draft._colors){draft.emotions=draft._colors.suggest.filter(id=>emo(id)).slice(0,3);renderEditor()}break;
     case 'go-plus':goPlus();break;
+    case 'trial-ok':if(v==='welcome')S.settings.trialWelcomeSeen=true;else S.settings.trialEndSeen=true;savePalette();render();break;
     case 'plus-later':S.settings.plusSnooze=iso(addDays(new Date(),7));savePalette();render();break;
     case 'stat-emo':{statEmo=v;const y=window.scrollY;render();window.scrollTo(0,y);break}
     case 'stat-drawer':{statDrawer=v;const y=window.scrollY;render();window.scrollTo(0,y);break}
