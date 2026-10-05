@@ -404,6 +404,7 @@ es:{
   trialActive:n=>`Estás probando Plus gratis: te ${n===1?'queda 1 día':'quedan '+n+' días'}. Todo lo que crees durante la prueba se queda contigo.`,
   trialWelcome:'Tienes 14 días de Plus gratis para probarlo todo: estadísticas, hasta 5 fotos por recuerdo, el mapa de cualquier año y más. Sin dar ningún dato.',
   trialSoon:n=>`Tu prueba de Plus termina en ${n===1?'1 día':n+' días'}. Todo lo que creaste se queda contigo.`, trialEnded:'Tu prueba de Plus ha terminado. Todo lo que creaste sigue aquí.', gotIt:'Entendido',
+  supportTitle:b=>`Apoya ${b}`, supportText:b=>`${b} es gratis y sin anuncios. Si te acompaña y quieres ayudar a que siga creciendo, puedes invitarme a un café.`, supportBtn:'Invítame a un café',
   plusBuyYear:'Un año · 9,99 €', plusBuyLife:'Para siempre · 24,99 €',
   plusActiveLife:b=>`Tienes Plus para siempre. Gracias por apoyar ${b}.`, plusActiveYear:(d,b)=>`Tienes Plus hasta el ${d}. Gracias por apoyar ${b}.`,
   plusExpired:d=>`Tu Plus terminó el ${d}. Todo lo que creaste sigue aquí; renuévalo cuando quieras para volver a usar las funciones Plus.`,
@@ -599,6 +600,7 @@ en:{
   trialActive:n=>`You're trying Plus for free: ${n===1?'1 day':n+' days'} left. Everything you create during the trial stays with you.`,
   trialWelcome:'You have 14 days of Plus for free to try everything: statistics, up to 5 photos per memory, the map of any year and more. No details needed.',
   trialSoon:n=>`Your Plus trial ends in ${n===1?'1 day':n+' days'}. Everything you created stays with you.`, trialEnded:'Your Plus trial has ended. Everything you created is still here.', gotIt:'Got it',
+  supportTitle:b=>`Support ${b}`, supportText:b=>`${b} is free and has no ads. If it keeps you company and you'd like to help it keep growing, you can buy me a coffee.`, supportBtn:'Buy me a coffee',
   plusBuyYear:'One year · €9.99', plusBuyLife:'Forever · €24.99',
   plusActiveLife:b=>`You have Plus forever. Thank you for supporting ${b}.`, plusActiveYear:(d,b)=>`You have Plus until ${d}. Thank you for supporting ${b}.`,
   plusExpired:d=>`Your Plus ended on ${d}. Everything you created is still here; renew whenever you like to use Plus features again.`,
@@ -794,6 +796,7 @@ ca:{
   trialActive:n=>`Estàs provant Plus gratis: et ${n===1?'queda 1 dia':'queden '+n+' dies'}. Tot el que creïs durant la prova es queda amb tu.`,
   trialWelcome:"Tens 14 dies de Plus gratis per provar-ho tot: estadístiques, fins a 5 fotos per record, el mapa de qualsevol any i més. Sense donar cap dada.",
   trialSoon:n=>`La teva prova de Plus acaba d'aquí a ${n===1?'1 dia':n+' dies'}. Tot el que has creat es queda amb tu.`, trialEnded:'La teva prova de Plus ha acabat. Tot el que vas crear continua aquí.', gotIt:'Entesos',
+  supportTitle:b=>`Dona suport a ${b}`, supportText:b=>`${b} és gratis i sense anuncis. Si t'acompanya i vols ajudar que continuï creixent, em pots convidar a un cafè.`, supportBtn:"Convida'm a un cafè",
   plusBuyYear:'Un any · 9,99 €', plusBuyLife:'Per sempre · 24,99 €',
   plusActiveLife:b=>`Tens Plus per sempre. Gràcies per donar suport a ${b}.`, plusActiveYear:(d,b)=>`Tens Plus fins al ${d}. Gràcies per donar suport a ${b}.`,
   plusExpired:d=>`El teu Plus va acabar el ${d}. Tot el que vas crear continua aquí; renova'l quan vulguis per tornar a fer servir les funcions Plus.`,
@@ -1316,6 +1319,7 @@ function vPerfil(){
   <label class="f" for="pf-about">${t('pfAbout')}</label>
   <textarea class="in" id="pf-about" data-field="pf-about" maxlength="600" placeholder="${esc(t('pfAboutPh'))}" style="min-height:100px">${esc(p.about)}</textarea>
   ${plusSection()}
+  ${supportSection()}
   ${privacySection()}
   ${careSection()}
   ${installSection()}
@@ -2380,6 +2384,8 @@ function plusStatsHTML(r,st,ps){
 
 /* ---------- Plus: códigos firmados que se comprueban sin conexión ---------- */
 const PLUS_PUBLIC_KEY={"kty":"EC","crv":"P-256","x":"huFeF33CNI2LNXtYfnpk8Np2bbBGDUQzWi-bgHJVcDs","y":"GMj5omm6XUKcW_QKEpJH8ZkB0hfTA2Y-o6X-k_ZGOoU"};
+const KOFI_URL='https://ko-fi.com/memorandumapp', KOFI_ON=false;
+function supportSection(){if(!KOFI_ON)return '';return `<h2 class="sec">${esc(t('supportTitle',t('brand')))}</h2><p class="note" style="font-size:15px">${esc(t('supportText',t('brand')))}</p><a class="btn" href="${KOFI_URL}" target="_blank" rel="noopener">☕ ${esc(t('supportBtn'))}</a>`}
 const PLUS_URL_YEAR='https://payhip.com/b/K1sxI', PLUS_URL_LIFE='https://payhip.com/b/0d23m';
 function plusBadge(){return `<span class="plus-badge">Plus</span>`}
 function b64uToBytes(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';const bin=atob(s);const a=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return a}
