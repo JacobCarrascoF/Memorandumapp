@@ -381,6 +381,7 @@ es:{
   cardKinds:{sky:'Cielo',story:'Periodo',mem:'Recuerdo',day:'Día',conn:'Conexión',stat:'Estadística',map:'Mapa'},
   skyAll:'Siempre', skyMonth:'Este mes', skyYear:'Este año', skyShowing:'Mostrando', skyAllLbl:'todos tus recuerdos', skyZoomIn:'Acercar', skyZoomOut:'Alejar', skyReset:'Ver todo',
   skyOpen:'Abrir', skyMake:'Crear imagen de este cielo', skyCardTitle:'Mi cielo', skyStats:(n,c)=>`${n} recuerdos y ${c} conexiones`, inclNames:'Incluir los nombres', seeSky:'Ver su cielo',
+  legalLink:'Aviso legal, privacidad y condiciones',
   shareBtn:'Crear imagen', shareTitle:'Crear una imagen', shareNote:'La imagen se crea en tu móvil y se guarda en tus tarjetas. Nada sale de aquí hasta que tú decidas compartirla.', shareShowLbl:'Botones para crear imágenes', shareShowOn:'Mostrar', shareShowOff:'Ocultar', shareShowHint:'Si los ocultas, no aparecerán en los recuerdos, los días, el informe ni las estadísticas.', inclPhoto:'Incluir la foto', inclQuote:'Incluir la cita', inclText:'Incluir lo que escribí',
   cardConn:'Una conexión que no buscaba', cardConnTxt:(e,w)=>`Comparten ${e} y la palabra «${w}».`, cardSameDay:y=>`Un día como hoy, en ${y}`,
   statOfMine:'de mis emociones', statDay:d=>`Su día: el ${d}.`, statPart:p=>`Su momento: ${p}.`, statMostly:(e,p)=>`Sobre todo ${e}, un ${p}%.`,
@@ -566,6 +567,7 @@ en:{
   cardKinds:{sky:'Sky',story:'Period',mem:'Memory',day:'Day',conn:'Connection',stat:'Statistic',map:'Map'},
   skyAll:'All time', skyMonth:'This month', skyYear:'This year', skyShowing:'Showing', skyAllLbl:'all your memories', skyZoomIn:'Zoom in', skyZoomOut:'Zoom out', skyReset:'Show all',
   skyOpen:'Open', skyMake:'Create an image of this sky', skyCardTitle:'My sky', skyStats:(n,c)=>`${n} memories and ${c} connections`, inclNames:'Include the names', seeSky:'See its sky',
+  legalLink:'Legal notice, privacy and terms',
   shareBtn:'Create image', shareTitle:'Create an image', shareNote:'The image is created on your phone and kept in your cards. Nothing leaves here until you decide to share it.', shareShowLbl:'Buttons to create images', shareShowOn:'Show', shareShowOff:'Hide', shareShowHint:"If you hide them, they won't appear in memories, days, the report or statistics.", inclPhoto:'Include the photo', inclQuote:'Include the quote', inclText:'Include what I wrote',
   cardConn:"A connection I wasn't looking for", cardConnTxt:(e,w)=>`They share ${e} and the word “${w}”.`, cardSameDay:y=>`On this day, in ${y}`,
   statOfMine:'of my emotions', statDay:d=>`Its day: ${d}.`, statPart:p=>`Its time: ${p}.`, statMostly:(e,p)=>`Mostly ${e}, ${p}%.`,
@@ -751,6 +753,7 @@ ca:{
   cardKinds:{sky:'Cel',story:'Període',mem:'Record',day:'Dia',conn:'Connexió',stat:'Estadística',map:'Mapa'},
   skyAll:'Sempre', skyMonth:'Aquest mes', skyYear:'Aquest any', skyShowing:'Mostrant', skyAllLbl:'tots els teus records', skyZoomIn:'Apropa', skyZoomOut:'Allunya', skyReset:"Veure-ho tot",
   skyOpen:'Obre', skyMake:"Crea una imatge d'aquest cel", skyCardTitle:'El meu cel', skyStats:(n,c)=>`${n} records i ${c} connexions`, inclNames:'Inclou els noms', seeSky:'Veure el seu cel',
+  legalLink:'Avís legal, privacitat i condicions',
   shareBtn:'Crea una imatge', shareTitle:'Crea una imatge', shareNote:"La imatge es crea al teu mòbil i es desa a les teves targetes. Res no surt d'aquí fins que tu decideixis compartir-la.", shareShowLbl:'Botons per crear imatges', shareShowOn:'Mostra', shareShowOff:'Amaga', shareShowHint:'Si els amagues, no apareixeran als records, als dies, a l’informe ni a les estadístiques.', inclPhoto:'Inclou la foto', inclQuote:'Inclou la cita', inclText:'Inclou el que vaig escriure',
   cardConn:'Una connexió que no buscava', cardConnTxt:(e,w)=>`Comparteixen ${e} i la paraula «${w}».`, cardSameDay:y=>`Un dia com avui, el ${y}`,
   statOfMine:'de les meves emocions', statDay:d=>`El seu dia: el ${d}.`, statPart:p=>`El seu moment: ${p}.`, statMostly:(e,p)=>`Sobretot ${e}, un ${p}%.`,
@@ -1298,7 +1301,8 @@ function vPerfil(){
   <h2 class="sec">${t('langTitle')}</h2>
   ${langChips()}
   <h2 class="sec">${t('helpTitle')}</h2>
-  <button class="btn" data-act="tutorial">${t('seeTutorial')}</button>`;
+  <button class="btn" data-act="tutorial">${t('seeTutorial')}</button>
+  <p style="margin-top:14px"><a href="https://memorandumapp.com/${{ca:'legal-ca.html',en:'legal-en.html'}[lang()]||'legal.html'}" target="_blank" rel="noopener" style="color:var(--ink)">${esc(t('legalLink'))}</a></p>`;
 }
 function freqChips(act,big){
   return `<div class="row" role="group" aria-label="${esc(t('freqLbl'))}">${Object.keys(FREQ_DAYS).map(k=>`<button class="chip"${big?' style="font-size:16px;padding:8px 16px"':''} data-act="${act}" data-v="${k}" aria-pressed="${S.settings.backupFreq===k}">${esc(t('freq')[k])}</button>`).join('')}</div>`;
