@@ -2374,9 +2374,18 @@ function b64uToBytes(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4
 async function verifyPlusCode(code){
   try{
     code=String(code||'').replace(/\s+/g,'');if(!code.startsWith('PLUS-'))return null;
-    const [p,sg]=code.slice(5).split('.');if(!p||!sg)return null;
     if(!(window.crypto&&crypto.subtle))return null;
     const key=await crypto.subtle.importKey('jwk',PLUS_PUBLIC_KEY,{name:'ECDSA',namedCurve:'P-256'},false,['verify']);
+    const body=code.slice(5);
+    if(!body.includes('.')){
+      // Formato corto: 6 bytes (plan + número) y la firma.
+      if(body.length!==94)return null;
+      const pb=b64uToBytes(body.slice(0,8)),sgb=b64uToBytes(body.slice(8));
+      const okS=await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},key,sgb,pb);
+      if(!okS)return null;
+      return {n:'',p:(pb[0]&15)===2?'year':'life',v:pb[0]>>4};
+    }
+    const [p,sg]=body.split('.');if(!p||!sg)return null;
     const ok=await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},key,b64uToBytes(sg),new TextEncoder().encode(p));
     return ok?JSON.parse(new TextDecoder().decode(b64uToBytes(p))):null;
   }catch(e){return null}
