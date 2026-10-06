@@ -454,7 +454,7 @@ es:{
   duCardTitle:'El mismo día, en dos colores', duCardTitleN:'El mismo día, en varios colores', rcTitle:(w,n)=>`${w} te ha enviado ${n===1?'un recuerdo nuevo':n+' recuerdos nuevos'}`, rcLead:b=>`Ya están en tu cajón «${b}».`, rcOpen:b=>`Abrir «${b}»`,
   sdBtn:'Compartir', sdTitle:b=>`Compartir «${b}»`, sdLead:n=>`Se creará un archivo con ${n===1?'el recuerdo':'los '+n+' recuerdos'} de este cajón para enviarlo a quien tú quieras: tu pareja, tu familia… Al abrirlo en su Memorándum, tendréis el mismo cajón.`,
   sdPhotos:'Incluir las fotos', sdOnly:'Solo viaja este cajón. Nada más de tu app sale del móvil.', sdSend:'Enviar el cajón', sdEmpty:'Este cajón todavía no tiene recuerdos.',
-  sdReceive:'Recibir un cajón compartido', sdReceiveHint:'Si alguien te ha enviado un cajón, ábrelo aquí. Recibir es gratis.', sdShared:'compartido', sdFrom:n=>`de ${n}`,
+  sdReceive:'Recibir un cajón compartido', sdReceiveHint:'Si alguien te ha enviado un cajón, ábrelo aquí. En Android, más fácil: en WhatsApp mantén pulsado el archivo, toca Compartir y elige Memorándum. Recibir es gratis.', sdShared:'compartido', sdFrom:n=>`de ${n}`,
   sdGot:(who,b,n,u)=>`${who} te comparte «${b}»: `+[n?`${n} ${n===1?'recuerdo nuevo':'recuerdos nuevos'}`:'',u?`${u} ${u===1?'recuerdo actualizado':'recuerdos actualizados'}`:''].filter(Boolean).join(' y ')+'.', sdNothing:b=>`«${b}» ya estaba al día.`, sdSomeone:'Alguien', sdFileName:'cajon',
   sdSaved:'Archivo guardado. Envíalo a quien quieras por WhatsApp o correo.',
   sdHowTitle:'Cómo funciona', sdHow:'Cada vez que os volváis a enviar el cajón, se pone al día sin duplicar: lo nuevo se añade y lo editado se renueva. Si alguien borra un recuerdo, al otro no se le borra.',
@@ -667,7 +667,7 @@ en:{
   duCardTitle:'The same day, in two colours', duCardTitleN:'The same day, in many colours', rcTitle:(w,n)=>`${w} sent you ${n===1?'a new memory':n+' new memories'}`, rcLead:b=>`They're already in your drawer “${b}”.`, rcOpen:b=>`Open “${b}”`,
   sdBtn:'Share', sdTitle:b=>`Share “${b}”`, sdLead:n=>`This creates a file with ${n===1?'the memory':'the '+n+' memories'} in this drawer to send to whoever you choose: your partner, your family… When they open it in their Memorandum, you'll both have the same drawer.`,
   sdPhotos:'Include the photos', sdOnly:'Only this drawer travels. Nothing else from your app leaves your phone.', sdSend:'Send the drawer', sdEmpty:'This drawer has no memories yet.',
-  sdReceive:'Receive a shared drawer', sdReceiveHint:'If someone has sent you a drawer, open it here. Receiving is free.', sdShared:'shared', sdFrom:n=>`from ${n}`,
+  sdReceive:'Receive a shared drawer', sdReceiveHint:'If someone has sent you a drawer, open it here. On Android it is even easier: in WhatsApp, long-press the file, tap Share and choose Memorandum. Receiving is free.', sdShared:'shared', sdFrom:n=>`from ${n}`,
   sdGot:(who,b,n,u)=>`${who} shared “${b}” with you: `+[n?`${n} new ${n===1?'memory':'memories'}`:'',u?`${u} updated`:''].filter(Boolean).join(' and ')+'.', sdNothing:b=>`“${b}” was already up to date.`, sdSomeone:'Someone', sdFileName:'drawer',
   sdSaved:'File saved. Send it to whoever you like by WhatsApp or email.',
   sdHowTitle:'How it works', sdHow:'Each time you send each other the drawer, it catches up without duplicates: new memories are added and edited ones are refreshed. If someone deletes a memory, it stays in the other person\'s app.',
@@ -880,7 +880,7 @@ ca:{
   duCardTitle:'El mateix dia, en dos colors', duCardTitleN:'El mateix dia, en diversos colors', rcTitle:(w,n)=>`${w} t'ha enviat ${n===1?'un record nou':n+' records nous'}`, rcLead:b=>`Ja són al teu calaix «${b}».`, rcOpen:b=>`Obre «${b}»`,
   sdBtn:'Compartir', sdTitle:b=>`Compartir «${b}»`, sdLead:n=>`Es crearà un fitxer amb ${n===1?'el record':'els '+n+' records'} d'aquest calaix per enviar-lo a qui tu vulguis: la teva parella, la teva família… En obrir-lo al seu Memoràndum, tindreu el mateix calaix.`,
   sdPhotos:'Inclou les fotos', sdOnly:"Només viatja aquest calaix. Res més de la teva app no surt del mòbil.", sdSend:'Envia el calaix', sdEmpty:'Aquest calaix encara no té records.',
-  sdReceive:'Rebre un calaix compartit', sdReceiveHint:"Si algú t'ha enviat un calaix, obre'l aquí. Rebre és gratis.", sdShared:'compartit', sdFrom:n=>`de ${n}`,
+  sdReceive:'Rebre un calaix compartit', sdReceiveHint:"Si algú t'ha enviat un calaix, obre'l aquí. A Android, més fàcil: al WhatsApp mantén premut el fitxer, toca Compartir i tria Memoràndum. Rebre és gratis.", sdShared:'compartit', sdFrom:n=>`de ${n}`,
   sdGot:(who,b,n,u)=>`${who} et comparteix «${b}»: `+[n?`${n} ${n===1?'record nou':'records nous'}`:'',u?`${u} ${u===1?'record actualitzat':'records actualitzats'}`:''].filter(Boolean).join(' i ')+'.', sdNothing:b=>`«${b}» ja estava al dia.`, sdSomeone:'Algú', sdFileName:'calaix',
   sdSaved:"Fitxer desat. Envia'l a qui vulguis per WhatsApp o correu.",
   sdHowTitle:'Com funciona', sdHow:"Cada vegada que us torneu a enviar el calaix, es posa al dia sense duplicar: el que és nou s'afegeix i el que s'ha editat es renova. Si algú esborra un record, a l'altre no se li esborra.",
@@ -1625,6 +1625,17 @@ function openReceived(who,d,list){
   ${connSky(center,nodes)}
   <div class="cn-groups">${miniList(sorted(list).slice(0,12))}</div>
   <div class="actions"><button class="btn" data-act="rc-open" data-id="${d.id}">${esc(t('rcOpen',d.name))}</button><button class="btn primary" data-act="close">${esc(t('cnGo'))}</button></div>`);
+}
+
+/* Android: archivo recibido desde el menú «Compartir» del móvil */
+async function checkShareInbox(){
+  if(!/[?&]shared=1/.test(location.search))return;
+  try{history.replaceState(null,'',location.pathname)}catch(e){}
+  try{const c=await caches.open('memorandum-inbox');const r=await c.match('inbox.json');if(!r){toast(t('tBadFile'));return}
+    const txt=await r.text();await c.delete('inbox.json');const p=JSON.parse(txt);
+    if(p&&p.kind==='memorandum-drawer'&&Array.isArray(p.memories)){S.settings.onboarded=true;if(dlg.open)closeDlg();await receiveDrawer(p)}
+    else toast(t('tBadFile'));
+  }catch(e){toast(t('tBadFile'))}
 }
 /* ---------- Cajones compartidos: se intercambian como archivo, sin servidor ---------- */
 function myId(){if(!S.settings.deviceId){S.settings.deviceId=mkid('u');saveLocal()}return S.settings.deviceId}
@@ -3019,7 +3030,7 @@ const local=loadLocal();if(local)S=local;ensureSettings();
 applyLang();render();
 if(!window.claude&&navigator.storage&&navigator.storage.persist){navigator.storage.persisted().then(x=>{if(!x)return navigator.storage.persist()}).catch(()=>{})}
 checkPlus();
-initCloud().catch(()=>{}).finally(()=>{checkPlus();ensureSettings();applyLang();autoSnapshot();render();if(!S.settings.onboarded)openOnboarding(0)});
+initCloud().catch(()=>{}).finally(()=>{checkPlus();ensureSettings();applyLang();autoSnapshot();render();if(/[?&]shared=1/.test(location.search))checkShareInbox();else if(!S.settings.onboarded)openOnboarding(0)});
 
 </script>
 </body>
