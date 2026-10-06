@@ -146,6 +146,9 @@ textarea.in{min-height:120px;resize:vertical;font-family:var(--serif);font-size:
 .drawer{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:6px 6px 6px 12px}
 .drawer input{flex:1;border:0;background:none;font-size:16px;padding:6px 0}
 .drawer small{color:var(--muted);white-space:nowrap}
+.drawer{flex-wrap:wrap}
+.drawer input{min-width:0;flex:1 1 140px}
+@media (max-width:520px){.drawer .btn{padding:6px 10px;font-size:14px}.drawer small{order:3;flex:1 0 55%;padding-left:0}.drawer .danger{order:4;margin-left:auto}}
 .note{font-size:14px;color:var(--muted);max-width:60ch}
 
 /* ---------- informe ---------- */
@@ -328,6 +331,14 @@ html[data-font="maquina"] .greet,html[data-font="mano"] .greet{letter-spacing:-.
 @media (prefers-reduced-motion:reduce){.cn-sky .cn-line{animation:none;stroke-dashoffset:0}.cn-sky .cn-node{animation:none;opacity:1}.cn-sky .cn-center{animation:none}}
 .cn-groups{margin:8px 0 0}
 .cn-groups h4{font-family:var(--serif);font-weight:400;font-size:19px;margin:16px 0 6px}
+.dual-date{font-family:var(--serif);font-size:19px;margin:16px 0 6px}
+.dual-grid{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:8px}
+.dual-card{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;text-align:left;padding:0;color:var(--ink);cursor:pointer}
+.dual-card .band{height:44px;background:var(--g)}
+.dual-card .in{padding:8px 10px 10px}
+.dual-card small{display:block;color:var(--muted);font-size:12px}
+.dual-card b{display:block;font-family:var(--serif);font-weight:400;font-size:17px;line-height:1.15;margin:2px 0 4px}
+.dual-card span{font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -406,7 +417,7 @@ es:{
   cardsLead:'Las imágenes que creas se guardan aquí, solo en este móvil. Nadie las ve hasta que tú decidas compartirlas.',
   cardsEmpty:'Todavía no has guardado ninguna. Puedes crearlas desde un recuerdo, un día, el Informe o el mapa.',
   cardShare:'Compartir', cardDownload:'Descargar', tCardDeleted:'Tarjeta borrada.', tCardErr:'No he podido guardar la imagen.',
-  cardKinds:{sky:'Cielo',story:'Periodo',mem:'Recuerdo',day:'Día',conn:'Conexión',stat:'Estadística',map:'Mapa'},
+  cardKinds:{dual:'Juntos',sky:'Cielo',story:'Periodo',mem:'Recuerdo',day:'Día',conn:'Conexión',stat:'Estadística',map:'Mapa'},
   skyAll:'Siempre', skyMonth:'Este mes', skyYear:'Este año', skyShowing:'Mostrando', skyAllLbl:'todos tus recuerdos', skyZoomIn:'Acercar', skyZoomOut:'Alejar', skyReset:'Ver todo',
   skyOpen:'Abrir', skyMake:'Crear imagen de este cielo', skyCardTitle:'Mi cielo', skyStats:(n,c)=>`${n} recuerdos y ${c} conexiones`, inclNames:'Incluir los nombres', seeSky:'Ver su cielo',
   legalLink:'Aviso legal, privacidad y condiciones',
@@ -428,7 +439,7 @@ es:{
   galleryTitle:'Tus fotos por emoción', galleryEmpty:'Todavía no hay fotos en tus recuerdos.', galleryLocked:'Con Plus, todas tus fotos se ordenan por emoción en un mosaico de tu año.',
   noEmotion:'Sin emoción', allYears:'Todos los años',
   plusLead:'Para quien quiere ir más allá, y para apoyar que esta app siga creciendo.',
-  plusFeatures:['Más diseños para compartir en Instagram: mosaico de tus días y tus fotos en polaroid.','Explora cada emoción, cada cajón y cada tipo de recuerdo: cuándo aparecen, qué días, a qué hora y con qué recuerdos.','El mapa en color de cualquier año o de las fechas que quieras, para guardarlo como imagen.','Estadísticas con gráficos: quesitos y barras de tus emociones, tus días, tus horas, tus palabras y mucho más.','Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
+  plusFeatures:['Cajones compartidos: comparte un cajón con tu pareja o tu familia y tened los mismos recuerdos.','Más diseños para compartir en Instagram: mosaico de tus días y tus fotos en polaroid.','Explora cada emoción, cada cajón y cada tipo de recuerdo: cuándo aparecen, qué días, a qué hora y con qué recuerdos.','El mapa en color de cualquier año o de las fechas que quieras, para guardarlo como imagen.','Estadísticas con gráficos: quesitos y barras de tus emociones, tus días, tus horas, tus palabras y mucho más.','Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
   trialActive:n=>`Estás probando Plus gratis: te ${n===1?'queda 1 día':'quedan '+n+' días'}. Todo lo que crees durante la prueba se queda contigo.`,
   trialWelcome:'Tienes 14 días de Plus gratis para probarlo todo: estadísticas, hasta 5 fotos por recuerdo, el mapa de cualquier año y más. Sin dar ningún dato.',
   trialSoon:n=>`Tu prueba de Plus termina en ${n===1?'1 día':n+' días'}. Todo lo que creaste se queda contigo.`, trialEnded:'Tu prueba de Plus ha terminado. Todo lo que creaste sigue aquí.', gotIt:'Entendido',
@@ -439,6 +450,14 @@ es:{
   lookTitle:'Apariencia', fontLbl:'Tipografía de los títulos', fontHint:'Puedes cambiarla cuando quieras: tus recuerdos no cambian, solo cómo se ven.',
   fonts:{clasica:['Clásica','Elegante y ligera'],libro:['Libro','Cálida, de novela'],maquina:['Máquina de escribir','Diario antiguo'],mano:['A mano','Como en tu cuaderno']},
   swatchHint:'Colores que combinan con la app', swatchPlus:'Colores sugeridos con Plus',
+  duTitle:'Vosotros', duLead:'Cómo ha vivido cada uno este cajón, con sus colores.', duSame:'La misma vivencia, vista por cada uno', duMe:'Tú', duCard:'Crear imagen juntos', duNone:'Cuando dos de vosotros guardéis un recuerdo del mismo día, aparecerá aquí, uno al lado del otro.',
+  duCardTitle:'El mismo día, en dos colores', duCardTitleN:'El mismo día, en varios colores', rcTitle:(w,n)=>`${w} te ha enviado ${n===1?'un recuerdo nuevo':n+' recuerdos nuevos'}`, rcLead:b=>`Ya están en tu cajón «${b}».`, rcOpen:b=>`Abrir «${b}»`,
+  sdBtn:'Compartir', sdTitle:b=>`Compartir «${b}»`, sdLead:n=>`Se creará un archivo con ${n===1?'el recuerdo':'los '+n+' recuerdos'} de este cajón para enviarlo a quien tú quieras: tu pareja, tu familia… Al abrirlo en su Memorándum, tendréis el mismo cajón.`,
+  sdPhotos:'Incluir las fotos', sdOnly:'Solo viaja este cajón. Nada más de tu app sale del móvil.', sdSend:'Enviar el cajón', sdEmpty:'Este cajón todavía no tiene recuerdos.',
+  sdReceive:'Recibir un cajón compartido', sdReceiveHint:'Si alguien te ha enviado un cajón, ábrelo aquí. Recibir es gratis.', sdShared:'compartido', sdFrom:n=>`de ${n}`,
+  sdGot:(who,b,n,u)=>`${who} te comparte «${b}»: `+[n?`${n} ${n===1?'recuerdo nuevo':'recuerdos nuevos'}`:'',u?`${u} ${u===1?'recuerdo actualizado':'recuerdos actualizados'}`:''].filter(Boolean).join(' y ')+'.', sdNothing:b=>`«${b}» ya estaba al día.`, sdSomeone:'Alguien', sdFileName:'cajon',
+  sdSaved:'Archivo guardado. Envíalo a quien quieras por WhatsApp o correo.',
+  sdHowTitle:'Cómo funciona', sdHow:'Cada vez que os volváis a enviar el cajón, se pone al día sin duplicar: lo nuevo se añade y lo editado se renueva. Si alguien borra un recuerdo, al otro no se le borra.',
   cnTitle:'Tu recuerdo se conecta con…', cnSaved:'Guardado.', cnTag:(tg,n)=>`#${tg}: ${n===1?'otro recuerdo':n+' recuerdos más'}`, cnSameDay:y=>`Ese mismo día, en ${y}`,
   cnMoreFrom:x=>`Otras notas de «${x}»`, cnEmo:(e,d)=>`Tu ${e} anterior fue el ${d}`, cnLinked:'Lo enlazaste con', cnSky:'Ver en el cielo', cnGo:'Seguir',
   dateHint:'¿Se te pasó un día? Cambia la fecha y el recuerdo irá a su sitio.',
@@ -518,8 +537,8 @@ es:{
     ['Tu fábrica de recuerdos','Guarda lo que vives, lees, ves y escuchas, y ponle el color de cómo te hizo sentir. Con el tiempo, tu archivo se convierte en un mapa de tu memoria. Y si un día se te pasa, no pasa nada: puedes añadirlo después y ponerle la fecha de aquel día.'],
     ['Solo tuyo',c=>I18N.es.privOnb(c)],
     ['Cada emoción es un color','Empiezas con ocho emociones. En Paleta puedes renombrarlas, cambiar su tono o crear las tuyas. En cada recuerdo eliges hasta tres, y la primera es la principal.'],
-    ['Archiva y conecta','Guarda cada recuerdo en un cajón, ponle etiquetas y enlázalo con otros. En el Archivo puedes verlos como una constelación: así un recuerdo te lleva a otro.'],
-    ['Vuelve a lo que sentiste','Cada día te devuelvo un recuerdo del archivo. En Informe ves tu semana, tu mes o tu año en color, y puedes crear una tarjeta para tus stories.'],
+    ['Archiva y conecta','Guarda cada recuerdo en un cajón, ponle etiquetas y enlázalo con otros. Al guardarlo te enseño con qué se conecta, y en el Archivo puedes verlos como una constelación. Y si quieres, puedes compartir un cajón con tu pareja o tu familia.'],
+    ['Vuelve a lo que sentiste','Cada día te devuelvo un recuerdo del archivo. En Informe ves tu semana, tu mes o tu año en color. Y puedes crear imágenes de tus recuerdos: se guardan solo para ti, y las compartes si quieres.'],
     ['Tu copia de seguridad',c=>`Tus recuerdos se guardan solos ${c?'en tu cuenta':'en este dispositivo'}. Además, te avisaré para guardar una copia en un archivo. ¿Cada cuánto quieres que te lo recuerde?`]
   ],
   types:{
@@ -611,7 +630,7 @@ en:{
   cardsLead:'The images you create are kept here, only on this phone. Nobody sees them until you decide to share them.',
   cardsEmpty:"You haven't saved any yet. You can create them from a memory, a day, the Report or the map.",
   cardShare:'Share', cardDownload:'Download', tCardDeleted:'Card deleted.', tCardErr:"I couldn't save the image.",
-  cardKinds:{sky:'Sky',story:'Period',mem:'Memory',day:'Day',conn:'Connection',stat:'Statistic',map:'Map'},
+  cardKinds:{dual:'Together',sky:'Sky',story:'Period',mem:'Memory',day:'Day',conn:'Connection',stat:'Statistic',map:'Map'},
   skyAll:'All time', skyMonth:'This month', skyYear:'This year', skyShowing:'Showing', skyAllLbl:'all your memories', skyZoomIn:'Zoom in', skyZoomOut:'Zoom out', skyReset:'Show all',
   skyOpen:'Open', skyMake:'Create an image of this sky', skyCardTitle:'My sky', skyStats:(n,c)=>`${n} memories and ${c} connections`, inclNames:'Include the names', seeSky:'See its sky',
   legalLink:'Legal notice, privacy and terms',
@@ -633,7 +652,7 @@ en:{
   galleryTitle:'Your photos by emotion', galleryEmpty:'There are no photos in your memories yet.', galleryLocked:'With Plus, all your photos are arranged by emotion into a mosaic of your year.',
   noEmotion:'No emotion', allYears:'All years',
   plusLead:'For those who want to go further, and to help this app keep growing.',
-  plusFeatures:['More designs to share on Instagram: a mosaic of your days and your photos as polaroids.','Explore each emotion, each drawer and each type of memory: when they appear, which days, what time and in which memories.','The colour map of any year or any dates you like, to save as an image.','Statistics with charts: pies and bars of your emotions, your days, your hours, your words and much more.','Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
+  plusFeatures:['Shared drawers: share a drawer with your partner or family and keep the same memories.','More designs to share on Instagram: a mosaic of your days and your photos as polaroids.','Explore each emotion, each drawer and each type of memory: when they appear, which days, what time and in which memories.','The colour map of any year or any dates you like, to save as an image.','Statistics with charts: pies and bars of your emotions, your days, your hours, your words and much more.','Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
   trialActive:n=>`You're trying Plus for free: ${n===1?'1 day':n+' days'} left. Everything you create during the trial stays with you.`,
   trialWelcome:'You have 14 days of Plus for free to try everything: statistics, up to 5 photos per memory, the map of any year and more. No details needed.',
   trialSoon:n=>`Your Plus trial ends in ${n===1?'1 day':n+' days'}. Everything you created stays with you.`, trialEnded:'Your Plus trial has ended. Everything you created is still here.', gotIt:'Got it',
@@ -644,6 +663,14 @@ en:{
   lookTitle:'Appearance', fontLbl:'Heading typeface', fontHint:"Change it whenever you like: your memories don't change, only how they look.",
   fonts:{clasica:['Classic','Elegant and light'],libro:['Book','Warm, like a novel'],maquina:['Typewriter','An old diary'],mano:['Handwritten','Like your notebook']},
   swatchHint:'Colours that match the app', swatchPlus:'Suggested colours with Plus',
+  duTitle:'All of you', duLead:'How each of you has lived this drawer, in your own colours.', duSame:'The same moment, seen by each of you', duMe:'You', duCard:'Create image together', duNone:'When two of you save a memory from the same day, it will appear here, side by side.',
+  duCardTitle:'The same day, in two colours', duCardTitleN:'The same day, in many colours', rcTitle:(w,n)=>`${w} sent you ${n===1?'a new memory':n+' new memories'}`, rcLead:b=>`They're already in your drawer “${b}”.`, rcOpen:b=>`Open “${b}”`,
+  sdBtn:'Share', sdTitle:b=>`Share “${b}”`, sdLead:n=>`This creates a file with ${n===1?'the memory':'the '+n+' memories'} in this drawer to send to whoever you choose: your partner, your family… When they open it in their Memorandum, you'll both have the same drawer.`,
+  sdPhotos:'Include the photos', sdOnly:'Only this drawer travels. Nothing else from your app leaves your phone.', sdSend:'Send the drawer', sdEmpty:'This drawer has no memories yet.',
+  sdReceive:'Receive a shared drawer', sdReceiveHint:'If someone has sent you a drawer, open it here. Receiving is free.', sdShared:'shared', sdFrom:n=>`from ${n}`,
+  sdGot:(who,b,n,u)=>`${who} shared “${b}” with you: `+[n?`${n} new ${n===1?'memory':'memories'}`:'',u?`${u} updated`:''].filter(Boolean).join(' and ')+'.', sdNothing:b=>`“${b}” was already up to date.`, sdSomeone:'Someone', sdFileName:'drawer',
+  sdSaved:'File saved. Send it to whoever you like by WhatsApp or email.',
+  sdHowTitle:'How it works', sdHow:'Each time you send each other the drawer, it catches up without duplicates: new memories are added and edited ones are refreshed. If someone deletes a memory, it stays in the other person\'s app.',
   cnTitle:'Your memory connects with…', cnSaved:'Saved.', cnTag:(tg,n)=>`#${tg}: ${n===1?'one more memory':n+' more memories'}`, cnSameDay:y=>`On this same day, in ${y}`,
   cnMoreFrom:x=>`Other notes on “${x}”`, cnEmo:(e,d)=>`Your previous ${e} was on ${d}`, cnLinked:'You linked it with', cnSky:'See it in the sky', cnGo:'Continue',
   dateHint:'Missed a day? Change the date and the memory will go where it belongs.',
@@ -723,8 +750,8 @@ en:{
     ['Your factory of memories','Save what you live, read, watch and listen to, and give it the colour of how it made you feel. Over time, your archive becomes a map of your memory. And if you miss a day, no problem: you can add it later and give it the date it happened.'],
     ['Only yours',c=>I18N.en.privOnb(c)],
     ['Each emotion is a colour','You start with eight emotions. In Palette you can rename them, change their shade or create your own. For each memory you choose up to three, and the first is the main one.'],
-    ['File and connect','Put each memory in a drawer, give it tags and link it to others. In the Archive you can see them as a constellation: that is how one memory leads to another.'],
-    ['Go back to what you felt','Every day I bring back a memory from the archive. In Report you see your week, month or year in colour, and you can create a card for your stories.'],
+    ['File and connect','Put each memory in a drawer, give it tags and link it to others. When you save it, I’ll show you what it connects with, and in the Archive you can see them as a constellation. You can also share a drawer with your partner or family.'],
+    ['Go back to what you felt','Every day I bring back a memory from the archive. In Report you see your week, month or year in colour. And you can create images of your memories: they’re kept just for you, and you share them only if you want.'],
     ['Your backup',c=>`Your memories are saved automatically ${c?'to your account':'on this device'}. I will also remind you to save a copy as a file. How often would you like me to remind you?`]
   ],
   types:{
@@ -816,7 +843,7 @@ ca:{
   cardsLead:"Les imatges que crees es desen aquí, només en aquest mòbil. Ningú no les veu fins que tu decideixis compartir-les.",
   cardsEmpty:"Encara no n'has desat cap. Les pots crear des d'un record, un dia, l'Informe o el mapa.",
   cardShare:'Compartir', cardDownload:'Descarrega', tCardDeleted:'Targeta esborrada.', tCardErr:"No he pogut desar la imatge.",
-  cardKinds:{sky:'Cel',story:'Període',mem:'Record',day:'Dia',conn:'Connexió',stat:'Estadística',map:'Mapa'},
+  cardKinds:{dual:'Junts',sky:'Cel',story:'Període',mem:'Record',day:'Dia',conn:'Connexió',stat:'Estadística',map:'Mapa'},
   skyAll:'Sempre', skyMonth:'Aquest mes', skyYear:'Aquest any', skyShowing:'Mostrant', skyAllLbl:'tots els teus records', skyZoomIn:'Apropa', skyZoomOut:'Allunya', skyReset:"Veure-ho tot",
   skyOpen:'Obre', skyMake:"Crea una imatge d'aquest cel", skyCardTitle:'El meu cel', skyStats:(n,c)=>`${n} records i ${c} connexions`, inclNames:'Inclou els noms', seeSky:'Veure el seu cel',
   legalLink:'Avís legal, privacitat i condicions',
@@ -838,7 +865,7 @@ ca:{
   galleryTitle:'Les teves fotos per emoció', galleryEmpty:'Encara no hi ha fotos als teus records.', galleryLocked:`Amb Plus, totes les teves fotos s'ordenen per emoció en un mosaic del teu any.`,
   noEmotion:'Sense emoció', allYears:'Tots els anys',
   plusLead:'Per a qui vol anar més enllà, i per ajudar que aquesta app continuï creixent.',
-  plusFeatures:['Més dissenys per compartir a Instagram: mosaic dels teus dies i les teves fotos en polaroid.','Explora cada emoció, cada calaix i cada tipus de record: quan apareixen, quins dies, a quina hora i amb quins records.','El mapa en color de qualsevol any o de les dates que vulguis, per desar-lo com a imatge.','Estadístiques amb gràfics: formatges i barres de les teves emocions, els teus dies, les teves hores, les teves paraules i molt més.','Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
+  plusFeatures:['Calaixos compartits: comparteix un calaix amb la teva parella o la teva família i tingueu els mateixos records.','Més dissenys per compartir a Instagram: mosaic dels teus dies i les teves fotos en polaroid.','Explora cada emoció, cada calaix i cada tipus de record: quan apareixen, quins dies, a quina hora i amb quins records.','El mapa en color de qualsevol any o de les dates que vulguis, per desar-lo com a imatge.','Estadístiques amb gràfics: formatges i barres de les teves emocions, els teus dies, les teves hores, les teves paraules i molt més.','Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
   trialActive:n=>`Estàs provant Plus gratis: et ${n===1?'queda 1 dia':'queden '+n+' dies'}. Tot el que creïs durant la prova es queda amb tu.`,
   trialWelcome:"Tens 14 dies de Plus gratis per provar-ho tot: estadístiques, fins a 5 fotos per record, el mapa de qualsevol any i més. Sense donar cap dada.",
   trialSoon:n=>`La teva prova de Plus acaba d'aquí a ${n===1?'1 dia':n+' dies'}. Tot el que has creat es queda amb tu.`, trialEnded:'La teva prova de Plus ha acabat. Tot el que vas crear continua aquí.', gotIt:'Entesos',
@@ -849,6 +876,14 @@ ca:{
   lookTitle:'Aparença', fontLbl:'Tipografia dels títols', fontHint:'La pots canviar quan vulguis: els teus records no canvien, només com es veuen.',
   fonts:{clasica:['Clàssica','Elegant i lleugera'],libro:['Llibre','Càlida, de novel·la'],maquina:['Màquina d’escriure','Diari antic'],mano:['A mà','Com al teu quadern']},
   swatchHint:"Colors que combinen amb l'app", swatchPlus:'Colors suggerits amb Plus',
+  duTitle:'Vosaltres', duLead:'Com ha viscut cadascú aquest calaix, amb els seus colors.', duSame:'La mateixa vivència, vista per cadascú', duMe:'Tu', duCard:'Crear imatge junts', duNone:"Quan dos de vosaltres deseu un record del mateix dia, apareixerà aquí, l'un al costat de l'altre.",
+  duCardTitle:'El mateix dia, en dos colors', duCardTitleN:'El mateix dia, en diversos colors', rcTitle:(w,n)=>`${w} t'ha enviat ${n===1?'un record nou':n+' records nous'}`, rcLead:b=>`Ja són al teu calaix «${b}».`, rcOpen:b=>`Obre «${b}»`,
+  sdBtn:'Compartir', sdTitle:b=>`Compartir «${b}»`, sdLead:n=>`Es crearà un fitxer amb ${n===1?'el record':'els '+n+' records'} d'aquest calaix per enviar-lo a qui tu vulguis: la teva parella, la teva família… En obrir-lo al seu Memoràndum, tindreu el mateix calaix.`,
+  sdPhotos:'Inclou les fotos', sdOnly:"Només viatja aquest calaix. Res més de la teva app no surt del mòbil.", sdSend:'Envia el calaix', sdEmpty:'Aquest calaix encara no té records.',
+  sdReceive:'Rebre un calaix compartit', sdReceiveHint:"Si algú t'ha enviat un calaix, obre'l aquí. Rebre és gratis.", sdShared:'compartit', sdFrom:n=>`de ${n}`,
+  sdGot:(who,b,n,u)=>`${who} et comparteix «${b}»: `+[n?`${n} ${n===1?'record nou':'records nous'}`:'',u?`${u} ${u===1?'record actualitzat':'records actualitzats'}`:''].filter(Boolean).join(' i ')+'.', sdNothing:b=>`«${b}» ja estava al dia.`, sdSomeone:'Algú', sdFileName:'calaix',
+  sdSaved:"Fitxer desat. Envia'l a qui vulguis per WhatsApp o correu.",
+  sdHowTitle:'Com funciona', sdHow:"Cada vegada que us torneu a enviar el calaix, es posa al dia sense duplicar: el que és nou s'afegeix i el que s'ha editat es renova. Si algú esborra un record, a l'altre no se li esborra.",
   cnTitle:'El teu record es connecta amb…', cnSaved:'Desat.', cnTag:(tg,n)=>`#${tg}: ${n===1?'un altre record':n+' records més'}`, cnSameDay:y=>`Aquell mateix dia, el ${y}`,
   cnMoreFrom:x=>`Altres notes de «${x}»`, cnEmo:(e,d)=>`La teva ${e} anterior va ser el ${d}`, cnLinked:"L'has enllaçat amb", cnSky:'Veure-ho al cel', cnGo:'Continuar',
   dateHint:"Se t'ha passat un dia? Canvia la data i el record anirà al seu lloc.",
@@ -928,8 +963,8 @@ ca:{
     ['La teva fàbrica de records',`Desa el que vius, llegeixes, mires i escoltes, i posa-hi el color de com et va fer sentir. Amb el temps, el teu arxiu es converteix en un mapa de la teva memòria. I si un dia se't passa, no passa res: el pots afegir després i posar-hi la data d'aquell dia.`],
     ['Només teu',c=>I18N.ca.privOnb(c)],
     ['Cada emoció és un color',`Comences amb vuit emocions. A Paleta les pots reanomenar, canviar-ne el to o crear-ne de teves. En cada record en tries fins a tres, i la primera és la principal.`],
-    ['Arxiva i connecta',`Desa cada record en un calaix, posa-hi etiquetes i enllaça'l amb d'altres. A l'Arxiu els pots veure com una constel·lació: així un record et porta a un altre.`],
-    ['Torna al que vas sentir',`Cada dia et retorno un record de l'arxiu. A Informe veus la teva setmana, el teu mes o el teu any en color, i pots crear una targeta per a les teves stories.`],
+    ['Arxiva i connecta',`Desa cada record en un calaix, posa-hi etiquetes i enllaça'l amb d'altres. En desar-lo et mostro amb què es connecta, i a l'Arxiu els pots veure com una constel·lació. I si vols, pots compartir un calaix amb la teva parella o la teva família.`],
+    ['Torna al que vas sentir',`Cada dia et retorno un record de l'arxiu. A Informe veus la teva setmana, el teu mes o el teu any en color. I pots crear imatges dels teus records: es desen només per a tu, i les comparteixes si vols.`],
     ['La teva còpia de seguretat',c=>`Els teus records es desen sols ${c?'al teu compte':'en aquest dispositiu'}. A més, t'avisaré per desar una còpia en un fitxer. Cada quant vols que t'ho recordi?`]
   ],
   types:{
@@ -1217,7 +1252,7 @@ function resultsHTML(){
   const ms=filtered();
   if(!S.memories.length)return `<div class="empty-state"><p>${esc(t('archEmpty'))}</p><button class="btn primary" data-act="new">${t('navNew')}</button></div>`;
   if(!ms.length)return `<div class="empty-state"><p>${esc(t('noMatch'))}</p><button class="btn" data-act="clear-all">${t('clearAll')}</button></div>`;
-  let out='',cur='';
+  let out=filters.drawer?dualHTML(filters.drawer):'',cur='';
   for(const m of ms){
     const k=m.date.slice(0,7);
     if(k!==cur){if(cur)out+='</div>';cur=k;out+=`<div class="month">${esc(fmt(k+'-01',{month:'long',year:'numeric'}))}</div><div class="fichas">`}
@@ -1398,9 +1433,10 @@ function vPaleta(){
   </div>
   <h2 class="sec">${t('drawersTitle')}</h2>
   <p class="lead">${esc(t('drawersLead'))}</p>
-  <div class="drawers">${S.drawers.map(d=>`<div class="drawer"><input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${dcnt(d.id)}</small><button class="btn quiet" data-act="drawer-go" data-id="${d.id}">${t('open')}</button><button class="btn quiet danger" data-act="drawer-del" data-id="${d.id}">${t('del')}</button></div>`).join('')}
+  <div class="drawers">${S.drawers.map(d=>`<div class="drawer"><input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${d.shared?`👥 ${esc(t('sdShared'))} · `:''}${dcnt(d.id)}</small><button class="btn quiet" data-act="drawer-go" data-id="${d.id}">${t('open')}</button><button class="btn quiet" data-act="sd-open" data-id="${d.id}">${esc(t('sdBtn'))}${isPlus()?'':' '+plusBadge()}</button><button class="btn quiet danger" data-act="drawer-del" data-id="${d.id}">${t('del')}</button></div>`).join('')}
     <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newDrawerName'))}" data-field="new-drawer-pal" aria-label="${esc(t('newDrawerName'))}"><button class="btn" data-act="drawer-add">${t('addDrawer')}</button></div>
   </div>
+  <div class="row" style="margin-top:12px;align-items:center"><button class="btn" data-act="import">👥 ${esc(t('sdReceive'))}</button><span class="note" style="flex:1 1 200px">${esc(t('sdReceiveHint'))}</span></div>
   <h2 class="sec">${t('typesTitle')}</h2>
   <p class="lead">${esc(t('typesLead'))}</p>
   <div class="drawers">${(S.customTypes||[]).map(c=>`<div class="drawer"><input value="${esc(c.name)}" data-field="type-name" data-id="${c.id}" aria-label="${esc(t('typeName'))}"><small>${S.memories.filter(m=>m.type===c.id).length}</small><button class="btn quiet" data-act="type-go" data-id="${c.id}">${t('open')}</button><button class="btn quiet danger" data-act="type-del" data-id="${c.id}">${t('del')}</button></div>`).join('')}
@@ -1545,7 +1581,7 @@ function tagBlock(m){
 function openDetail(id){
   const m=memOf(id);if(!m)return;const ty=typeOf(m.type);const ds=(m.drawers||[]).map(drawerOf).filter(Boolean);
   const links=(m.links||[]).map(memOf).filter(Boolean);const rel=related(m);
-  openDlg(`<div class="dlg-head"><span class="note">${ty.label}, ${esc(fmt(m.date))}${timeOf(m)?', '+timeOf(m):''}${ds.length?`, ${esc(ds.length>1?t('inDrawers',joinY(ds.map(x=>x.name))):t('inDrawer',ds[0].name))}`:''}</span><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  openDlg(`<div class="dlg-head"><span class="note">${m.origin&&m.origin!==myId()&&m.author?esc(t('sdFrom',m.author))+' · ':''}${ty.label}, ${esc(fmt(m.date))}${timeOf(m)?', '+timeOf(m):''}${ds.length?`, ${esc(ds.length>1?t('inDrawers',joinY(ds.map(x=>x.name))):t('inDrawer',ds[0].name))}`:''}</span><button class="btn quiet" data-act="close">${t('close')}</button></div>
   <div class="wash" style="--c:${mainColor(m)};margin-top:12px">
     ${(m.photos||[]).length?`<div class="photos${m.photos.length>1?' multi':''}">${m.photos.map(pid=>`<div class="photos-item"><img data-photo="${pid}" alt="${esc(t('photoAlt'))}"></div>`).join('')}</div>`:''}
     <h2 class="detail-title">${esc(memTitle(m))}</h2>
@@ -1562,6 +1598,83 @@ function openDetail(id){
 }
 
 
+
+
+/* ---------- Vosotros: un cajón compartido visto por cada persona ---------- */
+function authorKey(m){return m.origin&&m.origin!==myId()?m.origin:'me'}
+function authorName(m){return authorKey(m)==='me'?t('duMe'):(m.author||t('sdSomeone'))}
+function emoGrad(m){const cs=(m.emotions||[]).map(emo).filter(Boolean).map(e=>e.color);if(!cs.length)return '#9A96AE';if(cs.length===1)return cs[0];return `linear-gradient(90deg,${cs.map((c,i)=>`${c} ${Math.round(i*100/cs.length)}% ${Math.round((i+1)*100/cs.length)}%`).join(',')})`}
+function dualHTML(did){
+  const d=drawerOf(did);if(!d||!d.shared)return '';
+  const ms=S.memories.filter(m=>(m.drawers||[]).includes(did));const by=new Map();
+  ms.forEach(m=>{const k=authorKey(m);if(!by.has(k))by.set(k,{name:authorName(m),list:[]});by.get(k).list.push(m)});
+  if(by.size<2)return '';
+  const rows=[...by.entries()].sort((a,b)=>a[0]==='me'?-1:b[0]==='me'?1:0).map(([k,v])=>({id:k,label:v.name,n:v.list.length,...compWeights(v.list)})).filter(x=>x.tot>0);
+  const days=new Map();ms.forEach(m=>{if(!days.has(m.date))days.set(m.date,new Map());const dm=days.get(m.date);const k=authorKey(m);if(!dm.has(k))dm.set(k,m)});
+  const shared=[...days.entries()].filter(([,dm])=>dm.size>=2).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,8);
+  const pairs=shared.map(([date,dm])=>{const items=[...dm.entries()].sort((a,b)=>a[0]==='me'?-1:b[0]==='me'?1:0).slice(0,3).map(x=>x[1]);
+    return `<div class="dual-date">${esc(fmt(date,{day:'numeric',month:'long',year:'numeric'}))}</div><div class="dual-grid" style="--n:${items.length}">${items.map(m=>`<button class="dual-card" data-act="open" data-id="${m.id}" style="--g:${emoGrad(m)}"><div class="band"></div><div class="in"><small>${esc(authorName(m))}</small><b>${esc(cut(memTitle(m),40))}</b><span>${esc((m.emotions||[]).map(emo).filter(Boolean).map(e=>e.name).join(' · '))}</span></div></button>`).join('')}</div>${showShare()?`<div class="row" style="margin-top:6px"><button class="btn quiet" data-act="share-dual" data-v="${items.map(m=>m.id).join(',')}">${IMG_ICON}${esc(t('duCard'))}</button></div>`:''}`}).join('');
+  return `<div class="card" style="margin:6px 0 18px"><h3 style="margin:0 0 4px">👥 ${esc(t('duTitle'))}</h3><p class="note" style="margin:0 0 8px">${esc(t('duLead'))}</p>${compBars(rows,'noop',null)}
+  <h4 style="font-family:var(--serif);font-weight:400;font-size:20px;margin:18px 0 2px">${esc(t('duSame'))}</h4>${pairs||`<p class="note">${esc(t('duNone'))}</p>`}</div>`;
+}
+function openReceived(who,d,list){
+  const ids=new Set(list.map(o=>o.id));const rest=sorted(S.memories.filter(o=>(o.drawers||[]).includes(d.id)&&!ids.has(o.id)));const nodes=[...list,...rest].slice(0,8).map(o=>({o,color:ids.has(o.id)?mainColor(o):null}));const center={emotions:(list[0]&&list[0].emotions)||[]};
+  openDlg(`<div class="dlg-head"><span class="note">👥 ${esc(d.name)}</span><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  <h2 style="font-family:var(--serif);font-weight:400;font-size:30px;margin:8px 0 4px">${esc(t('rcTitle',who,list.length))}</h2>
+  <p class="note" style="margin:0 0 6px">${esc(t('rcLead',d.name))}</p>
+  ${connSky(center,nodes)}
+  <div class="cn-groups">${miniList(sorted(list).slice(0,12))}</div>
+  <div class="actions"><button class="btn" data-act="rc-open" data-id="${d.id}">${esc(t('rcOpen',d.name))}</button><button class="btn primary" data-act="close">${esc(t('cnGo'))}</button></div>`);
+}
+/* ---------- Cajones compartidos: se intercambian como archivo, sin servidor ---------- */
+function myId(){if(!S.settings.deviceId){S.settings.deviceId=mkid('u');saveLocal()}return S.settings.deviceId}
+function myName(){return (S.profile&&S.profile.name||'').trim()||t('sdSomeone')}
+let sdState=null;
+function openShareDrawer(id){
+  const d=drawerOf(id);if(!d)return;const ms=S.memories.filter(m=>(m.drawers||[]).includes(id));
+  const nPh=ms.reduce((a,m)=>a+(m.photos||[]).length,0);sdState={id,photos:nPh>0&&nPh<=40};
+  openDlg(`<div class="dlg-head"><h2>${esc(t('sdTitle',d.name))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  ${ms.length?`<p style="font-size:15.5px">${esc(t('sdLead',ms.length))}</p>
+  ${nPh?`<label class="row" style="gap:8px;font-size:15px;margin-top:6px"><input type="checkbox" id="sd-photos"${sdState.photos?' checked':''}> ${esc(t('sdPhotos'))} (${nPh})</label>`:''}
+  <p class="note" style="margin-top:10px">🔒 ${esc(t('sdOnly'))}</p>
+  <h3 class="month" style="margin-top:16px">${esc(t('sdHowTitle'))}</h3><p class="note">${esc(t('sdHow'))}</p>
+  <div class="actions"><button class="btn primary" data-act="sd-send" data-id="${id}">${esc(t('sdSend'))}</button></div>`:`<p class="note">${esc(t('sdEmpty'))}</p>`}`);
+}
+async function sendDrawer(id){
+  const d=drawerOf(id);if(!d)return;if(!d.shareKey){d.shareKey=mkid('k')}d.shared=true;
+  const me=myId(),name=myName();const ms=S.memories.filter(m=>(m.drawers||[]).includes(id));
+  ms.forEach(m=>{if(!m.origin){m.origin=me;m.author=name}else if(m.origin===me)m.author=name});
+  const withPhotos=!!($('#sd-photos')&&$('#sd-photos').checked);
+  const emoIds=new Set(ms.flatMap(m=>m.emotions||[]));const typeIds=new Set(ms.map(m=>m.type));
+  const out={kind:'memorandum-drawer',v:1,from:name,fromId:me,sentAt:new Date().toISOString(),drawer:{name:d.name,shareKey:d.shareKey},
+    emotions:S.emotions.filter(e=>emoIds.has(e.id)),customTypes:(S.customTypes||[]).filter(c=>typeIds.has(c.id)),
+    memories:ms.map(m=>{const c=clone(m);c.drawers=[];delete c.drawer;if(!withPhotos)c.photos=[];return c}),photos:{}};
+  if(withPhotos){for(const m of ms)for(const pid of (m.photos||[])){try{const b=await IDB.get(pid);if(b)out.photos[pid]=await blobToDataURL(b)}catch(e){}}}
+  savePalette();for(const m of ms)saveMem(m);
+  const slug=(d.name||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'cajon';
+  const fname='memorandum-'+t('sdFileName')+'-'+slug+'.json';const blob=new Blob([JSON.stringify(out)],{type:'application/json'});
+  if(!window.claude){try{const f=new File([blob],fname,{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:d.name});closeDlg();render();return}}catch(e){if(e&&e.name==='AbortError')return}}
+  const r=await deliverFile(fname,blob,'application/json',{download:true});if(r==='ok'){closeDlg();render();toast(t('sdSaved'))}
+}
+async function receiveDrawer(p){
+  const me=myId();const key=p.drawer&&p.drawer.shareKey;const dname=(p.drawer&&p.drawer.name)||t('sdShared');
+  let d=S.drawers.find(x=>key&&x.shareKey===key)||S.drawers.find(x=>!x.shareKey&&(x.name||'').toLowerCase()===dname.toLowerCase());
+  if(!d){d={id:mkid('d'),name:dname};S.drawers.push(d)}d.shareKey=key||d.shareKey||mkid('k');d.shared=true;
+  (p.emotions||[]).forEach(e=>{if(e&&e.id&&!S.emotions.find(x=>x.id===e.id))S.emotions.push({id:e.id,name:e.name,color:e.color})});
+  (p.customTypes||[]).forEach(c=>{if(c&&c.id&&!(S.customTypes||[]).find(x=>x.id===c.id)){S.customTypes=S.customTypes||[];S.customTypes.push(c)}});
+  let added=0,updated=0;const touched=[];const fresh=[];
+  for(const x of (p.memories||[])){
+    if(!x||!x.id||x.origin===me)continue;const cur=memOf(x.id);
+    if(!cur){const m={...x,drawers:[d.id]};normDrawers(m);S.memories.push(m);touched.push(m);fresh.push(m);added++}
+    else if((x.updatedAt||x.createdAt||0)>(cur.updatedAt||cur.createdAt||0)){const keep=cur.drawers||[];const m={...x,drawers:[...new Set([...keep,d.id])]};normDrawers(m);S.memories[S.memories.findIndex(o=>o.id===x.id)]=m;touched.push(m);updated++}
+  }
+  if(p.photos&&typeof p.photos==='object'){for(const [pid,u] of Object.entries(p.photos)){try{if(typeof u==='string'&&u.startsWith('data:image/')&&!(await IDB.get(pid)))await IDB.put(pid,dataURLToBlob(u))}catch(err){}}}
+  const ids=new Set(S.memories.map(m=>m.id));touched.forEach(m=>{m.links=(m.links||[]).filter(l=>ids.has(l))});
+  ensureSettings();render();
+  if(fresh.length)openReceived(p.from||t('sdSomeone'),d,fresh);
+  else toast(updated?t('sdGot',p.from||t('sdSomeone'),d.name,added,updated):t('sdNothing',d.name));
+  await savePalette();for(const m of touched)await saveMem(m);
+}
 /* ---------- Al guardar: qué conecta con el recuerdo nuevo ---------- */
 function connectionsOf(m){
   const others=S.memories.filter(o=>o.id!==m.id);const groups=[];const seen=new Map();
@@ -1916,6 +2029,7 @@ function openShare(kind,data){
 }
 function shareControls(){
   const s=shareState;let h=`<div class="row" style="justify-content:center;margin-top:12px"><div class="seg" role="group"><button data-act="share-theme" data-v="dark" aria-pressed="${s.theme==='dark'}">${esc(t('themeDark'))}</button><button data-act="share-theme" data-v="light" aria-pressed="${s.theme==='light'}">${esc(t('themeLight'))}</button></div></div>`;
+  if(s.kind==='dual')h+=`<label class="row" style="justify-content:center;font-size:15px;gap:8px;margin-top:8px"><input type="checkbox" data-share-opt="text"${s.text?' checked':''}> ${esc(t('inclText'))}</label>`;
   if(s.kind==='sky')h+=`<label class="row" style="justify-content:center;font-size:15px;gap:8px;margin-top:8px"><input type="checkbox" data-share-opt="names"${s.names?' checked':''}> ${esc(t('inclNames'))}</label>`;
   if(s.kind==='mem'){const m=memOf(s.data);if(m&&t('tplSpecial')[m.type])h=`<div class="row" style="justify-content:center;margin-top:12px"><button class="chip" data-act="share-style" data-v="tipo" aria-pressed="${s.style==='tipo'}">${esc(t('tplSpecial')[m.type])}</button><button class="chip" data-act="share-style" data-v="clasico" aria-pressed="${s.style!=='tipo'}">${esc(t('tplClassic'))}</button></div>`+h;if(m){const box=(k,lbl)=>`<label class="row" style="justify-content:center;font-size:15px;gap:8px;margin-top:8px"><input type="checkbox" data-share-opt="${k}"${s[k]?' checked':''}> ${esc(lbl)}</label>`;
     if((m.photos||[]).length&&!(s.style==='tipo'&&(m.type==='libro'||m.type==='pelicula')))h+=box('photo',t('inclPhoto'));if(m.quote)h+=box('quote',t('inclQuote'));if(m.text)h+=box('text',t('inclText'))}}
@@ -2001,6 +2115,19 @@ async function drawShare(){
       let y=1520;x.font=`500 40px ${sans}`;emos.slice(1,4).forEach(e=>{x.fillStyle=e.color;x.beginPath();x.arc(108,y-14,16,0,Math.PI*2);x.fill();x.fillStyle=TX;x.fillText(e.name,145,y);x.textAlign='right';x.fillStyle=MU;x.fillText(Math.round(c[e.id]/tot*100)+'%',990,y);x.textAlign='left';y+=70});
     }
     footer();
+  }else if(s.kind==='dual'){
+    const ms=(s.data.ids||[]).map(memOf).filter(Boolean);if(ms.length<2)return;const n=ms.length;
+    brand();x.fillStyle=MU;x.font=`500 34px ${sans}`;x.fillText(n>2?t('duCardTitleN'):t('duCardTitle'),90,230);
+    x.fillStyle=TX;x.font=`110px ${serif}`;x.fillText(fmt(ms[0].date,{day:'numeric',month:'long'}),90,370);x.fillStyle=MU;x.font=`500 38px ${sans}`;x.fillText(ms[0].date.slice(0,4),90,430);
+    const top=500,bot=1760,gap=24,cw=(900-gap*(n-1))/n;
+    ms.forEach((m,i)=>{const X=90+i*(cw+gap);const cs=(m.emotions||[]).map(emo).filter(Boolean);const bh=s.text&&(m.quote||m.text)?640:760;
+      x.save();rr(x,X,top,cw,bh,28);x.clip();if(cs.length){const hh=bh/cs.length;cs.forEach((e,j)=>{x.fillStyle=e.color;x.fillRect(X,top+j*hh,cw,hh+1)})}else{x.fillStyle='#9A96AE';x.fillRect(X,top,cw,bh)}x.restore();
+      let y=top+bh+70;x.fillStyle=MU;x.font=`500 36px ${sans}`;x.fillText(cut(authorName(m),18),X,y);y+=80;
+      x.fillStyle=TX;const fs=n>2?52:68;x.font=`${fs}px ${serif}`;wrapLines(x,memTitle(m),cw,3).forEach(l=>{x.fillText(l,X,y);y+=fs*1.08});
+      x.fillStyle=MU;x.font=`500 34px ${sans}`;wrapLines(x,cs.map(e=>e.name).join(' · '),cw,2).forEach(l=>{x.fillText(l,X,y+14);y+=46});
+      if(s.text&&(m.quote||m.text)){x.fillStyle=TX;x.font=`italic ${n>2?30:36}px ${serif}`;wrapLines(x,'«'+(m.quote||m.text)+'»',cw,n>2?4:5).forEach((l,k)=>x.fillText(l,X,y+40+k*(n>2?38:46)))}
+    });
+    footer();
   }else if(s.kind==='sky'){
     const L=skyLast;if(!L)return;const C=skyColors(s.theme);
     x.fillStyle=C.bg;x.fillRect(0,0,W,H);
@@ -2055,6 +2182,7 @@ $('#importer').addEventListener('change',async e=>{
   const f=e.target.files[0];e.target.value='';if(!f)return;
   try{
     const p=JSON.parse(await f.text());
+    if(p&&p.kind==='memorandum-drawer'){if(!Array.isArray(p.memories))throw 0;if(dlg.open)closeDlg();await receiveDrawer(p);return}
     if(!Array.isArray(p.emotions)||!Array.isArray(p.memories))throw 0;
     const fresh=S.memories.length===0;
     const merge=(cur,inc)=>{const m=new Map((cur||[]).map(x=>[x.id,x]));(inc||[]).forEach(x=>{if(x&&x.id&&(fresh||!m.has(x.id)))m.set(x.id,x)});return [...m.values()]};
@@ -2740,7 +2868,7 @@ document.addEventListener('click',e=>{
     case 'share-stat':if(!isPlus()){goPlus();break}openShare('stat',{mode:b.dataset.m,id:v});break;
     case 'share-style':if(shareState){shareState.style=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'share-show':S.settings.share=v==='on';savePalette();render();break;
-    case 'card-save':{const k=b.dataset.k;if(k==='story'){saveCardFromCanvas(window._storyCanvas,{kind:'story',label:range(rep.period,rep.offset).label})}else if(shareState){const sd=shareState;let label='';if(sd.kind==='mem'){const m=memOf(sd.data);label=m?memTitle(m):''}else if(sd.kind==='day')label=fmt(sd.data);else if(sd.kind==='stat'){const d=sd.data;label=d.mode==='emo'?(emo(d.id)||{}).name:d.mode==='drawer'?(drawerOf(d.id)||{}).name:cap(typeOf(d.id).plural)}else if(sd.kind==='conn'){const a1=memOf(sd.data.a),b1=memOf(sd.data.b);label=a1&&b1?memTitle(a1)+' + '+memTitle(b1):''}else if(sd.kind==='sky')label=skyLast?cap(skyLast.label):'';saveCardFromCanvas(window._shareCanvas,{kind:sd.kind,label:label||''})}break}
+    case 'card-save':{const k=b.dataset.k;if(k==='story'){saveCardFromCanvas(window._storyCanvas,{kind:'story',label:range(rep.period,rep.offset).label})}else if(shareState){const sd=shareState;let label='';if(sd.kind==='mem'){const m=memOf(sd.data);label=m?memTitle(m):''}else if(sd.kind==='day')label=fmt(sd.data);else if(sd.kind==='stat'){const d=sd.data;label=d.mode==='emo'?(emo(d.id)||{}).name:d.mode==='drawer'?(drawerOf(d.id)||{}).name:cap(typeOf(d.id).plural)}else if(sd.kind==='conn'){const a1=memOf(sd.data.a),b1=memOf(sd.data.b);label=a1&&b1?memTitle(a1)+' + '+memTitle(b1):''}else if(sd.kind==='sky')label=skyLast?cap(skyLast.label):'';else if(sd.kind==='dual'){const a=memOf((sd.data.ids||[])[0]);label=a?fmt(a.date):''}saveCardFromCanvas(window._shareCanvas,{kind:sd.kind,label:label||''})}break}
     case 'go-cards':closeDlg();archMode='tarjetas';go('archivo');break;
     case 'card-open':openCard(id);break;
     case 'card-share':shareCard(id,false);break;
@@ -2758,6 +2886,11 @@ document.addEventListener('click',e=>{
     case 'fb-go':go('perfil');setTimeout(()=>{const el=$('#fb-sec');if(el)el.scrollIntoView({behavior:'smooth'})},60);break;
     case 'fb-no':S.settings.fbAsked=true;savePalette();render();break;
     case 'cn-sky':{closeDlg();filters=NOFILTER();skyPeriod={kind:'all'};archMode='constelacion';go('archivo');setTimeout(()=>{if(skyLast){const i=skyLast.nodes.findIndex(n=>n.m.id===id);if(i>=0){skySelect(i);const el=$('#sky');if(el)el.scrollIntoView({block:'center'})}}},350);break}
+    case 'share-dual':openShare('dual',{ids:String(v).split(',')});break;
+    case 'rc-open':closeDlg();filters=NOFILTER();filters.drawer=id;archMode='lista';go('archivo');break;
+    case 'noop':break;
+    case 'sd-open':if(!isPlus()){goPlus();break}openShareDrawer(id);break;
+    case 'sd-send':sendDrawer(id);break;
     case 'set-font':S.settings.font=v;applyFont();savePalette();{const y=window.scrollY;render();window.scrollTo(0,y)}break;
     case 'emo-swatch':{if(!isPlus()){goPlus();break}const it=S.emotions.find(x=>x.id===id);if(it){it.color=v;saveLocal();savePalette();const y=window.scrollY;render();window.scrollTo(0,y)}break}
     case 'share-theme':if(shareState){shareState.theme=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
