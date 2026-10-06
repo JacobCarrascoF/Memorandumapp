@@ -540,7 +540,7 @@ es:{
     ['Tu fábrica de recuerdos','Guarda lo que vives, lees, ves y escuchas, y ponle el color de cómo te hizo sentir. Con el tiempo, tu archivo se convierte en un mapa de tu memoria. Y si un día se te pasa, no pasa nada: puedes añadirlo después y ponerle la fecha de aquel día.'],
     ['Solo tuyo',c=>I18N.es.privOnb(c)],
     ['Cada emoción es un color','Empiezas con ocho emociones. En Paleta puedes renombrarlas, cambiar su tono o crear las tuyas. En cada recuerdo eliges hasta tres, y la primera es la principal.'],
-    ['Archiva y conecta','Guarda cada recuerdo en un cajón, ponle etiquetas y enlázalo con otros. Al guardarlo te enseño con qué se conecta, y en el Archivo puedes verlos como una constelación. Y si quieres, puedes compartir un cajón con tu pareja o tu familia.'],
+    ['Archiva y conecta','Guarda cada recuerdo en un cajón, ponle etiquetas y enlázalo con otros. Al guardarlo te enseño con qué se conecta, y en el Archivo puedes verlos como una constelación.'],
     ['Vuelve a lo que sentiste','Cada día te devuelvo un recuerdo del archivo. En Informe ves tu semana, tu mes o tu año en color. Y puedes crear imágenes de tus recuerdos: se guardan solo para ti, y las compartes si quieres.'],
     ['Tu copia de seguridad',c=>`Tus recuerdos se guardan solos ${c?'en tu cuenta':'en este dispositivo'}. Además, te avisaré para guardar una copia en un archivo. ¿Cada cuánto quieres que te lo recuerde?`]
   ],
@@ -756,7 +756,7 @@ en:{
     ['Your factory of memories','Save what you live, read, watch and listen to, and give it the colour of how it made you feel. Over time, your archive becomes a map of your memory. And if you miss a day, no problem: you can add it later and give it the date it happened.'],
     ['Only yours',c=>I18N.en.privOnb(c)],
     ['Each emotion is a colour','You start with eight emotions. In Palette you can rename them, change their shade or create your own. For each memory you choose up to three, and the first is the main one.'],
-    ['File and connect','Put each memory in a drawer, give it tags and link it to others. When you save it, I’ll show you what it connects with, and in the Archive you can see them as a constellation. You can also share a drawer with your partner or family.'],
+    ['File and connect','Put each memory in a drawer, give it tags and link it to others. When you save it, I’ll show you what it connects with, and in the Archive you can see them as a constellation.'],
     ['Go back to what you felt','Every day I bring back a memory from the archive. In Report you see your week, month or year in colour. And you can create images of your memories: they’re kept just for you, and you share them only if you want.'],
     ['Your backup',c=>`Your memories are saved automatically ${c?'to your account':'on this device'}. I will also remind you to save a copy as a file. How often would you like me to remind you?`]
   ],
@@ -972,7 +972,7 @@ ca:{
     ['La teva fàbrica de records',`Desa el que vius, llegeixes, mires i escoltes, i posa-hi el color de com et va fer sentir. Amb el temps, el teu arxiu es converteix en un mapa de la teva memòria. I si un dia se't passa, no passa res: el pots afegir després i posar-hi la data d'aquell dia.`],
     ['Només teu',c=>I18N.ca.privOnb(c)],
     ['Cada emoció és un color',`Comences amb vuit emocions. A Paleta les pots reanomenar, canviar-ne el to o crear-ne de teves. En cada record en tries fins a tres, i la primera és la principal.`],
-    ['Arxiva i connecta',`Desa cada record en un calaix, posa-hi etiquetes i enllaça'l amb d'altres. En desar-lo et mostro amb què es connecta, i a l'Arxiu els pots veure com una constel·lació. I si vols, pots compartir un calaix amb la teva parella o la teva família.`],
+    ['Arxiva i connecta',`Desa cada record en un calaix, posa-hi etiquetes i enllaça'l amb d'altres. En desar-lo et mostro amb què es connecta, i a l'Arxiu els pots veure com una constel·lació.`],
     ['Torna al que vas sentir',`Cada dia et retorno un record de l'arxiu. A Informe veus la teva setmana, el teu mes o el teu any en color. I pots crear imatges dels teus records: es desen només per a tu, i les comparteixes si vols.`],
     ['La teva còpia de seguretat',c=>`Els teus records es desen sols ${c?'al teu compte':'en aquest dispositiu'}. A més, t'avisaré per desar una còpia en un fitxer. Cada quant vols que t'ho recordi?`]
   ],
@@ -1080,6 +1080,8 @@ const emo=id=>S.emotions.find(e=>e.id===id)||(S.guestEmotions||[]).find(e=>e.id=
 const allEmos=()=>[...S.emotions,...(S.guestEmotions||[])];
 const drawerOf=id=>S.drawers.find(d=>d.id===id);
 const memOf=id=>S.memories.find(m=>m.id===id);
+/* Compartir cajones: apagado hasta resolver bien colores y emociones entre personas */
+const SHARE_ON=false;
 /* Recuerdos de otra persona (cajón compartido): solo se ven dentro de su cajón, salvo que en ese cajón elijas mezclarlos */
 function foreignMem(m){const me=S.settings&&S.settings.deviceId;return !!(m.origin&&me&&m.origin!==me)}
 function hiddenMem(m){return foreignMem(m)&&!(m.drawers||[]).some(id=>{const d=drawerOf(id);return d&&d.mix})}
@@ -1412,7 +1414,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.49';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.50';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackSection(){
@@ -1455,10 +1457,10 @@ function vPaleta(){
   </div>
   <h2 class="sec">${t('drawersTitle')}</h2>
   <p class="lead">${esc(t('drawersLead'))}</p>
-  <div class="drawers">${S.drawers.map(d=>`<div class="drawer"><input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${d.shared?`👥 ${esc(t('sdShared'))} · `:''}${dcnt(d.id)}</small><button class="btn quiet" data-act="drawer-go" data-id="${d.id}">${t('open')}</button><button class="btn quiet" data-act="sd-open" data-id="${d.id}">${esc(t('sdBtn'))}${isPlus()?'':' '+plusBadge()}</button>${d.shared?`<button class="btn quiet" data-act="sd-stop" data-id="${d.id}">${esc(t('sdStop'))}</button>`:''}<button class="btn quiet danger" data-act="drawer-del" data-id="${d.id}">${t('del')}</button></div>`).join('')}
+  <div class="drawers">${S.drawers.map(d=>`<div class="drawer"><input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${d.shared?`👥 ${esc(t('sdShared'))} · `:''}${dcnt(d.id)}</small><button class="btn quiet" data-act="drawer-go" data-id="${d.id}">${t('open')}</button>${SHARE_ON?`<button class="btn quiet" data-act="sd-open" data-id="${d.id}">${esc(t('sdBtn'))}${isPlus()?'':' '+plusBadge()}</button>`:''}${d.shared?`<button class="btn quiet" data-act="sd-stop" data-id="${d.id}">${esc(t('sdStop'))}</button>`:''}<button class="btn quiet danger" data-act="drawer-del" data-id="${d.id}">${t('del')}</button></div>`).join('')}
     <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newDrawerName'))}" data-field="new-drawer-pal" aria-label="${esc(t('newDrawerName'))}"><button class="btn" data-act="drawer-add">${t('addDrawer')}</button></div>
   </div>
-  <div class="row" style="margin-top:12px;align-items:center"><button class="btn" data-act="import">👥 ${esc(t('sdReceive'))}</button><span class="note" style="flex:1 1 200px">${esc(t('sdReceiveHint'))}</span></div>
+  ${SHARE_ON?`<div class="row" style="margin-top:12px;align-items:center"><button class="btn" data-act="import">👥 ${esc(t('sdReceive'))}</button><span class="note" style="flex:1 1 200px">${esc(t('sdReceiveHint'))}</span></div>`:''}
   <h2 class="sec">${t('typesTitle')}</h2>
   <p class="lead">${esc(t('typesLead'))}</p>
   <div class="drawers">${(S.customTypes||[]).map(c=>`<div class="drawer"><input value="${esc(c.name)}" data-field="type-name" data-id="${c.id}" aria-label="${esc(t('typeName'))}"><small>${S.memories.filter(m=>m.type===c.id).length}</small><button class="btn quiet" data-act="type-go" data-id="${c.id}">${t('open')}</button><button class="btn quiet danger" data-act="type-del" data-id="${c.id}">${t('del')}</button></div>`).join('')}
@@ -2769,7 +2771,7 @@ function plusSection(){
   if(st==='active'&&p.plan!=='year')return head+`<p class="note" style="font-size:15px">${esc(t('plusActiveLife',t('brand')))}</p>`;
   if(st==='active')return head+`<p class="note" style="font-size:15px">${esc(t('plusActiveYear',fmt(p.exp),t('brand')))}</p><p class="note">${esc(t('plusNoAuto'))}</p>${buy}${codeRow(t('plusRenewCode'))}`;
   const intro=st==='expired'?`<p class="note" style="font-size:15px">${esc(t('plusExpired',fmt(p.exp)))}</p>`:(trialActive()?`<div class="wash" style="--c:var(--accent);margin-bottom:12px"><p style="margin:0">${esc(t('trialActive',trialLeft()))}</p></div>`:'')+`<p class="note" style="font-size:15px">${esc(t('plusLead'))}</p>`;
-  return head+intro+`<ul class="plus-list">${t('plusFeatures').map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+  return head+intro+`<ul class="plus-list">${t('plusFeatures').filter((x,i)=>SHARE_ON||i>0).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
   <p style="margin:12px 0 4px">${esc(t('plusPrice'))}</p><p class="note" style="margin:0 0 12px">${esc(t('plusNoAuto'))}</p>${buy}${codeRow(st==='expired'?t('plusRenewCode'):t('plusHaveCode'))}`;
 }
 function goPlus(){closeDlg();go('perfil');setTimeout(()=>{const el=$('#plus-sec');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},80)}
