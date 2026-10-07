@@ -444,7 +444,11 @@ es:{
   galleryTitle:'Tus fotos por emoción', galleryEmpty:'Todavía no hay fotos en tus recuerdos.', galleryLocked:'Con Plus, todas tus fotos se ordenan por emoción en un mosaico de tu año.',
   noEmotion:'Sin emoción', allYears:'Todos los años',
   plusLead:'Para quien quiere ir más allá, y para apoyar que esta app siga creciendo.',
-  plusFeatures:['Cajones compartidos: comparte un cajón con tu pareja o tu familia y tened los mismos recuerdos.','Más diseños para compartir en Instagram: mosaico de tus días y tus fotos en polaroid.','Explora cada emoción, cada cajón y cada tipo de recuerdo: cuándo aparecen, qué días, a qué hora y con qué recuerdos.','El mapa en color de cualquier año o de las fechas que quieras, para guardarlo como imagen.','Estadísticas con gráficos: quesitos y barras de tus emociones, tus días, tus horas, tus palabras y mucho más.','Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
+  tagsAll:n=>`Ver todas (${n})`, tagsFewer:'Ver menos',
+  bookConn:'Conecta con', bookLinked:'enlazado', bookPage:n=>`p. ${n}`,
+  bookBtn:'Libro en PDF', bookTitle:'Tu libro en PDF', bookLead:n=>`Un libro en tamaño A5 con ${n===1?'tu recuerdo':'tus '+n+' recuerdos'}: portada, tus cifras, un recuerdo por página con su color y un cierre con tu paleta.`, bookInclText:'Incluir textos y citas', bookBleed:'Para imprenta', bookBleedHint:'Añade 3 mm de margen de corte. Déjalo sin marcar para imprimir en casa o en una copistería.', bookPrivate:'El PDF se crea en tu móvil. Nadie más lo ve hasta que tú lo compartes.', bookMake:'Crear PDF', bookMaking:'Creando…', bookStepPhotos:'Preparando las fotos…', bookStepPage:(i,n)=>`Página del recuerdo ${i} de ${n}…`, bookStepFile:'Montando el archivo…', bookDone:n=>`Listo: ${n} páginas.`, bookError:'No se ha podido crear el PDF. Prueba sin fotos o con un periodo más corto.', bookBy:n=>`de ${n}`, bookFigures:'En cifras', bookMems:'recuerdos', bookDays:'días con recuerdos', bookEmotions:'Tus emociones', bookWords:'Tus palabras', bookCont:'continúa', bookMade:'Hecho con Memorándum · memorandumapp.com', bookFile:'libro',
+  filmBtn:'Tu película', filmTitle:'Tu película en color', filmT_semana:'Tu semana en color', filmT_mes:'Tu mes en color', filmT_anio:'Tu año en color', filmEmpty:'Aún no hay recuerdos en este periodo.', filmCount:n=>n===1?'1 recuerdo':n+' recuerdos', filmEnd:'Así se sintió.', filmPlay:'Reproducir', filmPause:'Pausa', filmInclText:'Incluir citas y textos', filmNote:'El vídeo se crea en tu móvil: nada sale de él hasta que tú lo compartes.', filmSave:'Crear vídeo', filmRecShort:'Creando…', filmRecording:'Creando el vídeo mientras se reproduce. No cierres esta ventana.', filmReady:'Tu vídeo está listo.', filmShare:'Guardar o compartir vídeo', filmAgain:'Crear de nuevo', filmNoRec:'Este navegador no puede crear vídeos. Prueba con Chrome o Safari actualizados.', filmDone:'Vídeo listo', filmFile:'pelicula',
+  plusFeatures:['Cajones compartidos: comparte un cajón con tu pareja o tu familia y tened los mismos recuerdos.','Tu película en color: tus recuerdos de la semana, el mes o el año, uno tras otro, en un vídeo para Instagram.','Tu libro en PDF: tu año, tu mes o tu semana en un libro A5 para guardar o imprimir.','Más diseños para compartir en Instagram: mosaico de tus días y tus fotos en polaroid.','Explora cada emoción, cada cajón y cada tipo de recuerdo: cuándo aparecen, qué días, a qué hora y con qué recuerdos.','El mapa en color de cualquier año o de las fechas que quieras, para guardarlo como imagen.','Estadísticas con gráficos: quesitos y barras de tus emociones, tus días, tus horas, tus palabras y mucho más.','Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
   trialActive:n=>`Estás probando Plus gratis: te ${n===1?'queda 1 día':'quedan '+n+' días'}. Todo lo que crees durante la prueba se queda contigo.`,
   trialWelcome:'Tienes 14 días de Plus gratis para probarlo todo: estadísticas, hasta 5 fotos por recuerdo, el mapa de cualquier año y más. Sin dar ningún dato.',
   trialSoon:n=>`Tu prueba de Plus termina en ${n===1?'1 día':n+' días'}. Todo lo que creaste se queda contigo.`, trialEnded:'Tu prueba de Plus ha terminado. Todo lo que creaste sigue aquí.', gotIt:'Entendido',
@@ -661,7 +665,11 @@ en:{
   galleryTitle:'Your photos by emotion', galleryEmpty:'There are no photos in your memories yet.', galleryLocked:'With Plus, all your photos are arranged by emotion into a mosaic of your year.',
   noEmotion:'No emotion', allYears:'All years',
   plusLead:'For those who want to go further, and to help this app keep growing.',
-  plusFeatures:['Shared drawers: share a drawer with your partner or family and keep the same memories.','More designs to share on Instagram: a mosaic of your days and your photos as polaroids.','Explore each emotion, each drawer and each type of memory: when they appear, which days, what time and in which memories.','The colour map of any year or any dates you like, to save as an image.','Statistics with charts: pies and bars of your emotions, your days, your hours, your words and much more.','Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
+  tagsAll:n=>`See all (${n})`, tagsFewer:'See fewer',
+  bookConn:'Connects with', bookLinked:'linked', bookPage:n=>`p. ${n}`,
+  bookBtn:'PDF book', bookTitle:'Your PDF book', bookLead:n=>`An A5 book with ${n===1?'your memory':'your '+n+' memories'}: a cover, your figures, one memory per page in its colour and a closing page with your palette.`, bookInclText:'Include texts and quotes', bookBleed:'For a print shop', bookBleedHint:'Adds a 3 mm bleed. Leave it unticked to print at home or at a copy shop.', bookPrivate:'The PDF is made on your phone. Nobody else sees it until you share it.', bookMake:'Create PDF', bookMaking:'Creating…', bookStepPhotos:'Preparing photos…', bookStepPage:(i,n)=>`Memory page ${i} of ${n}…`, bookStepFile:'Putting the file together…', bookDone:n=>`Done: ${n} pages.`, bookError:'The PDF could not be created. Try without photos or with a shorter period.', bookBy:n=>`by ${n}`, bookFigures:'In figures', bookMems:'memories', bookDays:'days with memories', bookEmotions:'Your emotions', bookWords:'Your words', bookCont:'continued', bookMade:'Made with Memorandum · memorandumapp.com', bookFile:'book',
+  filmBtn:'Your film', filmTitle:'Your film in colour', filmT_semana:'Your week in colour', filmT_mes:'Your month in colour', filmT_anio:'Your year in colour', filmEmpty:'No memories in this period yet.', filmCount:n=>n===1?'1 memory':n+' memories', filmEnd:'This is how it felt.', filmPlay:'Play', filmPause:'Pause', filmInclText:'Include quotes and texts', filmNote:'The video is made on your phone: nothing leaves it until you share it.', filmSave:'Create video', filmRecShort:'Creating…', filmRecording:'Creating the video while it plays. Don’t close this window.', filmReady:'Your video is ready.', filmShare:'Save or share video', filmAgain:'Create again', filmNoRec:'This browser can’t create videos. Try an up-to-date Chrome or Safari.', filmDone:'Video ready', filmFile:'film',
+  plusFeatures:['Shared drawers: share a drawer with your partner or family and keep the same memories.','Your film in colour: your week, month or year of memories, one after another, in a video for Instagram.','Your PDF book: your year, month or week as an A5 book to keep or print.','More designs to share on Instagram: a mosaic of your days and your photos as polaroids.','Explore each emotion, each drawer and each type of memory: when they appear, which days, what time and in which memories.','The colour map of any year or any dates you like, to save as an image.','Statistics with charts: pies and bars of your emotions, your days, your hours, your words and much more.','Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
   trialActive:n=>`You're trying Plus for free: ${n===1?'1 day':n+' days'} left. Everything you create during the trial stays with you.`,
   trialWelcome:'You have 14 days of Plus for free to try everything: statistics, up to 5 photos per memory, the map of any year and more. No details needed.',
   trialSoon:n=>`Your Plus trial ends in ${n===1?'1 day':n+' days'}. Everything you created stays with you.`, trialEnded:'Your Plus trial has ended. Everything you created is still here.', gotIt:'Got it',
@@ -878,7 +886,11 @@ ca:{
   galleryTitle:'Les teves fotos per emoció', galleryEmpty:'Encara no hi ha fotos als teus records.', galleryLocked:`Amb Plus, totes les teves fotos s'ordenen per emoció en un mosaic del teu any.`,
   noEmotion:'Sense emoció', allYears:'Tots els anys',
   plusLead:'Per a qui vol anar més enllà, i per ajudar que aquesta app continuï creixent.',
-  plusFeatures:['Calaixos compartits: comparteix un calaix amb la teva parella o la teva família i tingueu els mateixos records.','Més dissenys per compartir a Instagram: mosaic dels teus dies i les teves fotos en polaroid.','Explora cada emoció, cada calaix i cada tipus de record: quan apareixen, quins dies, a quina hora i amb quins records.','El mapa en color de qualsevol any o de les dates que vulguis, per desar-lo com a imatge.','Estadístiques amb gràfics: formatges i barres de les teves emocions, els teus dies, les teves hores, les teves paraules i molt més.','Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
+  tagsAll:n=>`Veure-les totes (${n})`, tagsFewer:'Veure’n menys',
+  bookConn:'Connecta amb', bookLinked:'enllaçat', bookPage:n=>`p. ${n}`,
+  bookBtn:'Llibre en PDF', bookTitle:'El teu llibre en PDF', bookLead:n=>`Un llibre en mida A5 amb ${n===1?'el teu record':'els teus '+n+' records'}: portada, les teves xifres, un record per pàgina amb el seu color i un tancament amb la teva paleta.`, bookInclText:'Inclou textos i cites', bookBleed:'Per a impremta', bookBleedHint:'Afegeix 3 mm de marge de tall. Deixa-ho sense marcar per imprimir a casa o en una copisteria.', bookPrivate:'El PDF es crea al teu mòbil. Ningú més el veu fins que tu el comparteixes.', bookMake:'Crea el PDF', bookMaking:'Creant…', bookStepPhotos:'Preparant les fotos…', bookStepPage:(i,n)=>`Pàgina del record ${i} de ${n}…`, bookStepFile:'Muntant el fitxer…', bookDone:n=>`Fet: ${n} pàgines.`, bookError:'No s’ha pogut crear el PDF. Prova sense fotos o amb un període més curt.', bookBy:n=>`de ${n}`, bookFigures:'En xifres', bookMems:'records', bookDays:'dies amb records', bookEmotions:'Les teves emocions', bookWords:'Les teves paraules', bookCont:'continua', bookMade:'Fet amb Memoràndum · memorandumapp.com', bookFile:'llibre',
+  filmBtn:'La teva pel·lícula', filmTitle:'La teva pel·lícula en color', filmT_semana:'La teva setmana en color', filmT_mes:'El teu mes en color', filmT_anio:'El teu any en color', filmEmpty:'Encara no hi ha records en aquest període.', filmCount:n=>n===1?'1 record':n+' records', filmEnd:'Així es va sentir.', filmPlay:'Reprodueix', filmPause:'Pausa', filmInclText:'Inclou cites i textos', filmNote:'El vídeo es crea al teu mòbil: no en surt res fins que tu el comparteixes.', filmSave:'Crea el vídeo', filmRecShort:'Creant…', filmRecording:'Creant el vídeo mentre es reprodueix. No tanquis aquesta finestra.', filmReady:'El teu vídeo és a punt.', filmShare:'Desa o comparteix el vídeo', filmAgain:'Torna a crear', filmNoRec:'Aquest navegador no pot crear vídeos. Prova amb Chrome o Safari actualitzats.', filmDone:'Vídeo a punt', filmFile:'pellicula',
+  plusFeatures:['Calaixos compartits: comparteix un calaix amb la teva parella o la teva família i tingueu els mateixos records.','La teva pel·lícula en color: els teus records de la setmana, el mes o l’any, un rere l’altre, en un vídeo per a Instagram.','El teu llibre en PDF: el teu any, el teu mes o la teva setmana en un llibre A5 per guardar o imprimir.','Més dissenys per compartir a Instagram: mosaic dels teus dies i les teves fotos en polaroid.','Explora cada emoció, cada calaix i cada tipus de record: quan apareixen, quins dies, a quina hora i amb quins records.','El mapa en color de qualsevol any o de les dates que vulguis, per desar-lo com a imatge.','Estadístiques amb gràfics: formatges i barres de les teves emocions, els teus dies, les teves hores, les teves paraules i molt més.','Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
   trialActive:n=>`Estàs provant Plus gratis: et ${n===1?'queda 1 dia':'queden '+n+' dies'}. Tot el que creïs durant la prova es queda amb tu.`,
   trialWelcome:"Tens 14 dies de Plus gratis per provar-ho tot: estadístiques, fins a 5 fotos per record, el mapa de qualsevol any i més. Sense donar cap dada.",
   trialSoon:n=>`La teva prova de Plus acaba d'aquí a ${n===1?'1 dia':n+' dies'}. Tot el que has creat es queda amb tu.`, trialEnded:'La teva prova de Plus ha acabat. Tot el que vas crear continua aquí.', gotIt:'Entesos',
@@ -1437,7 +1449,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.51';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.56';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackSection(){
@@ -1598,7 +1610,7 @@ function vInforme(){
   }
   h+=plusStatsHTML(r,st,ps);
   if(showShare())h+=`<h2 class="sec">${t('share')}</h2><p class="lead">${esc(t('shareLead'))}</p>
-  <button class="btn" data-act="story">${IMG_ICON}${t('makeCard')}</button>`;
+  <div class="row"><button class="btn" data-act="story">${IMG_ICON}${t('makeCard')}</button><button class="btn" data-act="film">▶ ${esc(t('filmBtn'))}${isPlus()?'':' '+plusBadge()}</button><button class="btn" data-act="book">📖 ${esc(t('bookBtn'))}${isPlus()?'':' '+plusBadge()}</button></div>`;
   return h;
 }
 
@@ -1788,7 +1800,7 @@ function openConnections(m){
   return true;
 }
 /* ---------- Editor ---------- */
-function openEditor(id,preset={}){
+function openEditor(id,preset={}){tagsAll=false;
   const m=id?memOf(id):null;
   draft=m?clone(m):{id:null,type:preset.type||'dia',title:'',source:'',text:'',emotions:preset.emo?[preset.emo]:[],tags:[],drawers:(preset.type==='dia'&&drawerOf('d-diario'))?['d-diario']:[],date:preset.date||iso(new Date()),time:(()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')})(),links:[]};
   normDrawers(draft);
@@ -1796,10 +1808,19 @@ function openEditor(id,preset={}){
   draft.photos=[...(draft.photos||[])];draft._new=[];draft._saved=false;draft._colors=null;
   edErr='';linkQ='';newDrawerName='';newTypeOpen=false;newTypeName='';renderEditor();
 }
+function recentTags(){const out=[];sorted(vis()).forEach(m=>(m.tags||[]).forEach(x=>{if(!out.includes(x))out.push(x)}));return out}
+let tagsAll=false;
+function tagSugg(q){q=(q||'').trim().toLowerCase().replace(/^#/,'');const have=x=>!draft||!draft.tags.includes(x);
+  if(q){const all=allTags().filter(have);return [...all.filter(x=>x.startsWith(q)),...all.filter(x=>!x.startsWith(q)&&x.includes(q))].slice(0,12)}
+  if(tagsAll)return allTags().filter(have).sort((a,b)=>a.localeCompare(b));
+  const out=[];[...recentTags().slice(0,5),...allTags()].forEach(x=>{if(have(x)&&!out.includes(x))out.push(x)});return out.slice(0,10)}
+function tagSuggHTML(list,q){const total=allTags().filter(x=>!draft||!draft.tags.includes(x)).length;
+  const more=!q&&total>10?`<button class="chip" data-act="ed-tags-all" style="border-style:dashed">${esc(tagsAll?t('tagsFewer'):t('tagsAll',total))}</button>`:'';
+  return list.length||more?`<div class="row" style="margin-top:8px;${tagsAll&&!q?'max-height:180px;overflow:auto':''}">${list.map(x=>`<button class="chip" data-act="ed-tag" data-v="${esc(x)}">+ ${esc(x)}</button>`).join('')}${more}</div>`:''}
 function allTags(){const c={};vis().forEach(m=>(m.tags||[]).forEach(x=>c[x]=(c[x]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(x=>x[0])}
 function renderEditor(focusSel){
   const ty=typeOf(draft.type);
-  const sugg=allTags().filter(x=>!draft.tags.includes(x)).slice(0,8);
+  const sugg=tagSugg('');
   const lq=linkQ.trim().toLowerCase();
   const cands=S.memories.filter(o=>o.id!==draft.id&&!draft.links.includes(o.id)&&(!lq||[o.title,o.text,o.source,o.quote,...(o.tags||[])].join(' ').toLowerCase().includes(lq)));
   const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('remove'))}</span>`;
@@ -1823,7 +1844,7 @@ function renderEditor(focusSel){
   <label class="f" for="ed-tag">${t('tags')} <small>${t('tagHint')}</small></label>
   ${draft.tags.length?`<div class="row" style="margin-bottom:8px">${draft.tags.map(x=>`<button class="chip" data-act="ed-untag" data-v="${esc(x)}">#${esc(x)} ${rm}</button>`).join('')}</div>`:''}
   <input class="in" id="ed-tag" data-ed-tag autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" style="text-transform:lowercase" placeholder="${esc(t('tagPh'))}">
-  ${sugg.length?`<div class="row" style="margin-top:8px">${sugg.map(x=>`<button class="chip" data-act="ed-tag" data-v="${esc(x)}">+ ${esc(x)}</button>`).join('')}</div>`:''}
+  <div id="ed-sugg">${tagSuggHTML(sugg,'')}</div>
   <label class="f">${t('drawersTitle')} <small>${esc(t('drawersHint'))}</small></label>
   <div class="row">${S.drawers.map(d=>`<button class="chip" data-act="ed-drawer" data-v="${d.id}" aria-pressed="${draft.drawers.includes(d.id)}">${esc(d.name)}</button>`).join('')}</div>
   <div class="row" style="margin-top:8px"><input class="in" style="flex:1 1 180px" id="ed-newdrawer" data-ed-newdrawer placeholder="${esc(t('orNewDrawer'))}" value="${esc(newDrawerName)}"><button class="btn" data-act="ed-adddrawer">${t('createDrawer')}</button></div>
@@ -2232,6 +2253,312 @@ async function drawShare(){
 }
 
 /* ---------- Copias ---------- */
+/* ---------- Película: tus recuerdos uno tras otro, en color (Plus) ---------- */
+let film=null;
+function filmPeriodTitle(){return t('filmT_'+rep.period)}
+async function openFilm(){
+  if(!isPlus()){goPlus();return}
+  const r=range(rep.period,rep.offset);const ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0)).slice(-36);
+  if(!ms.length){toast(t('filmEmpty'));return}
+  film={ms,label:r.label,title:filmPeriodTitle(),theme:'dark',photo:true,text:false,t0:0,playing:true,raf:0,imgs:new Map(),rec:null,blob:null};
+  openDlg(`<div class="dlg-head"><h2>${esc(t('filmTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  <div class="story-prev"><canvas id="film-cv" width="1080" height="1920" style="width:100%;height:auto;display:block;border-radius:14px" aria-label="${esc(t('filmTitle'))}"></canvas></div>
+  <div id="film-ctl">${filmControls()}</div>`);
+  try{await Promise.all([document.fonts.load('120px '+FONT_FAM[curFont()]),document.fonts.load('italic 52px '+FONT_FAM[curFont()]),document.fonts.load('500 40px "Instrument Sans"')])}catch(e){}
+  for(const m of ms){if((m.photos||[]).length){try{const u=await photoURL(m.photos[0]);if(u)film.imgs.set(m.id,await loadImg(u))}catch(e){}}}
+  filmStart();
+}
+function filmControls(){
+  const f=film;if(!f)return '';const rec=f.rec;
+  const box=(k,l)=>`<label class="row" style="justify-content:center;font-size:15px;gap:8px;margin-top:8px"><input type="checkbox" data-act="film-opt" data-v="${k}"${f[k]?' checked':''}${rec?' disabled':''}> ${esc(l)}</label>`;
+  return `<div class="row" style="justify-content:center;margin-top:12px;gap:8px"><button class="btn" data-act="film-play"${rec?' disabled':''}>${f.playing?'❚❚ '+esc(t('filmPause')):'▶ '+esc(t('filmPlay'))}</button><div class="seg" role="group"><button data-act="film-theme" data-v="dark" aria-pressed="${f.theme==='dark'}"${rec?' disabled':''}>${esc(t('themeDark'))}</button><button data-act="film-theme" data-v="light" aria-pressed="${f.theme==='light'}"${rec?' disabled':''}>${esc(t('themeLight'))}</button></div></div>
+  ${f.imgs.size?box('photo',t('inclPhoto')):''}${f.ms.some(m=>m.quote||m.text)?box('text',t('filmInclText')):''}
+  <p class="note" style="text-align:center;font-size:13.5px;margin:10px auto 0;max-width:36ch">${esc(rec?t('filmRecording'):f.blob?t('filmReady'):t('filmNote'))}</p>
+  <div class="actions" style="justify-content:center">${f.blob?`<button class="btn primary" data-act="film-share">${esc(t('filmShare'))}</button><button class="btn quiet" data-act="film-rec">${esc(t('filmAgain'))}</button>`:`<button class="btn primary" data-act="film-rec"${rec?' disabled':''}>${esc(rec?t('filmRecShort'):t('filmSave'))}</button>`}</div>`;
+}
+function filmRefresh(){const el=document.getElementById('film-ctl');if(el)el.innerHTML=filmControls()}
+function filmTimeline(){const n=film.ms.length;const per=Math.max(1.6,Math.min(2.8,34/n));return {intro:2.6,per,outro:3.6,total:2.6+n*per+3.6}}
+function filmStart(){const f=film;if(!f)return;cancelAnimationFrame(f.raf);f.t0=performance.now();f.paused=0;f.playing=true;filmRefresh();filmLoop()}
+function filmLoop(){
+  const f=film;const cv=document.getElementById('film-cv');if(!f||!cv||!dlg.open){if(f&&f.rec&&f.rec.state==='recording')try{f.rec.stop()}catch(e){};film=null;return}
+  const tl=filmTimeline();let ts=f.playing?(performance.now()-f.t0)/1000:f.paused;
+  if(ts>=tl.total){if(f.rec&&f.rec.state==='recording'){filmFrame(cv,tl.total-0.001);try{f.rec.stop()}catch(e){};return}f.t0=performance.now();ts=0}
+  filmFrame(cv,ts);f.raf=requestAnimationFrame(filmLoop);
+}
+function filmBg(m){const cs=(m.emotions||[]).map(emo).filter(Boolean).map(e=>e.color);return cs.length?cs:['#9A96AE']}
+function filmFrame(cv,ts){
+  const f=film,x=cv.getContext('2d'),W=1080,H=1920,tl=filmTimeline();
+  const serif=serifFam(),sans='"Instrument Sans", system-ui, sans-serif';const dark=f.theme==='dark';
+  const BG=dark?'#1C1A28':'#EEEBF3',TX=dark?'#EFECF7':'#26233D',MU=dark?'#A9A4C0':'#6C6884',SF=dark?'#2A2838':'#F9F8FC';
+  x.globalAlpha=1;x.fillStyle=BG;x.fillRect(0,0,W,H);
+  const n=f.ms.length;const ease=v=>v<0?0:v>1?1:v*v*(3-2*v);
+  const barcode=(Y,h,alpha)=>{const bw=900/n;f.ms.forEach((m,i)=>{const cs=filmBg(m);cs.forEach((c,j)=>{x.globalAlpha=alpha;x.fillStyle=c;x.fillRect(90+i*bw,Y+j*h/cs.length,Math.max(1,bw-(n>60?0:3)),h/cs.length+.5)})});x.globalAlpha=1};
+  const foot=()=>{x.fillStyle=MU;x.font=`500 30px ${sans}`;x.textAlign='left';x.fillText(t('brand'),90,1850);x.textAlign='right';x.fillText('memorandumapp.com',990,1850);x.textAlign='left'};
+  const lines=(text,font,col,X,Y,maxW,lh,maxL)=>{x.font=font;x.fillStyle=col;const ls=wrapLines(x,text,maxW,maxL);ls.forEach((l,i)=>x.fillText(l,X,Y+i*lh));return Y+ls.length*lh};
+  // progreso tipo historias
+  const prog=Math.min(1,ts/tl.total);
+  const drawProg=()=>{x.globalAlpha=1;x.fillStyle=dark?'rgba(255,255,255,.18)':'rgba(38,35,61,.14)';rr(x,90,70,900,8,4);x.fill();x.fillStyle=TX;rr(x,90,70,Math.max(8,900*prog),8,4);x.fill()};
+  if(ts<tl.intro){
+    const a=ease(ts/0.8);x.globalAlpha=a;
+    x.fillStyle=MU;x.font=`500 36px ${sans}`;x.fillText(f.label.toUpperCase(),90,560);
+    lines(f.title,`124px ${serif}`,TX,90,720,900,130,3);
+    barcode(1060,260*ease((ts-0.3)/1.6),1);
+    x.globalAlpha=a;x.fillStyle=MU;x.font=`500 36px ${sans}`;x.fillText(t('filmCount',n),90,1420);
+    foot();drawProg();return;
+  }
+  const k=ts-tl.intro;const i=Math.min(n-1,Math.floor(k/tl.per));
+  if(k<n*tl.per){
+    const local=k-i*tl.per,fade=Math.min(0.45,tl.per*0.25);
+    const drawMem=(m,alpha,lt)=>{
+      x.globalAlpha=alpha;const cs=filmBg(m);const img=f.photo?f.imgs.get(m.id):null;const ph=1080;
+      const z=1+0.06*(lt/tl.per);
+      if(img){const iw=img.naturalWidth,ih=img.naturalHeight,sc=Math.max(W/iw,ph/ih)*z,sw=W/sc,sh=ph/sc;x.drawImage(img,(iw-sw)/2,(ih-sh)/2,sw,sh,0,0,W,ph);
+        const g=x.createLinearGradient(0,ph-26,0,ph);g.addColorStop(0,cs[0]);g.addColorStop(1,cs[cs.length-1]);x.fillStyle=g;x.fillRect(0,ph-26,W,26)}
+      else{const g=x.createLinearGradient(0,0,W*z,ph);cs.forEach((c,j)=>g.addColorStop(cs.length===1?0:j/(cs.length-1),c));if(cs.length===1)g.addColorStop(1,cs[0]);x.fillStyle=g;x.fillRect(0,0,W,ph);
+        const rg=x.createRadialGradient(W*0.72,ph*0.35,20,W*0.72,ph*0.35,700*z);rg.addColorStop(0,'rgba(255,255,255,.22)');rg.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=rg;x.fillRect(0,0,W,ph)}
+      let Y=1170;x.fillStyle=MU;x.font=`500 34px ${sans}`;x.fillText(fmt(m.date,{weekday:'long',day:'numeric',month:'long'}),90,Y);
+      Y=lines(memTitle(m),`92px ${serif}`,TX,90,Y+108,900,98,f.text?2:3)+10;
+      let X=90;x.font=`500 34px ${sans}`;(m.emotions||[]).map(emo).filter(Boolean).forEach(e=>{const w=x.measureText(e.name).width+80;if(X+w>990)return;x.fillStyle=SF;rr(x,X,Y-6,w,60,30);x.fill();x.fillStyle=e.color;x.beginPath();x.arc(X+30,Y+24,12,0,7);x.fill();x.fillStyle=TX;x.fillText(e.name,X+52,Y+36);X+=w+14});
+      if(f.text&&(m.quote||m.text))lines(m.quote?'«'+m.quote+'»':m.text,`italic 46px ${serif}`,MU,90,Y+140,900,58,4);
+      x.globalAlpha=1};
+    if(i>0&&local<fade){drawMem(f.ms[i-1],1,tl.per);drawMem(f.ms[i],ease(local/fade),local)}else drawMem(f.ms[i],1,local);
+    if(i===0&&local<fade){/* entrada desde la portada */}
+    foot();drawProg();return;
+  }
+  // final
+  const lo=ts-tl.intro-n*tl.per,a=ease(lo/0.8);x.globalAlpha=a;
+  const c={};f.ms.forEach(m=>(m.emotions||[]).forEach((id,j)=>{if(emo(id))c[id]=(c[id]||0)+(j===0?1:.5)}));const top=Object.entries(c).sort((p,q)=>q[1]-p[1]).slice(0,3).map(([id])=>emo(id));
+  x.fillStyle=MU;x.font=`500 36px ${sans}`;x.fillText(f.label.toUpperCase(),90,420);
+  lines(t('filmEnd'),`104px ${serif}`,TX,90,560,900,112,2);
+  barcode(760,300,a);x.globalAlpha=a;
+  let Y=1220;x.font=`500 40px ${sans}`;top.forEach((e,j)=>{x.fillStyle=e.color;x.beginPath();x.arc(114,Y+j*86-14,20,0,7);x.fill();x.fillStyle=TX;x.fillText(e.name,156,Y+j*86)});
+  x.fillStyle=MU;x.font=`500 36px ${sans}`;x.fillText(t('filmCount',n),90,1600);
+  x.globalAlpha=1;foot();drawProg();
+}
+function filmPickMime(){const L=['video/mp4;codecs=avc1.42E01E','video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'];if(typeof MediaRecorder==='undefined')return null;return L.find(m=>{try{return MediaRecorder.isTypeSupported(m)}catch(e){return false}})||''}
+function filmRecord(){
+  const f=film;const cv=document.getElementById('film-cv');if(!f||!cv)return;
+  const mime=filmPickMime();if(mime===null||!cv.captureStream){toast(t('filmNoRec'));return}
+  let rec;try{rec=new MediaRecorder(cv.captureStream(30),mime?{mimeType:mime,videoBitsPerSecond:6000000}:{videoBitsPerSecond:6000000})}catch(e){toast(t('filmNoRec'));return}
+  const chunks=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+  rec.onstop=()=>{if(!film)return;const type=(rec.mimeType||mime||'video/webm').split(';')[0];film.blob=new Blob(chunks,{type});film.rec=null;film.playing=true;film.t0=performance.now();filmRefresh();cancelAnimationFrame(film.raf);filmLoop()};
+  f.blob=null;f.rec=rec;rec.start(500);filmStart();
+}
+async function filmShare(){
+  const f=film;if(!f||!f.blob)return;const ext=f.blob.type.includes('mp4')?'mp4':'webm';
+  const slug=(f.label||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const r=await deliverFile(`memorandum-${t('filmFile')}-${slug}.${ext}`,f.blob,f.blob.type);if(r==='ok')toast(t('filmDone'))
+}
+/* ---------- Libro en PDF: se crea en el móvil, con las tipografías de la app incrustadas (Plus) ---------- */
+let book=null;
+const WIN_MAP={0x20AC:0x80,0x201A:0x82,0x0192:0x83,0x201E:0x84,0x2026:0x85,0x2020:0x86,0x2021:0x87,0x02C6:0x88,0x2030:0x89,0x0160:0x8A,0x2039:0x8B,0x0152:0x8C,0x017D:0x8E,0x2018:0x91,0x2019:0x92,0x201C:0x93,0x201D:0x94,0x2022:0x95,0x2013:0x96,0x2014:0x97,0x02DC:0x98,0x2122:0x99,0x0161:0x9A,0x203A:0x9B,0x0153:0x9C,0x017E:0x9E,0x0178:0x9F};
+const WIN_INV=Object.fromEntries(Object.entries(WIN_MAP).map(([u,c])=>[c,+u]));
+function winCode(cp){if(cp===0xA0)return 32;if(cp>=32&&cp<127)return cp;if(cp>=0xA0&&cp<=0xFF)return cp;return WIN_MAP[cp]||0}
+function fontWoffURL(fam,style,w){
+  const css=[...document.querySelectorAll('style')].map(s=>s.textContent).join('');
+  const re=new RegExp('@font-face\\{font-family:"'+fam+'";font-style:'+style+';font-weight:([0-9 ]+);[^}]*?url\\((data:font/woff;base64,[^)]+)\\)','g');
+  let m,best=null;while((m=re.exec(css))){if(!best||m[1].startsWith(String(w)))best=m[2];if(m[1].startsWith(String(w)))break}return best}
+async function woffToTTF(buf){
+  const dv=new DataView(buf),n=dv.getUint16(12),tabs=[];
+  for(let i=0;i<n;i++){const o=44+i*20;tabs.push({tag:dv.getUint32(o),off:dv.getUint32(o+4),comp:dv.getUint32(o+8),orig:dv.getUint32(o+12),ck:dv.getUint32(o+16)})}
+  for(const t of tabs){let d=new Uint8Array(buf,t.off,t.comp);if(t.comp<t.orig)d=new Uint8Array(await new Response(new Blob([d]).stream().pipeThrough(new DecompressionStream('deflate'))).arrayBuffer());t.data=d}
+  let size=12+16*n;tabs.forEach(t=>size+=(t.data.length+3)&~3);const out=new Uint8Array(size),o=new DataView(out.buffer);
+  const es=Math.floor(Math.log2(n));o.setUint32(0,dv.getUint32(4));o.setUint16(4,n);o.setUint16(6,(1<<es)*16);o.setUint16(8,es);o.setUint16(10,n*16-(1<<es)*16);
+  let p=12+16*n;tabs.forEach((t,i)=>{const r=12+i*16;o.setUint32(r,t.tag);o.setUint32(r+4,t.ck);o.setUint32(r+8,p);o.setUint32(r+12,t.data.length);out.set(t.data,p);p+=(t.data.length+3)&~3});
+  return out}
+function ttfMetrics(ttf){
+  const dv=new DataView(ttf.buffer,ttf.byteOffset,ttf.byteLength),n=dv.getUint16(4),T={};
+  for(let i=0;i<n;i++){const r=12+i*16;T[String.fromCharCode(dv.getUint8(r),dv.getUint8(r+1),dv.getUint8(r+2),dv.getUint8(r+3))]=dv.getUint32(r+8)}
+  const head=T.head,upm=dv.getUint16(head+18),bbox=[dv.getInt16(head+36),dv.getInt16(head+38),dv.getInt16(head+40),dv.getInt16(head+42)];
+  const asc=dv.getInt16(T.hhea+4),desc=dv.getInt16(T.hhea+6),nh=dv.getUint16(T.hhea+34);
+  const adv=g=>dv.getUint16(T.hmtx+4*Math.min(g,nh-1));
+  let cap=Math.round(asc*.7);if(T['OS/2']&&dv.getUint16(T['OS/2'])>=2)cap=dv.getInt16(T['OS/2']+88)||cap;
+  const cm=T.cmap,nt=dv.getUint16(cm+2);let sub=null;
+  for(let i=0;i<nt;i++){const pl=dv.getUint16(cm+4+i*8),en=dv.getUint16(cm+6+i*8),of=dv.getUint32(cm+8+i*8);if(pl===3&&en===1&&dv.getUint16(cm+of)===4){sub=cm+of;break}}
+  const gid=u=>{if(!sub)return 0;const seg=dv.getUint16(sub+6)/2,ends=sub+14,starts=ends+seg*2+2,deltas=starts+seg*2,ros=deltas+seg*2;
+    for(let i=0;i<seg;i++){if(dv.getUint16(ends+i*2)>=u){const st=dv.getUint16(starts+i*2);if(st>u)return 0;const ro=dv.getUint16(ros+i*2),de=dv.getInt16(deltas+i*2);if(!ro)return (u+de)&0xFFFF;const g=dv.getUint16(ros+i*2+ro+(u-st)*2);return g?(g+de)&0xFFFF:0}}return 0};
+  const widths=[];for(let c=32;c<=255;c++){const u=(c>=128&&c<160)?WIN_INV[c]:c;widths.push(u?Math.round(adv(gid(u))*1000/upm):0)}
+  const k=1000/upm;return {widths,bbox:bbox.map(v=>Math.round(v*k)),asc:Math.round(asc*k),desc:Math.round(desc*k),cap:Math.round(cap*k)}}
+async function pdfFont(fam,style,w,name,adj){
+  const u=fontWoffURL(fam,style,w);if(!u)return null;const buf=await (await fetch(u)).arrayBuffer();const ttf=await woffToTTF(buf);
+  const m=ttfMetrics(ttf);return {ttf,...m,name,adj:adj||1,italic:style==='italic'}}
+function pdfEnc(str){const out=[];for(const ch of String(str||'')){const c=winCode(ch.codePointAt(0));if(c)out.push(c)}return out}
+function pdfHex(bytes){return bytes.map(b=>b.toString(16).padStart(2,'0')).join('')}
+function pdfW(f,str,size){return pdfEnc(str).reduce((a,c)=>a+(f.widths[c-32]||0),0)*size*f.adj/1000}
+function pdfWrap(f,str,size,maxW,maxL){
+  const out=[];String(str||'').replace(/\r/g,'').split('\n').forEach(par=>{const words=par.split(/\s+/).filter(Boolean);let line='';
+    if(!words.length){out.push('');return}
+    words.forEach(wd=>{const tryL=line?line+' '+wd:wd;if(pdfW(f,tryL,size)<=maxW){line=tryL;return}if(line)out.push(line);
+      if(pdfW(f,wd,size)>maxW){let part='';for(const ch of wd){if(pdfW(f,part+ch,size)>maxW){out.push(part);part=ch}else part+=ch}line=part}else line=wd});
+    if(line)out.push(line)});
+  if(maxL&&out.length>maxL){const r=out.slice(0,maxL);let l=r[maxL-1];while(l&&pdfW(f,l+'…',size)>maxW)l=l.slice(0,-1);r[maxL-1]=l.replace(/\s+$/,'')+'…';return r}return out}
+const pdfRGB=h=>{h=(h||'#9A96AE').replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');return [0,2,4].map(i=>(parseInt(h.slice(i,i+2),16)/255).toFixed(3)).join(' ')};
+async function pdfDeflate(bytes){try{if(typeof CompressionStream==='undefined')return null;return new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new CompressionStream('deflate'))).arrayBuffer())}catch(e){return null}}
+async function imgJPEG(img,maxSide,aspect){
+  let sw=img.naturalWidth,sh=img.naturalHeight,sx=0,sy=0;if(aspect){if(sw/sh>aspect){const nw=sh*aspect;sx=(sw-nw)/2;sw=nw}else{const nh=sw/aspect;sy=(sh-nh)/2;sh=nh}}
+  const sc=Math.min(1,maxSide/Math.max(sw,sh)),w=Math.max(1,Math.round(sw*sc)),h=Math.max(1,Math.round(sh*sc));
+  const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(img,sx,sy,sw,sh,0,0,w,h);
+  const b=await new Promise(r=>c.toBlob(r,'image/jpeg',.88));return {w,h,data:new Uint8Array(await b.arrayBuffer())}}
+
+function bookConns(m,ms){
+  const out=[];const seen=new Set([m.id]);const add=(o,why)=>{if(o&&!seen.has(o.id)&&out.length<3){seen.add(o.id);out.push({o,why})}};
+  const near=list=>[...list].sort((a,b)=>Math.abs(new Date(a.date)-new Date(m.date))-Math.abs(new Date(b.date)-new Date(m.date)));
+  (m.links||[]).map(memOf).forEach(o=>add(o,t('bookLinked')));S.memories.filter(o=>(o.links||[]).includes(m.id)).forEach(o=>add(o,t('bookLinked')));
+  if(m.title&&typeOf(m.type).src){const k=(m.title||'').trim().toLowerCase();near(ms.filter(o=>o.type===m.type&&(o.title||'').trim().toLowerCase()===k)).forEach(o=>add(o,typeOf(m.type).label.toLowerCase()))}
+  (m.tags||[]).forEach(tg=>near(ms.filter(o=>(o.tags||[]).includes(tg))).slice(0,2).forEach(o=>add(o,'#'+tg)));
+  const e0=(m.emotions||[])[0];if(e0&&emo(e0))near(ms.filter(o=>(o.emotions||[])[0]===e0)).forEach(o=>add(o,emo(e0).name.toLowerCase()));
+  return out}
+async function buildBookPDF(opts,onStep){
+  const {ms,title,label,photo,text,bleed}=opts;
+  const W=419.53,H=595.28,B=bleed?8.5:0,M=42,CW=W-2*M;
+  const fk=curFont(),serifF={clasica:'Instrument Serif',libro:'MemoLibro',maquina:'MemoMaquina',mano:'MemoMano'}[fk]||'Instrument Serif';
+  const adj={libro:.86,maquina:.76,mano:.96}[fk]||1;
+  const F={serif:await pdfFont(serifF,'normal',400,'F1',adj)};
+  F.ital=(await pdfFont(serifF,'italic',400,'F2',adj))||F.serif;F.sans=await pdfFont('Instrument Sans','normal',400,'F3');F.bold=await pdfFont('Instrument Sans','normal',600,'F4');
+  if(!F.serif||!F.sans){F.serif=F.serif||await pdfFont('Instrument Serif','normal',400,'F1');F.sans=F.sans||F.serif;F.bold=F.bold||F.sans;F.ital=F.ital||F.serif}
+  const fonts=[...new Set([F.serif,F.ital,F.sans,F.bold])];fonts.forEach((f,i)=>f.name='F'+(i+1));
+  const TX='#26233D',MU='#6C6884',LN='#D9D5E4';
+  const pages=[];const images=[];let pg=null;
+  const newPage=()=>{pg={ops:[],imgs:new Set()};pages.push(pg);return pg};
+  const X=v=>(B+v).toFixed(2),Y=v=>(B+H-v).toFixed(2);
+  const op=s=>pg.ops.push(s);
+  const rect=(x,y,w,h,col)=>op(`${pdfRGB(col)} rg ${X(x)} ${Y(y+h)} ${w.toFixed(2)} ${h.toFixed(2)} re f`);
+  const circle=(cx,cy,r,col)=>{const k=.5523*r,x0=B+cx,y0=B+H-cy;op(`${pdfRGB(col)} rg ${(x0+r).toFixed(2)} ${y0.toFixed(2)} m ${(x0+r).toFixed(2)} ${(y0+k).toFixed(2)} ${(x0+k).toFixed(2)} ${(y0+r).toFixed(2)} ${x0.toFixed(2)} ${(y0+r).toFixed(2)} c ${(x0-k).toFixed(2)} ${(y0+r).toFixed(2)} ${(x0-r).toFixed(2)} ${(y0+k).toFixed(2)} ${(x0-r).toFixed(2)} ${y0.toFixed(2)} c ${(x0-r).toFixed(2)} ${(y0-k).toFixed(2)} ${(x0-k).toFixed(2)} ${(y0-r).toFixed(2)} ${x0.toFixed(2)} ${(y0-r).toFixed(2)} c ${(x0+k).toFixed(2)} ${(y0-r).toFixed(2)} ${(x0+r).toFixed(2)} ${(y0-k).toFixed(2)} ${(x0+r).toFixed(2)} ${y0.toFixed(2)} c f`)};
+  const txt=(f,size,col,x,y,str,align)=>{const by=pdfEnc(str);if(!by.length)return;const s=size*f.adj;let xx=x;if(align==='right')xx=x-pdfW(f,str,size);else if(align==='center')xx=x-pdfW(f,str,size)/2;
+    op(`BT /${f.name} ${s.toFixed(2)} Tf ${pdfRGB(col)} rg 1 0 0 1 ${X(xx)} ${Y(y)} Tm <${pdfHex(by)}> Tj ET`)};
+  const para=(f,size,col,x,y,str,maxW,lh,maxL)=>{const ls=pdfWrap(f,str,size,maxW,maxL);ls.forEach((l,i)=>txt(f,size,col,x,y+i*lh,l));return y+ls.length*lh};
+  const image=(im,x,y,w,h)=>{pg.imgs.add(im.id);op(`q ${w.toFixed(2)} 0 0 ${h.toFixed(2)} ${X(x)} ${Y(y+h)} cm /${im.id} Do Q`)};
+  const colorsOf=m=>{const cs=(m.emotions||[]).map(emo).filter(Boolean);return cs.length?cs:[{color:'#9A96AE',name:''}]};
+  const barcode=(list,x,y,w,h)=>{const n=list.length;if(!n)return;const bw=w/n,gap=n>80?0:Math.min(2,bw*.15);list.forEach((m,i)=>{const cs=colorsOf(m);cs.forEach((e,j)=>rect(x+i*bw,y+j*h/cs.length,Math.max(.3,bw-gap),h/cs.length+.05,e.color))})};
+  const band=(m,y,h)=>{const cs=colorsOf(m);const ws=cs.map((e,i)=>i===0?2:1),tot=ws.reduce((a,b)=>a+b,0);let xx=-B;const full=W+2*B;cs.forEach((e,i)=>{const w=full*ws[i]/tot;rect(xx,y,w+.3,h,e.color);xx+=w})};
+  const footer=()=>txt(F.sans,7.5,MU,W/2,H-24,String(pages.indexOf(pg)),'center');
+  const mix=(a,b2,k)=>{const pa=[1,3,5].map(i=>parseInt(a.slice(i,i+2),16)),pb=[1,3,5].map(i=>parseInt(b2.slice(i,i+2),16));return '#'+pa.map((v,i)=>Math.round(v+(pb[i]-v)*k).toString(16).padStart(2,'0')).join('')};
+  const shadings=[];const tint=(col,k)=>{rect(-B,-B,W+2*B,H+2*B,mix('#FFFFFF',col,k))};
+  const gradField=(cols,x,y,w,h)=>{let cs=cols.slice(0,4);if(cs.length===1)cs=[mix(cs[0],'#FFFFFF',.38),cs[0]];
+    const id='Sh'+(shadings.length+1);const rgb=c=>'['+pdfRGB(c)+']';
+    const fns=cs.slice(1).map((c,i)=>`<< /FunctionType 2 /Domain [0 1] /C0 ${rgb(cs[i])} /C1 ${rgb(c)} /N 1 >>`);
+    const fn=fns.length===1?fns[0]:`<< /FunctionType 3 /Domain [0 1] /Functions [${fns.join(' ')}] /Bounds [${fns.slice(1).map((_,i)=>((i+1)/fns.length).toFixed(3)).join(' ')}] /Encode [${fns.map(()=>'0 1').join(' ')}] >>`;
+    shadings.push({id,dict:`/ShadingType 2 /ColorSpace /DeviceRGB /Coords [${X(x)} ${Y(y)} ${X(x+w)} ${Y(y+h)}] /Function ${fn} /Extend [true true]`});
+    pg.shs=pg.shs||new Set();pg.shs.add(id);op(`q ${X(x)} ${Y(y+h)} ${w.toFixed(2)} ${h.toFixed(2)} re W n /${id} sh Q`)};
+  const later=[];const memPage={};const HP=318,FW=W+2*B;
+  const photoBoxes=k=>{if(k<=1)return [{x:-B,y:-B,w:FW,h:HP+B}];const g=3,mw=FW*.64,sw=FW-mw-g;const bx=[{x:-B,y:-B,w:mw,h:HP+B}];if(k===2)bx.push({x:-B+mw+g,y:-B,w:sw,h:HP+B});else{const sh=(HP+B-g)/2;bx.push({x:-B+mw+g,y:-B,w:sw,h:sh},{x:-B+mw+g,y:-B+sh+g,w:sw,h:sh})}return bx};
+  const fmtL=(d,o)=>fmt(d,o);
+  const n=ms.length,days=new Set(ms.map(m=>m.date)).size;
+  const ec={};ms.forEach(m=>(m.emotions||[]).forEach((id,i)=>{if(emo(id))ec[id]=(ec[id]||0)+(i===0?1:.5)}));const etot=Object.values(ec).reduce((a,b)=>a+b,0)||1;
+  const topE=Object.entries(ec).sort((a,b)=>b[1]-a[1]).map(([id,v])=>({e:emo(id),v}));
+  const tc={};ms.forEach(m=>(m.tags||[]).forEach(t2=>tc[t2]=(tc[t2]||0)+1));const topT=Object.entries(tc).sort((a,b)=>b[1]-a[1]).slice(0,18).map(x=>x[0]);
+  // fotos
+  const photoOf=new Map();
+  if(photo){let k=0;for(const m of ms){const loaded=[];for(const pid of (m.photos||[]).slice(0,3)){try{const u=await photoURL(pid);if(u)loaded.push(await loadImg(u))}catch(e){}}
+    if(!loaded.length)continue;const bx=photoBoxes(loaded.length);const list=[];
+    for(let i=0;i<loaded.length;i++){const j=await imgJPEG(loaded[i],i===0?1800:900,bx[i].w/bx[i].h);const id='Im'+(++k);images.push({id,...j});list.push({id,box:bx[i]})}
+    photoOf.set(m.id,list);onStep&&onStep(t('bookStepPhotos'))}}
+  const imOf=id=>images.find(i=>i.id===id);
+  // portada
+  newPage();
+  txt(F.sans,8.5,MU,M,M+8,t('brand').toUpperCase());
+  let y=150;txt(F.sans,9,MU,M,y,String(label).toUpperCase());y+=40;
+  y=para(F.serif,38,TX,M,y,title,CW,42,3)+4;
+  if((S.profile&&S.profile.name||'').trim())txt(F.ital,15,MU,M,y+6,t('bookBy',S.profile.name.trim()));
+  barcode(ms,M,330,CW,130);
+  txt(F.sans,9,MU,M,490,t('filmCount',n));
+  txt(F.sans,7.5,MU,M,H-30,'memorandumapp.com');
+  // en cifras
+  newPage();y=M+40;txt(F.serif,26,TX,M,y,t('bookFigures'));y+=40;
+  txt(F.serif,40,TX,M,y+20,String(n));txt(F.sans,9,MU,M,y+36,t('bookMems'));txt(F.serif,40,TX,M+CW/2,y+20,String(days));txt(F.sans,9,MU,M+CW/2,y+36,t('bookDays'));
+  y+=72;txt(F.bold,9,TX,M,y,t('bookEmotions').toUpperCase());y+=18;
+  topE.slice(0,9).forEach(({e,v})=>{circle(M+5,y-3,4.5,e.color);txt(F.sans,10.5,TX,M+16,y,e.name);const pc=v/etot;rect(M+130,y-7,(CW-170)*pc,7,e.color);txt(F.sans,9,MU,W-M,y,Math.round(pc*100)+'%','right');y+=20});
+  if(topT.length){y+=14;txt(F.bold,9,TX,M,y,t('bookWords').toUpperCase());y+=18;y=para(F.serif,13,TX,M,y,topT.join('  ·  '),CW,18,8)}
+  footer();
+  // recuerdos
+  const sortedMs=[...ms];let curMonth='';const yearMode=opts.period==='anio';
+  for(let i=0;i<sortedMs.length;i++){
+    const m=sortedMs[i];
+    if(yearMode&&m.date.slice(0,7)!==curMonth){curMonth=m.date.slice(0,7);const mm=sortedMs.filter(o=>o.date.slice(0,7)===curMonth);
+      newPage();const mc={};mm.forEach(o=>{const c=colorsOf(o)[0].color;mc[c]=(mc[c]||0)+1});tint(Object.entries(mc).sort((a,b)=>b[1]-a[1])[0][0],.1);const mn=fmtL(curMonth+'-01',{month:'long'});txt(F.sans,9,MU,M,170,curMonth.slice(0,4));txt(F.serif,48,TX,M,222,mn.charAt(0).toUpperCase()+mn.slice(1));txt(F.sans,9,MU,M,248,t('filmCount',mm.length));barcode(mm,M,290,CW,220);footer()}
+    onStep&&onStep(t('bookStepPage',i+1,sortedMs.length));
+    newPage();memPage[m.id]=pages.length-1;
+    const ph=photoOf.get(m.id);const small=true;const cn=bookConns(m,ms);const connH=cn.length?18+cn.length*15:0;
+    const ty=typeOf(m.type);let meta=(ty.label+'  ·  '+fmtL(m.date,{weekday:'long',day:'numeric',month:'long',year:'numeric'})).toUpperCase();
+    if(m.origin&&m.origin!==myId()&&m.author)meta+='  ·  '+m.author.toUpperCase();
+    const cols=colorsOf(m).map(e=>e.color);tint(cols[0],.07);
+    if(ph){ph.forEach(p=>image(imOf(p.id),p.box.x,p.box.y,p.box.w,p.box.h));band(m,HP,6);y=HP+6+30}
+    else{const est=(text&&m.text?pdfWrap(F.serif,m.text,9.5,CW,0).length:0)+(text&&m.quote?4:0);const fh=est>26?120:est>14?210:HP;gradField(cols,-B,-B,W+2*B,fh+B);band(m,fh,6);y=fh+6+30}
+    txt(F.sans,7,MU,M,y,meta);y+=small?24:30;
+    y=para(F.serif,small?17:24,TX,M,y,memTitle(m),CW,small?20:27,small?2:3);
+    if(m.source)y=para(F.ital,small?9.5:12,MU,M,y+(small?0:2),m.source,CW,small?12:15,2)+2;
+    y+=small?5:8;let ex=M;const es=small?8.5:9.5;colorsOf(m).filter(e=>e.name).forEach(e=>{const w=pdfW(F.sans,e.name,es)+16;if(ex+w>W-M){ex=M;y+=14}circle(ex+3.5,y-3,small?3.2:4,e.color);txt(F.sans,es,TX,ex+11,y,e.name);ex+=w+8});y+=small?16:18;
+    const bottom=()=>H-58-connH-((m.tags||[]).length?16:0);
+    if(text&&m.quote){const qz=small?10.5:13.5,ql=small?14:18;const qs=pdfWrap(F.ital,'«'+m.quote+'»',qz,CW-12,small?4:8);const qh=qs.length*ql;rect(M,y-qz*.8,2,qh,colorsOf(m)[0].color);qs.forEach((l,j)=>txt(F.ital,qz,TX,M+10,y+j*ql,l));y+=qh+(small?6:10)}
+    if(text&&m.text){y+=small?2:6;const tz=small?9.5:11.5,lh=small?13:16;const ls=pdfWrap(F.serif,m.text,tz,CW,0);let j=0;
+      while(j<ls.length){const room=Math.floor((bottom()-y)/lh);if(room<1){footer();newPage();tint(cols[0],.07);txt(F.sans,7,MU,M,M+8,(memTitle(m)+' · '+t('bookCont')).toUpperCase());y=M+34;continue}
+        ls.slice(j,j+room).forEach((l,k)=>txt(F.serif,tz,TX,M,y+k*lh,l));const used=Math.min(room,ls.length-j);y+=used*lh;j+=used}y+=6}
+    if(y>bottom()+4){footer();newPage();tint(cols[0],.07);y=M+20}
+    if((m.tags||[]).length)txt(F.sans,small?7.5:8.5,MU,M,H-48-connH-6,m.tags.map(x=>'#'+x).join('   '));
+    if(cn.length){let cy=H-50-connH+12;rect(M,cy-12,CW,.5,LN);cy+=4;txt(F.bold,6.5,MU,M,cy,t('bookConn').toUpperCase());cy+=15;
+      cn.forEach(({o,why})=>{const c0=colorsOf(o)[0].color;circle(M+3,cy-3,3,c0);const tt=pdfWrap(F.serif,memTitle(o),10,CW-120,1)[0]||'';txt(F.serif,10,TX,M+11,cy,tt);
+        txt(F.sans,7.5,MU,M+15+pdfW(F.serif,tt,10),cy,why);const page=pg,yy=cy;later.push(()=>{const prev=pg;pg=page;txt(F.sans,8,MU,W-M,yy,memPage[o.id]?t('bookPage',memPage[o.id]):fmtL(o.date,{day:'numeric',month:'short',year:'numeric'}),'right');pg=prev});cy+=15})}
+    footer();
+  }
+  // cierre
+  newPage();txt(F.sans,9,MU,M,150,String(label).toUpperCase());txt(F.serif,34,TX,M,196,t('filmEnd'));barcode(ms,M,240,CW,110);
+  y=400;topE.slice(0,3).forEach(({e})=>{circle(M+6,y-4,6,e.color);txt(F.sans,12,TX,M+20,y,e.name);y+=24});
+  txt(F.sans,8,MU,M,H-30,t('bookMade'));
+  later.forEach(f=>f());
+  onStep&&onStep(t('bookStepFile'));
+  // ---- escribir el PDF ----
+  const chunks=[];let pos=0;const offs=[];const asc=s=>{const a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i)&255;return a};
+  const push=b=>{chunks.push(b);pos+=b.length};
+  const objs=[];const obj=()=>{objs.push(null);return objs.length};const set=(id,v)=>objs[id-1]=v;
+  const cat=obj(),pagesId=obj(),info=obj();
+  const fontIds={};
+  for(const f of fonts){const ff=obj(),fd=obj(),fo=obj();fontIds[f.name]=fo;const z=await pdfDeflate(f.ttf);
+    set(ff,{dict:`/Length1 ${f.ttf.length}${z?' /Filter /FlateDecode':''}`,data:z||f.ttf});
+    const fl=32+(f.italic?64:0)+2;set(fd,{dict:`/Type /FontDescriptor /FontName /MEMO+${f.name} /Flags ${fl} /FontBBox [${f.bbox.join(' ')}] /ItalicAngle ${f.italic?-10:0} /Ascent ${f.asc} /Descent ${f.desc} /CapHeight ${f.cap} /StemV 80 /FontFile2 ${ff} 0 R`});
+    set(fo,{dict:`/Type /Font /Subtype /TrueType /BaseFont /MEMO+${f.name} /FirstChar 32 /LastChar 255 /Widths [${f.widths.join(' ')}] /Encoding /WinAnsiEncoding /FontDescriptor ${fd} 0 R`})}
+  const shIds={};for(const sh of shadings){const id=obj();shIds[sh.id]=id;set(id,{dict:sh.dict})}
+  const imgIds={};for(const im of images){const id=obj();imgIds[im.id]=id;set(id,{dict:`/Type /XObject /Subtype /Image /Width ${im.w} /Height ${im.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode`,data:im.data})}
+  const fontRes=`/Font << ${fonts.map(f=>`/${f.name} ${fontIds[f.name]} 0 R`).join(' ')} >>`;
+  const MW=(W+2*B).toFixed(2),MH=(H+2*B).toFixed(2);const kids=[];
+  for(const p of pages){const cs=obj(),po=obj();kids.push(po);const raw=asc(p.ops.join('\n'));const z=await pdfDeflate(raw);set(cs,{dict:z?'/Filter /FlateDecode':'',data:z||raw});
+    const xo=(p.imgs.size?` /XObject << ${[...p.imgs].map(id=>`/${id} ${imgIds[id]} 0 R`).join(' ')} >>`:'')+(p.shs&&p.shs.size?` /Shading << ${[...p.shs].map(id=>`/${id} ${shIds[id]} 0 R`).join(' ')} >>`:'');
+    set(po,{dict:`/Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${MW} ${MH}] /TrimBox [${B} ${B} ${(W+B).toFixed(2)} ${(H+B).toFixed(2)}] /BleedBox [0 0 ${MW} ${MH}] /Resources << ${fontRes}${xo} >> /Contents ${cs} 0 R`})}
+  set(pagesId,{dict:`/Type /Pages /Kids [${kids.map(k=>k+' 0 R').join(' ')}] /Count ${kids.length}`});
+  set(cat,{dict:`/Type /Catalog /Pages ${pagesId} 0 R /ViewerPreferences << /DisplayDocTitle true >>`});
+  const u16=s=>{let h='FEFF';for(const ch of s){const c=ch.codePointAt(0);if(c>0xFFFF){const v=c-0x10000;h+=(0xD800+(v>>10)).toString(16).padStart(4,'0')+(0xDC00+(v&1023)).toString(16).padStart(4,'0')}else h+=c.toString(16).padStart(4,'0')}return '<'+h+'>'};
+  set(info,{dict:`/Title ${u16(title+' · '+label)} /Producer ${u16('Memorándum')} /Creator ${u16('Memorándum · memorandumapp.com')}`,plain:true});
+  push(new Uint8Array([37,80,68,70,45,49,46,55,10,37,226,227,207,211,10]));
+  objs.forEach((o,i)=>{offs[i]=pos;push(asc(`${i+1} 0 obj\n`));
+    if(o.data){push(asc(`<< ${o.dict} /Length ${o.data.length} >>\nstream\n`));push(o.data);push(asc('\nendstream\nendobj\n'))}
+    else push(asc(`<< ${o.dict} >>\nendobj\n`))});
+  const xref=pos;let xr=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`;offs.forEach(o=>xr+=String(o).padStart(10,'0')+' 00000 n \n');
+  push(asc(xr+`trailer\n<< /Size ${objs.length+1} /Root ${cat} 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF\n`));
+  return {blob:new Blob(chunks,{type:'application/pdf'}),pages:pages.length};
+}
+function openBook(){
+  if(!isPlus()){goPlus();return}
+  const r=range(rep.period,rep.offset);const ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0));
+  if(!ms.length){toast(t('filmEmpty'));return}
+  const hasPh=ms.some(m=>(m.photos||[]).length);
+  book={ms,label:r.label,title:t('filmT_'+rep.period),period:rep.period,photo:hasPh,text:true,bleed:false,busy:false,hasPh};
+  openDlg(`<div class="dlg-head"><h2>${esc(t('bookTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><div id="book-body">${bookBody()}</div>`);
+}
+function bookBody(){
+  const b=book;if(!b)return '';const box=(k,l,h)=>`<label class="row" style="gap:10px;font-size:15px;margin-top:10px;align-items:flex-start"><input type="checkbox" data-act="book-opt" data-v="${k}"${b[k]?' checked':''}${b.busy?' disabled':''} style="flex:none;margin-top:3px"> <span>${esc(l)}${h?`<br><small class="note">${esc(h)}</small>`:''}</span></label>`;
+  return `<p style="font-size:16px;margin:4px 0 6px"><b style="font-weight:600">${esc(b.title)}</b> · ${esc(b.label)}</p>
+  <p class="note" style="margin:0 0 6px">${esc(t('bookLead',b.ms.length))}</p>
+  ${b.hasPh?box('photo',t('inclPhoto')):''}${box('text',t('bookInclText'))}${box('bleed',t('bookBleed'),t('bookBleedHint'))}
+  <p class="note" style="margin-top:14px">🔒 ${esc(t('bookPrivate'))}</p>
+  <p class="note" id="book-step" style="min-height:1.4em;margin:6px 0 0">${b.busy?esc(b.step||''):''}</p>
+  <div class="actions"><button class="btn primary" data-act="book-make"${b.busy?' disabled':''}>${esc(b.busy?t('bookMaking'):t('bookMake'))}</button></div>`}
+async function makeBook(){
+  const b=book;if(!b||b.busy)return;b.busy=true;b.step='';const body=document.getElementById('book-body');if(body)body.innerHTML=bookBody();
+  try{const res=await buildBookPDF(b,s=>{b.step=s;const el=document.getElementById('book-step');if(el)el.textContent=s});
+    const slug=(b.label||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    b.busy=false;b.step=t('bookDone',res.pages);const el=document.getElementById('book-body');if(el)el.innerHTML=bookBody();
+    await deliverFile(`memorandum-${t('bookFile')}-${slug}.pdf`,res.blob,'application/pdf',{download:true});
+  }catch(e){b.busy=false;b.step=t('bookError');const el=document.getElementById('book-body');if(el)el.innerHTML=bookBody();console.error(e)}
+}
 async function deliverFile(name,data,mime,opts={}){
   if(downloads){try{await downloads.save({filename:name,data});return 'ok'}catch(e){if(e&&e.code==='declined')return 'declined'}}
   if(window.claude)return 'fallback';
@@ -2943,6 +3270,15 @@ document.addEventListener('click',e=>{
     case 'clear-all':filters=NOFILTER();render();break;
     case 'mode':archMode=v;render();break;
     case 'period':rep={period:v,offset:0};render();break;
+    case 'film':openFilm();break;
+    case 'book':openBook();break;
+    case 'book-opt':if(book&&!book.busy){book[v]=!book[v];const el=document.getElementById('book-body');if(el)el.innerHTML=bookBody()}break;
+    case 'book-make':makeBook();break;
+    case 'film-play':if(film){if(film.playing){film.paused=(performance.now()-film.t0)/1000;film.playing=false}else{film.t0=performance.now()-(film.paused||0)*1000;film.playing=true}filmRefresh()}break;
+    case 'film-theme':if(film&&!film.rec){film.theme=v;filmRefresh()}break;
+    case 'film-opt':if(film&&!film.rec){film[v]=!film[v];film.blob=null;filmRefresh()}break;
+    case 'film-rec':filmRecord();break;
+    case 'film-share':filmShare();break;
     case 'prev':rep.offset--;render();break;
     case 'next':if(rep.offset<0){rep.offset++;render()}break;
     case 'story':openStory();break;
@@ -3025,6 +3361,7 @@ document.addEventListener('click',e=>{
     case 'ed-type':draft.type=v;if(!typeOf(v).src)draft.source='';renderEditor();break;
     case 'ed-emo':{const i=draft.emotions.indexOf(v);if(i>=0)draft.emotions.splice(i,1);else if(draft.emotions.length<3)draft.emotions.push(v);else toast(t('max3'));renderEditor();break}
     case 'ed-tag':addTag(v);renderEditor('#ed-tag');break;
+    case 'ed-tags-all':tagsAll=!tagsAll;{const el=document.getElementById('ed-sugg');if(el)el.innerHTML=tagSuggHTML(tagSugg(''),'')}break;
     case 'ed-untag':draft.tags=draft.tags.filter(x=>x!==v);renderEditor();break;
     case 'ed-link':{const i=draft.links.indexOf(v);if(i>=0)draft.links.splice(i,1);else draft.links.push(v);renderEditor('#ed-link');break}
     case 'ed-adddrawer':{const n=newDrawerName.trim();if(!n){$('#ed-newdrawer')?.focus();break}const nd={id:mkid('d-'),name:cut(n,40)};S.drawers.push(nd);draft.drawers.push(nd.id);newDrawerName='';savePalette();renderEditor();break}
@@ -3037,6 +3374,10 @@ document.addEventListener('click',e=>{
     case 'type-del':armed(b,async()=>{S.customTypes=S.customTypes.filter(x=>x.id!==id);const tt=S.memories.filter(m=>m.type===id);tt.forEach(m=>m.type='idea');if(filters.type===id)filters.type='';render();await savePalette();for(const m of tt)await saveMem(m)});break;
   }
 });
+/* Etiquetas: sugerencias mientras escribes y coma también en teclados de Android */
+document.addEventListener('input',e=>{const el=e.target;if(!el.matches||!el.matches('[data-ed-tag]'))return;
+  if(el.value.includes(',')){const parts=el.value.split(',');const last=parts.pop();parts.forEach(x=>{if(x.trim())addTag(x)});renderEditor('#ed-tag');const n=$('#ed-tag');if(n){n.value=last.trimStart()}return}
+  const box=document.getElementById('ed-sugg');if(box)box.innerHTML=tagSuggHTML(tagSugg(el.value),el.value)});
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'){
     const el=e.target;
