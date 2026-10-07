@@ -110,6 +110,10 @@ p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
 .ficha-emos,.who-pal{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--muted);padding-top:4px}
 .ficha-emos span,.who-pal span{display:inline-flex;align-items:center;gap:5px}
 .ficha-emos i,.who-pal i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.ficha-who{font-size:12.5px;font-weight:600;color:var(--ink);letter-spacing:.02em}
+.who-legend{display:grid;gap:10px;margin:18px 0 6px;padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.who-row b{font-weight:600;font-size:15px}
+.who-row .who-pal{margin:4px 0 0}
 .who-head{font-family:var(--serif);font-weight:400;font-size:26px;margin:26px 0 2px}
 .who-pal{margin:0 0 6px;font-size:13.5px}
 .month{font-family:var(--serif);font-size:22px;margin:28px 0 10px;color:var(--muted)}
@@ -1248,6 +1252,7 @@ function vHoy(){
 function ficha(m,withEmo){
   const ty=typeOf(m.type);
   return `<button class="ficha" data-act="open" data-id="${m.id}" style="--band:${band(m)}">
+    ${withEmo?`<span class="ficha-who">${esc(authorName(m))}</span>`:''}
     ${(m.photos||[]).length?`<span class="ficha-photo"><img data-photo="${m.photos[0]}" alt=""></span>`:''}
     <span class="ficha-meta"><span>${ty.label}</span><span>${esc(fmt(m.date,{day:'numeric',month:'short'}))}</span></span>
     <span class="ficha-title">${esc(memTitle(m))}</span>
@@ -1303,11 +1308,12 @@ function resultsHTML(){
   if(shD&&(shD.shared||hasForeign(shD.id))){
     const by=new Map();ms.forEach(m=>{const k=authorKey(m);if(!by.has(k))by.set(k,{name:authorName(m),list:[]});by.get(k).list.push(m)});
     const groups=[...by.entries()].sort((a,b)=>a[0]==='me'?-1:b[0]==='me'?1:a[1].name.localeCompare(b[1].name));
-    for(const [k,g] of groups){
-      const used=[];g.list.forEach(m=>(m.emotions||[]).forEach(id=>{if(!used.includes(id))used.push(id)}));
-      out+=`<h3 class="who-head">${esc(k==='me'?t('whoMine'):t('whoTheirs',g.name))} <small class="note" style="font-size:15px">(${g.list.length})</small></h3>
-      <div class="who-pal">${used.map(emo).filter(Boolean).map(e=>`<span><i style="background:${e.color}"></i>${esc(e.name)}</span>`).join('')}</div><div class="fichas">${g.list.map(m=>ficha(m,true)).join('')}</div>`;
-    }
+    out+=`<div class="who-legend">${groups.map(([k,g])=>{const used=[];g.list.forEach(m=>(m.emotions||[]).forEach(id=>{if(!used.includes(id))used.push(id)}));
+      return `<div class="who-row"><b>${esc(g.name)}</b> <small class="note">(${g.list.length})</small><div class="who-pal">${used.map(emo).filter(Boolean).map(e=>`<span><i style="background:${e.color}"></i>${esc(e.name)}</span>`).join('')}</div></div>`}).join('')}</div>`;
+    for(const m of ms){const k=m.date.slice(0,7);
+      if(k!==cur){if(cur)out+='</div>';cur=k;out+=`<div class="month">${esc(fmt(k+'-01',{month:'long',year:'numeric'}))}</div><div class="fichas">`}
+      out+=ficha(m,true)}
+    if(cur)out+='</div>';
     return out;
   }
   for(const m of ms){
@@ -1449,7 +1455,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.56';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.58';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackSection(){
@@ -2285,6 +2291,8 @@ function filmLoop(){
   if(ts>=tl.total){if(f.rec&&f.rec.state==='recording'){filmFrame(cv,tl.total-0.001);try{f.rec.stop()}catch(e){};return}f.t0=performance.now();ts=0}
   filmFrame(cv,ts);f.raf=requestAnimationFrame(filmLoop);
 }
+function lumOf(h){const v=[1,3,5].map(i=>parseInt((h||'#9A96AE').slice(i,i+2),16)/255).map(c=>c<=.03928?c/12.92:((c+.055)/1.055)**2.4);return .2126*v[0]+.7152*v[1]+.0722*v[2]}
+function inkFor(cols){return cols.reduce((a,c)=>a+lumOf(c),0)/cols.length>.36}
 function filmBg(m){const cs=(m.emotions||[]).map(emo).filter(Boolean).map(e=>e.color);return cs.length?cs:['#9A96AE']}
 function filmFrame(cv,ts){
   const f=film,x=cv.getContext('2d'),W=1080,H=1920,tl=filmTimeline();
@@ -2315,11 +2323,15 @@ function filmFrame(cv,ts){
       if(img){const iw=img.naturalWidth,ih=img.naturalHeight,sc=Math.max(W/iw,ph/ih)*z,sw=W/sc,sh=ph/sc;x.drawImage(img,(iw-sw)/2,(ih-sh)/2,sw,sh,0,0,W,ph);
         const g=x.createLinearGradient(0,ph-26,0,ph);g.addColorStop(0,cs[0]);g.addColorStop(1,cs[cs.length-1]);x.fillStyle=g;x.fillRect(0,ph-26,W,26)}
       else{const g=x.createLinearGradient(0,0,W*z,ph);cs.forEach((c,j)=>g.addColorStop(cs.length===1?0:j/(cs.length-1),c));if(cs.length===1)g.addColorStop(1,cs[0]);x.fillStyle=g;x.fillRect(0,0,W,ph);
-        const rg=x.createRadialGradient(W*0.72,ph*0.35,20,W*0.72,ph*0.35,700*z);rg.addColorStop(0,'rgba(255,255,255,.22)');rg.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=rg;x.fillRect(0,0,W,ph)}
+        const rg=x.createRadialGradient(W*0.72,ph*0.35,20,W*0.72,ph*0.35,700*z);rg.addColorStop(0,'rgba(255,255,255,.22)');rg.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=rg;x.fillRect(0,0,W,ph);
+        const darkInk=inkFor(cs),ink=darkInk?'rgba(38,35,61,.9)':'rgba(255,255,255,.96)';
+        const names=(m.emotions||[]).map(emo).filter(Boolean).map(e=>e.name).join(' · ');
+        if(names){x.font=`150px ${serif}`;const nl=wrapLines(x,names,900,2);x.fillStyle=ink;nl.forEach((l,j)=>x.fillText(l,90,ph-90-(nl.length-1-j)*150))}
+        if(f.text&&(m.quote||m.text))lines(m.quote?'«'+m.quote+'»':m.text,`italic 60px ${serif}`,ink,90,230,900,76,names&&names.length>14?4:6)}
       let Y=1170;x.fillStyle=MU;x.font=`500 34px ${sans}`;x.fillText(fmt(m.date,{weekday:'long',day:'numeric',month:'long'}),90,Y);
       Y=lines(memTitle(m),`92px ${serif}`,TX,90,Y+108,900,98,f.text?2:3)+10;
       let X=90;x.font=`500 34px ${sans}`;(m.emotions||[]).map(emo).filter(Boolean).forEach(e=>{const w=x.measureText(e.name).width+80;if(X+w>990)return;x.fillStyle=SF;rr(x,X,Y-6,w,60,30);x.fill();x.fillStyle=e.color;x.beginPath();x.arc(X+30,Y+24,12,0,7);x.fill();x.fillStyle=TX;x.fillText(e.name,X+52,Y+36);X+=w+14});
-      if(f.text&&(m.quote||m.text))lines(m.quote?'«'+m.quote+'»':m.text,`italic 46px ${serif}`,MU,90,Y+140,900,58,4);
+      if(f.text&&img&&(m.quote||m.text))lines(m.quote?'«'+m.quote+'»':m.text,`italic 46px ${serif}`,MU,90,Y+140,900,58,4);
       x.globalAlpha=1};
     if(i>0&&local<fade){drawMem(f.ms[i-1],1,tl.per);drawMem(f.ms[i],ease(local/fade),local)}else drawMem(f.ms[i],1,local);
     if(i===0&&local<fade){/* entrada desde la portada */}
@@ -2481,15 +2493,19 @@ async function buildBookPDF(opts,onStep){
     const ph=photoOf.get(m.id);const small=true;const cn=bookConns(m,ms);const connH=cn.length?18+cn.length*15:0;
     const ty=typeOf(m.type);let meta=(ty.label+'  ·  '+fmtL(m.date,{weekday:'long',day:'numeric',month:'long',year:'numeric'})).toUpperCase();
     if(m.origin&&m.origin!==myId()&&m.author)meta+='  ·  '+m.author.toUpperCase();
-    const cols=colorsOf(m).map(e=>e.color);tint(cols[0],.07);
+    const cols=colorsOf(m).map(e=>e.color);tint(cols[0],.07);let qIn=false;
     if(ph){ph.forEach(p=>image(imOf(p.id),p.box.x,p.box.y,p.box.w,p.box.h));band(m,HP,6);y=HP+6+30}
-    else{const est=(text&&m.text?pdfWrap(F.serif,m.text,9.5,CW,0).length:0)+(text&&m.quote?4:0);const fh=est>26?120:est>14?210:HP;gradField(cols,-B,-B,W+2*B,fh+B);band(m,fh,6);y=fh+6+30}
+    else{const est=(text&&m.text?pdfWrap(F.serif,m.text,9.5,CW,0).length:0)+(text&&m.quote?4:0);const fh=est>26?120:est>14?210:HP;gradField(cols,-B,-B,W+2*B,fh+B);band(m,fh,6);
+      const ink=inkFor(cols)?TX:'#FFFFFF';const names=colorsOf(m).filter(e=>e.name).map(e=>e.name).join(' · ');
+      if(names){const nl=pdfWrap(F.serif,names,fh>=HP?36:28,CW,2);const nz=fh>=HP?36:28;nl.forEach((l,j)=>txt(F.serif,nz,ink,M,fh-22-(nl.length-1-j)*(nz+2),l))}
+      if(text&&m.quote&&fh>=200){const qs=pdfWrap(F.ital,'«'+m.quote+'»',15,CW,fh>=HP?6:3);qs.forEach((l,j)=>txt(F.ital,15,ink,M,M+16+j*20,l));qIn=true}
+      y=fh+6+30}
     txt(F.sans,7,MU,M,y,meta);y+=small?24:30;
     y=para(F.serif,small?17:24,TX,M,y,memTitle(m),CW,small?20:27,small?2:3);
     if(m.source)y=para(F.ital,small?9.5:12,MU,M,y+(small?0:2),m.source,CW,small?12:15,2)+2;
     y+=small?5:8;let ex=M;const es=small?8.5:9.5;colorsOf(m).filter(e=>e.name).forEach(e=>{const w=pdfW(F.sans,e.name,es)+16;if(ex+w>W-M){ex=M;y+=14}circle(ex+3.5,y-3,small?3.2:4,e.color);txt(F.sans,es,TX,ex+11,y,e.name);ex+=w+8});y+=small?16:18;
     const bottom=()=>H-58-connH-((m.tags||[]).length?16:0);
-    if(text&&m.quote){const qz=small?10.5:13.5,ql=small?14:18;const qs=pdfWrap(F.ital,'«'+m.quote+'»',qz,CW-12,small?4:8);const qh=qs.length*ql;rect(M,y-qz*.8,2,qh,colorsOf(m)[0].color);qs.forEach((l,j)=>txt(F.ital,qz,TX,M+10,y+j*ql,l));y+=qh+(small?6:10)}
+    if(text&&m.quote&&!qIn){const qz=small?10.5:13.5,ql=small?14:18;const qs=pdfWrap(F.ital,'«'+m.quote+'»',qz,CW-12,small?4:8);const qh=qs.length*ql;rect(M,y-qz*.8,2,qh,colorsOf(m)[0].color);qs.forEach((l,j)=>txt(F.ital,qz,TX,M+10,y+j*ql,l));y+=qh+(small?6:10)}
     if(text&&m.text){y+=small?2:6;const tz=small?9.5:11.5,lh=small?13:16;const ls=pdfWrap(F.serif,m.text,tz,CW,0);let j=0;
       while(j<ls.length){const room=Math.floor((bottom()-y)/lh);if(room<1){footer();newPage();tint(cols[0],.07);txt(F.sans,7,MU,M,M+8,(memTitle(m)+' · '+t('bookCont')).toUpperCase());y=M+34;continue}
         ls.slice(j,j+room).forEach((l,k)=>txt(F.serif,tz,TX,M,y+k*lh,l));const used=Math.min(room,ls.length-j);y+=used*lh;j+=used}y+=6}
