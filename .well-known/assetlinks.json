@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.memorandumapp.app",
+    "sha256_cert_fingerprints": ["C0:E1:DA:63:EE:69:D5:AF:40:08:80:83:F4:FE:98:FB:46:5B:D3:A9:A9:78:A2:F1:38:90:A8:35:CF:84:79:5B"]
+  }
+}]
