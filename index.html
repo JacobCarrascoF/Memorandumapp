@@ -114,6 +114,14 @@ p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
 .who-legend{display:grid;gap:10px;margin:18px 0 6px;padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
 .who-row b{font-weight:600;font-size:15px}
 .who-row .who-pal{margin:4px 0 0}
+.rg-steps{margin:6px 0 0;padding-left:22px;font-size:15.5px;line-height:1.5}
+.rg-steps li{margin:4px 0}
+.type-fixed{flex:1 1 140px;font-size:16px;padding:8px 0}
+.nz-title{font-family:var(--serif);font-weight:400;font-size:21px}
+.nz-emo{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);margin-left:6px;white-space:nowrap}
+.nz-emo i{width:10px;height:10px;border-radius:50%}
+a.btn{text-decoration:none}
+a.btn:not(.primary){color:var(--ink)}
 .who-head{font-family:var(--serif);font-weight:400;font-size:26px;margin:26px 0 2px}
 .who-pal{margin:0 0 6px;font-size:13.5px}
 .month{font-family:var(--serif);font-size:22px;margin:28px 0 10px;color:var(--muted)}
@@ -449,6 +457,10 @@ es:{
   noEmotion:'Sin emoción', allYears:'Todos los años',
   plusLead:'Para quien quiere ir más allá, y para apoyar que esta app siga creciendo.',
   tagsAll:n=>`Ver todas (${n})`, tagsFewer:'Ver menos',
+  rgLead:'Alguien te ha enviado un archivo con un cajón. Así lo abres:', rgAndT:'En Android', rgAnd:['En WhatsApp, <b>mantén pulsado</b> el archivo del cajón.','Toca <b>Compartir</b> (el icono ⋮ o ↗, arriba).','Elige <b>Memorándum</b>. Se abre la app y el cajón entra solo.'], rgAndNoT:'¿No sale Memorándum en la lista?', rgAndNo:'Toca el archivo en WhatsApp para descargarlo, pulsa <b>Elegir el archivo</b> aquí abajo y búscalo en <b>Android › media › com.whatsapp › WhatsApp › Media › WhatsApp Documents</b>. También puedes enviártelo por correo y descargarlo: quedará en <b>Descargas</b>.', rgIosT:'En iPhone', rgIos:['En WhatsApp, toca el archivo del cajón y luego el botón de <b>compartir</b> (el cuadrado con la flecha).','Elige <b>Guardar en Archivos</b> y guárdalo, por ejemplo en <b>En mi iPhone</b>.','Vuelve aquí, pulsa <b>Elegir el archivo</b> y ábrelo desde <b>Recientes</b>.'], rgDeskT:'En el ordenador', rgDesk:['Descarga el archivo del cajón que te han enviado.','Pulsa <b>Elegir el archivo</b> y ábrelo desde <b>Descargas</b>.'], rgPick:'Elegir el archivo', rgOther:'¿Usas otro tipo de móvil?', rgFree:'Recibir un cajón es gratis. Lo que te envían se queda solo en tu móvil.',
+  typeHide:'Ocultar', typeShow:'Mostrar', typeHiddenTag:'oculto', typeHideNote:'Los tipos que no uses puedes ocultarlos: dejan de salir al crear un recuerdo, pero sus recuerdos se quedan. Los tuyos también los puedes borrar. Se ordenan solos: los que más usas, arriba.',
+  nzWeekAgo:'Hace una semana', nzMonthAgo:'Hace un mes', nzWeekLbl:'Tu semana en color', nzWeek:(e,n,t)=>`Esta semana tu color es «${e}»: ${n} de tus ${t} recuerdos.`, nzWeekBtn:'Ver tu semana', nzStreakLbl:'Racha', nzStreak:n=>`Llevas ${n} días seguidos guardando recuerdos.`, nzStreakToday:n=>`Llevas ${n} días seguidos guardando recuerdos. ¿Guardas también el de hoy?`, nzMissLbl:'Hace días que no aparece', nzMiss:e=>`Hace días que no aparece «${e}». ¿Ha habido hoy algún momento pequeño que valga la pena guardar?`, nzMissBtn:'Guardarlo', nzLbl:'Recordatorios en Hoy', nzHint:'Una tarjeta al día al abrir la app: lo que pasó hace una semana, tu color de la semana, tu racha… Se calcula en tu móvil.',
+  remSec:'Recordatorio diario', remLead:'Si quieres que el móvil te recuerde cada día guardar lo que has sentido, añádelo a tu calendario. Te avisará el calendario a la hora que elijas, y lo puedes quitar cuando quieras desde allí.', remAt:'Avisarme a las', remIcs:'Añadir al calendario del móvil', remGoogle:'Añadir a Google Calendar', remHint:'No se envía nada a ningún servidor: es un evento diario en tu propio calendario.', remTitle:'Memorándum · ¿Qué has sentido hoy?', remDesc:'Guarda el color de tu día.', remFile:'recordatorio', remDone:'Abre el archivo para añadirlo a tu calendario',
   bookConn:'Conecta con', bookLinked:'enlazado', bookPage:n=>`p. ${n}`,
   bookBtn:'Libro en PDF', bookTitle:'Tu libro en PDF', bookLead:n=>`Un libro en tamaño A5 con ${n===1?'tu recuerdo':'tus '+n+' recuerdos'}: portada, tus cifras, un recuerdo por página con su color y un cierre con tu paleta.`, bookInclText:'Incluir textos y citas', bookBleed:'Para imprenta', bookBleedHint:'Añade 3 mm de margen de corte. Déjalo sin marcar para imprimir en casa o en una copistería.', bookPrivate:'El PDF se crea en tu móvil. Nadie más lo ve hasta que tú lo compartes.', bookMake:'Crear PDF', bookMaking:'Creando…', bookStepPhotos:'Preparando las fotos…', bookStepPage:(i,n)=>`Página del recuerdo ${i} de ${n}…`, bookStepFile:'Montando el archivo…', bookDone:n=>`Listo: ${n} páginas.`, bookError:'No se ha podido crear el PDF. Prueba sin fotos o con un periodo más corto.', bookBy:n=>`de ${n}`, bookFigures:'En cifras', bookMems:'recuerdos', bookDays:'días con recuerdos', bookEmotions:'Tus emociones', bookWords:'Tus palabras', bookCont:'continúa', bookMade:'Hecho con Memorándum · memorandumapp.com', bookFile:'libro',
   filmBtn:'Tu película', filmTitle:'Tu película en color', filmT_semana:'Tu semana en color', filmT_mes:'Tu mes en color', filmT_anio:'Tu año en color', filmEmpty:'Aún no hay recuerdos en este periodo.', filmCount:n=>n===1?'1 recuerdo':n+' recuerdos', filmEnd:'Así se sintió.', filmPlay:'Reproducir', filmPause:'Pausa', filmInclText:'Incluir citas y textos', filmNote:'El vídeo se crea en tu móvil: nada sale de él hasta que tú lo compartes.', filmSave:'Crear vídeo', filmRecShort:'Creando…', filmRecording:'Creando el vídeo mientras se reproduce. No cierres esta ventana.', filmReady:'Tu vídeo está listo.', filmShare:'Guardar o compartir vídeo', filmAgain:'Crear de nuevo', filmNoRec:'Este navegador no puede crear vídeos. Prueba con Chrome o Safari actualizados.', filmDone:'Vídeo listo', filmFile:'pelicula',
@@ -670,6 +682,10 @@ en:{
   noEmotion:'No emotion', allYears:'All years',
   plusLead:'For those who want to go further, and to help this app keep growing.',
   tagsAll:n=>`See all (${n})`, tagsFewer:'See fewer',
+  rgLead:'Someone has sent you a file with a drawer. Here’s how to open it:', rgAndT:'On Android', rgAnd:['In WhatsApp, <b>long-press</b> the drawer file.','Tap <b>Share</b> (the ⋮ or ↗ icon at the top).','Choose <b>Memorandum</b>. The app opens and the drawer comes in by itself.'], rgAndNoT:'Memorandum not in the list?', rgAndNo:'Tap the file in WhatsApp to download it, tap <b>Choose the file</b> below and find it in <b>Android › media › com.whatsapp › WhatsApp › Media › WhatsApp Documents</b>. You can also email it to yourself and download it: it will be in <b>Downloads</b>.', rgIosT:'On iPhone', rgIos:['In WhatsApp, tap the drawer file and then the <b>share</b> button (the square with the arrow).','Choose <b>Save to Files</b> and save it, for example in <b>On My iPhone</b>.','Come back here, tap <b>Choose the file</b> and open it from <b>Recents</b>.'], rgDeskT:'On a computer', rgDesk:['Download the drawer file you were sent.','Tap <b>Choose the file</b> and open it from <b>Downloads</b>.'], rgPick:'Choose the file', rgOther:'Using a different phone?', rgFree:'Receiving a drawer is free. What you receive stays only on your phone.',
+  typeHide:'Hide', typeShow:'Show', typeHiddenTag:'hidden', typeHideNote:'You can hide the types you don’t use: they stop appearing when you create a memory, but their memories stay. Your own types can also be deleted. They sort themselves: the ones you use most go first.',
+  nzWeekAgo:'A week ago', nzMonthAgo:'A month ago', nzWeekLbl:'Your week in colour', nzWeek:(e,n,t)=>`This week your colour is “${e}”: ${n} of your ${t} memories.`, nzWeekBtn:'See your week', nzStreakLbl:'Streak', nzStreak:n=>`You’ve saved memories ${n} days in a row.`, nzStreakToday:n=>`You’ve saved memories ${n} days in a row. Will you save today’s too?`, nzMissLbl:'Not seen for a while', nzMiss:e=>`“${e}” hasn’t shown up for a few days. Was there a small moment today worth keeping?`, nzMissBtn:'Save it', nzLbl:'Reminders on Today', nzHint:'One card a day when you open the app: what happened a week ago, your colour of the week, your streak… Worked out on your phone.',
+  remSec:'Daily reminder', remLead:'If you’d like your phone to remind you every day to save how you felt, add it to your calendar. Your calendar will notify you at the time you choose, and you can remove it whenever you like from there.', remAt:'Remind me at', remIcs:'Add to phone calendar', remGoogle:'Add to Google Calendar', remHint:'Nothing is sent to any server: it’s a daily event in your own calendar.', remTitle:'Memorandum · How did you feel today?', remDesc:'Save the colour of your day.', remFile:'reminder', remDone:'Open the file to add it to your calendar',
   bookConn:'Connects with', bookLinked:'linked', bookPage:n=>`p. ${n}`,
   bookBtn:'PDF book', bookTitle:'Your PDF book', bookLead:n=>`An A5 book with ${n===1?'your memory':'your '+n+' memories'}: a cover, your figures, one memory per page in its colour and a closing page with your palette.`, bookInclText:'Include texts and quotes', bookBleed:'For a print shop', bookBleedHint:'Adds a 3 mm bleed. Leave it unticked to print at home or at a copy shop.', bookPrivate:'The PDF is made on your phone. Nobody else sees it until you share it.', bookMake:'Create PDF', bookMaking:'Creating…', bookStepPhotos:'Preparing photos…', bookStepPage:(i,n)=>`Memory page ${i} of ${n}…`, bookStepFile:'Putting the file together…', bookDone:n=>`Done: ${n} pages.`, bookError:'The PDF could not be created. Try without photos or with a shorter period.', bookBy:n=>`by ${n}`, bookFigures:'In figures', bookMems:'memories', bookDays:'days with memories', bookEmotions:'Your emotions', bookWords:'Your words', bookCont:'continued', bookMade:'Made with Memorandum · memorandumapp.com', bookFile:'book',
   filmBtn:'Your film', filmTitle:'Your film in colour', filmT_semana:'Your week in colour', filmT_mes:'Your month in colour', filmT_anio:'Your year in colour', filmEmpty:'No memories in this period yet.', filmCount:n=>n===1?'1 memory':n+' memories', filmEnd:'This is how it felt.', filmPlay:'Play', filmPause:'Pause', filmInclText:'Include quotes and texts', filmNote:'The video is made on your phone: nothing leaves it until you share it.', filmSave:'Create video', filmRecShort:'Creating…', filmRecording:'Creating the video while it plays. Don’t close this window.', filmReady:'Your video is ready.', filmShare:'Save or share video', filmAgain:'Create again', filmNoRec:'This browser can’t create videos. Try an up-to-date Chrome or Safari.', filmDone:'Video ready', filmFile:'film',
@@ -891,6 +907,10 @@ ca:{
   noEmotion:'Sense emoció', allYears:'Tots els anys',
   plusLead:'Per a qui vol anar més enllà, i per ajudar que aquesta app continuï creixent.',
   tagsAll:n=>`Veure-les totes (${n})`, tagsFewer:'Veure’n menys',
+  rgLead:'Algú t’ha enviat un fitxer amb un calaix. Així l’obres:', rgAndT:'A Android', rgAnd:['Al WhatsApp, <b>mantén premut</b> el fitxer del calaix.','Toca <b>Compartir</b> (la icona ⋮ o ↗, a dalt).','Tria <b>Memoràndum</b>. S’obre l’app i el calaix hi entra sol.'], rgAndNoT:'No surt Memoràndum a la llista?', rgAndNo:'Toca el fitxer al WhatsApp per descarregar-lo, prem <b>Tria el fitxer</b> aquí sota i busca’l a <b>Android › media › com.whatsapp › WhatsApp › Media › WhatsApp Documents</b>. També te’l pots enviar per correu i descarregar-lo: quedarà a <b>Baixades</b>.', rgIosT:'A iPhone', rgIos:['Al WhatsApp, toca el fitxer del calaix i després el botó de <b>compartir</b> (el quadrat amb la fletxa).','Tria <b>Desar a Arxius</b> i desa’l, per exemple a <b>Al meu iPhone</b>.','Torna aquí, prem <b>Tria el fitxer</b> i obre’l des de <b>Recents</b>.'], rgDeskT:'A l’ordinador', rgDesk:['Descarrega el fitxer del calaix que t’han enviat.','Prem <b>Tria el fitxer</b> i obre’l des de <b>Baixades</b>.'], rgPick:'Tria el fitxer', rgOther:'Fas servir un altre tipus de mòbil?', rgFree:'Rebre un calaix és gratis. El que reps es queda només al teu mòbil.',
+  typeHide:'Amaga', typeShow:'Mostra', typeHiddenTag:'amagat', typeHideNote:'Els tipus que no facis servir els pots amagar: deixen de sortir en crear un record, però els seus records es queden. Els teus també els pots esborrar. S’ordenen sols: els que més fas servir, a dalt.',
+  nzWeekAgo:'Fa una setmana', nzMonthAgo:'Fa un mes', nzWeekLbl:'La teva setmana en color', nzWeek:(e,n,t)=>`Aquesta setmana el teu color és «${e}»: ${n} dels teus ${t} records.`, nzWeekBtn:'Veure la setmana', nzStreakLbl:'Ratxa', nzStreak:n=>`Portes ${n} dies seguits desant records.`, nzStreakToday:n=>`Portes ${n} dies seguits desant records. Desaràs també el d’avui?`, nzMissLbl:'Fa dies que no apareix', nzMiss:e=>`Fa dies que no apareix «${e}». Avui hi ha hagut algun moment petit que valgui la pena desar?`, nzMissBtn:'Desar-lo', nzLbl:'Recordatoris a Avui', nzHint:'Una targeta al dia en obrir l’app: el que va passar fa una setmana, el teu color de la setmana, la teva ratxa… Es calcula al teu mòbil.',
+  remSec:'Recordatori diari', remLead:'Si vols que el mòbil et recordi cada dia desar el que has sentit, afegeix-ho al teu calendari. T’avisarà el calendari a l’hora que triïs, i ho pots treure quan vulguis des d’allà.', remAt:'Avisa’m a les', remIcs:'Afegeix al calendari del mòbil', remGoogle:'Afegeix a Google Calendar', remHint:'No s’envia res a cap servidor: és un esdeveniment diari al teu propi calendari.', remTitle:'Memoràndum · Què has sentit avui?', remDesc:'Desa el color del teu dia.', remFile:'recordatori', remDone:'Obre el fitxer per afegir-lo al calendari',
   bookConn:'Connecta amb', bookLinked:'enllaçat', bookPage:n=>`p. ${n}`,
   bookBtn:'Llibre en PDF', bookTitle:'El teu llibre en PDF', bookLead:n=>`Un llibre en mida A5 amb ${n===1?'el teu record':'els teus '+n+' records'}: portada, les teves xifres, un record per pàgina amb el seu color i un tancament amb la teva paleta.`, bookInclText:'Inclou textos i cites', bookBleed:'Per a impremta', bookBleedHint:'Afegeix 3 mm de marge de tall. Deixa-ho sense marcar per imprimir a casa o en una copisteria.', bookPrivate:'El PDF es crea al teu mòbil. Ningú més el veu fins que tu el comparteixes.', bookMake:'Crea el PDF', bookMaking:'Creant…', bookStepPhotos:'Preparant les fotos…', bookStepPage:(i,n)=>`Pàgina del record ${i} de ${n}…`, bookStepFile:'Muntant el fitxer…', bookDone:n=>`Fet: ${n} pàgines.`, bookError:'No s’ha pogut crear el PDF. Prova sense fotos o amb un període més curt.', bookBy:n=>`de ${n}`, bookFigures:'En xifres', bookMems:'records', bookDays:'dies amb records', bookEmotions:'Les teves emocions', bookWords:'Les teves paraules', bookCont:'continua', bookMade:'Fet amb Memoràndum · memorandumapp.com', bookFile:'llibre',
   filmBtn:'La teva pel·lícula', filmTitle:'La teva pel·lícula en color', filmT_semana:'La teva setmana en color', filmT_mes:'El teu mes en color', filmT_anio:'El teu any en color', filmEmpty:'Encara no hi ha records en aquest període.', filmCount:n=>n===1?'1 record':n+' records', filmEnd:'Així es va sentir.', filmPlay:'Reprodueix', filmPause:'Pausa', filmInclText:'Inclou cites i textos', filmNote:'El vídeo es crea al teu mòbil: no en surt res fins que tu el comparteixes.', filmSave:'Crea el vídeo', filmRecShort:'Creant…', filmRecording:'Creant el vídeo mentre es reprodueix. No tanquis aquesta finestra.', filmReady:'El teu vídeo és a punt.', filmShare:'Desa o comparteix el vídeo', filmAgain:'Torna a crear', filmNoRec:'Aquest navegador no pot crear vídeos. Prova amb Chrome o Safari actualitzats.', filmDone:'Vídeo a punt', filmFile:'pellicula',
@@ -1075,6 +1095,9 @@ function typeOf(id){
   return {id:'dia',...ty.dia};
 }
 function allTypeIds(){return [...TYPE_IDS,...(S.customTypes||[]).map(c=>c.id)]}
+/* Tipos ordenados por uso; los ocultos no salen al crear un recuerdo, pero sus recuerdos se quedan */
+function typesByUse(){const c={};S.memories.forEach(m=>c[m.type]=(c[m.type]||0)+1);return allTypeIds().map((id,i)=>({id,i,n:c[id]||0})).sort((a,b)=>b.n-a.n||a.i-b.i).map(x=>x.id)}
+function typeHidden(id){return ((S.settings&&S.settings.hiddenTypes)||[]).includes(id)}
 function setLang(l){
   if(!I18N[l]||l===lang())return;
   const from=I18N[lang()],to=I18N[l];
@@ -1104,7 +1127,8 @@ function daysAgo(s){return Math.round((fromIso(iso(new Date()))-fromIso(s))/864e
 function fmt(s,o={day:'numeric',month:'long',year:'numeric'}){return fromIso(s).toLocaleDateString(t('locale'),o)}
 function fmtD(d,o){return d.toLocaleDateString(t('locale'),o)}
 const emo=id=>S.emotions.find(e=>e.id===id)||(S.guestEmotions||[]).find(e=>e.id===id);
-const allEmos=()=>[...S.emotions,...(S.guestEmotions||[])];
+function guestOwner(id){const o=String(id).split('~')[0];const m=(S.memories||[]).find(x=>x.origin===o&&x.author);return m?m.author:''}
+const allEmos=()=>[...S.emotions,...(S.guestEmotions||[]).map(e=>{const w=guestOwner(e.id);return w?{...e,name:e.name+' · '+w}:e})];
 const drawerOf=id=>S.drawers.find(d=>d.id===id);
 const memOf=id=>S.memories.find(m=>m.id===id);
 /* Compartir cajones: apagado hasta resolver bien colores y emociones entre personas */
@@ -1209,12 +1233,41 @@ function resurfPool(){
   const old=vis().filter(m=>daysAgo(m.date)>=14&&!same.includes(m));
   return [...sorted(same),...old];
 }
+/* ---------- Recordatorio del día en Hoy: uno al día, se puede cerrar ---------- */
+function nudgesOn(){return !(S.settings&&S.settings.nudges===false)}
+function nudgeHTML(){
+  if(!nudgesOn())return '';const today=iso(new Date());if(S.settings.nudgeClosed===today)return '';
+  const me=S.settings.deviceId;const own=S.memories.filter(m=>!(m.origin&&me&&m.origin!==me));if(own.length<3)return '';
+  const now=fromIso(today),ago=d=>iso(addDays(now,-d));const out=[];
+  // 1. volver atrás: hace una semana / un mes
+  const mAgo=(()=>{const d=new Date(now);d.setMonth(d.getMonth()-1);return iso(d)})();
+  const wk=sorted(own.filter(m=>m.date===ago(7)))[0],mo=sorted(own.filter(m=>m.date===mAgo))[0];
+  const back=wk?{m:wk,k:'nzWeekAgo'}:mo?{m:mo,k:'nzMonthAgo'}:null;
+  if(back){const e=emo((back.m.emotions||[])[0]);out.push({c:e?e.color:'#9A96AE',label:t(back.k),body:`<b class="nz-title">${esc(memTitle(back.m))}</b>${e?` <span class="nz-emo"><i style="background:${e.color}"></i>${esc(e.name)}</span>`:''}`,btn:`<button class="btn" data-act="open" data-id="${back.m.id}">${t('open')}</button>`})}
+  // 2. tu semana en color
+  const week=own.filter(m=>m.date>ago(7)&&m.date<=today);
+  if(week.length>=3){const c={};week.forEach(m=>{const id=(m.emotions||[])[0];if(emo(id))c[id]=(c[id]||0)+1});const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
+    if(top&&top[1]>=2){const e=emo(top[0]);out.push({c:e.color,label:t('nzWeekLbl'),body:esc(t('nzWeek',e.name,top[1],week.length)),btn:`<button class="btn" data-act="nz-week">${esc(t('nzWeekBtn'))}</button>`})}}
+  // 3. racha
+  const days=new Set(own.map(m=>m.date));let k=days.has(today)?0:1,run=0;while(days.has(ago(k+run)))run++;
+  if(run>=3){const has=days.has(today);out.push({c:'#E9C46A',label:t('nzStreakLbl'),body:esc(has?t('nzStreak',run):t('nzStreakToday',run)),btn:has?'':`<button class="btn" data-act="new">${t('navNew')}</button>`})}
+  // 4. una emoción que hace días que no aparece (sin juzgar)
+  const recent=own.filter(m=>m.date>ago(60));const cnt={};recent.forEach(m=>(m.emotions||[]).forEach(id=>{if(S.emotions.find(e=>e.id===id))cnt[id]=(cnt[id]||0)+1}));
+  const last={};own.forEach(m=>(m.emotions||[]).forEach(id=>{if(!last[id]||m.date>last[id])last[id]=m.date}));
+  const miss=Object.entries(cnt).filter(([id,n])=>n>=3&&last[id]<=ago(7)).sort((a,b)=>b[1]-a[1])[0];
+  if(miss){const e=emo(miss[0]);out.push({c:e.color,label:t('nzMissLbl'),body:esc(t('nzMiss',e.name)),btn:`<button class="btn" data-act="new" data-type="dia" data-emo="${e.id}">${esc(t('nzMissBtn'))}</button>`})}
+  if(!out.length)return '';
+  const dn=Math.floor(now/864e5);const n=out[dn%out.length];
+  return `<div class="wash nudge" style="--c:${n.c};margin:18px 0 26px"><div class="row" style="justify-content:space-between;align-items:center;margin-bottom:6px"><span class="note" style="font-size:13px;text-transform:uppercase;letter-spacing:.06em">${esc(n.label)}</span><button class="btn quiet" data-act="nz-close" aria-label="${esc(t('close'))}" style="padding:2px 8px">✕</button></div>
+  <p style="margin:0 0 10px;font-size:16.5px">${n.body}</p>${n.btn?`<div class="row">${n.btn}</div>`:''}</div>`;
+}
 function vHoy(){
   const grow=firstHoy;firstHoy=false;
   const today=iso(new Date());
   const nm=(S.profile.name||'').trim();
   let h=`<h1 class="greet">${t('hello',new Date().getHours())}${nm?', '+esc(nm):''}.</h1>
   <p class="today-date">${esc(cap(fmt(today,{weekday:'long',day:'numeric',month:'long'})))}</p>
+  ${S.memories.length?nudgeHTML():''}
   <div class="strip${grow?' grow':''}" aria-label="${esc(t('stripCap'))}">${stripHTML()}</div>
   <div class="strip-cap"><span>${t('stripCap')}</span><span>${t('today')}</span></div>
   <button class="link-plain" data-act="go-map" style="margin-top:10px">${esc(t('mapSeeYear'))}</button>
@@ -1290,8 +1343,8 @@ function vArchivo(){
   <div class="seg" role="group" aria-label="${esc(t('view'))}"><button data-act="mode" data-v="lista" aria-pressed="${archMode==='lista'}">${t('cards')}</button><button data-act="mode" data-v="constelacion" aria-pressed="${archMode==='constelacion'}">${t('sky')}</button><button data-act="mode" data-v="fotos" aria-pressed="${archMode==='fotos'}">${t('photos')}</button><button data-act="mode" data-v="tarjetas" aria-pressed="${archMode==='tarjetas'}">${t('cardsMode')}</button></div>
   <div class="search">
     <input class="in" type="search" placeholder="${esc(t('search'))}" value="${esc(filters.q)}" data-field="q" aria-label="${esc(t('searchLbl'))}">
-    <select class="in" data-field="type" aria-label="${esc(t('typeLbl'))}"><option value="">${t('allTypes')}</option>${allTypeIds().map(id=>`<option value="${id}"${filters.type===id?' selected':''}>${typeOf(id).label}</option>`).join('')}</select>
-    <select class="in" data-field="drawer" aria-label="${esc(t('drawerLbl'))}"><option value="">${t('allDrawers')}</option>${S.drawers.map(d=>`<option value="${d.id}"${filters.drawer===d.id?' selected':''}>${esc(d.name)}</option>`).join('')}</select>
+    <select class="in" data-field="type" aria-label="${esc(t('typeLbl'))}"><option value="">${t('allTypes')}</option>${typesByUse().map(id=>`<option value="${id}"${filters.type===id?' selected':''}>${typeOf(id).label}</option>`).join('')}</select>
+    <select class="in" data-field="drawer" aria-label="${esc(t('drawerLbl'))}"><option value="">${t('allDrawers')}</option>${drawersByUse().map(d=>`<option value="${d.id}"${filters.drawer===d.id?' selected':''}>${esc(d.name)}</option>`).join('')}</select>
   </div>
   <div class="row goday-row" style="margin:-2px 0 12px;align-items:center"><label for="goday" class="note" style="font-size:14px">${esc(t('goDay'))}</label><input class="in" type="date" id="goday" data-dayjump style="flex:0 1 190px;width:auto"></div>
   <div class="emorow" role="group" aria-label="${esc(t('byEmotion'))}">${(shared?(()=>{const u=new Set(S.memories.filter(m=>(m.drawers||[]).includes(shD.id)).flatMap(m=>m.emotions||[]));return [...S.emotions,...(S.guestEmotions||[]).filter(e=>u.has(e.id))]})():S.emotions).map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo" data-v="${e.id}" aria-pressed="${filters.emotion===e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
@@ -1455,7 +1508,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.58';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.64';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackSection(){
@@ -1498,13 +1551,16 @@ function vPaleta(){
   </div>
   <h2 class="sec">${t('drawersTitle')}</h2>
   <p class="lead">${esc(t('drawersLead'))}</p>
-  <div class="drawers">${S.drawers.map(d=>`<div class="drawer"><input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${d.shared?`👥 ${esc(t('sdShared'))} · `:''}${dcnt(d.id)}</small><button class="btn quiet" data-act="drawer-go" data-id="${d.id}">${t('open')}</button>${SHARE_ON?`<button class="btn quiet" data-act="sd-open" data-id="${d.id}">${esc(t('sdBtn'))}${isPlus()?'':' '+plusBadge()}</button>`:''}${d.shared?`<button class="btn quiet" data-act="sd-stop" data-id="${d.id}">${esc(t('sdStop'))}</button>`:''}<button class="btn quiet danger" data-act="drawer-del" data-id="${d.id}">${t('del')}</button></div>`).join('')}
+  <div class="drawers">${drawersByUse().map(d=>`<div class="drawer"><input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${d.shared?`👥 ${esc(t('sdShared'))} · `:''}${dcnt(d.id)}</small><button class="btn quiet" data-act="drawer-go" data-id="${d.id}">${t('open')}</button>${SHARE_ON?`<button class="btn quiet" data-act="sd-open" data-id="${d.id}">${esc(t('sdBtn'))}${isPlus()?'':' '+plusBadge()}</button>`:''}${d.shared?`<button class="btn quiet" data-act="sd-stop" data-id="${d.id}">${esc(t('sdStop'))}</button>`:''}<button class="btn quiet danger" data-act="drawer-del" data-id="${d.id}">${t('del')}</button></div>`).join('')}
     <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newDrawerName'))}" data-field="new-drawer-pal" aria-label="${esc(t('newDrawerName'))}"><button class="btn" data-act="drawer-add">${t('addDrawer')}</button></div>
   </div>
-  ${SHARE_ON?`<div class="row" style="margin-top:12px;align-items:center"><button class="btn" data-act="import">👥 ${esc(t('sdReceive'))}</button><span class="note" style="flex:1 1 200px">${esc(t('sdReceiveHint'))}</span></div>`:''}
+  ${SHARE_ON?`<div class="row" style="margin-top:12px;align-items:center"><button class="btn" data-act="sd-recv">👥 ${esc(t('sdReceive'))}</button><span class="note" style="flex:1 1 200px">${esc(t('sdReceiveHint'))}</span></div>`:''}
   <h2 class="sec">${t('typesTitle')}</h2>
   <p class="lead">${esc(t('typesLead'))}</p>
-  <div class="drawers">${(S.customTypes||[]).map(c=>`<div class="drawer"><input value="${esc(c.name)}" data-field="type-name" data-id="${c.id}" aria-label="${esc(t('typeName'))}"><small>${S.memories.filter(m=>m.type===c.id).length}</small><button class="btn quiet" data-act="type-go" data-id="${c.id}">${t('open')}</button><button class="btn quiet danger" data-act="type-del" data-id="${c.id}">${t('del')}</button></div>`).join('')}
+  <div class="drawers">${typesByUse().map(id=>{const c=(S.customTypes||[]).find(x=>x.id===id);const n=S.memories.filter(m=>m.type===id).length;const hid=typeHidden(id);
+    const name=c?`<input value="${esc(c.name)}" data-field="type-name" data-id="${c.id}" aria-label="${esc(t('typeName'))}">`:`<span class="type-fixed"${hid?' style="opacity:.5"':''}>${esc(typeOf(id).label)}</span>`;
+    return `<div class="drawer">${name}<small>${hid?esc(t('typeHiddenTag'))+' · ':''}${n}</small><button class="btn quiet" data-act="type-go" data-id="${id}">${t('open')}</button><button class="btn quiet" data-act="type-hide" data-id="${id}">${esc(hid?t('typeShow'):t('typeHide'))}</button>${c?`<button class="btn quiet danger" data-act="type-del" data-id="${c.id}">${t('del')}</button>`:''}</div>`}).join('')}
+    <p class="note" style="margin:4px 0 6px">${esc(t('typeHideNote'))}</p>
     <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newTypeName'))}" data-field="new-type-pal" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="type-add">${t('addType')}</button></div>
   </div>`;
 }
@@ -1525,6 +1581,7 @@ function vPerfil(){
   ${plusSection()}
   ${supportSection()}
   ${feedbackSection()}
+  ${reminderSection()}
   ${privacySection()}
   ${careSection()}
   ${installSection()}
@@ -1758,6 +1815,17 @@ function drawerBarHTML(){
   <label style="display:flex;align-items:flex-start;gap:10px;font-size:15px;flex:1 1 220px;cursor:pointer"><input type="checkbox" data-act="dr-mix" data-id="${d.id}"${d.mix?' checked':''} style="flex:none;width:20px;height:20px"> <span style="flex:1 1 0;min-width:0">${esc(t('drMix'))}<br><small class="note">${esc(t(d.mix?'drMixOn':'drMixOff'))}</small></span></label>
   ${d.shared?`<button class="btn quiet" data-act="sd-stop" data-id="${d.id}">${esc(t('sdStop'))}</button>`:''}</div></div>`;
 }
+function openRecvGuide(){
+  const pf=platform();const steps=k=>`<ol class="rg-steps">${t(k).map(x=>`<li>${x}</li>`).join('')}</ol>`;
+  const sec=(k,title)=>`<h3 class="month" style="margin-top:14px">${esc(title)}</h3>${steps(k)}`;
+  const main=pf==='ios'?sec('rgIos',t('rgIosT')):pf==='android'?sec('rgAnd',t('rgAndT'))+`<p class="note" style="margin:6px 0 0"><b style="font-weight:600;color:var(--ink)">${esc(t('rgAndNoT'))}</b> ${t('rgAndNo')}</p>`:sec('rgDesk',t('rgDeskT'));
+  const other=pf==='ios'?sec('rgAnd',t('rgAndT')):pf==='android'?sec('rgIos',t('rgIosT')):sec('rgAnd',t('rgAndT'))+sec('rgIos',t('rgIosT'));
+  openDlg(`<div class="dlg-head"><h2>${esc(t('sdReceive'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  <p style="font-size:15.5px;margin:2px 0 0">${esc(t('rgLead'))}</p>${main}
+  <div class="actions"><button class="btn primary" data-act="import">${esc(t('rgPick'))}</button></div>
+  <details style="margin-top:14px"><summary class="note" style="cursor:pointer">${esc(t('rgOther'))}</summary>${other}</details>
+  <p class="note" style="margin-top:12px">🔒 ${esc(t('rgFree'))}</p>`);
+}
 function openStopShare(id){
   const d=drawerOf(id);if(!d)return;const me=myId();const theirs=S.memories.filter(m=>(m.drawers||[]).includes(id)&&m.origin&&m.origin!==me);
   const names=[...new Set(theirs.map(m=>m.author).filter(Boolean))];const who=names.length===1?names[0]:t('sdOthers');
@@ -1832,7 +1900,7 @@ function renderEditor(focusSel){
   const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('remove'))}</span>`;
   openDlg(`<div class="dlg-head"><h2>${draft.id?t('editMem'):t('newMem')}</h2><button class="btn quiet" data-act="close">${t('cancel')}</button></div>
   <label class="f">${t('whatIs')}</label>
-  <div class="row">${allTypeIds().map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${esc(typeOf(id).label)}</button>`).join('')}<button class="chip" data-act="ed-newtype-toggle" aria-expanded="${newTypeOpen}" style="border-style:dashed">${t('otherType')}</button></div>
+  <div class="row">${typesByUse().filter(id=>!typeHidden(id)||draft.type===id).map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${esc(typeOf(id).label)}</button>`).join('')}<button class="chip" data-act="ed-newtype-toggle" aria-expanded="${newTypeOpen}" style="border-style:dashed">${t('otherType')}</button></div>
   ${newTypeOpen?`<div class="row" style="margin-top:8px"><input class="in" style="flex:1 1 180px" id="ed-newtype" data-ed-newtype placeholder="${esc(t('newTypePh'))}" value="${esc(newTypeName)}" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="ed-addtype">${t('createType')}</button></div>`:''}
   <label class="f" for="ed-title">${ty.t}</label>
   <input class="in" id="ed-title" data-ed="title" value="${esc(draft.title)}" list="ed-titles" autocomplete="off">
@@ -1852,7 +1920,7 @@ function renderEditor(focusSel){
   <input class="in" id="ed-tag" data-ed-tag autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" style="text-transform:lowercase" placeholder="${esc(t('tagPh'))}">
   <div id="ed-sugg">${tagSuggHTML(sugg,'')}</div>
   <label class="f">${t('drawersTitle')} <small>${esc(t('drawersHint'))}</small></label>
-  <div class="row">${S.drawers.map(d=>`<button class="chip" data-act="ed-drawer" data-v="${d.id}" aria-pressed="${draft.drawers.includes(d.id)}">${esc(d.name)}</button>`).join('')}</div>
+  <div class="row">${drawersByUse().map(d=>`<button class="chip" data-act="ed-drawer" data-v="${d.id}" aria-pressed="${draft.drawers.includes(d.id)}">${esc(d.name)}</button>`).join('')}</div>
   <div class="row" style="margin-top:8px"><input class="in" style="flex:1 1 180px" id="ed-newdrawer" data-ed-newdrawer placeholder="${esc(t('orNewDrawer'))}" value="${esc(newDrawerName)}"><button class="btn" data-act="ed-adddrawer">${t('createDrawer')}</button></div>
   <div class="row" style="gap:14px;align-items:flex-end">
     <div style="flex:1 1 160px"><label class="f" for="ed-date">${t('date')}</label><input class="in" type="date" id="ed-date" data-ed="date" value="${draft.date}"></div>
@@ -2900,6 +2968,8 @@ function svgPct(labels,vals,color){
 }
 
 let statMode='emo', statDrawer=null;
+/* Cajones ordenados por uso: los que tienen más recuerdos, arriba */
+function drawersByUse(){const c={};S.memories.forEach(m=>(m.drawers||[]).forEach(id=>c[id]=(c[id]||0)+1));return S.drawers.map((d,i)=>({d,i,n:c[d.id]||0})).sort((a,b)=>b.n-a.n||a.i-b.i).map(x=>x.d)}
 function exSeg(){return `<div class="seg" role="group" style="margin:0 0 12px"><button data-act="stat-mode" data-v="emo" aria-pressed="${statMode==='emo'}">${esc(t('exModeEmo'))}</button><button data-act="stat-mode" data-v="drawer" aria-pressed="${statMode==='drawer'}">${esc(t('exModeDrawer'))}</button><button data-act="stat-mode" data-v="type" aria-pressed="${statMode==='type'}">${esc(t('exModeType'))}</button></div>`}
 
 function compWeights(ms){const c={};let tot=0;ms.forEach(m=>emoWeights(m).forEach(([id,w])=>{c[id]=(c[id]||0)+w;tot+=w}));return {c,tot}}
@@ -2907,7 +2977,7 @@ function compareDrawersHTML(ms,selId){
   const rows=S.drawers.map(d=>{const inD=ms.filter(m=>(m.drawers||[]).includes(d.id));return {d,n:inD.length,...compWeights(inD)}}).filter(x=>x.n>0&&x.tot>0).sort((a,b)=>b.n-a.n);
   const sub=(title,body)=>`<div><h4 style="font-family:var(--serif);font-weight:400;font-size:18px;margin:18px 0 6px">${esc(title)}</h4>${body}</div>`;
   if(rows.length<2)return sub(t('exCompare'),`<p class="note">${esc(t('exOnlyOne'))}</p>`);
-  const bars=rows.map(x=>`<button class="cmprow${x.d.id===selId?' sel':''}" data-act="stat-drawer" data-v="${x.d.id}"><span>${esc(x.d.name)} <small>(${x.n})</small></span><div class="cmpbar">${S.emotions.filter(e=>x.c[e.id]).map(e=>`<i style="width:${(x.c[e.id]/x.tot*100).toFixed(2)}%;background:${e.color}" title="${esc(e.name)} ${Math.round(x.c[e.id]/x.tot*100)}%"></i>`).join('')}</div></button>`).join('');
+  const bars=rows.map(x=>`<button class="cmprow${x.d.id===selId?' sel':''}" data-act="stat-drawer" data-v="${x.d.id}"><span>${x.d.shared?'👥 ':''}${esc(x.d.name)} <small>(${x.n})</small></span><div class="cmpbar">${allEmos().filter(e=>x.c[e.id]).map(e=>`<i style="width:${(x.c[e.id]/x.tot*100).toFixed(2)}%;background:${e.color}" title="${esc(e.name)} ${Math.round(x.c[e.id]/x.tot*100)}%"></i>`).join('')}</div></button>`).join('');
   const sel=compWeights(ms.filter(m=>(m.drawers||[]).includes(selId))),rest=compWeights(ms.filter(m=>(m.drawers||[]).length&&!(m.drawers||[]).includes(selId)));
   let txt='';
   if(sel.tot&&rest.tot){
@@ -2963,11 +3033,11 @@ function exploreTypeCard(r,st){
   <div class="row" style="margin-top:10px"><button class="btn" data-act="type-go" data-id="${statType}">${esc(t('exSeeAll'))}</button><button class="btn quiet" data-act="sky-view" data-m="type" data-v="${statType}">${esc(t('seeSky'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="type" data-v="${statType}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
 }
 function exploreDrawerCard(r,st){
-  const ms=st.ms;const head=`<h3>${esc(t('chExploreDrawer'))}</h3>${exSeg()}<p class="note" style="margin-top:-4px">${esc(t('exHintDrawer'))}</p>`;
+  const ms=S.memories.filter(m=>m.date>=r.s&&m.date<=r.e);const head=`<h3>${esc(t('chExploreDrawer'))}</h3>${exSeg()}<p class="note" style="margin-top:-4px">${esc(t('exHintDrawer'))}</p>`;
   if(!S.drawers.length)return `<div class="card" style="grid-column:1/-1">${head}<p class="note">${esc(t('exNoDrawers'))}</p></div>`;
   if(!statDrawer||!drawerOf(statDrawer)){const c={};ms.forEach(m=>(m.drawers||[]).forEach(id=>c[id]=(c[id]||0)+1));const top=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];statDrawer=top?top[0]:S.drawers[0].id}
   const dr=drawerOf(statDrawer);
-  const chips=`<div class="row" style="margin-bottom:12px">${S.drawers.map(x=>`<button class="chip" data-act="stat-drawer" data-v="${x.id}" aria-pressed="${x.id===statDrawer}">${esc(x.name)}</button>`).join('')}</div>`;
+  const chips=`<div class="row" style="margin-bottom:12px">${drawersByUse().map(x=>`<button class="chip" data-act="stat-drawer" data-v="${x.id}" aria-pressed="${x.id===statDrawer}">${x.shared?'👥 ':''}${esc(x.name)}</button>`).join('')}</div>`;
   const inD=sorted(ms.filter(m=>(m.drawers||[]).includes(dr.id)));
   if(!inD.length)return `<div class="card" style="grid-column:1/-1">${head}${chips}<p class="note">${esc(t('exNoneDrawer'))}</p></div>`;
   const pct=Math.round(inD.length/ms.length*100);
@@ -3073,7 +3143,7 @@ function plusStatsHTML(r,st,ps){
 
 /* ---------- Plus: códigos firmados que se comprueban sin conexión ---------- */
 const PLUS_PUBLIC_KEY={"kty":"EC","crv":"P-256","x":"huFeF33CNI2LNXtYfnpk8Np2bbBGDUQzWi-bgHJVcDs","y":"GMj5omm6XUKcW_QKEpJH8ZkB0hfTA2Y-o6X-k_ZGOoU"};
-const KOFI_URL='https://ko-fi.com/memorandumapp', KOFI_ON=false, BUY_ON=false;
+const KOFI_URL='https://ko-fi.com/memorandumapp', KOFI_ON=true, BUY_ON=true;
 function supportSection(){if(!KOFI_ON)return '';return `<h2 class="sec">${esc(t('supportTitle',t('brand')))}</h2><p class="note" style="font-size:15px">${esc(t('supportText',t('brand')))}</p><a class="btn" href="${KOFI_URL}" target="_blank" rel="noopener">☕ ${esc(t('supportBtn'))}</a>`}
 const PLUS_URL_YEAR='https://payhip.com/b/K1sxI', PLUS_URL_LIFE='https://payhip.com/b/0d23m';
 function plusBadge(){return `<span class="plus-badge">Plus</span>`}
@@ -3164,7 +3234,29 @@ function careBody(){
 function careSection(){return `<h2 class="sec">${esc(t('careTitle'))}</h2>${careBody()}`}
 function openCare(){openDlg(`<div class="dlg-head"><h2>${esc(t('careTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><div style="margin-top:14px">${careBody()}</div>
   <div class="actions"><button class="btn primary" data-act="export">${t('saveBackup')}</button>${canInstallUI()?`<button class="btn" data-act="install-how">${esc(t('instHow'))}</button>`:''}</div>`)}
-function privacySection(){return `<h2 class="sec">${esc(t('privSec'))}</h2><p class="note" style="font-size:15px">${esc(t('privText',!!cloud))}</p><label class="f">${esc(t('shareShowLbl'))}</label><div class="row" role="group" aria-label="${esc(t('shareShowLbl'))}"><button class="chip" data-act="share-show" data-v="on" aria-pressed="${showShare()}">${esc(t('shareShowOn'))}</button><button class="chip" data-act="share-show" data-v="off" aria-pressed="${!showShare()}">${esc(t('shareShowOff'))}</button></div><p class="note" style="margin-top:6px">${esc(t('shareShowHint'))}</p>`}
+/* ---------- Recordatorio diario en el calendario del móvil: sin servidor ---------- */
+function remindTime(){return (S.settings&&S.settings.remindTime)||'21:30'}
+function reminderSection(){const pf=platform();
+  const g=`<button class="btn${pf==='android'?' primary':''}" data-act="rem-google">${esc(t('remGoogle'))}</button>`,i=`<button class="btn${pf!=='android'?' primary':''}" data-act="rem-ics">${esc(t('remIcs'))}</button>`;
+  return `<h2 class="sec">${esc(t('remSec'))}</h2><p class="note" style="font-size:15px">${esc(t('remLead'))}</p>
+  <div class="row" style="align-items:center;margin:8px 0 10px"><label for="rem-time" class="note" style="font-size:15px">${esc(t('remAt'))}</label><input class="in" type="time" id="rem-time" value="${remindTime()}" style="flex:0 0 130px;width:auto"></div>
+  <div class="row">${pf==='android'?g+i:i+g}</div><p class="note" style="margin-top:8px">${esc(t('remHint'))}</p>`}
+function remStart(){const tm=($('#rem-time')&&$('#rem-time').value)||remindTime();S.settings.remindTime=tm;saveLocal();const [h,mi]=tm.split(':').map(Number);const d=new Date();d.setHours(h,mi,0,0);if(d<new Date())d.setDate(d.getDate()+1);return d}
+const pad2=n=>String(n).padStart(2,'0');
+const icsDT=d=>`${d.getFullYear()}${pad2(d.getMonth()+1)}${pad2(d.getDate())}T${pad2(d.getHours())}${pad2(d.getMinutes())}00`;
+function remEnd(d){return new Date(d.getTime()+10*60000)}
+async function remIcs(){
+  const d=remStart(),e=remEnd(d),url='https://memorandumapp.com/';
+  const esc2=x=>String(x).replace(/[\\,;]/g,m=>'\\'+m).replace(/\n/g,'\\n');
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Memorandum//ES','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:memorandum-diario-'+Date.now()+'@memorandumapp.com','DTSTAMP:'+icsDT(new Date()),'DTSTART:'+icsDT(d),'DTEND:'+icsDT(e),'RRULE:FREQ=DAILY','SUMMARY:'+esc2(t('remTitle')),'DESCRIPTION:'+esc2(t('remDesc')+' '+url),'URL:'+url,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc2(t('remTitle')),'TRIGGER:PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const blob=new Blob([ics],{type:'text/calendar'});
+  if(platform()==='ios'&&!window.claude){const u=URL.createObjectURL(blob);location.href=u;setTimeout(()=>URL.revokeObjectURL(u),60000);return}
+  const r=await deliverFile('memorandum-'+t('remFile')+'.ics',blob,'text/calendar',{download:true});if(r==='ok')toast(t('remDone'))}
+function remGoogle(){
+  const d=remStart(),e=remEnd(d),url='https://memorandumapp.com/';
+  const q=new URLSearchParams({action:'TEMPLATE',text:t('remTitle'),dates:icsDT(d)+'/'+icsDT(e),details:t('remDesc')+' '+url,recur:'RRULE:FREQ=DAILY'});
+  window.open('https://calendar.google.com/calendar/render?'+q.toString(),'_blank','noopener')}
+function privacySection(){return `<h2 class="sec">${esc(t('privSec'))}</h2><p class="note" style="font-size:15px">${esc(t('privText',!!cloud))}</p><label class="f">${esc(t('shareShowLbl'))}</label><div class="row" role="group" aria-label="${esc(t('shareShowLbl'))}"><button class="chip" data-act="share-show" data-v="on" aria-pressed="${showShare()}">${esc(t('shareShowOn'))}</button><button class="chip" data-act="share-show" data-v="off" aria-pressed="${!showShare()}">${esc(t('shareShowOff'))}</button></div><p class="note" style="margin-top:6px">${esc(t('shareShowHint'))}</p><label class="f">${esc(t('nzLbl'))}</label><div class="row" role="group" aria-label="${esc(t('nzLbl'))}"><button class="chip" data-act="nudge-show" data-v="on" aria-pressed="${nudgesOn()}">${esc(t('shareShowOn'))}</button><button class="chip" data-act="nudge-show" data-v="off" aria-pressed="${!nudgesOn()}">${esc(t('shareShowOff'))}</button></div><p class="note" style="margin-top:6px">${esc(t('nzHint'))}</p>`}
 function installSection(){
   if(window.claude)return '';
   if(isStandalone())return `<h2 class="sec">${esc(t('instSec'))}</h2><p class="note" style="font-size:15px">${esc(t('installed'))}</p>`;
@@ -3303,6 +3395,11 @@ document.addEventListener('click',e=>{
     case 'share-conn':openShare('conn',{a:b.dataset.a,b:b.dataset.b,se:(b.dataset.se||'').split(',').filter(Boolean),st:[b.dataset.st]});break;
     case 'share-stat':if(!isPlus()){goPlus();break}openShare('stat',{mode:b.dataset.m,id:v});break;
     case 'share-style':if(shareState){shareState.style=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
+    case 'nz-close':S.settings.nudgeClosed=iso(new Date());saveLocal();render();break;
+    case 'nz-week':rep={period:'semana',offset:0};go('informe');break;
+    case 'nudge-show':S.settings.nudges=v==='on';savePalette();render();break;
+    case 'rem-ics':remIcs();break;
+    case 'rem-google':remGoogle();break;
     case 'share-show':S.settings.share=v==='on';savePalette();render();break;
     case 'card-save':{const k=b.dataset.k;if(k==='story'){saveCardFromCanvas(window._storyCanvas,{kind:'story',label:range(rep.period,rep.offset).label})}else if(shareState){const sd=shareState;let label='';if(sd.kind==='mem'){const m=memOf(sd.data);label=m?memTitle(m):''}else if(sd.kind==='day')label=fmt(sd.data);else if(sd.kind==='stat'){const d=sd.data;label=d.mode==='emo'?(emo(d.id)||{}).name:d.mode==='drawer'?(drawerOf(d.id)||{}).name:cap(typeOf(d.id).plural)}else if(sd.kind==='conn'){const a1=memOf(sd.data.a),b1=memOf(sd.data.b);label=a1&&b1?memTitle(a1)+' + '+memTitle(b1):''}else if(sd.kind==='sky')label=skyLast?cap(skyLast.label):'';else if(sd.kind==='dual'){const a=memOf((sd.data.ids||[])[0]);label=a?fmt(a.date):''}saveCardFromCanvas(window._shareCanvas,{kind:sd.kind,label:label||''})}break}
     case 'go-cards':closeDlg();archMode='tarjetas';go('archivo');break;
@@ -3362,6 +3459,7 @@ document.addEventListener('click',e=>{
     case 'plus-activate':activatePlus(($('#plus-code')||{}).value);break;
     case 'gal-year':galYear=v;render();break;
     case 'import':$('#importer').click();break;
+    case 'sd-recv':openRecvGuide();break;
     case 'mark-backup':S.settings.lastBackup=iso(new Date());S.settings.snoozeUntil=null;savePalette();closeDlg();render();toast(t('tBackupMarked'));break;
     case 'backup-later':S.settings.snoozeUntil=iso(addDays(new Date(),1));savePalette();render();break;
     case 'freq':S.settings.backupFreq=v;S.settings.snoozeUntil=null;savePalette();render();break;
@@ -3385,6 +3483,7 @@ document.addEventListener('click',e=>{
     case 'ed-drawer':{const i=draft.drawers.indexOf(v);if(i>=0)draft.drawers.splice(i,1);else draft.drawers.push(v);renderEditor();break}
     case 'ed-newtype-toggle':newTypeOpen=!newTypeOpen;renderEditor(newTypeOpen?'#ed-newtype':null);break;
     case 'ed-addtype':{const n=newTypeName.trim();if(!n){$('#ed-newtype')?.focus();break}const nt=createType(n);draft.type=nt.id;draft.source='';newTypeOpen=false;newTypeName='';renderEditor();break}
+    case 'type-hide':{const h=new Set(S.settings.hiddenTypes||[]);h.has(id)?h.delete(id):h.add(id);S.settings.hiddenTypes=[...h];savePalette();const y=window.scrollY;render();window.scrollTo(0,y);break}
     case 'type-add':{const inp=document.querySelector('[data-field="new-type-pal"]');const n=(inp?.value||'').trim();if(!n){inp?.focus();break}createType(n);render();break}
     case 'type-go':filters={...NOFILTER(),type:id};go('archivo');break;
     case 'type-del':armed(b,async()=>{S.customTypes=S.customTypes.filter(x=>x.id!==id);const tt=S.memories.filter(m=>m.type===id);tt.forEach(m=>m.type='idea');if(filters.type===id)filters.type='';render();await savePalette();for(const m of tt)await saveMem(m)});break;
