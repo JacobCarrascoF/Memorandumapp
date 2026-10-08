@@ -3,6 +3,9 @@
   "target": {
     "namespace": "android_app",
     "package_name": "com.memorandumapp.app",
-    "sha256_cert_fingerprints": ["C0:E1:DA:63:EE:69:D5:AF:40:08:80:83:F4:FE:98:FB:46:5B:D3:A9:A9:78:A2:F1:38:90:A8:35:CF:84:79:5B"]
+    "sha256_cert_fingerprints": [
+      "51:7D:B1:14:D1:FA:E8:AD:8E:15:13:5B:1D:28:61:09:D6:16:EE:7A:58:43:C8:A2:AD:B9:AA:B8:51:60:17:57",
+      "C0:E1:DA:63:EE:69:D5:AF:40:08:80:83:F4:FE:98:FB:46:5B:D3:A9:A9:78:A2:F1:38:90:A8:35:CF:84:79:5B"
+    ]
   }
 }]
