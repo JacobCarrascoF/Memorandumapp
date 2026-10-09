@@ -336,7 +336,8 @@ html[data-font="maquina"] .greet,html[data-font="mano"] .greet{letter-spacing:-.
 .swatches{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;align-items:center}
 .swatches button{width:24px;height:24px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line);padding:0;cursor:pointer}
 .swatches button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
-.swatches button.used{opacity:.35}
+.swatches button.used{opacity:.4}
+.swatches .sw-more{width:auto;height:24px;border-radius:999px;padding:0 9px;font:500 12px/1 var(--sans,inherit);color:var(--muted,#6C6884);background:var(--surface);box-shadow:0 0 0 1px var(--line);border:0}
 .swatches.locked button{opacity:.45}
 .cn-sky{display:block;width:100%;max-width:420px;height:auto;margin:6px auto 2px}
 .cn-sky .cn-line{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:cnDraw .7s ease-out forwards}
@@ -464,7 +465,7 @@ es:{
   bookConn:'Conecta con', bookLinked:'enlazado', bookPage:n=>`p. ${n}`,
   bookBtn:'Libro en PDF', bookTitle:'Tu libro en PDF', bookLead:n=>`Un libro en tamaño A5 con ${n===1?'tu recuerdo':'tus '+n+' recuerdos'}: portada, tus cifras, un recuerdo por página con su color y un cierre con tu paleta.`, bookInclText:'Incluir textos y citas', bookBleed:'Para imprenta', bookBleedHint:'Añade 3 mm de margen de corte. Déjalo sin marcar para imprimir en casa o en una copistería.', bookPrivate:'El PDF se crea en tu móvil. Nadie más lo ve hasta que tú lo compartes.', bookMake:'Crear PDF', bookMaking:'Creando…', bookStepPhotos:'Preparando las fotos…', bookStepPage:(i,n)=>`Página del recuerdo ${i} de ${n}…`, bookStepFile:'Montando el archivo…', bookDone:n=>`Listo: ${n} páginas.`, bookError:'No se ha podido crear el PDF. Prueba sin fotos o con un periodo más corto.', bookBy:n=>`de ${n}`, bookFigures:'En cifras', bookMems:'recuerdos', bookDays:'días con recuerdos', bookEmotions:'Tus emociones', bookWords:'Tus palabras', bookCont:'continúa', bookMade:'Hecho con Memorándum · memorandumapp.com', bookFile:'libro',
   verPlay:'app de Google Play', verWeb:'versión web',
-  filmBtn:'Tu película', filmTitle:'Tu película en color', filmT_semana:'Tu semana en color', filmT_mes:'Tu mes en color', filmT_anio:'Tu año en color', filmEmpty:'Aún no hay recuerdos en este periodo.', filmCount:n=>n===1?'1 recuerdo':n+' recuerdos', filmEnd:'Así se sintió.', filmPlay:'Reproducir', filmPause:'Pausa', filmInclText:'Incluir citas y textos', filmNote:'El vídeo se crea en tu móvil: nada sale de él hasta que tú lo compartes.', filmSave:'Crear vídeo', filmRecShort:'Creando…', filmRecording:'Creando el vídeo mientras se reproduce. No cierres esta ventana.', filmReady:'Tu vídeo está listo.', filmShare:'Guardar o compartir vídeo', filmAgain:'Crear de nuevo', filmNoRec:'Este navegador no puede crear vídeos. Prueba con Chrome o Safari actualizados.', filmDone:'Vídeo listo', filmFile:'pelicula',
+  filmBtn:'Tu película', filmTitle:'Tu película en color', filmT_semana:'Tu semana en color', filmT_mes:'Tu mes en color', filmT_anio:'Tu año en color', filmEmpty:'Aún no hay recuerdos en este periodo.', filmCount:n=>n===1?'1 recuerdo':n+' recuerdos', filmEnd:'Así se sintió.', filmPlay:'Reproducir', filmPause:'Pausa', filmInclText:'Incluir citas y textos', filmNote:'El vídeo se crea en tu móvil: nada sale de él hasta que tú lo compartes.', filmSave:'Crear vídeo', filmRecShort:'Creando…', filmRecording:'Creando el vídeo mientras se reproduce. No cierres esta ventana.', filmReady:'Tu vídeo está listo.', filmShare:'Guardar o compartir vídeo', filmAgain:'Crear de nuevo', filmNoRec:'Este navegador no puede crear vídeos. Prueba con Chrome o Safari actualizados.', filmDone:'Vídeo listo', filmFile:'pelicula', selMake:n=>`Con ${n===1?'este recuerdo':'estos '+n+' recuerdos'}:`, selFilmCap:'La película usa los 36 más recientes.', selSearch:q=>`«${q}»`,
   plusFeatures:['Cajones compartidos: comparte un cajón con tu pareja o tu familia y tened los mismos recuerdos.','Tu película en color: tus recuerdos de la semana, el mes o el año, uno tras otro, en un vídeo para Instagram.','Tu libro en PDF: tu año, tu mes o tu semana en un libro A5 para guardar o imprimir.','Más diseños para compartir en Instagram: mosaico de tus días y tus fotos en polaroid.','Explora cada emoción, cada cajón y cada tipo de recuerdo: cuándo aparecen, qué días, a qué hora y con qué recuerdos.','El mapa en color de cualquier año o de las fechas que quieras, para guardarlo como imagen.','Estadísticas con gráficos: quesitos y barras de tus emociones, tus días, tus horas, tus palabras y mucho más.','Hasta 5 fotos por recuerdo.','Emociones sugeridas a partir de los colores de tus fotos.','Tus fotos ordenadas por emoción, en un mosaico de tu año.','Y todo lo que vaya llegando a Plus.'],
   trialActive:n=>`Estás probando Plus gratis: te ${n===1?'queda 1 día':'quedan '+n+' días'}. Todo lo que crees durante la prueba se queda contigo.`,
   trialWelcome:'Tienes 14 días de Plus gratis para probarlo todo: estadísticas, hasta 5 fotos por recuerdo, el mapa de cualquier año y más. Sin dar ningún dato.',
@@ -475,7 +476,7 @@ es:{
   fbRates:['Poco','Regular','Bien','Muy bien','Me encanta'], fbBanner:'Ya llevas un tiempo con Memorándum. ¿Me cuentas qué te parece? Son dos minutos.', fbGo:'Contarte', fbNotNow:'Ahora no', tFbThanks:'¡Gracias! Te he abierto el correo.',
   lookTitle:'Apariencia', fontLbl:'Tipografía de los títulos', fontHint:'Puedes cambiarla cuando quieras: tus recuerdos no cambian, solo cómo se ven.',
   fonts:{clasica:['Clásica','Elegante y ligera'],libro:['Libro','Cálida, de novela'],maquina:['Máquina de escribir','Diario antiguo'],mano:['A mano','Como en tu cuaderno']},
-  swatchHint:'Colores que combinan con la app', swatchPlus:'Colores sugeridos con Plus',
+  swatchHint:'Colores que combinan con la app', swMore:n=>`+${n} colores`, swLess:'Ocultar', swUsedBy:n=>`Ojo: «${n}» también tiene este color.`, swatchPlus:'Colores sugeridos con Plus',
   duTitle:'Vosotros', duLead:'Cómo ha vivido cada uno este cajón, con sus colores.', duSame:'La misma vivencia, vista por cada uno', duMe:'Tú', duCard:'Crear imagen juntos', duNone:'Cuando dos de vosotros guardéis un recuerdo del mismo día, aparecerá aquí, uno al lado del otro.',
   duCardTitle:'El mismo día, en dos colores', duCardTitleN:'El mismo día, en varios colores', rcTitle:(w,n)=>`${w} te ha enviado ${n===1?'un recuerdo nuevo':n+' recuerdos nuevos'}`, rcLead:b=>`Ya están en tu cajón «${b}».`, rcOpen:b=>`Abrir «${b}»`,
   whoMine:'Tus recuerdos', whoTheirs:n=>`Recuerdos de ${n}`,
@@ -690,7 +691,7 @@ en:{
   bookConn:'Connects with', bookLinked:'linked', bookPage:n=>`p. ${n}`,
   bookBtn:'PDF book', bookTitle:'Your PDF book', bookLead:n=>`An A5 book with ${n===1?'your memory':'your '+n+' memories'}: a cover, your figures, one memory per page in its colour and a closing page with your palette.`, bookInclText:'Include texts and quotes', bookBleed:'For a print shop', bookBleedHint:'Adds a 3 mm bleed. Leave it unticked to print at home or at a copy shop.', bookPrivate:'The PDF is made on your phone. Nobody else sees it until you share it.', bookMake:'Create PDF', bookMaking:'Creating…', bookStepPhotos:'Preparing photos…', bookStepPage:(i,n)=>`Memory page ${i} of ${n}…`, bookStepFile:'Putting the file together…', bookDone:n=>`Done: ${n} pages.`, bookError:'The PDF could not be created. Try without photos or with a shorter period.', bookBy:n=>`by ${n}`, bookFigures:'In figures', bookMems:'memories', bookDays:'days with memories', bookEmotions:'Your emotions', bookWords:'Your words', bookCont:'continued', bookMade:'Made with Memorandum · memorandumapp.com', bookFile:'book',
   verPlay:'Google Play app', verWeb:'web version',
-  filmBtn:'Your film', filmTitle:'Your film in colour', filmT_semana:'Your week in colour', filmT_mes:'Your month in colour', filmT_anio:'Your year in colour', filmEmpty:'No memories in this period yet.', filmCount:n=>n===1?'1 memory':n+' memories', filmEnd:'This is how it felt.', filmPlay:'Play', filmPause:'Pause', filmInclText:'Include quotes and texts', filmNote:'The video is made on your phone: nothing leaves it until you share it.', filmSave:'Create video', filmRecShort:'Creating…', filmRecording:'Creating the video while it plays. Don’t close this window.', filmReady:'Your video is ready.', filmShare:'Save or share video', filmAgain:'Create again', filmNoRec:'This browser can’t create videos. Try an up-to-date Chrome or Safari.', filmDone:'Video ready', filmFile:'film',
+  filmBtn:'Your film', filmTitle:'Your film in colour', filmT_semana:'Your week in colour', filmT_mes:'Your month in colour', filmT_anio:'Your year in colour', filmEmpty:'No memories in this period yet.', filmCount:n=>n===1?'1 memory':n+' memories', filmEnd:'This is how it felt.', filmPlay:'Play', filmPause:'Pause', filmInclText:'Include quotes and texts', filmNote:'The video is made on your phone: nothing leaves it until you share it.', filmSave:'Create video', filmRecShort:'Creating…', filmRecording:'Creating the video while it plays. Don’t close this window.', filmReady:'Your video is ready.', filmShare:'Save or share video', filmAgain:'Create again', filmNoRec:'This browser can’t create videos. Try an up-to-date Chrome or Safari.', filmDone:'Video ready', filmFile:'film', selMake:n=>`With ${n===1?'this memory':'these '+n+' memories'}:`, selFilmCap:'The film uses the 36 most recent.', selSearch:q=>`“${q}”`,
   plusFeatures:['Shared drawers: share a drawer with your partner or family and keep the same memories.','Your film in colour: your week, month or year of memories, one after another, in a video for Instagram.','Your PDF book: your year, month or week as an A5 book to keep or print.','More designs to share on Instagram: a mosaic of your days and your photos as polaroids.','Explore each emotion, each drawer and each type of memory: when they appear, which days, what time and in which memories.','The colour map of any year or any dates you like, to save as an image.','Statistics with charts: pies and bars of your emotions, your days, your hours, your words and much more.','Up to 5 photos per memory.','Emotions suggested from the colours in your photos.','Your photos arranged by emotion, in a mosaic of your year.','And everything that comes to Plus next.'],
   trialActive:n=>`You're trying Plus for free: ${n===1?'1 day':n+' days'} left. Everything you create during the trial stays with you.`,
   trialWelcome:'You have 14 days of Plus for free to try everything: statistics, up to 5 photos per memory, the map of any year and more. No details needed.',
@@ -701,7 +702,7 @@ en:{
   fbRates:['Not much','So-so','Good','Very good','Love it'], fbBanner:"You've been using Memorandum for a while. Would you tell me what you think? It takes two minutes.", fbGo:'Tell you', fbNotNow:'Not now', tFbThanks:"Thank you! I've opened your email.",
   lookTitle:'Appearance', fontLbl:'Heading typeface', fontHint:"Change it whenever you like: your memories don't change, only how they look.",
   fonts:{clasica:['Classic','Elegant and light'],libro:['Book','Warm, like a novel'],maquina:['Typewriter','An old diary'],mano:['Handwritten','Like your notebook']},
-  swatchHint:'Colours that match the app', swatchPlus:'Suggested colours with Plus',
+  swatchHint:'Colours that match the app', swMore:n=>`+${n} colours`, swLess:'Hide', swUsedBy:n=>`Heads up: “${n}” has this colour too.`, swatchPlus:'Suggested colours with Plus',
   duTitle:'All of you', duLead:'How each of you has lived this drawer, in your own colours.', duSame:'The same moment, seen by each of you', duMe:'You', duCard:'Create image together', duNone:'When two of you save a memory from the same day, it will appear here, side by side.',
   duCardTitle:'The same day, in two colours', duCardTitleN:'The same day, in many colours', rcTitle:(w,n)=>`${w} sent you ${n===1?'a new memory':n+' new memories'}`, rcLead:b=>`They're already in your drawer “${b}”.`, rcOpen:b=>`Open “${b}”`,
   whoMine:'Your memories', whoTheirs:n=>`${n}’s memories`,
@@ -916,7 +917,7 @@ ca:{
   bookConn:'Connecta amb', bookLinked:'enllaçat', bookPage:n=>`p. ${n}`,
   bookBtn:'Llibre en PDF', bookTitle:'El teu llibre en PDF', bookLead:n=>`Un llibre en mida A5 amb ${n===1?'el teu record':'els teus '+n+' records'}: portada, les teves xifres, un record per pàgina amb el seu color i un tancament amb la teva paleta.`, bookInclText:'Inclou textos i cites', bookBleed:'Per a impremta', bookBleedHint:'Afegeix 3 mm de marge de tall. Deixa-ho sense marcar per imprimir a casa o en una copisteria.', bookPrivate:'El PDF es crea al teu mòbil. Ningú més el veu fins que tu el comparteixes.', bookMake:'Crea el PDF', bookMaking:'Creant…', bookStepPhotos:'Preparant les fotos…', bookStepPage:(i,n)=>`Pàgina del record ${i} de ${n}…`, bookStepFile:'Muntant el fitxer…', bookDone:n=>`Fet: ${n} pàgines.`, bookError:'No s’ha pogut crear el PDF. Prova sense fotos o amb un període més curt.', bookBy:n=>`de ${n}`, bookFigures:'En xifres', bookMems:'records', bookDays:'dies amb records', bookEmotions:'Les teves emocions', bookWords:'Les teves paraules', bookCont:'continua', bookMade:'Fet amb Memoràndum · memorandumapp.com', bookFile:'llibre',
   verPlay:'app de Google Play', verWeb:'versió web',
-  filmBtn:'La teva pel·lícula', filmTitle:'La teva pel·lícula en color', filmT_semana:'La teva setmana en color', filmT_mes:'El teu mes en color', filmT_anio:'El teu any en color', filmEmpty:'Encara no hi ha records en aquest període.', filmCount:n=>n===1?'1 record':n+' records', filmEnd:'Així es va sentir.', filmPlay:'Reprodueix', filmPause:'Pausa', filmInclText:'Inclou cites i textos', filmNote:'El vídeo es crea al teu mòbil: no en surt res fins que tu el comparteixes.', filmSave:'Crea el vídeo', filmRecShort:'Creant…', filmRecording:'Creant el vídeo mentre es reprodueix. No tanquis aquesta finestra.', filmReady:'El teu vídeo és a punt.', filmShare:'Desa o comparteix el vídeo', filmAgain:'Torna a crear', filmNoRec:'Aquest navegador no pot crear vídeos. Prova amb Chrome o Safari actualitzats.', filmDone:'Vídeo a punt', filmFile:'pellicula',
+  filmBtn:'La teva pel·lícula', filmTitle:'La teva pel·lícula en color', filmT_semana:'La teva setmana en color', filmT_mes:'El teu mes en color', filmT_anio:'El teu any en color', filmEmpty:'Encara no hi ha records en aquest període.', filmCount:n=>n===1?'1 record':n+' records', filmEnd:'Així es va sentir.', filmPlay:'Reprodueix', filmPause:'Pausa', filmInclText:'Inclou cites i textos', filmNote:'El vídeo es crea al teu mòbil: no en surt res fins que tu el comparteixes.', filmSave:'Crea el vídeo', filmRecShort:'Creant…', filmRecording:'Creant el vídeo mentre es reprodueix. No tanquis aquesta finestra.', filmReady:'El teu vídeo és a punt.', filmShare:'Desa o comparteix el vídeo', filmAgain:'Torna a crear', filmNoRec:'Aquest navegador no pot crear vídeos. Prova amb Chrome o Safari actualitzats.', filmDone:'Vídeo a punt', filmFile:'pellicula', selMake:n=>`Amb ${n===1?'aquest record':'aquests '+n+' records'}:`, selFilmCap:'La pel·lícula fa servir els 36 més recents.', selSearch:q=>`«${q}»`,
   plusFeatures:['Calaixos compartits: comparteix un calaix amb la teva parella o la teva família i tingueu els mateixos records.','La teva pel·lícula en color: els teus records de la setmana, el mes o l’any, un rere l’altre, en un vídeo per a Instagram.','El teu llibre en PDF: el teu any, el teu mes o la teva setmana en un llibre A5 per guardar o imprimir.','Més dissenys per compartir a Instagram: mosaic dels teus dies i les teves fotos en polaroid.','Explora cada emoció, cada calaix i cada tipus de record: quan apareixen, quins dies, a quina hora i amb quins records.','El mapa en color de qualsevol any o de les dates que vulguis, per desar-lo com a imatge.','Estadístiques amb gràfics: formatges i barres de les teves emocions, els teus dies, les teves hores, les teves paraules i molt més.','Fins a 5 fotos per record.','Emocions suggerides a partir dels colors de les teves fotos.','Les teves fotos ordenades per emoció, en un mosaic del teu any.','I tot el que vagi arribant a Plus.'],
   trialActive:n=>`Estàs provant Plus gratis: et ${n===1?'queda 1 dia':'queden '+n+' dies'}. Tot el que creïs durant la prova es queda amb tu.`,
   trialWelcome:"Tens 14 dies de Plus gratis per provar-ho tot: estadístiques, fins a 5 fotos per record, el mapa de qualsevol any i més. Sense donar cap dada.",
@@ -927,7 +928,7 @@ ca:{
   fbRates:['Poc','Regular','Bé','Molt bé',"M'encanta"], fbBanner:"Ja fa un temps que fas servir Memoràndum. M'expliques què te'n sembla? Són dos minuts.", fbGo:'Explicar-te-ho', fbNotNow:'Ara no', tFbThanks:"Gràcies! T'he obert el correu.",
   lookTitle:'Aparença', fontLbl:'Tipografia dels títols', fontHint:'La pots canviar quan vulguis: els teus records no canvien, només com es veuen.',
   fonts:{clasica:['Clàssica','Elegant i lleugera'],libro:['Llibre','Càlida, de novel·la'],maquina:['Màquina d’escriure','Diari antic'],mano:['A mà','Com al teu quadern']},
-  swatchHint:"Colors que combinen amb l'app", swatchPlus:'Colors suggerits amb Plus',
+  swatchHint:"Colors que combinen amb l'app", swMore:n=>`+${n} colors`, swLess:'Amaga', swUsedBy:n=>`Compte: «${n}» també té aquest color.`, swatchPlus:'Colors suggerits amb Plus',
   duTitle:'Vosaltres', duLead:'Com ha viscut cadascú aquest calaix, amb els seus colors.', duSame:'La mateixa vivència, vista per cadascú', duMe:'Tu', duCard:'Crear imatge junts', duNone:"Quan dos de vosaltres deseu un record del mateix dia, apareixerà aquí, l'un al costat de l'altre.",
   duCardTitle:'El mateix dia, en dos colors', duCardTitleN:'El mateix dia, en diversos colors', rcTitle:(w,n)=>`${w} t'ha enviat ${n===1?'un record nou':n+' records nous'}`, rcLead:b=>`Ja són al teu calaix «${b}».`, rcOpen:b=>`Obre «${b}»`,
   whoMine:'Els teus records', whoTheirs:n=>`Records de ${n}`,
@@ -1353,7 +1354,28 @@ function vArchivo(){
   <div class="emorow" role="group" aria-label="${esc(t('byEmotion'))}">${(shared?(()=>{const u=new Set(S.memories.filter(m=>(m.drawers||[]).includes(shD.id)).flatMap(m=>m.emotions||[]));return [...S.emotions,...(S.guestEmotions||[]).filter(e=>u.has(e.id))]})():S.emotions).map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo" data-v="${e.id}" aria-pressed="${filters.emotion===e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
   ${active.length?`<div class="row active-filters" style="margin-bottom:6px">${active.join('')}</div>`:''}
   ${drawerBarHTML()}
+  <div id="sel-bar">${selBarHTML()}</div>
   <div id="results">${archMode==='lista'?resultsHTML():archMode==='fotos'?galleryHTML():archMode==='tarjetas'?cardsHTML():`${skyHeaderHTML()}<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>${skyButtonsHTML()}`}</div>`;
+}
+function selInfo(){
+  const parts=[];
+  if(filters.emotion){const e=allEmos().find(x=>x.id===filters.emotion);if(e)parts.push(e.name)}
+  if(filters.drawer){const d=drawerOf(filters.drawer);if(d)parts.push(d.name)}
+  if(filters.tag)parts.push('#'+filters.tag);
+  if(filters.type)parts.push(typeOf(filters.type).label);
+  if(filters.date)parts.push(fmt(filters.date));
+  if(filters.q.trim())parts.push(t('selSearch',filters.q.trim()));
+  if(!parts.length)return null;
+  const ms=[...filtered()].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0));
+  if(!ms.length)return null;
+  const a=ms[0].date,b=ms[ms.length-1].date,o={month:'short',year:'numeric'};
+  const la=fmt(a,o),lb=fmt(b,o);const label=a===b?fmt(a):la===lb?la:la+' – '+lb;
+  const span=(fromIso(b)-fromIso(a))/864e5;
+  return {ms,title:parts.join(' · '),label,period:span>62?'anio':'mes'};
+}
+function selBarHTML(){
+  const s=selInfo();if(!s)return '';
+  return `<div class="row sel-bar" style="align-items:center;gap:8px;margin:2px 0 14px"><span class="note" style="font-size:14px">${esc(t('selMake',s.ms.length))}</span><button class="btn" data-act="film-sel">▶ ${esc(t('filmBtn'))}${isPlus()?'':' '+plusBadge()}</button><button class="btn" data-act="book-sel">📖 ${esc(t('bookBtn'))}${isPlus()?'':' '+plusBadge()}</button></div>`;
 }
 function resultsHTML(){
   const ms=filtered();
@@ -1502,16 +1524,23 @@ function lookSection(){
   <div class="fontpick" role="group" aria-label="${esc(t('fontLbl'))}">${FONT_KEYS.map(k=>`<button data-act="set-font" data-v="${k}" aria-pressed="${curFont()===k}"><b style="font-family:${FONT_FAM[k].replace(/"/g,"'")},Georgia,serif">${esc(sample)}</b>${esc(t('fonts')[k][0])}<br><small>${esc(t('fonts')[k][1])}</small></button>`).join('')}</div>
   <p class="note" style="margin-top:8px">${esc(t('fontHint'))}</p>`;
 }
-const SUGGEST=['#D4A373','#8FA9C7','#E9C46A','#5B5F97','#E5A9B4','#7FB7A4','#8E5572','#B23A48','#A3B18A','#F4A261','#9D8189','#6D9DC5','#C08497','#84A59D','#E07A5F','#3D5A80','#B5838D','#CDB4DB','#81B29A','#F2CC8F'];
+const SUGGEST=['#D4A373','#8FA9C7','#E9C46A','#5B5F97','#E5A9B4','#7FB7A4','#8E5572','#B23A48','#A3B18A','#F4A261','#9D8189','#6D9DC5','#C08497','#84A59D','#E07A5F','#3D5A80','#B5838D','#CDB4DB','#81B29A','#F2CC8F','#6B9080','#E56B6F','#355070','#EAAC8B','#6D597A','#F6BD60','#52796F','#B56576','#A4C3B2','#F7A072','#4A4E69','#C9ADA7','#90BE6D','#577590','#9A8C98','#FFAFCC','#BC6C25','#2A9D8F','#D8A48F','#7D8CC4'];
 function freeSuggest(exceptId){const used=new Set(S.emotions.filter(e=>e.id!==exceptId).map(e=>(e.color||'').toUpperCase()));return SUGGEST.filter(c=>!used.has(c))}
+const swOpen=new Set();
 function swatchesHTML(e){
   const used=new Set(S.emotions.filter(x=>x.id!==e.id).map(x=>(x.color||'').toUpperCase()));
-  const order=[...SUGGEST.filter(c=>!used.has(c)),...SUGGEST.filter(c=>used.has(c))];
+  const own=(e.color||'').toUpperCase();
+  const free=SUGGEST.filter(c=>!used.has(c)),taken=SUGGEST.filter(c=>used.has(c));
+  const open=swOpen.has(e.id);
+  const all=[...free,...taken];
+  let short=free.slice(0,20);if(own&&SUGGEST.includes(own)&&!short.includes(own))short=[own,...short.slice(0,19)];
+  const order=open?all:short;const hidden=all.length-short.length;
   const lock=!isPlus();
-  return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
+  const more=hidden>0?`<button class="sw-more" data-act="sw-more" data-id="${e.id}" aria-expanded="${open}">${esc(open?t('swLess'):t('swMore',hidden))}</button>`:'';
+  return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.66';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.68';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackSection(){
@@ -2334,11 +2363,13 @@ async function drawShare(){
 /* ---------- Película: tus recuerdos uno tras otro, en color (Plus) ---------- */
 let film=null;
 function filmPeriodTitle(){return t('filmT_'+rep.period)}
-async function openFilm(){
+async function openFilm(sel){
   if(!isPlus()){goPlus();return}
-  const r=range(rep.period,rep.offset);const ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0)).slice(-36);
+  let ms,label,title;
+  if(sel){ms=sel.ms.slice(-36);label=sel.label;title=sel.title}
+  else{const r=range(rep.period,rep.offset);ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0)).slice(-36);label=r.label;title=filmPeriodTitle()}
   if(!ms.length){toast(t('filmEmpty'));return}
-  film={ms,label:r.label,title:filmPeriodTitle(),theme:'dark',photo:true,text:false,t0:0,playing:true,raf:0,imgs:new Map(),rec:null,blob:null};
+  film={ms,label,title,slugSrc:sel?title+' '+label:label,theme:'dark',photo:true,text:false,t0:0,playing:true,raf:0,imgs:new Map(),rec:null,blob:null};
   openDlg(`<div class="dlg-head"><h2>${esc(t('filmTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
   <div class="story-prev"><canvas id="film-cv" width="1080" height="1920" style="width:100%;height:auto;display:block;border-radius:14px" aria-label="${esc(t('filmTitle'))}"></canvas></div>
   <div id="film-ctl">${filmControls()}</div>`);
@@ -2430,7 +2461,7 @@ function filmRecord(){
 }
 async function filmShare(){
   const f=film;if(!f||!f.blob)return;const ext=f.blob.type.includes('mp4')?'mp4':'webm';
-  const slug=(f.label||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const slug=(f.slugSrc||f.label||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   const r=await deliverFile(`memorandum-${t('filmFile')}-${slug}.${ext}`,f.blob,f.blob.type);if(r==='ok')toast(t('filmDone'))
 }
 /* ---------- Libro en PDF: se crea en el móvil, con las tipografías de la app incrustadas (Plus) ---------- */
@@ -2623,12 +2654,14 @@ async function buildBookPDF(opts,onStep){
   push(asc(xr+`trailer\n<< /Size ${objs.length+1} /Root ${cat} 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF\n`));
   return {blob:new Blob(chunks,{type:'application/pdf'}),pages:pages.length};
 }
-function openBook(){
+function openBook(sel){
   if(!isPlus()){goPlus();return}
-  const r=range(rep.period,rep.offset);const ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0));
+  let ms,label,title,period;
+  if(sel){({ms,label,title,period}=sel)}
+  else{const r=range(rep.period,rep.offset);ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0));label=r.label;title=t('filmT_'+rep.period);period=rep.period}
   if(!ms.length){toast(t('filmEmpty'));return}
   const hasPh=ms.some(m=>(m.photos||[]).length);
-  book={ms,label:r.label,title:t('filmT_'+rep.period),period:rep.period,photo:hasPh,text:true,bleed:false,busy:false,hasPh};
+  book={ms,label,title,period,slugSrc:sel?title+' '+label:label,photo:hasPh,text:true,bleed:false,busy:false,hasPh};
   openDlg(`<div class="dlg-head"><h2>${esc(t('bookTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><div id="book-body">${bookBody()}</div>`);
 }
 function bookBody(){
@@ -2642,7 +2675,7 @@ function bookBody(){
 async function makeBook(){
   const b=book;if(!b||b.busy)return;b.busy=true;b.step='';const body=document.getElementById('book-body');if(body)body.innerHTML=bookBody();
   try{const res=await buildBookPDF(b,s=>{b.step=s;const el=document.getElementById('book-step');if(el)el.textContent=s});
-    const slug=(b.label||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    const slug=(b.slugSrc||b.label||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
     b.busy=false;b.step=t('bookDone',res.pages);const el=document.getElementById('book-body');if(el)el.innerHTML=bookBody();
     await deliverFile(`memorandum-${t('bookFile')}-${slug}.pdf`,res.blob,'application/pdf',{download:true});
   }catch(e){b.busy=false;b.step=t('bookError');const el=document.getElementById('book-body');if(el)el.innerHTML=bookBody();console.error(e)}
@@ -3385,6 +3418,8 @@ document.addEventListener('click',e=>{
     case 'mode':archMode=v;render();break;
     case 'period':rep={period:v,offset:0};render();break;
     case 'film':openFilm();break;
+    case 'film-sel':{const s=selInfo();if(s)openFilm(s);break}
+    case 'book-sel':{const s=selInfo();if(s)openBook(s);break}
     case 'book':openBook();break;
     case 'book-opt':if(book&&!book.busy){book[v]=!book[v];const el=document.getElementById('book-body');if(el)el.innerHTML=bookBody()}break;
     case 'book-make':makeBook();break;
@@ -3431,7 +3466,8 @@ document.addEventListener('click',e=>{
     case 'sd-open':if(!isPlus()){goPlus();break}openShareDrawer(id);break;
     case 'sd-send':sendDrawer(id);break;
     case 'set-font':S.settings.font=v;applyFont();savePalette();{const y=window.scrollY;render();window.scrollTo(0,y)}break;
-    case 'emo-swatch':{if(!isPlus()){goPlus();break}const it=S.emotions.find(x=>x.id===id);if(it){it.color=v;saveLocal();savePalette();const y=window.scrollY;render();window.scrollTo(0,y)}break}
+    case 'sw-more':{swOpen.has(id)?swOpen.delete(id):swOpen.add(id);const y=window.scrollY;render();window.scrollTo(0,y);break}
+    case 'emo-swatch':{if(!isPlus()){goPlus();break}const it=S.emotions.find(x=>x.id===id);if(it){const o=S.emotions.find(x=>x.id!==id&&(x.color||'').toUpperCase()===v);if(o)toast(t('swUsedBy',o.name));it.color=v;saveLocal();savePalette();const y=window.scrollY;render();window.scrollTo(0,y)}break}
     case 'share-theme':if(shareState){shareState.theme=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'share-save':if(shareBlob){const nm=shareState?shareState.kind:'tarjeta';deliverFile('memorandum-'+nm+'-'+iso(new Date())+'.png',shareBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}break;
     case 'story-tpl':{const pl=STORY_TPLS.find(z=>z[0]===v);if(pl&&pl[1]&&!isPlus()){goPlus();break}storyTpl=v;refreshStoryControls();drawStory();break}
@@ -3530,7 +3566,7 @@ document.addEventListener('input',e=>{
     if(k==='name')renderNav();
     return;
   }
-  if(f==='q'){filters.q=el.value;if(archMode==='lista'){$('#results').innerHTML=resultsHTML();hydratePhotos($('#results'))}else if(archMode==='fotos'){$('#results').innerHTML=galleryHTML();hydratePhotos($('#results'))}else drawSky();return}
+  if(f==='q'){filters.q=el.value;{const sb=document.getElementById('sel-bar');if(sb)sb.innerHTML=selBarHTML()}if(archMode==='lista'){$('#results').innerHTML=resultsHTML();hydratePhotos($('#results'))}else if(archMode==='fotos'){$('#results').innerHTML=galleryHTML();hydratePhotos($('#results'))}else drawSky();return}
   if(f==='emo-name'||f==='emo-color'||f==='drawer-name'||f==='type-name'){
     const list=f==='drawer-name'?S.drawers:f==='type-name'?S.customTypes:S.emotions;const it=list.find(x=>x.id===el.dataset.id);if(!it)return;
     if(f==='emo-color'){it.color=el.value;el.closest('.pal').style.setProperty('--c',el.value)}else it.name=el.value.slice(0,40)||t('noName');
