@@ -1540,7 +1540,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.68';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.69';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackSection(){
@@ -3182,7 +3182,14 @@ function plusStatsHTML(r,st,ps){
 const PLUS_PUBLIC_KEY={"kty":"EC","crv":"P-256","x":"huFeF33CNI2LNXtYfnpk8Np2bbBGDUQzWi-bgHJVcDs","y":"GMj5omm6XUKcW_QKEpJH8ZkB0hfTA2Y-o6X-k_ZGOoU"};
 const KOFI_URL='https://ko-fi.com/memorandumapp', KOFI_ON=true, BUY_ON=true;
 /* App de Google Play (Trusted Web Activity): se abre con ?twa=1. Ahí no se enlaza a pagos externos (normas de Google Play). */
-function isPlayApp(){try{if(/[?&]twa=1/.test(location.search)||String(document.referrer).startsWith('android-app://com.memorandumapp'))sessionStorage.setItem('memoTwa','1');return sessionStorage.getItem('memoTwa')==='1'}catch(e){return /[?&]twa=1/.test(location.search)}}
+function isPlayApp(){
+  const sa=()=>{try{return matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches}catch(e){return false}};
+  try{
+    if(/[?&]twa=1/.test(location.search)||String(document.referrer).startsWith('android-app://com.memorandumapp')){sessionStorage.setItem('memoTwa','1');localStorage.setItem('memoTwa','1')}
+    if(sessionStorage.getItem('memoTwa')==='1')return true;
+    return localStorage.getItem('memoTwa')==='1'&&platform()==='android'&&sa();
+  }catch(e){return /[?&]twa=1/.test(location.search)}
+}
 function supportSection(){if(!KOFI_ON||isPlayApp())return '';return `<h2 class="sec">${esc(t('supportTitle',t('brand')))}</h2><p class="note" style="font-size:15px">${esc(t('supportText',t('brand')))}</p><a class="btn" href="${KOFI_URL}" target="_blank" rel="noopener">☕ ${esc(t('supportBtn'))}</a>`}
 const PLUS_URL_YEAR='https://payhip.com/b/K1sxI', PLUS_URL_LIFE='https://payhip.com/b/0d23m';
 function plusBadge(){return `<span class="plus-badge">Plus</span>`}
