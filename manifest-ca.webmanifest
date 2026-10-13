@@ -44,7 +44,8 @@
             ".json",
             "text/plain",
             "application/octet-stream",
-            "*/*"
+            "*/*",
+            ".txt"
           ]
         }
       ]
