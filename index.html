@@ -505,7 +505,7 @@ es:{
   cnTitle:'Tu recuerdo se conecta con…', cnSaved:'Guardado.', cnTag:(tg,n)=>`#${tg}: ${n===1?'otro recuerdo':n+' recuerdos más'}`, cnSameDay:y=>`Ese mismo día, en ${y}`,
   cnMoreFrom:x=>`Otras notas de «${x}»`, cnEmo:(e,d)=>`Tu ${e} anterior fue el ${d}`, cnLinked:'Lo enlazaste con', cnSky:'Ver en el cielo', cnGo:'Seguir',
   dateHint:'¿Se te pasó un día? Cambia la fecha y el recuerdo irá a su sitio.',
-  plusBuyYear:'Un año · 9,99 €', plusBuyLife:'Para siempre · 24,99 €',
+  plusBuyYear:'Un año · 9,99 €', playBuyYear:p=>`Un año · ${p}`, playBuyLife:p=>`Para siempre · ${p}`, playRestore:'Restaurar compras', playRestored:'Compra recuperada. ¡Gracias!', playNothing:'No hay compras de Plus en esta cuenta de Google.', playErr:'No se ha podido completar con Google Play. Inténtalo de nuevo.', playNote:'Pago único con Google Play, sin renovaciones automáticas.', plusBuyLife:'Para siempre · 24,99 €',
   plusActiveLife:b=>`Tienes Plus para siempre. Gracias por apoyar ${b}.`, plusActiveYear:(d,b)=>`Tienes Plus hasta el ${d}. Gracias por apoyar ${b}.`,
   plusExpired:d=>`Tu Plus terminó el ${d}. Todo lo que creaste sigue aquí; renuévalo cuando quieras para volver a usar las funciones Plus.`,
   plusNoAuto:'Sin renovaciones automáticas: renuevas solo si quieres.', plusSoonEnd:d=>`Tu Plus termina el ${d}. Puedes renovarlo cuando quieras: no hay cobros automáticos.`,
@@ -731,7 +731,7 @@ en:{
   cnTitle:'Your memory connects with…', cnSaved:'Saved.', cnTag:(tg,n)=>`#${tg}: ${n===1?'one more memory':n+' more memories'}`, cnSameDay:y=>`On this same day, in ${y}`,
   cnMoreFrom:x=>`Other notes on “${x}”`, cnEmo:(e,d)=>`Your previous ${e} was on ${d}`, cnLinked:'You linked it with', cnSky:'See it in the sky', cnGo:'Continue',
   dateHint:'Missed a day? Change the date and the memory will go where it belongs.',
-  plusBuyYear:'One year · €9.99', plusBuyLife:'Forever · €24.99',
+  plusBuyYear:'One year · €9.99', playBuyYear:p=>`One year · ${p}`, playBuyLife:p=>`Forever · ${p}`, playRestore:'Restore purchases', playRestored:'Purchase restored. Thank you!', playNothing:'No Plus purchases on this Google account.', playErr:'Google Play couldn’t complete it. Please try again.', playNote:'One-off payment with Google Play, no automatic renewals.', plusBuyLife:'Forever · €24.99',
   plusActiveLife:b=>`You have Plus forever. Thank you for supporting ${b}.`, plusActiveYear:(d,b)=>`You have Plus until ${d}. Thank you for supporting ${b}.`,
   plusExpired:d=>`Your Plus ended on ${d}. Everything you created is still here; renew whenever you like to use Plus features again.`,
   plusNoAuto:'No automatic renewals: you renew only if you want to.', plusSoonEnd:d=>`Your Plus ends on ${d}. You can renew whenever you like: there are no automatic charges.`,
@@ -957,7 +957,7 @@ ca:{
   cnTitle:'El teu record es connecta amb…', cnSaved:'Desat.', cnTag:(tg,n)=>`#${tg}: ${n===1?'un altre record':n+' records més'}`, cnSameDay:y=>`Aquell mateix dia, el ${y}`,
   cnMoreFrom:x=>`Altres notes de «${x}»`, cnEmo:(e,d)=>`La teva ${e} anterior va ser el ${d}`, cnLinked:"L'has enllaçat amb", cnSky:'Veure-ho al cel', cnGo:'Continuar',
   dateHint:"Se t'ha passat un dia? Canvia la data i el record anirà al seu lloc.",
-  plusBuyYear:'Un any · 9,99 €', plusBuyLife:'Per sempre · 24,99 €',
+  plusBuyYear:'Un any · 9,99 €', playBuyYear:p=>`Un any · ${p}`, playBuyLife:p=>`Per sempre · ${p}`, playRestore:'Restaura les compres', playRestored:'Compra recuperada. Gràcies!', playNothing:'No hi ha compres de Plus en aquest compte de Google.', playErr:'No s’ha pogut completar amb Google Play. Torna-ho a provar.', playNote:'Pagament únic amb Google Play, sense renovacions automàtiques.', plusBuyLife:'Per sempre · 24,99 €',
   plusActiveLife:b=>`Tens Plus per sempre. Gràcies per donar suport a ${b}.`, plusActiveYear:(d,b)=>`Tens Plus fins al ${d}. Gràcies per donar suport a ${b}.`,
   plusExpired:d=>`El teu Plus va acabar el ${d}. Tot el que vas crear continua aquí; renova'l quan vulguis per tornar a fer servir les funcions Plus.`,
   plusNoAuto:'Sense renovacions automàtiques: renoves només si vols.', plusSoonEnd:d=>`El teu Plus acaba el ${d}. El pots renovar quan vulguis: no hi ha cobraments automàtics.`,
@@ -1568,7 +1568,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.78';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.79';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackSection(){
@@ -3285,7 +3285,7 @@ function trialLeft(){const ts=S.settings&&S.settings.trialStart;if(!ts)return 0;
 function trialActive(){return !plusInfo()&&trialLeft()>0}
 function isPlus(){return plusState()==='active'||trialActive()}
 function codeKey(c){return String(c).replace(/\s+/g,'').slice(-24)}
-async function checkPlus(){const p=plusInfo();const info=p&&p.code?await verifyPlusCode(p.code):null;const was=isPlus();plusSigOK=!!info;if(info&&p&&!p.plan){p.plan=info.p==='year'?'year':'life'}if(was!==isPlus())render()}
+async function checkPlus(){const p=plusInfo();const info=p&&p.code?await verifyPlusCode(p.code):null;const was=isPlus();plusSigOK=!!info||!!(p&&p.source==='play');if(info&&p&&!p.plan){p.plan=info.p==='year'?'year':'life'}if(was!==isPlus())render()}
 async function activatePlus(code){
   const info=await verifyPlusCode(code);if(!info){toast(t('plusBadCode'));return}
   const clean=String(code).replace(/\s+/g,''),key=codeKey(clean),today=iso(new Date());const cur=plusInfo();
@@ -3311,10 +3311,48 @@ function plusBanner(){
   let msg='';if(left>=0&&left<=21)msg=t('plusSoonEnd',fmt(p.exp));else if(left<0&&left>=-30)msg=t('plusEndedBanner',fmt(p.exp));else return '';
   return `<div class="wash" style="--c:var(--accent);margin-top:28px"><p style="margin:0 0 12px">${esc(msg)}</p><div class="row"><button class="btn primary" data-act="go-plus">${esc(t('plusRenew'))}</button><button class="btn quiet" data-act="plus-later">${esc(t('later'))}</button></div></div>`;
 }
+/* ---------- Google Play Billing (solo en la app de Google Play) ---------- */
+const PLAY_SKUS={year:'plus_anual',life:'plus_siempre'};
+let playSvc=null;const playPrices={};
+function playFmt(pr){try{return new Intl.NumberFormat(t('locale'),{style:'currency',currency:pr.currency}).format(+pr.value)}catch(e){return pr.value+' '+pr.currency}}
+async function playInit(){
+  if(!isPlayApp()||!('getDigitalGoodsService' in window))return;
+  try{playSvc=await window.getDigitalGoodsService('https://play.google.com/billing')}catch(e){playSvc=null;return}
+  if(!playSvc)return;
+  try{(await playSvc.getDetails(Object.values(PLAY_SKUS))).forEach(d=>{if(d&&d.price)playPrices[d.itemId]=playFmt(d.price)})}catch(e){}
+  await playRestore(false);render();
+}
+function grantPlay(plan,token){
+  const today=iso(new Date()),cur=plusInfo();
+  if(plan==='life')S.settings.plus={source:'play',plan:'life',since:(cur&&cur.since)||today,exp:null,token:token||null,used:(cur&&cur.used)||[]};
+  else{const base=(cur&&cur.plan==='year'&&cur.exp&&cur.exp>=today)?fromIso(cur.exp):fromIso(today);S.settings.plus={source:'play',plan:'year',since:(cur&&cur.since)||today,exp:iso(addDays(base,365)),token:token||null,used:(cur&&cur.used)||[]}}
+  plusSigOK=true;savePalette();render();
+}
+async function playBuy(plan){
+  if(!playSvc){toast(t('playErr'));return}
+  const sku=PLAY_SKUS[plan];let resp;
+  try{resp=await new PaymentRequest([{supportedMethods:'https://play.google.com/billing',data:{sku}}],{total:{label:'Total',amount:{currency:'EUR',value:'0'}}}).show()}catch(e){return}
+  const token=resp&&resp.details&&resp.details.purchaseToken;
+  try{if(token)await playSvc.consume(token);await resp.complete('success')}catch(e){try{await resp.complete('fail')}catch(_){}toast(t('playErr'));return}
+  if(dlg.open)closeDlg();grantPlay(plan,token);toast(t('plusThanks'));
+}
+async function playRestore(manual){
+  if(!playSvc)return;let found=null;
+  try{for(const p of (await playSvc.listPurchases())||[]){const plan=p.itemId===PLAY_SKUS.life?'life':p.itemId===PLAY_SKUS.year?'year':null;if(!plan)continue;try{await playSvc.consume(p.purchaseToken)}catch(e){}if(!found||plan==='life')found={plan,token:p.purchaseToken,fresh:true}}}catch(e){if(manual){toast(t('playErr'));return}}
+  if(!found&&playSvc.listPurchaseHistory){try{const ids=((await playSvc.listPurchaseHistory())||[]).map(p=>p.itemId);if(ids.includes(PLAY_SKUS.life))found={plan:'life'};else if(ids.includes(PLAY_SKUS.year))found={plan:'year'}}catch(e){}}
+  const cur=plusInfo(),has=plusState()==='active';
+  if(found&&(found.fresh||found.plan==='life'?!(has&&cur.plan==='life'):!has)){grantPlay(found.plan,found.token);if(manual)toast(t('playRestored'));return}
+  if(manual)toast(found?t('playRestored'):t('playNothing'));
+}
+function buyRowHTML(){
+  if(isPlayApp()){if(!playSvc)return '';const py=playPrices[PLAY_SKUS.year]||'9,99 €',pl=playPrices[PLAY_SKUS.life]||'24,99 €';
+    return `<div class="row" style="margin:4px 0 6px"><button class="btn primary" data-act="play-buy" data-v="year">${esc(t('playBuyYear',py))}</button><button class="btn" data-act="play-buy" data-v="life">${esc(t('playBuyLife',pl))}</button></div><p class="note" style="margin:0 0 8px">${esc(t('playNote'))} <button class="link-plain" data-act="play-restore">${esc(t('playRestore'))}</button></p>`}
+  return !BUY_ON?`<p class="note">${esc(t('plusSoon'))}</p>`:`<div class="row" style="margin:4px 0 6px"><a class="btn primary" href="${PLUS_URL_YEAR}" target="_blank" rel="noopener">${esc(t('plusBuyYear'))}</a><a class="btn" href="${PLUS_URL_LIFE}" target="_blank" rel="noopener">${esc(t('plusBuyLife'))}</a></div>`;
+}
 function plusSection(){
   const head=`<h2 class="sec" id="plus-sec">${esc(t('brand'))} Plus ${plusBadge()}</h2>`;const st=plusState(),p=plusInfo();
   const codeRow=(lbl)=>`<label class="f" for="plus-code">${esc(lbl)}</label><div class="row"><input class="in" id="plus-code" style="flex:1 1 220px" placeholder="${esc(t('plusCodePh'))}" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn" data-act="plus-activate">${esc(t('plusActivate'))}</button></div>`;
-  const buy=isPlayApp()?'':!BUY_ON?`<p class="note">${esc(t('plusSoon'))}</p>`:`<div class="row" style="margin:4px 0 6px"><a class="btn primary" href="${PLUS_URL_YEAR}" target="_blank" rel="noopener">${esc(t('plusBuyYear'))}</a><a class="btn" href="${PLUS_URL_LIFE}" target="_blank" rel="noopener">${esc(t('plusBuyLife'))}</a></div>`;
+  const buy=buyRowHTML();
   if(st==='active'&&p.plan!=='year')return head+`<p class="note" style="font-size:15px">${esc(t('plusActiveLife',t('brand')))}</p>`;
   if(st==='active')return head+`<p class="note" style="font-size:15px">${esc(t('plusActiveYear',fmt(p.exp),t('brand')))}</p><p class="note">${esc(t('plusNoAuto'))}</p>${buy}${codeRow(t('plusRenewCode'))}`;
   const intro=st==='expired'?`<p class="note" style="font-size:15px">${esc(t('plusExpired',fmt(p.exp)))}</p>`:(trialActive()?`<div class="wash" style="--c:var(--accent);margin-bottom:12px"><p style="margin:0">${esc(t('trialActive',trialLeft()))}</p></div>`:'')+`<p class="note" style="font-size:15px">${esc(t('plusLead'))}</p>`;
@@ -3327,7 +3365,7 @@ function openPlusCompare(){
   const mk=v=>v===1?'<span class="ok" aria-label="✓">✓</span>':v===0?'<span class="no" aria-label="—">—</span>':esc(v);
   const rows=t('cmpRows').filter(r=>SHARE_ON||!/compart|Shared/.test(r[0]));
   const st=plusState(),has=st==='active';
-  const buy=has||isPlayApp()||!BUY_ON?'':`<p style="margin:14px 0 4px;font-size:14.5px">${esc(t('plusPrice'))}</p><div class="row" style="margin:6px 0 4px"><a class="btn primary" href="${PLUS_URL_YEAR}" target="_blank" rel="noopener">${esc(t('plusBuyYear'))}</a><a class="btn" href="${PLUS_URL_LIFE}" target="_blank" rel="noopener">${esc(t('plusBuyLife'))}</a></div>`;
+  const buy=has?'':(isPlayApp()?(playSvc?`<div style="margin-top:14px">${buyRowHTML()}</div>`:''):(!BUY_ON?'':`<p style="margin:14px 0 4px;font-size:14.5px">${esc(t('plusPrice'))}</p>${buyRowHTML()}`));
   openDlg(`<div class="dlg-head"><h2>${esc(t('cmpTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
   ${has?`<p class="note" style="font-size:15px;margin:0 0 10px">${esc(t('cmpYou'))}</p>`:trialActive()?`<div class="wash" style="--c:var(--accent);margin-bottom:10px"><p style="margin:0">${esc(t('trialActive',trialLeft()))}</p></div>`:''}
   <table class="cmp"><thead><tr><th></th><th>${esc(t('cmpFree'))}</th><th>Plus</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${mk(r[1])}</td><td>${mk(r[2])}</td></tr>`).join('')}</tbody></table>
@@ -3506,6 +3544,8 @@ document.addEventListener('click',e=>{
     case 'bk-share':if(bkPending)finishBackup(bkPending.name,bkPending.data,'share');break;
     case 'bk-device':if(bkPending)finishBackup(bkPending.name,bkPending.data,'device');break;
     case 'plus-compare':openPlusCompare();break;
+    case 'play-buy':playBuy(v);break;
+    case 'play-restore':playRestore(true);break;
     case 'plus-code-go':goPlusSec();setTimeout(()=>{const i=$('#plus-code');if(i)i.focus()},400);break;
     case 'create-hoy':openCreate(hoySel());break;
     case 'create-card':if(createSel)openStory(createSel);break;
@@ -3698,7 +3738,7 @@ const local=loadLocal();if(local)S=local;ensureSettings();
 applyLang();render();
 if(!window.claude&&navigator.storage&&navigator.storage.persist){navigator.storage.persisted().then(x=>{if(!x)return navigator.storage.persist()}).catch(()=>{})}
 checkPlus();
-initCloud().catch(()=>{}).finally(()=>{checkPlus();ensureSettings();applyLang();autoSnapshot();render();if(/[?&]shared=1/.test(location.search))checkShareInbox();else if(!S.settings.onboarded)openOnboarding(0)});
+initCloud().catch(()=>{}).finally(()=>{checkPlus().then(()=>playInit()).catch(()=>{});ensureSettings();applyLang();autoSnapshot();render();if(/[?&]shared=1/.test(location.search))checkShareInbox();else if(!S.settings.onboarded)openOnboarding(0)});
 
 </script>
 </body>
