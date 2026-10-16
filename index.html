@@ -375,7 +375,40 @@ html[data-font="maquina"] .greet,html[data-font="mano"] .greet{letter-spacing:-.
 .dual-card b{display:block;font-family:var(--serif);font-weight:400;font-size:17px;line-height:1.15;margin:2px 0 4px}
 .dual-card span{font-size:12px;color:var(--muted)}
 
+/* ---------- Biblioteca compacta ---------- */
+.emo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px}
+.emo-tile{display:flex;flex-direction:column;align-items:stretch;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 6px 8px;gap:2px;min-width:0}
+.emo-sw{display:block;height:54px;border-radius:8px;background:var(--c);margin-bottom:4px;position:relative}
+.emo-tile b{font-family:var(--serif);font-weight:400;font-size:17px;line-height:1.15;padding:0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.emo-tile small{font-size:12px;color:var(--muted);padding:0 4px}
+.emo-tile.add{border-style:dashed}
+.emo-tile.add .emo-sw{background:repeating-linear-gradient(45deg,var(--line) 0 6px,transparent 6px 12px);display:flex;align-items:center;justify-content:center}
+.emo-tile.add .emo-sw b{font-family:var(--sans);font-size:24px;color:var(--ink);padding:0}
+.emo-hero{display:flex;align-items:flex-end;justify-content:flex-end;width:100%;height:110px;border:0;border-radius:14px;background:var(--c);padding:10px 14px;margin-top:6px}
+.emo-hero span{color:#fff;font-size:14px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.lib-row{display:flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:2px 4px 2px 12px;min-height:46px}
+.lib-row input,.lib-row .type-fixed{flex:1;min-width:0;border:0;background:none;font-size:16px;padding:8px 0}
+.lib-row small{color:var(--muted);font-size:13px;min-width:22px;text-align:right;margin-right:6px}
+.ico{flex:none;width:36px;height:36px;border:0;background:none;border-radius:50%;padding:0;display:inline-flex;align-items:center;justify-content:center;color:var(--muted)}
+.ico svg{width:19px;height:19px}
+.ico:hover{background:var(--paper);color:var(--ink)}
+.ico.danger{color:#B23A48}
+.ico.dim{opacity:.45}
+.ico.armed{width:auto;padding:0 10px;border-radius:999px;font-size:13px;background:#B23A48;color:#fff}
+.ico-gap{width:36px;flex:none}
 /* ---------- Hoy, Archivo y bienvenida ---------- */
+.resurf-mini{display:flex;align-items:center;gap:4px;margin:30px 0 0;border-radius:14px;padding:8px 4px 8px 8px;background:color-mix(in srgb,var(--c) 16%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 35%,var(--line))}
+.rm-main{flex:1;min-width:0;display:flex;align-items:center;gap:12px;border:0;background:none;padding:0;text-align:left}
+.rm-bar{flex:none;width:5px;align-self:stretch;border-radius:4px;background:var(--c);margin-left:4px}
+.rm-ph{flex:none;width:58px;height:58px;border-radius:10px;overflow:hidden;background:var(--line)}
+.rm-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.rm-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.rm-txt small,.rm-txt strong,.rm-txt em{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm-txt small{font-size:12.5px;color:var(--muted)}
+.rm-txt small b{font-weight:600;color:var(--ink)}
+.rm-txt strong{font-family:var(--serif);font-weight:400;font-size:20px;line-height:1.2}
+.rm-txt em{font-family:var(--serif);font-size:15.5px;color:color-mix(in srgb,var(--ink) 75%,var(--muted))}
+
 .nz-line{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 4px 4px 14px;margin:0 0 16px;font-size:14px;min-height:40px}
 .nz-line>i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--c)}
 .nz-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -673,7 +706,7 @@ es:{
   tInstalled:'¡Instalada! Ya me tienes en tu pantalla de inicio.',
   meBtn:'Perfil y ajustes', meTitle:'Perfil y ajustes',
   psMe:'Tu perfil', psMeSub:'Nombre, año y unas líneas sobre ti', psLook:'Apariencia y personalización', psLookSub:'Tipografía, idioma, botones y recordatorio', psShow:'Qué se ve en la app', psData:'Tus datos y copias', psDataSub:'Copias de seguridad y cómo no perder nada', psHelp:'Ayuda y privacidad', psHelpSub:'Tutorial, tu opinión, privacidad y aviso legal',
-  remShort:'Un aviso cada día en tu propio calendario, a la hora que elijas. Sin servidores.', bkSave:'Guardar copia', smpTitle:'Recuerdos de ejemplo', smpHint:n=>`Tienes ${n} recuerdos de ejemplo. Bórralos cuando quieras empezar solo con los tuyos.`, smpDel:'Borrar los ejemplos', tSmpDel:n=>`${n} recuerdos de ejemplo borrados`, snapDel:'Borrar esta copia', tSnapDel:'Copia borrada', saveShort:'Guardar', newDrawerChip:'Nuevo cajón', newDrawerPh:'Nombre del cajón', streakShort:n=>`${n} días seguidos`, bkDueShort:'Toca guardar una copia', nzWeekShort:e=>`Tu color de la semana: ${e}`, nzMissShort:e=>`${e}: hace días que no aparece`, nzSee:'Ver', fbShort:'Darme tu opinión', tutShort:'Ver el tutorial', remAdd:pf=>pf==='android'?'Añadir a Google Calendar':'Añadir al calendario', playRate:'Valorar en Google Play', tSaved2:'Guardado',
+  remShort:'Un aviso cada día en tu propio calendario, a la hora que elijas. Sin servidores.', bkSave:'Guardar copia', smpTitle:'Recuerdos de ejemplo', smpHint:n=>`Tienes ${n} recuerdos de ejemplo. Bórralos cuando quieras empezar solo con los tuyos.`, smpDel:'Borrar los ejemplos', tSmpDel:n=>`${n} recuerdos de ejemplo borrados`, snapDel:'Borrar esta copia', tSnapDel:'Copia borrada', saveShort:'Guardar', newDrawerChip:'Nuevo cajón', newDrawerPh:'Nombre del cajón', streakShort:n=>`${n} días seguidos`, bkDueShort:'Toca guardar una copia', nzWeekShort:e=>`Tu color de la semana: ${e}`, nzMissShort:e=>`${e}: hace días que no aparece`, nzSee:'Ver', palLead2:'Toca una emoción para cambiarle el nombre o el color.', emoAddSub:'Crea la tuya', emoPanel:'Emoción', emoSee:'verlos', emoColorHint:'o elige uno de estos:', emoDel:'Borrar esta emoción', againShort:'¿Borrar?', tabEmos:'Emociones', tabTypes:'Tipos', emoNewShort:'Nueva', fbShort:'Darme tu opinión', tutShort:'Ver el tutorial', remAdd:pf=>pf==='android'?'Añadir a Google Calendar':'Añadir al calendario', playRate:'Valorar en Google Play', tSaved2:'Guardado',
   meLead:'Todo es opcional y solo lo ves tú. Me sirve para hablarte a ti y, más adelante, para que los informes con inteligencia artificial tengan un poco de contexto.',
   pfName:'Nombre o alias', pfBirth:'Año de nacimiento', pfAge:n=>`Ahora tienes unos ${n} años.`, pfAbout:'Sobre ti',
   pfAboutPh:'Un par de frases: a qué te dedicas, qué te mueve, qué etapa estás viviendo…',
@@ -901,7 +934,7 @@ en:{
   tInstalled:'Installed! You now have me on your home screen.',
   meBtn:'Profile and settings', meTitle:'Profile and settings',
   psMe:'Your profile', psMeSub:'Name, year and a few lines about you', psLook:'Appearance and personalisation', psLookSub:'Typeface, language, buttons and reminder', psShow:'What shows in the app', psData:'Your data and backups', psDataSub:'Backups and how not to lose anything', psHelp:'Help and privacy', psHelpSub:'Tutorial, your feedback, privacy and legal notice',
-  remShort:'A daily nudge in your own calendar, at the time you choose. No servers.', bkSave:'Save a copy', smpTitle:'Sample memories', smpHint:n=>`You have ${n} sample memories. Delete them whenever you want to start with just your own.`, smpDel:'Delete the samples', tSmpDel:n=>`${n} sample memories deleted`, snapDel:'Delete this copy', tSnapDel:'Copy deleted', saveShort:'Save', newDrawerChip:'New drawer', newDrawerPh:'Drawer name', streakShort:n=>`${n} days in a row`, bkDueShort:'Time to save a copy', nzWeekShort:e=>`Your colour this week: ${e}`, nzMissShort:e=>`${e}: not seen for a while`, nzSee:'See', fbShort:'Give feedback', tutShort:'See the tutorial', remAdd:pf=>pf==='android'?'Add to Google Calendar':'Add to calendar', playRate:'Rate on Google Play', tSaved2:'Saved',
+  remShort:'A daily nudge in your own calendar, at the time you choose. No servers.', bkSave:'Save a copy', smpTitle:'Sample memories', smpHint:n=>`You have ${n} sample memories. Delete them whenever you want to start with just your own.`, smpDel:'Delete the samples', tSmpDel:n=>`${n} sample memories deleted`, snapDel:'Delete this copy', tSnapDel:'Copy deleted', saveShort:'Save', newDrawerChip:'New drawer', newDrawerPh:'Drawer name', streakShort:n=>`${n} days in a row`, bkDueShort:'Time to save a copy', nzWeekShort:e=>`Your colour this week: ${e}`, nzMissShort:e=>`${e}: not seen for a while`, nzSee:'See', palLead2:'Tap an emotion to change its name or colour.', emoAddSub:'Make your own', emoPanel:'Emotion', emoSee:'see them', emoColorHint:'or pick one of these:', emoDel:'Delete this emotion', againShort:'Delete?', tabEmos:'Emotions', tabTypes:'Types', emoNewShort:'New', fbShort:'Give feedback', tutShort:'See the tutorial', remAdd:pf=>pf==='android'?'Add to Google Calendar':'Add to calendar', playRate:'Rate on Google Play', tSaved2:'Saved',
   meLead:'Everything is optional and only you can see it. It helps me talk to you and, later on, gives AI reports a little context.',
   pfName:'Name or nickname', pfBirth:'Year of birth', pfAge:n=>`You are about ${n} now.`, pfAbout:'About you',
   pfAboutPh:"A couple of sentences: what you do, what moves you, what stage of life you're in…",
@@ -1129,7 +1162,7 @@ ca:{
   tInstalled:`Instal·lada! Ja em tens a la pantalla d'inici.`,
   meBtn:'Perfil i ajustos', meTitle:'Perfil i ajustos',
   psMe:'El teu perfil', psMeSub:'Nom, any i unes línies sobre tu', psLook:'Aparença i personalització', psLookSub:'Tipografia, idioma, botons i recordatori', psShow:'Què es veu a l’app', psData:'Les teves dades i còpies', psDataSub:'Còpies de seguretat i com no perdre res', psHelp:'Ajuda i privacitat', psHelpSub:'Tutorial, la teva opinió, privacitat i avís legal',
-  remShort:'Un avís cada dia al teu propi calendari, a l’hora que triïs. Sense servidors.', bkSave:'Desa una còpia', smpTitle:'Records d’exemple', smpHint:n=>`Tens ${n} records d’exemple. Esborra’ls quan vulguis començar només amb els teus.`, smpDel:'Esborra els exemples', tSmpDel:n=>`${n} records d’exemple esborrats`, snapDel:'Esborra aquesta còpia', tSnapDel:'Còpia esborrada', saveShort:'Desa', newDrawerChip:'Nou calaix', newDrawerPh:'Nom del calaix', streakShort:n=>`${n} dies seguits`, bkDueShort:'Toca desar una còpia', nzWeekShort:e=>`El teu color de la setmana: ${e}`, nzMissShort:e=>`${e}: fa dies que no apareix`, nzSee:'Veure', fbShort:'Dona’m la teva opinió', tutShort:'Veure el tutorial', remAdd:pf=>pf==='android'?'Afegeix a Google Calendar':'Afegeix al calendari', playRate:'Valora a Google Play', tSaved2:'Desat',
+  remShort:'Un avís cada dia al teu propi calendari, a l’hora que triïs. Sense servidors.', bkSave:'Desa una còpia', smpTitle:'Records d’exemple', smpHint:n=>`Tens ${n} records d’exemple. Esborra’ls quan vulguis començar només amb els teus.`, smpDel:'Esborra els exemples', tSmpDel:n=>`${n} records d’exemple esborrats`, snapDel:'Esborra aquesta còpia', tSnapDel:'Còpia esborrada', saveShort:'Desa', newDrawerChip:'Nou calaix', newDrawerPh:'Nom del calaix', streakShort:n=>`${n} dies seguits`, bkDueShort:'Toca desar una còpia', nzWeekShort:e=>`El teu color de la setmana: ${e}`, nzMissShort:e=>`${e}: fa dies que no apareix`, nzSee:'Veure', palLead2:'Toca una emoció per canviar-ne el nom o el color.', emoAddSub:'Crea la teva', emoPanel:'Emoció', emoSee:'veure’ls', emoColorHint:'o tria’n un d’aquests:', emoDel:'Esborra aquesta emoció', againShort:'Esborrar?', tabEmos:'Emocions', tabTypes:'Tipus', emoNewShort:'Nova', fbShort:'Dona’m la teva opinió', tutShort:'Veure el tutorial', remAdd:pf=>pf==='android'?'Afegeix a Google Calendar':'Afegeix al calendari', playRate:'Valora a Google Play', tSaved2:'Desat',
   meLead:`Tot és opcional i només ho veus tu. Em serveix per parlar-te a tu i, més endavant, perquè els informes amb intel·ligència artificial tinguin una mica de context.`,
   pfName:'Nom o àlies', pfBirth:'Any de naixement', pfAge:n=>`Ara tens uns ${n} anys.`, pfAbout:'Sobre tu',
   pfAboutPh:`Un parell de frases: a què et dediques, què et mou, quina etapa estàs vivint…`,
@@ -1412,13 +1445,7 @@ function vHoy(){
     const sameDay=m.date.slice(5)===today.slice(5)&&m.date<today;
     const by=parseInt(S.profile.birthYear,10);const ageThen=(by>1900&&by<=+m.date.slice(0,4))?(+m.date.slice(0,4)-by):null;
     const when=(sameDay?t('sameDay',m.date.slice(0,4)):t('fromArchive',fmt(m.date)))+(ageThen!=null&&ageThen<120&&daysAgo(m.date)>=300?t('youWere',ageThen):'');
-    h+=`<h2 class="sec">${t('backMem')}</h2>
-    <div class="resurf" style="--c:${mainColor(m)}"><div class="when">${esc(when)}</div>
-      ${(m.photos||[]).length?`<div class="resurf-photo"><img data-photo="${m.photos[0]}" alt=""></div>`:''}
-      <h3>${esc(memTitle(m))}</h3>
-      ${m.text?`<p>${esc(cut(m.text,220))}</p>`:''}
-      <div class="row"><button class="btn" data-act="open" data-id="${m.id}">${t('open')}</button>${pool.length>1?`<button class="btn quiet" data-act="shuffle">${t('another')}</button>`:''}</div>
-    </div>`;
+    h+=`<div class="resurf-mini" style="--c:${mainColor(m)}"><button class="rm-main" data-act="open" data-id="${m.id}">${(m.photos||[]).length?`<span class="rm-ph"><img data-photo="${m.photos[0]}" alt=""></span>`:'<i class="rm-bar" aria-hidden="true"></i>'}<span class="rm-txt"><small><b>${esc(t('backMem'))}</b> · ${esc(when)}</small><strong>${esc(memTitle(m))}</strong>${m.text?`<em>${esc(cut(m.text,140))}</em>`:''}</span></button>${pool.length>1?`<button class="ico" data-act="shuffle" aria-label="${esc(t('another'))}" title="${esc(t('another'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg></button>`:''}</div>`;
   }
   h+=`<h2 class="sec">${esc(t('latest'))}</h2><div class="fichas">${sorted(vis()).slice(0,6).map(ficha).join('')}</div>
   <div class="row" style="margin-top:14px"><button class="btn quiet" data-act="nav" data-v="archivo">${esc(t('seeAll'))}</button>${hoySel()?`<button class="btn quiet" data-act="create-hoy">✦ ${esc(t('createBtn'))}</button>`:''}</div>`;
@@ -1694,36 +1721,39 @@ function sendFeedback(){
   toast(t('tFbThanks'));
 }
 /* ---------- Paleta ---------- */
+const ICO={open:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',share:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 13v6h14v-6"/></svg>',del:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',eye:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',eyeoff:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>',stop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>'};
+let emoPanel=null;
+function openEmo(id){const e=S.emotions.find(x=>x.id===id);if(!e){closeDlg();return}emoPanel=id;const n=S.memories.filter(m=>(m.emotions||[]).includes(id)).length;
+  openDlg(`<div class="dlg-head" data-sheet="1"><button class="btn quiet icon-x" data-act="close" aria-label="${esc(t('close'))}">✕</button><h2>${esc(t('emoPanel'))}</h2><span style="width:40px"></span></div>
+  <div class="emo-panel" style="--c:${e.color}"><button class="emo-hero" data-act="filter-emo-go" data-v="${e.id}"><span>${esc(t('nMem',n))}${n?' · '+esc(t('emoSee'))+' →':''}</span></button>
+  <label class="f" for="emo-name-in">${esc(t('emoName'))}</label><input class="in" id="emo-name-in" value="${esc(e.name)}" data-field="emo-name" data-id="${e.id}" maxlength="40">
+  <label class="f">${esc(t('emoColorLbl'))}</label><div class="row" style="align-items:center"><input type="color" value="${e.color}" data-field="emo-color" data-id="${e.id}" aria-label="${esc(t('colorOf',e.name))}" style="width:48px;height:40px;border:1px solid var(--line);border-radius:10px;padding:0;background:none"><span class="note">${esc(t('emoColorHint'))}</span></div>
+  ${swatchesHTML(e)}
+  <div class="actions" style="border-top:1px solid var(--line);padding-top:16px;margin-top:24px"><button class="btn quiet danger" data-act="emo-del" data-id="${e.id}" style="padding-left:0">${esc(t('emoDel'))}</button></div></div>`);
+}
+let palTab='emo';
+function palTabs(){return `<div class="seg seg-full" role="tablist" style="margin:4px 0 16px">${[['emo','tabEmos'],['drawers','drawersTitle'],['types','tabTypes']].map(([k,l])=>`<button role="tab" data-act="pal-tab" data-v="${k}" aria-pressed="${palTab===k}" aria-selected="${palTab===k}">${esc(t(l))}</button>`).join('')}</div>`}
 function vPaleta(){
   const cnt=id=>S.memories.filter(m=>(m.emotions||[]).includes(id)).length;
   const dcnt=id=>S.memories.filter(m=>(m.drawers||[]).includes(id)).length;
   return `<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${esc(t('palTitle'))}</h1>
-  <p class="lead">${esc(t('palLead'))}</p>
-  <div class="palette">${S.emotions.map(e=>`<div class="pal" style="--c:${e.color}">
-    <button class="block" data-act="filter-emo-go" data-v="${e.id}" aria-label="${esc(t('seeMemsOf',e.name))}"><span>${esc(t('nMem',cnt(e.id)))}</span></button>
-    <div class="body">
-      <input class="name" value="${esc(e.name)}" data-field="emo-name" data-id="${e.id}" aria-label="${esc(t('emoName'))}">
-      <div class="tools"><input type="color" value="${e.color}" data-field="emo-color" data-id="${e.id}" aria-label="${esc(t('colorOf',e.name))}">
-      <button class="btn quiet danger" data-act="emo-del" data-id="${e.id}">${t('del')}</button></div>
-      ${swatchesHTML(e)}
-    </div></div>`).join('')}
-    <div class="pal" style="--c:var(--line)"><button class="block" data-act="emo-add" style="background:repeating-linear-gradient(45deg,var(--line) 0 6px,transparent 6px 12px)"><span style="color:var(--ink);text-shadow:none">${t('newEmo')}</span></button>
-    <div class="body"><span class="note">${esc(t('newEmoHint'))}</span></div></div>
-  </div>
-  <h2 class="sec">${t('drawersTitle')}</h2>
+  ${palTabs()}`+(palTab==='drawers'?`
   <p class="lead">${esc(t('drawersLead'))}</p>
-  <div class="drawers">${drawersByUse().map(d=>`<div class="drawer"><input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${d.shared?`👥 ${esc(t('sdShared'))} · `:''}${dcnt(d.id)}</small><button class="btn quiet" data-act="drawer-go" data-id="${d.id}">${t('open')}</button>${SHARE_ON?`<button class="btn quiet" data-act="sd-open" data-id="${d.id}">${esc(t('sdBtn'))}${isPlus()?'':' '+plusBadge()}</button>`:''}${d.shared?`<button class="btn quiet" data-act="sd-stop" data-id="${d.id}">${esc(t('sdStop'))}</button>`:''}<button class="btn quiet danger" data-act="drawer-del" data-id="${d.id}">${t('del')}</button></div>`).join('')}
-    <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newDrawerName'))}" data-field="new-drawer-pal" aria-label="${esc(t('newDrawerName'))}"><button class="btn" data-act="drawer-add">${t('addDrawer')}</button></div>
+    <div class="row" style="flex-wrap:nowrap;margin-bottom:10px"><input class="in" style="flex:1;min-width:0" placeholder="${esc(t('newDrawerName'))}" data-field="new-drawer-pal" aria-label="${esc(t('newDrawerName'))}"><button class="btn" data-act="drawer-add">${t('addDrawer')}</button></div>
+  <div class="drawers">${drawersByUse().map(d=>`<div class="lib-row">${d.shared?'<span title="'+esc(t('sdShared'))+'">👥</span>':''}<input value="${esc(d.name)}" data-field="drawer-name" data-id="${d.id}" aria-label="${esc(t('drawerName'))}"><small>${dcnt(d.id)}</small><button class="ico" data-act="drawer-go" data-id="${d.id}" aria-label="${esc(t('open'))}" title="${esc(t('open'))}">${ICO.open}</button>${SHARE_ON?`<button class="ico${isPlus()?'':' dim'}" data-act="sd-open" data-id="${d.id}" aria-label="${esc(t('sdBtn'))}" title="${esc(t('sdBtn'))}">${ICO.share}</button>`:''}${d.shared?`<button class="ico" data-act="sd-stop" data-id="${d.id}" aria-label="${esc(t('sdStop'))}" title="${esc(t('sdStop'))}">${ICO.stop}</button>`:''}<button class="ico danger" data-act="drawer-del" data-id="${d.id}" aria-label="${esc(t('del'))}" title="${esc(t('del'))}">${ICO.del}</button></div>`).join('')}
   </div>
   ${SHARE_ON?`<div class="row" style="margin-top:12px;align-items:center"><button class="btn" data-act="sd-recv">👥 ${esc(t('sdReceive'))}</button><span class="note" style="flex:1 1 200px">${esc(t('sdReceiveHint'))}</span></div>`:''}
-  <h2 class="sec">${t('typesTitle')}</h2>
+`:palTab==='types'?`
   <p class="lead">${esc(t('typesLead'))}</p>
+    <div class="row" style="flex-wrap:nowrap;margin-bottom:10px"><input class="in" style="flex:1;min-width:0" placeholder="${esc(t('newTypeName'))}" data-field="new-type-pal" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="type-add">${t('addType')}</button></div>
   <div class="drawers">${typesByUse().map(id=>{const c=(S.customTypes||[]).find(x=>x.id===id);const n=S.memories.filter(m=>m.type===id).length;const hid=typeHidden(id);
-    const name=c?`<input value="${esc(c.name)}" data-field="type-name" data-id="${c.id}" aria-label="${esc(t('typeName'))}">`:`<span class="type-fixed"${hid?' style="opacity:.5"':''}>${esc(typeOf(id).label)}</span>`;
-    return `<div class="drawer">${name}<small>${hid?esc(t('typeHiddenTag'))+' · ':''}${n}</small><button class="btn quiet" data-act="type-go" data-id="${id}">${t('open')}</button><button class="btn quiet" data-act="type-hide" data-id="${id}">${esc(hid?t('typeShow'):t('typeHide'))}</button>${c?`<button class="btn quiet danger" data-act="type-del" data-id="${c.id}">${t('del')}</button>`:''}</div>`}).join('')}
+    const name=c?`<input value="${esc(c.name)}" data-field="type-name" data-id="${c.id}" aria-label="${esc(t('typeName'))}"${hid?' style="opacity:.5"':''}>`:`<span class="type-fixed"${hid?' style="opacity:.5"':''}>${esc(typeOf(id).label)}</span>`;
+    return `<div class="lib-row">${name}<small>${n}</small><button class="ico" data-act="type-go" data-id="${id}" aria-label="${esc(t('open'))}" title="${esc(t('open'))}">${ICO.open}</button><button class="ico" data-act="type-hide" data-id="${id}" aria-label="${esc(hid?t('typeShow'):t('typeHide'))}" title="${esc(hid?t('typeShow'):t('typeHide'))}">${hid?ICO.eyeoff:ICO.eye}</button>${c?`<button class="ico danger" data-act="type-del" data-id="${c.id}" aria-label="${esc(t('del'))}" title="${esc(t('del'))}">${ICO.del}</button>`:'<span class="ico-gap"></span>'}</div>`}).join('')}
     <p class="note" style="margin:4px 0 6px">${esc(t('typeHideNote'))}</p>
-    <div class="row"><input class="in" style="flex:1 1 200px" placeholder="${esc(t('newTypeName'))}" data-field="new-type-pal" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="type-add">${t('addType')}</button></div>
-  </div>`;
+  </div>`:`
+  <p class="lead">${esc(t('palLead2'))}</p>
+  <div class="emo-grid"><button class="emo-tile add" data-act="emo-add"><span class="emo-sw"><b>+</b></span><b>${esc(t('emoNewShort'))}</b><small>${esc(t('emoAddSub'))}</small></button>${S.emotions.map(e=>`<button class="emo-tile" style="--c:${e.color}" data-act="emo-open" data-id="${e.id}"><span class="emo-sw"></span><b>${esc(e.name)}</b><small>${esc(t('nMem',cnt(e.id)))}</small></button>`).join('')}</div>
+`);
 }
 
 let perfOpen=new Set();
@@ -1875,10 +1905,10 @@ function vInforme(){
    Diálogos
    ========================================================= */
 const dlg=$('#dlg');
-function openDlg(html){const keep=$('#dlg-body').scrollTop,same=dlg.open&&draft&&html.includes('data-act="ed-save"');const hs={};document.querySelectorAll('#dlg-body [data-hs]').forEach(e=>hs[e.dataset.hs]=e.scrollLeft);dlg.classList.toggle('sheet',html.includes('data-act="ed-save"'));dlg.classList.toggle('onbd',html.includes('data-onb="1"'));$('#dlg-body').innerHTML=html;if(same)document.querySelectorAll('#dlg-body [data-hs]').forEach(e=>{if(hs[e.dataset.hs])e.scrollLeft=hs[e.dataset.hs]});if(!dlg.open)dlg.showModal();$('#dlg-body').scrollTop=same?keep:0;hydratePhotos($('#dlg-body'))}
+function openDlg(html){const keep=$('#dlg-body').scrollTop,same=dlg.open&&draft&&html.includes('data-act="ed-save"');const hs={};document.querySelectorAll('#dlg-body [data-hs]').forEach(e=>hs[e.dataset.hs]=e.scrollLeft);dlg.classList.toggle('sheet',html.includes('data-act="ed-save"')||html.includes('data-sheet="1"'));dlg.classList.toggle('onbd',html.includes('data-onb="1"'));$('#dlg-body').innerHTML=html;if(same)document.querySelectorAll('#dlg-body [data-hs]').forEach(e=>{if(hs[e.dataset.hs])e.scrollLeft=hs[e.dataset.hs]});if(!dlg.open)dlg.showModal();$('#dlg-body').scrollTop=same?keep:0;hydratePhotos($('#dlg-body'))}
 function closeDlg(){if(dlg.open)dlg.close()}
 dlg.addEventListener('click',e=>{if(e.target===dlg)closeDlg()});
-dlg.addEventListener('close',()=>{if(draft&&!draft._saved&&draft._new&&draft._new.length){draft._new.forEach(dropPhoto);draft._new=[]}if(onbOpen){onbOpen=false;if(!S.settings.onboarded){S.settings.onboarded=true;savePalette()}}});
+dlg.addEventListener('close',()=>{if(emoPanel){emoPanel=null;if(view==='paleta')render()}if(draft&&!draft._saved&&draft._new&&draft._new.length){draft._new.forEach(dropPhoto);draft._new=[]}if(onbOpen){onbOpen=false;if(!S.settings.onboarded){S.settings.onboarded=true;savePalette()}}});
 
 function related(m){
   return vis().filter(o=>o.id!==m.id&&!(m.links||[]).includes(o.id)).map(o=>{
@@ -2951,7 +2981,7 @@ function autoSnapshot(){
 function snapsHTML(){
   const snaps=getSnaps();if(!snaps.length)return '';
   return `<label class="f">${t('snapsLbl')} <small>${t('snapsSmall')}</small></label>
-  <div class="drawers">${snaps.map((x,i)=>`<div class="drawer"><span style="flex:1;padding:6px 0">${esc(cap(fmt(x.date,{weekday:'long',day:'numeric',month:'long'})))}</span><small>${esc(t('nMem',x.n))}</small><button class="btn quiet" data-act="snap-restore" data-v="${i}">${t('restore')}</button><button class="btn quiet snap-x" data-act="snap-del" data-v="${i}" aria-label="${esc(t('snapDel'))}" title="${esc(t('snapDel'))}">✕</button></div>`).join('')}</div>`;
+  <div class="drawers">${snaps.map((x,i)=>`<div class="drawer"><span style="flex:1;padding:6px 0">${esc(cap(fmt(x.date,{weekday:'long',day:'numeric',month:'long'})))}</span><small>${esc(t('nMem',x.n))}</small><button class="btn quiet" data-act="snap-restore" data-v="${i}">${t('restore')}</button><button class="btn quiet snap-x ico" data-act="snap-del" data-v="${i}" aria-label="${esc(t('snapDel'))}" title="${esc(t('snapDel'))}">✕</button></div>`).join('')}</div>`;
 }
 async function restoreSnap(i){
   const sn=getSnaps()[i];if(!sn)return;
@@ -3643,8 +3673,8 @@ function createType(name){
    ========================================================= */
 function armed(btn,fn){
   if(btn.dataset.armed){fn();return}
-  btn.dataset.armed='1';const old=btn.textContent;btn.textContent=btn.dataset.act==='snap-restore'?t('againRestore'):t('again');btn.classList.add('armed');
-  setTimeout(()=>{if(btn.isConnected){delete btn.dataset.armed;btn.textContent=old;btn.classList.remove('armed')}},3500);
+  btn.dataset.armed='1';const old=btn.innerHTML;btn.textContent=btn.classList.contains('ico')?t('againShort'):btn.dataset.act==='snap-restore'?t('againRestore'):t('again');btn.classList.add('armed');
+  setTimeout(()=>{if(btn.isConnected){delete btn.dataset.armed;btn.innerHTML=old;btn.classList.remove('armed')}},3500);
 }
 const NOFILTER=()=>({q:'',emotion:null,type:'',drawer:'',tag:null,date:null});
 document.addEventListener('click',e=>{
@@ -3742,8 +3772,10 @@ document.addEventListener('click',e=>{
     case 'sd-open':if(!isPlus()){goPlus();break}openShareDrawer(id);break;
     case 'sd-send':sendDrawer(id);break;
     case 'set-font':S.settings.font=v;applyFont();savePalette();{const y=window.scrollY;render();window.scrollTo(0,y)}break;
-    case 'sw-more':{swOpen.has(id)?swOpen.delete(id):swOpen.add(id);const y=window.scrollY;render();window.scrollTo(0,y);break}
-    case 'emo-swatch':{if(!isPlus()){goPlus();break}const it=S.emotions.find(x=>x.id===id);if(it){const o=S.emotions.find(x=>x.id!==id&&(x.color||'').toUpperCase()===v);if(o)toast(t('swUsedBy',o.name));it.color=v;saveLocal();savePalette();const y=window.scrollY;render();window.scrollTo(0,y)}break}
+    case 'sw-more':{swOpen.has(id)?swOpen.delete(id):swOpen.add(id);if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y);break}
+    case 'emo-open':openEmo(id);break;
+    case 'pal-tab':palTab=v;render();break;
+    case 'emo-swatch':{if(!isPlus()){goPlus();break}const it=S.emotions.find(x=>x.id===id);if(it){const o=S.emotions.find(x=>x.id!==id&&(x.color||'').toUpperCase()===v);if(o)toast(t('swUsedBy',o.name));it.color=v;saveLocal();savePalette();if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y)}break}
     case 'share-theme':if(shareState){shareState.theme=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'share-save':if(shareBlob){const nm=shareState?shareState.kind:'tarjeta';deliverFile('memorandum-'+nm+'-'+iso(new Date())+'.png',shareBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}break;
     case 'story-tpl':{const pl=STORY_TPLS.find(z=>z[0]===v);if(pl&&pl[1]&&!isPlus()){goPlus();break}storyTpl=v;refreshStoryControls();drawStory();break}
@@ -3752,8 +3784,8 @@ document.addEventListener('click',e=>{
       if(storyBlob){deliverFile('memorandum-'+rep.period+'-'+iso(new Date())+'.png',storyBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}
       break;
     case 'link-pair':{const x=memOf(b.dataset.a),y=memOf(b.dataset.b);if(x&&y){x.links=[...new Set([...(x.links||[]),y.id])];y.links=[...new Set([...(y.links||[]),x.id])];toast(t('tLinked'));render();saveMem(x).then(()=>saveMem(y))}break}
-    case 'emo-add':{const fr=freeSuggest(null);const pal=['#A3B18A','#F4A261','#9D8189','#6D9DC5','#C08497','#84A59D'];const ne={id:mkid('e-'),name:t('newEmo'),color:fr[0]||pal[S.emotions.length%pal.length]};S.emotions.push(ne);render();savePalette();setTimeout(()=>{const el=document.querySelector(`[data-field="emo-name"][data-id="${ne.id}"]`);if(el){el.focus();el.select()}},30);break}
-    case 'emo-del':armed(b,async()=>{S.emotions=S.emotions.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.emotions||[]).includes(id));tt.forEach(m=>m.emotions=m.emotions.filter(x=>x!==id));if(filters.emotion===id)filters.emotion=null;render();await savePalette();for(const m of tt)await saveMem(m)});break;
+    case 'emo-add':{const fr=freeSuggest(null);const pal=['#A3B18A','#F4A261','#9D8189','#6D9DC5','#C08497','#84A59D'];const ne={id:mkid('e-'),name:t('newEmo'),color:fr[0]||pal[S.emotions.length%pal.length]};S.emotions.push(ne);render();savePalette();openEmo(ne.id);setTimeout(()=>{const el=$('#emo-name-in');if(el){el.focus();el.select()}},60);break}
+    case 'emo-del':armed(b,async()=>{if(emoPanel===id){emoPanel=null;closeDlg()}S.emotions=S.emotions.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.emotions||[]).includes(id));tt.forEach(m=>m.emotions=m.emotions.filter(x=>x!==id));if(filters.emotion===id)filters.emotion=null;render();await savePalette();for(const m of tt)await saveMem(m)});break;
     case 'drawer-add':{const inp=document.querySelector('[data-field="new-drawer-pal"]');const n=(inp?.value||'').trim();if(!n){inp?.focus();break}S.drawers.push({id:mkid('d-'),name:cut(n,40)});render();savePalette();break}
     case 'drawer-del':armed(b,async()=>{S.drawers=S.drawers.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.drawers||[]).includes(id));tt.forEach(m=>{m.drawers=m.drawers.filter(x=>x!==id);normDrawers(m)});render();await savePalette();for(const m of tt)await saveMem(m)});break;
     case 'export':exportData(true);break;
@@ -3851,7 +3883,7 @@ document.addEventListener('input',e=>{
   if(f==='q'){filters.q=el.value;{const sb=document.getElementById('sel-bar');if(sb)sb.innerHTML=selBarHTML()}if(archMode==='lista'){$('#results').innerHTML=resultsHTML();hydratePhotos($('#results'))}else if(archMode==='fotos'){$('#results').innerHTML=galleryHTML();hydratePhotos($('#results'))}else drawSky();return}
   if(f==='emo-name'||f==='emo-color'||f==='drawer-name'||f==='type-name'){
     const list=f==='drawer-name'?S.drawers:f==='type-name'?S.customTypes:S.emotions;const it=list.find(x=>x.id===el.dataset.id);if(!it)return;
-    if(f==='emo-color'){it.color=el.value;el.closest('.pal').style.setProperty('--c',el.value)}else it.name=el.value.slice(0,40)||t('noName');
+    if(f==='emo-color'){it.color=el.value;const pl=el.closest('.pal,.emo-panel');if(pl)pl.style.setProperty('--c',el.value)}else it.name=el.value.slice(0,40)||t('noName');
     saveLocal();clearTimeout(saveT);saveT=setTimeout(savePalette,700);
   }
 });
