@@ -177,7 +177,7 @@ textarea.in{min-height:120px;resize:vertical;font-family:var(--serif);font-size:
 .period{display:flex;align-items:center;gap:6px}
 .period strong{font-family:var(--serif);font-weight:400;font-size:24px;min-width:9ch;text-align:center}
 .period strong:first-letter{text-transform:uppercase}
-.compo{display:flex;height:220px;border-radius:16px;overflow:hidden;margin:20px 0 10px;border:1px solid var(--line)}
+.compo{display:flex;height:140px;border-radius:16px;overflow:hidden;margin:20px 0 10px;border:1px solid var(--line)}
 .compo div{background:var(--c);min-width:4px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -375,6 +375,22 @@ html[data-font="maquina"] .greet,html[data-font="mano"] .greet{letter-spacing:-.
 .dual-card b{display:block;font-family:var(--serif);font-weight:400;font-size:17px;line-height:1.15;margin:2px 0 4px}
 .dual-card span{font-size:12px;color:var(--muted)}
 
+/* ---------- Informe en pestañas ---------- */
+.inf-create{margin-left:auto;padding:7px 14px;font-size:14px}
+.rep-head .period{flex:1}
+.vs-row{display:grid;grid-template-columns:12px minmax(0,6.5em) 1fr 2.6em 2.4em;gap:8px;align-items:center;font-size:14px;margin:7px 0}
+.vs-row>i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.vs-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vs-row .hb-track{position:relative}
+.vs-row .hb-track i{position:absolute;left:0;top:0;bottom:0;border-radius:inherit}
+.vs-row b{font-weight:500;text-align:right}
+.vs-row em{font-style:normal;font-size:12.5px;color:var(--muted);text-align:right}
+.vs-row em.up{color:#2E7D5B}.vs-row em.down{color:#B23A48}
+.ex-more{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.ex-more>summary{cursor:pointer;font-size:14.5px;color:var(--ink);list-style:none;padding:6px 0}
+.ex-more>summary::-webkit-details-marker{display:none}
+.ex-more>summary::after{content:" ▾";color:var(--muted)}
+.ex-more[open]>summary::after{content:" ▴"}
 /* ---------- Biblioteca compacta ---------- */
 .emo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px}
 .emo-tile{display:flex;flex-direction:column;align-items:stretch;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 6px 8px;gap:2px;min-width:0}
@@ -706,7 +722,7 @@ es:{
   tInstalled:'¡Instalada! Ya me tienes en tu pantalla de inicio.',
   meBtn:'Perfil y ajustes', meTitle:'Perfil y ajustes',
   psMe:'Tu perfil', psMeSub:'Nombre, año y unas líneas sobre ti', psLook:'Apariencia y personalización', psLookSub:'Tipografía, idioma, botones y recordatorio', psShow:'Qué se ve en la app', psData:'Tus datos y copias', psDataSub:'Copias de seguridad y cómo no perder nada', psHelp:'Ayuda y privacidad', psHelpSub:'Tutorial, tu opinión, privacidad y aviso legal',
-  remShort:'Un aviso cada día en tu propio calendario, a la hora que elijas. Sin servidores.', bkSave:'Guardar copia', smpTitle:'Recuerdos de ejemplo', smpHint:n=>`Tienes ${n} recuerdos de ejemplo. Bórralos cuando quieras empezar solo con los tuyos.`, smpDel:'Borrar los ejemplos', tSmpDel:n=>`${n} recuerdos de ejemplo borrados`, snapDel:'Borrar esta copia', tSnapDel:'Copia borrada', saveShort:'Guardar', newDrawerChip:'Nuevo cajón', newDrawerPh:'Nombre del cajón', streakShort:n=>`${n} días seguidos`, bkDueShort:'Toca guardar una copia', nzWeekShort:e=>`Tu color de la semana: ${e}`, nzMissShort:e=>`${e}: hace días que no aparece`, nzSee:'Ver', palLead2:'Toca una emoción para cambiarle el nombre o el color.', emoAddSub:'Crea la tuya', emoPanel:'Emoción', emoSee:'verlos', emoColorHint:'o elige uno de estos:', emoDel:'Borrar esta emoción', againShort:'¿Borrar?', tabEmos:'Emociones', tabTypes:'Tipos', emoNewShort:'Nueva', pfTitle:'Tus fotos', pfFile:'fotos', pfCount:n=>n===1?'1 foto':n+' fotos', pfBtn:n=>n===1?'Hacer un vídeo con esta foto':`Hacer un vídeo con estas ${n} fotos`, pfHint:'Marca una o varias emociones arriba para hacer el vídeo solo con sus fotos.', fbShort:'Darme tu opinión', tutShort:'Ver el tutorial', remAdd:pf=>pf==='android'?'Añadir a Google Calendar':'Añadir al calendario', playRate:'Valorar en Google Play', tSaved2:'Guardado',
+  remShort:'Un aviso cada día en tu propio calendario, a la hora que elijas. Sin servidores.', bkSave:'Guardar copia', smpTitle:'Recuerdos de ejemplo', smpHint:n=>`Tienes ${n} recuerdos de ejemplo. Bórralos cuando quieras empezar solo con los tuyos.`, smpDel:'Borrar los ejemplos', tSmpDel:n=>`${n} recuerdos de ejemplo borrados`, snapDel:'Borrar esta copia', tSnapDel:'Copia borrada', saveShort:'Guardar', newDrawerChip:'Nuevo cajón', newDrawerPh:'Nombre del cajón', streakShort:n=>`${n} días seguidos`, bkDueShort:'Toca guardar una copia', nzWeekShort:e=>`Tu color de la semana: ${e}`, nzMissShort:e=>`${e}: hace días que no aparece`, nzSee:'Ver', palLead2:'Toca una emoción para cambiarle el nombre o el color.', emoAddSub:'Crea la tuya', emoPanel:'Emoción', emoSee:'verlos', emoColorHint:'o elige uno de estos:', emoDel:'Borrar esta emoción', againShort:'¿Borrar?', tabEmos:'Emociones', tabTypes:'Tipos', emoNewShort:'Nueva', pfTitle:'Tus fotos', pfFile:'fotos', pfCount:n=>n===1?'1 foto':n+' fotos', pfBtn:n=>n===1?'Hacer un vídeo con esta foto':`Hacer un vídeo con estas ${n} fotos`, pfHint:'Marca una o varias emociones arriba para hacer el vídeo solo con sus fotos.', infRes:'Resumen', infEmo:'Emociones', infHab:'Hábitos', infWords:'Palabras', createShort:'Crear', vsNote:'La barra clara es el periodo anterior; la flecha, cuántos puntos ha cambiado.', noWords:'Aún no hay palabras en este periodo.', exMore:'Más detalles: días, horas, tipos, cajones y palabras', fbShort:'Darme tu opinión', tutShort:'Ver el tutorial', remAdd:pf=>pf==='android'?'Añadir a Google Calendar':'Añadir al calendario', playRate:'Valorar en Google Play', tSaved2:'Guardado',
   meLead:'Todo es opcional y solo lo ves tú. Me sirve para hablarte a ti y, más adelante, para que los informes con inteligencia artificial tengan un poco de contexto.',
   pfName:'Nombre o alias', pfBirth:'Año de nacimiento', pfAge:n=>`Ahora tienes unos ${n} años.`, pfAbout:'Sobre ti',
   pfAboutPh:'Un par de frases: a qué te dedicas, qué te mueve, qué etapa estás viviendo…',
@@ -934,7 +950,7 @@ en:{
   tInstalled:'Installed! You now have me on your home screen.',
   meBtn:'Profile and settings', meTitle:'Profile and settings',
   psMe:'Your profile', psMeSub:'Name, year and a few lines about you', psLook:'Appearance and personalisation', psLookSub:'Typeface, language, buttons and reminder', psShow:'What shows in the app', psData:'Your data and backups', psDataSub:'Backups and how not to lose anything', psHelp:'Help and privacy', psHelpSub:'Tutorial, your feedback, privacy and legal notice',
-  remShort:'A daily nudge in your own calendar, at the time you choose. No servers.', bkSave:'Save a copy', smpTitle:'Sample memories', smpHint:n=>`You have ${n} sample memories. Delete them whenever you want to start with just your own.`, smpDel:'Delete the samples', tSmpDel:n=>`${n} sample memories deleted`, snapDel:'Delete this copy', tSnapDel:'Copy deleted', saveShort:'Save', newDrawerChip:'New drawer', newDrawerPh:'Drawer name', streakShort:n=>`${n} days in a row`, bkDueShort:'Time to save a copy', nzWeekShort:e=>`Your colour this week: ${e}`, nzMissShort:e=>`${e}: not seen for a while`, nzSee:'See', palLead2:'Tap an emotion to change its name or colour.', emoAddSub:'Make your own', emoPanel:'Emotion', emoSee:'see them', emoColorHint:'or pick one of these:', emoDel:'Delete this emotion', againShort:'Delete?', tabEmos:'Emotions', tabTypes:'Types', emoNewShort:'New', pfTitle:'Your photos', pfFile:'photos', pfCount:n=>n===1?'1 photo':n+' photos', pfBtn:n=>n===1?'Make a video with this photo':`Make a video with these ${n} photos`, pfHint:'Pick one or more emotions to make the video with just their photos.', fbShort:'Give feedback', tutShort:'See the tutorial', remAdd:pf=>pf==='android'?'Add to Google Calendar':'Add to calendar', playRate:'Rate on Google Play', tSaved2:'Saved',
+  remShort:'A daily nudge in your own calendar, at the time you choose. No servers.', bkSave:'Save a copy', smpTitle:'Sample memories', smpHint:n=>`You have ${n} sample memories. Delete them whenever you want to start with just your own.`, smpDel:'Delete the samples', tSmpDel:n=>`${n} sample memories deleted`, snapDel:'Delete this copy', tSnapDel:'Copy deleted', saveShort:'Save', newDrawerChip:'New drawer', newDrawerPh:'Drawer name', streakShort:n=>`${n} days in a row`, bkDueShort:'Time to save a copy', nzWeekShort:e=>`Your colour this week: ${e}`, nzMissShort:e=>`${e}: not seen for a while`, nzSee:'See', palLead2:'Tap an emotion to change its name or colour.', emoAddSub:'Make your own', emoPanel:'Emotion', emoSee:'see them', emoColorHint:'or pick one of these:', emoDel:'Delete this emotion', againShort:'Delete?', tabEmos:'Emotions', tabTypes:'Types', emoNewShort:'New', pfTitle:'Your photos', pfFile:'photos', pfCount:n=>n===1?'1 photo':n+' photos', pfBtn:n=>n===1?'Make a video with this photo':`Make a video with these ${n} photos`, pfHint:'Pick one or more emotions to make the video with just their photos.', infRes:'Summary', infEmo:'Emotions', infHab:'Habits', infWords:'Words', createShort:'Create', vsNote:'The pale bar is the previous period; the arrow, how many points it changed.', noWords:'No words in this period yet.', exMore:'More details: days, times, types, drawers and words', fbShort:'Give feedback', tutShort:'See the tutorial', remAdd:pf=>pf==='android'?'Add to Google Calendar':'Add to calendar', playRate:'Rate on Google Play', tSaved2:'Saved',
   meLead:'Everything is optional and only you can see it. It helps me talk to you and, later on, gives AI reports a little context.',
   pfName:'Name or nickname', pfBirth:'Year of birth', pfAge:n=>`You are about ${n} now.`, pfAbout:'About you',
   pfAboutPh:"A couple of sentences: what you do, what moves you, what stage of life you're in…",
@@ -1162,7 +1178,7 @@ ca:{
   tInstalled:`Instal·lada! Ja em tens a la pantalla d'inici.`,
   meBtn:'Perfil i ajustos', meTitle:'Perfil i ajustos',
   psMe:'El teu perfil', psMeSub:'Nom, any i unes línies sobre tu', psLook:'Aparença i personalització', psLookSub:'Tipografia, idioma, botons i recordatori', psShow:'Què es veu a l’app', psData:'Les teves dades i còpies', psDataSub:'Còpies de seguretat i com no perdre res', psHelp:'Ajuda i privacitat', psHelpSub:'Tutorial, la teva opinió, privacitat i avís legal',
-  remShort:'Un avís cada dia al teu propi calendari, a l’hora que triïs. Sense servidors.', bkSave:'Desa una còpia', smpTitle:'Records d’exemple', smpHint:n=>`Tens ${n} records d’exemple. Esborra’ls quan vulguis començar només amb els teus.`, smpDel:'Esborra els exemples', tSmpDel:n=>`${n} records d’exemple esborrats`, snapDel:'Esborra aquesta còpia', tSnapDel:'Còpia esborrada', saveShort:'Desa', newDrawerChip:'Nou calaix', newDrawerPh:'Nom del calaix', streakShort:n=>`${n} dies seguits`, bkDueShort:'Toca desar una còpia', nzWeekShort:e=>`El teu color de la setmana: ${e}`, nzMissShort:e=>`${e}: fa dies que no apareix`, nzSee:'Veure', palLead2:'Toca una emoció per canviar-ne el nom o el color.', emoAddSub:'Crea la teva', emoPanel:'Emoció', emoSee:'veure’ls', emoColorHint:'o tria’n un d’aquests:', emoDel:'Esborra aquesta emoció', againShort:'Esborrar?', tabEmos:'Emocions', tabTypes:'Tipus', emoNewShort:'Nova', pfTitle:'Les teves fotos', pfFile:'fotos', pfCount:n=>n===1?'1 foto':n+' fotos', pfBtn:n=>n===1?'Fes un vídeo amb aquesta foto':`Fes un vídeo amb aquestes ${n} fotos`, pfHint:'Marca una o diverses emocions per fer el vídeo només amb les seves fotos.', fbShort:'Dona’m la teva opinió', tutShort:'Veure el tutorial', remAdd:pf=>pf==='android'?'Afegeix a Google Calendar':'Afegeix al calendari', playRate:'Valora a Google Play', tSaved2:'Desat',
+  remShort:'Un avís cada dia al teu propi calendari, a l’hora que triïs. Sense servidors.', bkSave:'Desa una còpia', smpTitle:'Records d’exemple', smpHint:n=>`Tens ${n} records d’exemple. Esborra’ls quan vulguis començar només amb els teus.`, smpDel:'Esborra els exemples', tSmpDel:n=>`${n} records d’exemple esborrats`, snapDel:'Esborra aquesta còpia', tSnapDel:'Còpia esborrada', saveShort:'Desa', newDrawerChip:'Nou calaix', newDrawerPh:'Nom del calaix', streakShort:n=>`${n} dies seguits`, bkDueShort:'Toca desar una còpia', nzWeekShort:e=>`El teu color de la setmana: ${e}`, nzMissShort:e=>`${e}: fa dies que no apareix`, nzSee:'Veure', palLead2:'Toca una emoció per canviar-ne el nom o el color.', emoAddSub:'Crea la teva', emoPanel:'Emoció', emoSee:'veure’ls', emoColorHint:'o tria’n un d’aquests:', emoDel:'Esborra aquesta emoció', againShort:'Esborrar?', tabEmos:'Emocions', tabTypes:'Tipus', emoNewShort:'Nova', pfTitle:'Les teves fotos', pfFile:'fotos', pfCount:n=>n===1?'1 foto':n+' fotos', pfBtn:n=>n===1?'Fes un vídeo amb aquesta foto':`Fes un vídeo amb aquestes ${n} fotos`, pfHint:'Marca una o diverses emocions per fer el vídeo només amb les seves fotos.', infRes:'Resum', infEmo:'Emocions', infHab:'Hàbits', infWords:'Paraules', createShort:'Crea', vsNote:'La barra clara és el període anterior; la fletxa, quants punts ha canviat.', noWords:'Encara no hi ha paraules en aquest període.', exMore:'Més detalls: dies, hores, tipus, calaixos i paraules', fbShort:'Dona’m la teva opinió', tutShort:'Veure el tutorial', remAdd:pf=>pf==='android'?'Afegeix a Google Calendar':'Afegeix al calendari', playRate:'Valora a Google Play', tSaved2:'Desat',
   meLead:`Tot és opcional i només ho veus tu. Em serveix per parlar-te a tu i, més endavant, perquè els informes amb intel·ligència artificial tinguin una mica de context.`,
   pfName:'Nom o àlies', pfBirth:'Any de naixement', pfAge:n=>`Ara tens uns ${n} anys.`, pfAbout:'Sobre tu',
   pfAboutPh:`Un parell de frases: a què et dediques, què et mou, quina etapa estàs vivint…`,
@@ -1860,6 +1876,7 @@ function discovered(ms){
   }
   return best;
 }
+let infTab='res';
 function vInforme(){
   const r=range(rep.period,rep.offset),st=stats(r);
   const ps=stats(range(rep.period,rep.offset-1));
@@ -1867,10 +1884,17 @@ function vInforme(){
   let h=`<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${t('repTitle')}</h1>
   <div class="rep-head">
     <div class="seg" role="group" aria-label="${esc(t('period'))}">${[['semana','weekly'],['mes','monthly'],['anio','yearly']].map(([k,l])=>`<button data-act="period" data-v="${k}" aria-pressed="${rep.period===k}">${t(l)}</button>`).join('')}</div>
-    <div class="period"><button class="btn quiet" data-act="prev" aria-label="${esc(t('prev'))}">‹</button><strong>${esc(r.label)}</strong><button class="btn quiet" data-act="next" aria-label="${esc(t('next'))}"${rep.offset>=0?' disabled style="opacity:.3"':''}>›</button></div>
+    <div class="period"><button class="btn quiet" data-act="prev" aria-label="${esc(t('prev'))}">‹</button><strong>${esc(r.label)}</strong><button class="btn quiet" data-act="next" aria-label="${esc(t('next'))}"${rep.offset>=0?' disabled style="opacity:.3"':''}>›</button>${st.ms.length&&showShare()?`<button class="btn primary inf-create" data-act="inf-create">✦ ${esc(t('createShort'))}</button>`:''}</div>
   </div>`;
   if(!st.ms.length){
     return h+`<div class="empty-state"><p>${esc(t('repEmpty',word))}</p><button class="btn primary" data-act="new">${t('navNew')}</button></div>`;
+  }
+  h+=`<div class="seg seg-full" role="tablist" style="margin:2px 0 14px">${[['res','infRes'],['emo','infEmo'],['hab','infHab'],['words','infWords']].map(([k,l])=>`<button role="tab" data-act="inf-tab" data-v="${k}" aria-pressed="${infTab===k}">${esc(t(l))}</button>`).join('')}</div>`;
+  if(infTab==='emo'||infTab==='hab')return h+(isPlus()?'':`<p class="note" style="margin:0 0 10px">${esc(t('statsLocked'))} ${plusBadge()}</p>`)+plusStatsHTML(r,st,ps,infTab);
+  if(infTab==='words'){
+    if(st.tags.length){const mx=st.tags[0][1];h+=`<div class="words" style="margin-top:4px">${st.tags.slice(0,14).map(([x,c])=>`<button data-act="tag-go" data-v="${esc(x)}" style="font-size:${18+Math.round(c/mx*20)}px">${esc(x)}</button>`).join('')}</div>`}
+    else h+=`<p class="note">${esc(t('noWords'))}</p>`;
+    return h+plusStatsHTML(r,st,ps,'words');
   }
   h+=`<div class="compo" role="img" aria-label="${esc(t('compo'))}">${st.emos.map(x=>`<div style="--c:${x.e.color};flex:${x.share}" title="${esc(x.e.name)} ${Math.round(x.share*100)}%"></div>`).join('')}</div>
   <div class="legend">${st.emos.map(x=>`<span style="--c:${x.e.color}"><i></i>${esc(x.e.name)} ${Math.round(x.share*100)}%</span>`).join('')}</div>`;
@@ -1884,10 +1908,6 @@ function vInforme(){
     if(up&&d>.08)n+=t('more',up.e.name.toLowerCase());
   }
   h+=`<p class="narr">${esc(n)}</p><div class="row" style="margin-top:16px"><button class="btn" data-act="go-map">${esc(t('mapSeeYear'))}</button></div>`;
-  if(st.tags.length){
-    const mx=st.tags[0][1];
-    h+=`<h2 class="sec">${t('words')}</h2><div class="words">${st.tags.slice(0,14).map(([x,c])=>`<button data-act="tag-go" data-v="${esc(x)}" style="font-size:${18+Math.round(c/mx*20)}px">${esc(x)}</button>`).join('')}</div>`;
-  }
   let quotes=st.ms.filter(m=>m.quote);if(!quotes.length)quotes=st.ms.filter(m=>m.type==='libro'&&m.text);
   if(quotes.length){const q=quotes[Math.floor(Math.random()*quotes.length)];
     h+=`<h2 class="sec">${t('quoteOf')}</h2><blockquote class="quote" style="--c:${mainColor(q)}"><p>${esc(cut(q.quote||q.text,260))}</p><cite>${esc(q.title)}${q.source?', '+esc(q.source):''}</cite></blockquote>`}
@@ -1898,9 +1918,6 @@ function vInforme(){
     h+=`<h2 class="sec">${t('conn')}</h2><p class="narr" style="font-size:21px;margin-top:0">${t('connTxt',la,lb,esc(joinY(dsc.se.map(id=>emo(id).name.toLowerCase()))),esc(dsc.st[0]))}</p>
     <div class="row"><button class="btn" data-act="link-pair" data-a="${dsc.a.id}" data-b="${dsc.b.id}">${esc(t('linkThem'))}</button>${showShare()?`<button class="btn quiet" data-act="share-conn" data-a="${dsc.a.id}" data-b="${dsc.b.id}" data-se="${esc(dsc.se.join(','))}" data-st="${esc(dsc.st[0])}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div>`;
   }
-  h+=plusStatsHTML(r,st,ps);
-  if(showShare())h+=`<h2 class="sec">${t('share')}</h2><p class="lead">${esc(t('shareLead'))}</p>
-  <div class="row"><button class="btn" data-act="story">${IMG_ICON}${t('makeCard')}</button><button class="btn" data-act="film">▶ ${esc(t('filmBtn'))}${isPlus()?'':' '+plusBadge()}</button><button class="btn" data-act="book">📖 ${esc(t('bookBtn'))}${isPlus()?'':' '+plusBadge()}</button></div>`;
   return h;
 }
 
@@ -3333,7 +3350,7 @@ function exploreTypeCard(r,st){
     ${tags.length?sub(t('exWordsD'),hbars(tags.map(([w,n])=>({label:esc(w),value:n})))):''}
   </div>
   <div><h4 style="font-family:var(--serif);font-weight:400;font-size:18px;margin:18px 0 6px">${esc(t('exCompareType'))}</h4>${cmp}</div>
-  ${sub(t('exMems'),miniList(inT.slice(0,12)))}
+  ${sub(t('exMems'),miniList(inT.slice(0,3)))}
   <div class="row" style="margin-top:10px"><button class="btn" data-act="type-go" data-id="${statType}">${esc(t('exSeeAll'))}</button><button class="btn quiet" data-act="sky-view" data-m="type" data-v="${statType}">${esc(t('seeSky'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="type" data-v="${statType}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
 }
 function exploreDrawerCard(r,st){
@@ -3364,7 +3381,7 @@ function exploreDrawerCard(r,st){
     ${tags.length?sub(t('exWordsD'),hbars(tags.map(([w,n])=>({label:esc(w),value:n})))):''}
   </div>
   ${compareDrawersHTML(ms,dr.id)}
-  ${sub(t('exMems'),miniList(inD.slice(0,12)))}
+  ${sub(t('exMems'),miniList(inD.slice(0,3)))}
   <div class="row" style="margin-top:10px"><button class="btn" data-act="drawer-go" data-id="${dr.id}">${esc(t('exSeeAll'))}</button><button class="btn quiet" data-act="sky-view" data-m="drawer" data-v="${dr.id}">${esc(t('seeSky'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="drawer" data-v="${dr.id}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
 }
 function exploreCard(r,st){
@@ -3385,64 +3402,65 @@ function exploreCard(r,st){
   <p style="margin:0 0 4px;font-size:15px">${esc(t('exCount',withE.length,pct))} ${esc(t('exLast',fmt(withE[0].date,{day:'numeric',month:'long'})))}</p>
   <div class="stats-grid" style="margin-top:4px">
     ${sub(t('exWhen'),svgPct(sb.map(b=>b.label),sb.map(b=>shareOf(ms.filter(m=>m.date>=b.s&&m.date<=b.e),e.id)),e.color))}
+  </div>
+  <details class="ex-more"><summary>${esc(t('exMore'))}</summary><div class="stats-grid">
     ${sub(t('exWeekday'),svgPct(wd,wd.map((_,i)=>shareOf(ms.filter(m=>(fromIso(m.date).getDay()+6)%7===i),e.id)),e.color))}
     ${sub(t('exDaypart'),svgPct(dp.map(k=>L[k]),dp.map(k=>shareOf(ms.filter(m=>daypartOf(m)===k),e.id)),e.color))}
     ${sub(t('exTypes'),hbars(tys.map(([x,c])=>({label:esc(typeOf(x).label),value:c,color:e.color}))))}
     ${(()=>{const rows=S.drawers.map(d=>{const inD=ms.filter(m=>(m.drawers||[]).includes(d.id));return {d,p:inD.length?shareOf(inD,e.id):0,n:inD.length}}).filter(x=>x.n>0&&x.p>0).sort((a,b)=>b.p-a.p);return rows.length?sub(t('exInDrawers'),hbars(rows.map(x=>({label:esc(x.d.name),value:x.p,color:e.color,text:Math.round(x.p*100)+'%'})))):''})()}
     ${tags.length?sub(t('exWords'),hbars(tags.map(([w,c])=>({label:esc(w),value:c,color:e.color})))):''}
-  </div>
-  ${sub(t('exMems'),miniList(withE.slice(0,12)))}
+  </div></details>
+  ${sub(t('exMems'),miniList(withE.slice(0,3)))}
   <div class="row" style="margin-top:10px"><button class="btn" data-act="filter-emo-go" data-v="${e.id}">${esc(t('exSeeAll'))}</button><button class="btn quiet" data-act="sky-view" data-m="emo" data-v="${e.id}">${esc(t('seeSky'))}</button>${showShare()?`<button class="btn quiet" data-act="share-stat" data-m="emo" data-v="${e.id}">${IMG_ICON}${esc(t('shareBtn'))}</button>`:''}</div></div>`;
 }
-function plusStatsHTML(r,st,ps){
+function plusStatsHTML(r,st,ps,grp){
   const ms=st.ms;const L=t('dayparts');
   const card=(title,body)=>`<div class="card"><h3>${esc(title)}</h3>${body}</div>`;
-  const cards=[];
+  const cards=[];const G={};const push=(g,h)=>{(G[g]=G[g]||[]).push(h)};
   // cifras
   const sk=streaks();const s0=fromIso(r.s),today=fromIso(iso(new Date()));const e0=fromIso(r.e)<today?fromIso(r.e):today;
   const span=Math.max(1,Math.round((e0-s0)/864e5)+1);const perW=(ms.length/span*7);
   const withPh=ms.length?Math.round(ms.filter(m=>(m.photos||[]).length).length/ms.length*100):0;
-  cards.push(`<div class="card" style="grid-column:1/-1"><div class="tiles">
+  push('hab',`<div class="card" style="grid-column:1/-1"><div class="tiles">
     <div class="tile"><b>${sk.cur}</b><span>${esc(t('stStreak'))} · ${esc(t('nDaysShort',sk.cur))}</span></div>
     <div class="tile"><b>${sk.best}</b><span>${esc(t('stBest'))}</span></div>
     <div class="tile"><b>${st.days}</b><span>${esc(t('stDays'))}</span></div>
     <div class="tile"><b>${perW.toFixed(perW<10?1:0).replace('.',t('locale')==='en-GB'?'.':',')}</b><span>${esc(t('stPerWeek'))}</span></div>
     <div class="tile"><b>${withPh}%</b><span>${esc(t('stPhoto'))}</span></div></div></div>`);
-  cards.push(statMode==='drawer'?exploreDrawerCard(r,st):statMode==='type'?exploreTypeCard(r,st):exploreCard(r,st));
+  const exploreH=statMode==='drawer'?exploreDrawerCard(r,st):statMode==='type'?exploreTypeCard(r,st):exploreCard(r,st);
   // quesito
   const items=st.emos.map(x=>({color:x.e.color,value:x.share,label:x.e.name}));
-  cards.push(card(t('chEmotions'),`<div class="donut-wrap">${svgDonut(items,String(ms.length),t('nMem',ms.length).replace(/^\d+\s*/,''))}<div class="legend" style="flex-direction:column;gap:4px">${st.emos.map(x=>`<span style="--c:${x.e.color}"><i></i>${esc(x.e.name)} ${Math.round(x.share*100)}%</span>`).join('')}</div></div>`));
+  push('emo',card(t('chEmotions'),`<div class="donut-wrap">${svgDonut(items,String(ms.length),t('nMem',ms.length).replace(/^\d+\s*/,''))}<div class="legend" style="flex-direction:column;gap:4px">${st.emos.map(x=>`<span style="--c:${x.e.color}"><i></i>${esc(x.e.name)} ${Math.round(x.share*100)}%</span>`).join('')}</div></div>`));
   // evolución
-  const sb=subBuckets(r);cards.push(card(t('chEvolution'),svgStack(sb.map(b=>b.label),sb.map(b=>stackFor(ms.filter(m=>m.date>=b.s&&m.date<=b.e))))));
+  const sb=subBuckets(r);push('emo',card(t('chEvolution'),svgStack(sb.map(b=>b.label),sb.map(b=>stackFor(ms.filter(m=>m.date>=b.s&&m.date<=b.e))))));
   // días de la semana
   const mon=new Date(2024,0,1);const wd=[0,1,2,3,4,5,6].map(i=>fmtD(addDays(mon,i),{weekday:'short'}).replace('.',''));
-  cards.push(card(t('chWeekday'),svgStack(wd,wd.map((_,i)=>stackFor(ms.filter(m=>(fromIso(m.date).getDay()+6)%7===i))))));
+  push('hab',card(t('chWeekday'),svgStack(wd,wd.map((_,i)=>stackFor(ms.filter(m=>(fromIso(m.date).getDay()+6)%7===i))))));
   // momento del día
   const dp=['madrugada','manana','tarde','noche'];
-  cards.push(card(t('chDaypart'),svgStack(dp.map(k=>L[k]),dp.map(k=>stackFor(ms.filter(m=>daypartOf(m)===k))))));
+  push('hab',card(t('chDaypart'),svgStack(dp.map(k=>L[k]),dp.map(k=>stackFor(ms.filter(m=>daypartOf(m)===k))))));
   // comparación
   if(ps.emos.length){
     const ids=[...new Set([...st.emos.map(x=>x.e.id),...ps.emos.map(x=>x.e.id)])].map(emo).filter(Boolean);
-    cards.push(card(t('chVsPrev'),ids.map(e=>{const a=(ps.emos.find(x=>x.e.id===e.id)||{share:0}).share,b=(st.emos.find(x=>x.e.id===e.id)||{share:0}).share;
-      return `<div class="cmp" style="--c:${e.color}"><div class="cmp-name"><i></i>${esc(e.name)}</div>
-      <div class="cmp-row"><span>${esc(t('prevShort'))}</span><div class="hb-track"><i style="width:${(a*100).toFixed(1)}%;background:${e.color};opacity:.4"></i></div><span>${Math.round(a*100)}%</span></div>
-      <div class="cmp-row"><span>${esc(t('nowShort'))}</span><div class="hb-track"><i style="width:${(b*100).toFixed(1)}%;background:${e.color}"></i></div><span>${Math.round(b*100)}%</span></div></div>`}).join('')));
+    push('emo',card(t('chVsPrev'),ids.map(e=>{const a=(ps.emos.find(x=>x.e.id===e.id)||{share:0}).share,b=(st.emos.find(x=>x.e.id===e.id)||{share:0}).share;const d=Math.round(b*100)-Math.round(a*100);
+      return `<div class="vs-row" style="--c:${e.color}"><i></i><span>${esc(e.name)}</span><div class="hb-track"><i style="width:${(a*100).toFixed(1)}%;background:${e.color};opacity:.3"></i><i style="width:${(b*100).toFixed(1)}%;background:${e.color}"></i></div><b>${Math.round(b*100)}%</b><em class="${d>0?'up':d<0?'down':''}">${d>0?'↑'+d:d<0?'↓'+(-d):'='}</em></div>`}).join('')+`<p class="note" style="margin:8px 0 0;font-size:12.5px">${esc(t('vsNote'))}</p>`));
   }
   // tipos
-  cards.push(card(t('chTypes'),hbars(st.types.map(([ty,c])=>({label:esc(typeOf(ty).label),value:c})))));
+  push('hab',card(t('chTypes'),hbars(st.types.map(([ty,c])=>({label:esc(typeOf(ty).label),value:c})))));
   // la emoción de cada tipo
   const et=st.types.map(([ty])=>{const sub=ms.filter(m=>m.type===ty);const sk2=stackFor(sub);const tot=sk2.reduce((a,b)=>a+b.value,0);if(!tot)return null;
     const c={};sub.forEach(m=>emoWeights(m).forEach(([id,w])=>c[id]=(c[id]||0)+w));const [bid,bv]=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];const e=emo(bid);
     return {label:esc(typeOf(ty).label),value:bv/tot,color:e.color,text:`${esc(e.name)} ${Math.round(bv/tot*100)}%`}}).filter(Boolean);
-  if(et.length)cards.push(card(t('chEmoType'),et.map(x=>`<div class="hbar"><span>${x.label}</span><div class="hb-track"><i style="width:${(x.value*100).toFixed(1)}%;background:${x.color}"></i></div><b style="color:var(--ink)">${x.text}</b></div>`).join('')));
+  if(et.length)push('emo',card(t('chEmoType'),et.map(x=>`<div class="hbar"><span>${x.label}</span><div class="hb-track"><i style="width:${(x.value*100).toFixed(1)}%;background:${x.color}"></i></div><b style="color:var(--ink)">${x.text}</b></div>`).join('')));
   // palabras y cajones
-  if(st.tags.length)cards.push(card(t('chTags'),hbars(st.tags.slice(0,10).map(([w,c])=>({label:esc(w),value:c})))));
+  if(st.tags.length)push('words',card(t('chTags'),hbars(st.tags.slice(0,10).map(([w,c])=>({label:esc(w),value:c})))));
   const dc={};ms.forEach(m=>(m.drawers||[]).forEach(id=>{if(drawerOf(id))dc[id]=(dc[id]||0)+1}));
-  const dr=Object.entries(dc).sort((a,b)=>b[1]-a[1]);if(dr.length)cards.push(card(t('chDrawers'),hbars(dr.map(([id,c])=>({label:esc(drawerOf(id).name),value:c})))));
-  const grid=`<div class="stats-grid">${cards.join('')}</div>`;
-  const head=`<h2 class="sec">${esc(t('statsTitle'))} ${plusBadge()}</h2>`;
-  if(isPlus())return head+grid;
-  return head+`<div class="locked"><div class="locked-inner" aria-hidden="true">${grid}</div><div class="locked-cta"><p>${esc(t('statsLocked'))}</p><button class="btn primary" data-act="go-plus">${esc(t('plusMore'))}</button></div></div>`;
+  const dr=Object.entries(dc).sort((a,b)=>b[1]-a[1]);if(dr.length)push('hab',card(t('chDrawers'),hbars(dr.map(([id,c])=>({label:esc(drawerOf(id).name),value:c})))));
+  if(grp==='emo')(G.emo=G.emo||[]).push(exploreH);
+  const grid=`<div class="stats-grid">${(G[grp]||[]).join('')}</div>`;
+  if(!(G[grp]||[]).length)return '';
+  if(isPlus())return grid;
+  return `<div class="locked"><div class="locked-inner" aria-hidden="true">${grid}</div><div class="locked-cta"><p>${esc(t('statsLocked'))}</p><button class="btn primary" data-act="go-plus">${esc(t('plusMore'))}</button></div></div>`;
 }
 
 /* ---------- Plus: códigos firmados que se comprueban sin conexión ---------- */
@@ -3745,6 +3763,8 @@ document.addEventListener('click',e=>{
     case 'mode':archMode=v;render();break;
     case 'gal-emo':galEmos.has(v)?galEmos.delete(v):galEmos.add(v);render();break;
     case 'period':rep={period:v,offset:0};render();break;
+    case 'inf-tab':infTab=v;render();window.scrollTo(0,0);break;
+    case 'inf-create':{const r=range(rep.period,rep.offset);const ms=asc(vis().filter(m=>m.date>=r.s&&m.date<=r.e));openCreate({ms,title:filmPeriodTitle(),label:r.label,period:rep.period});break}
     case 'film':openFilm();break;
     case 'film-sel':{const s=selInfo();if(s)openFilm(s);break}
     case 'create-sel':openCreate(selInfo());break;
