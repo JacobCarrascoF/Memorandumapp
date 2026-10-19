@@ -1,6 +1,6 @@
 // Memorándum: funcionamiento sin conexión.
 // Cambia VERSION cada vez que subas un index.html nuevo para que los teléfonos se actualicen.
-const VERSION='memorandum-v41';
+const VERSION='memorandum-v44';
 const CORE=['./','index.html','manifest.webmanifest','manifest-ca.webmanifest','manifest-en.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png','icons/favicon-32.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
@@ -21,7 +21,14 @@ self.addEventListener('fetch',e=>{
   // La página: primero la red (para recibir actualizaciones), si no hay conexión, la copia guardada.
   if(req.mode==='navigate'){
     // Si el servidor responde con un error (por ejemplo un 404 durante un cambio de dominio), se abre la copia guardada.
-    e.respondWith(fetch(req).then(r=>{if(!r.ok)return caches.match('index.html').then(h=>h||r);const cp=r.clone();caches.open(VERSION).then(c=>c.put('index.html',cp));return r}).catch(()=>caches.match('index.html')));
+    // Con cobertura mala (la red no responde ni falla), a los 3 segundos se abre la copia guardada.
+    e.respondWith((async()=>{
+      const saved=await caches.match('index.html');
+      const net=fetch(req).then(r=>{if(r.ok){const cp=r.clone();caches.open(VERSION).then(c=>c.put('index.html',cp))}return r});
+      if(!saved)return net.catch(()=>new Response('Sin conexión',{status:503}));
+      const timeout=new Promise(res=>setTimeout(()=>res(null),3000));
+      try{const r=await Promise.race([net,timeout]);if(r&&r.ok)return r;return saved}catch(err){return saved}
+    })());
     return;
   }
   // Iconos, manifiesto y tipografías: primero la copia guardada.

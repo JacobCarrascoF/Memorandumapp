@@ -375,6 +375,27 @@ html[data-font="maquina"] .greet,html[data-font="mano"] .greet{letter-spacing:-.
 .dual-card b{display:block;font-family:var(--serif);font-weight:400;font-size:17px;line-height:1.15;margin:2px 0 4px}
 .dual-card span{font-size:12px;color:var(--muted)}
 
+/* ---------- Notas de voz ---------- */
+.pe-rec{border-color:#B23A48;color:#B23A48;background:color-mix(in srgb,#B23A48 10%,var(--surface));animation:recPulse 1.2s ease-in-out infinite}
+.pe-rec small{font-variant-numeric:tabular-nums;font-weight:600}
+@keyframes recPulse{50%{background:color-mix(in srgb,#B23A48 22%,var(--surface))}}
+.au-list{display:flex;flex-direction:column;gap:6px;margin:10px 0 0}
+.au-item{display:flex;align-items:center;gap:4px}
+.au-play{flex:1;min-width:0;max-width:340px;display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 14px 4px 4px;color:var(--ink)}
+.au-ic{flex:none;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:inline-flex;align-items:center;justify-content:center;font-size:11px}
+.au-bar{flex:1;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.au-bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s linear}
+.au-t{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.au-up{display:inline-block;margin-top:8px;font-size:13.5px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line);cursor:pointer}
+.au-up small{color:var(--muted);text-decoration:none;display:inline}
+.snd-list{display:flex;flex-direction:column;gap:10px}
+.snd-row{display:flex;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px 12px 10px;transition:box-shadow .2s,border-color .2s}
+.snd-row.now{border-color:var(--c);box-shadow:0 0 0 2px color-mix(in srgb,var(--c) 45%,transparent)}
+.snd-band{flex:none;width:5px;border-radius:4px}
+.snd-body{flex:1;min-width:0}
+.snd-title{border:0;background:none;padding:0;font-family:var(--serif);font-size:20px;line-height:1.2;text-align:left;color:var(--ink)}
+.snd-body small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.seg.seg-full button{font-size:13.5px}
 /* ---------- Informe en pestañas ---------- */
 .inf-create{margin-left:auto;padding:7px 14px;font-size:14px}
 .rep-head .period{flex:1}
@@ -722,7 +743,7 @@ es:{
   tInstalled:'¡Instalada! Ya me tienes en tu pantalla de inicio.',
   meBtn:'Perfil y ajustes', meTitle:'Perfil y ajustes',
   psMe:'Tu perfil', psMeSub:'Nombre, año y unas líneas sobre ti', psLook:'Apariencia y personalización', psLookSub:'Tipografía, idioma, botones y recordatorio', psShow:'Qué se ve en la app', psData:'Tus datos y copias', psDataSub:'Copias de seguridad y cómo no perder nada', psHelp:'Ayuda y privacidad', psHelpSub:'Tutorial, tu opinión, privacidad y aviso legal',
-  remShort:'Un aviso cada día en tu propio calendario, a la hora que elijas. Sin servidores.', bkSave:'Guardar copia', smpTitle:'Recuerdos de ejemplo', smpHint:n=>`Tienes ${n} recuerdos de ejemplo. Bórralos cuando quieras empezar solo con los tuyos.`, smpDel:'Borrar los ejemplos', tSmpDel:n=>`${n} recuerdos de ejemplo borrados`, snapDel:'Borrar esta copia', tSnapDel:'Copia borrada', saveShort:'Guardar', newDrawerChip:'Nuevo cajón', newDrawerPh:'Nombre del cajón', streakShort:n=>`${n} días seguidos`, bkDueShort:'Toca guardar una copia', nzWeekShort:e=>`Tu color de la semana: ${e}`, nzMissShort:e=>`${e}: hace días que no aparece`, nzSee:'Ver', palLead2:'Toca una emoción para cambiarle el nombre o el color.', emoAddSub:'Crea la tuya', emoPanel:'Emoción', emoSee:'verlos', emoColorHint:'o elige uno de estos:', emoDel:'Borrar esta emoción', againShort:'¿Borrar?', tabEmos:'Emociones', tabTypes:'Tipos', emoNewShort:'Nueva', pfTitle:'Tus fotos', pfFile:'fotos', pfCount:n=>n===1?'1 foto':n+' fotos', pfBtn:n=>n===1?'Hacer un vídeo con esta foto':`Hacer un vídeo con estas ${n} fotos`, pfHint:'Marca una o varias emociones arriba para hacer el vídeo solo con sus fotos.', infRes:'Resumen', infEmo:'Emociones', infHab:'Hábitos', infWords:'Palabras', createShort:'Crear', vsNote:'La barra clara es el periodo anterior; la flecha, cuántos puntos ha cambiado.', noWords:'Aún no hay palabras en este periodo.', exMore:'Más detalles: días, horas, tipos, cajones y palabras', fbShort:'Darme tu opinión', tutShort:'Ver el tutorial', remAdd:pf=>pf==='android'?'Añadir a Google Calendar':'Añadir al calendario', playRate:'Valorar en Google Play', tSaved2:'Guardado',
+  remShort:'Un aviso cada día en tu propio calendario, a la hora que elijas. Sin servidores.', bkSave:'Guardar copia', smpTitle:'Recuerdos de ejemplo', smpHint:n=>`Tienes ${n} recuerdos de ejemplo. Bórralos cuando quieras empezar solo con los tuyos.`, smpDel:'Borrar los ejemplos', tSmpDel:n=>`${n} recuerdos de ejemplo borrados`, snapDel:'Borrar esta copia', tSnapDel:'Copia borrada', saveShort:'Guardar', newDrawerChip:'Nuevo cajón', newDrawerPh:'Nombre del cajón', streakShort:n=>`${n} días seguidos`, bkDueShort:'Toca guardar una copia', nzWeekShort:e=>`Tu color de la semana: ${e}`, nzMissShort:e=>`${e}: hace días que no aparece`, nzSee:'Ver', palLead2:'Toca una emoción para cambiarle el nombre o el color.', emoAddSub:'Crea la tuya', emoPanel:'Emoción', emoSee:'verlos', emoColorHint:'o elige uno de estos:', emoDel:'Borrar esta emoción', againShort:'¿Borrar?', tabEmos:'Emociones', tabTypes:'Tipos', emoNewShort:'Nueva', pfTitle:'Tus fotos', pfFile:'fotos', pfCount:n=>n===1?'1 foto':n+' fotos', pfBtn:n=>n===1?'Hacer un vídeo con esta foto':`Hacer un vídeo con estas ${n} fotos`, pfHint:'Marca una o varias emociones arriba para hacer el vídeo solo con sus fotos.', infRes:'Resumen', infEmo:'Emociones', infHab:'Hábitos', infWords:'Palabras', createShort:'Crear', vsNote:'La barra clara es el periodo anterior; la flecha, cuántos puntos ha cambiado.', noWords:'Aún no hay palabras en este periodo.', exMore:'Más detalles: días, horas, tipos, cajones y palabras', photosVoice:'Fotos y sonidos', auRec:'Grabar un sonido', auRecShort:'Sonido', auStop:'Parar', auPlay:'Escuchar', auRemove:'Quitar sonido', auUpload:'o subir un audio', auHintFree:'(gratis: 1 de hasta 1 min)', auHintPlus:'(hasta 3, de 5 min)', auLimitFree:'Con Plus puedes guardar hasta 3 sonidos de 5 minutos.', auLimitPlus:'Ya tienes 3 sonidos en este recuerdo.', auLongFree:'Ese audio dura más de 1 minuto. Con Plus, hasta 5.', auLongPlus:'Ese audio dura más de 5 minutos.', auNoMic:'No hay permiso para el micrófono. Actívalo en los ajustes del navegador.', auNoRec:'Este navegador no puede grabar audio.', auBadFile:'No se puede reproducir ese audio aquí.', auTooBig:'Ese audio es demasiado grande.', auMissing:'Este sonido no está en este móvil (quizá venía de una copia ligera).', soundsMode:'Sonidos', sndTitle:'Tus sonidos', sndEmpty:'Aún no hay recuerdos con sonido aquí. Graba uno desde «Fotos y sonidos» al guardar un recuerdo.', sndAll:n=>n===1?'Escuchar':`Escuchar los ${n}`, sndStop:'Parar', sndCut:'Con un clac entre sonidos', sndDone:'Fin de tus sonidos', fbShort:'Darme tu opinión', tutShort:'Ver el tutorial', remAdd:pf=>pf==='android'?'Añadir a Google Calendar':'Añadir al calendario', playRate:'Valorar en Google Play', tSaved2:'Guardado',
   meLead:'Todo es opcional y solo lo ves tú. Me sirve para hablarte a ti y, más adelante, para que los informes con inteligencia artificial tengan un poco de contexto.',
   pfName:'Nombre o alias', pfBirth:'Año de nacimiento', pfAge:n=>`Ahora tienes unos ${n} años.`, pfAbout:'Sobre ti',
   pfAboutPh:'Un par de frases: a qué te dedicas, qué te mueve, qué etapa estás viviendo…',
@@ -950,7 +971,7 @@ en:{
   tInstalled:'Installed! You now have me on your home screen.',
   meBtn:'Profile and settings', meTitle:'Profile and settings',
   psMe:'Your profile', psMeSub:'Name, year and a few lines about you', psLook:'Appearance and personalisation', psLookSub:'Typeface, language, buttons and reminder', psShow:'What shows in the app', psData:'Your data and backups', psDataSub:'Backups and how not to lose anything', psHelp:'Help and privacy', psHelpSub:'Tutorial, your feedback, privacy and legal notice',
-  remShort:'A daily nudge in your own calendar, at the time you choose. No servers.', bkSave:'Save a copy', smpTitle:'Sample memories', smpHint:n=>`You have ${n} sample memories. Delete them whenever you want to start with just your own.`, smpDel:'Delete the samples', tSmpDel:n=>`${n} sample memories deleted`, snapDel:'Delete this copy', tSnapDel:'Copy deleted', saveShort:'Save', newDrawerChip:'New drawer', newDrawerPh:'Drawer name', streakShort:n=>`${n} days in a row`, bkDueShort:'Time to save a copy', nzWeekShort:e=>`Your colour this week: ${e}`, nzMissShort:e=>`${e}: not seen for a while`, nzSee:'See', palLead2:'Tap an emotion to change its name or colour.', emoAddSub:'Make your own', emoPanel:'Emotion', emoSee:'see them', emoColorHint:'or pick one of these:', emoDel:'Delete this emotion', againShort:'Delete?', tabEmos:'Emotions', tabTypes:'Types', emoNewShort:'New', pfTitle:'Your photos', pfFile:'photos', pfCount:n=>n===1?'1 photo':n+' photos', pfBtn:n=>n===1?'Make a video with this photo':`Make a video with these ${n} photos`, pfHint:'Pick one or more emotions to make the video with just their photos.', infRes:'Summary', infEmo:'Emotions', infHab:'Habits', infWords:'Words', createShort:'Create', vsNote:'The pale bar is the previous period; the arrow, how many points it changed.', noWords:'No words in this period yet.', exMore:'More details: days, times, types, drawers and words', fbShort:'Give feedback', tutShort:'See the tutorial', remAdd:pf=>pf==='android'?'Add to Google Calendar':'Add to calendar', playRate:'Rate on Google Play', tSaved2:'Saved',
+  remShort:'A daily nudge in your own calendar, at the time you choose. No servers.', bkSave:'Save a copy', smpTitle:'Sample memories', smpHint:n=>`You have ${n} sample memories. Delete them whenever you want to start with just your own.`, smpDel:'Delete the samples', tSmpDel:n=>`${n} sample memories deleted`, snapDel:'Delete this copy', tSnapDel:'Copy deleted', saveShort:'Save', newDrawerChip:'New drawer', newDrawerPh:'Drawer name', streakShort:n=>`${n} days in a row`, bkDueShort:'Time to save a copy', nzWeekShort:e=>`Your colour this week: ${e}`, nzMissShort:e=>`${e}: not seen for a while`, nzSee:'See', palLead2:'Tap an emotion to change its name or colour.', emoAddSub:'Make your own', emoPanel:'Emotion', emoSee:'see them', emoColorHint:'or pick one of these:', emoDel:'Delete this emotion', againShort:'Delete?', tabEmos:'Emotions', tabTypes:'Types', emoNewShort:'New', pfTitle:'Your photos', pfFile:'photos', pfCount:n=>n===1?'1 photo':n+' photos', pfBtn:n=>n===1?'Make a video with this photo':`Make a video with these ${n} photos`, pfHint:'Pick one or more emotions to make the video with just their photos.', infRes:'Summary', infEmo:'Emotions', infHab:'Habits', infWords:'Words', createShort:'Create', vsNote:'The pale bar is the previous period; the arrow, how many points it changed.', noWords:'No words in this period yet.', exMore:'More details: days, times, types, drawers and words', photosVoice:'Photos and sounds', auRec:'Record a sound', auRecShort:'Sound', auStop:'Stop', auPlay:'Listen', auRemove:'Remove sound', auUpload:'or upload audio', auHintFree:'(free: 1, up to 1 min)', auHintPlus:'(up to 3, 5 min each)', auLimitFree:'With Plus you can keep up to 3 sounds of 5 minutes.', auLimitPlus:'This memory already has 3 sounds.', auLongFree:'That audio is longer than 1 minute. With Plus, up to 5.', auLongPlus:'That audio is longer than 5 minutes.', auNoMic:'No microphone permission. Turn it on in your browser settings.', auNoRec:'This browser can’t record audio.', auBadFile:'That audio can’t be played here.', auTooBig:'That audio is too large.', auMissing:'This sound isn’t on this phone (maybe it came from a light copy).', soundsMode:'Sounds', sndTitle:'Your sounds', sndEmpty:'No memories with sound here yet. Record one from “Photos and sounds” when saving a memory.', sndAll:n=>n===1?'Listen':`Listen to all ${n}`, sndStop:'Stop', sndCut:'A click between sounds', sndDone:'End of your sounds', fbShort:'Give feedback', tutShort:'See the tutorial', remAdd:pf=>pf==='android'?'Add to Google Calendar':'Add to calendar', playRate:'Rate on Google Play', tSaved2:'Saved',
   meLead:'Everything is optional and only you can see it. It helps me talk to you and, later on, gives AI reports a little context.',
   pfName:'Name or nickname', pfBirth:'Year of birth', pfAge:n=>`You are about ${n} now.`, pfAbout:'About you',
   pfAboutPh:"A couple of sentences: what you do, what moves you, what stage of life you're in…",
@@ -1178,7 +1199,7 @@ ca:{
   tInstalled:`Instal·lada! Ja em tens a la pantalla d'inici.`,
   meBtn:'Perfil i ajustos', meTitle:'Perfil i ajustos',
   psMe:'El teu perfil', psMeSub:'Nom, any i unes línies sobre tu', psLook:'Aparença i personalització', psLookSub:'Tipografia, idioma, botons i recordatori', psShow:'Què es veu a l’app', psData:'Les teves dades i còpies', psDataSub:'Còpies de seguretat i com no perdre res', psHelp:'Ajuda i privacitat', psHelpSub:'Tutorial, la teva opinió, privacitat i avís legal',
-  remShort:'Un avís cada dia al teu propi calendari, a l’hora que triïs. Sense servidors.', bkSave:'Desa una còpia', smpTitle:'Records d’exemple', smpHint:n=>`Tens ${n} records d’exemple. Esborra’ls quan vulguis començar només amb els teus.`, smpDel:'Esborra els exemples', tSmpDel:n=>`${n} records d’exemple esborrats`, snapDel:'Esborra aquesta còpia', tSnapDel:'Còpia esborrada', saveShort:'Desa', newDrawerChip:'Nou calaix', newDrawerPh:'Nom del calaix', streakShort:n=>`${n} dies seguits`, bkDueShort:'Toca desar una còpia', nzWeekShort:e=>`El teu color de la setmana: ${e}`, nzMissShort:e=>`${e}: fa dies que no apareix`, nzSee:'Veure', palLead2:'Toca una emoció per canviar-ne el nom o el color.', emoAddSub:'Crea la teva', emoPanel:'Emoció', emoSee:'veure’ls', emoColorHint:'o tria’n un d’aquests:', emoDel:'Esborra aquesta emoció', againShort:'Esborrar?', tabEmos:'Emocions', tabTypes:'Tipus', emoNewShort:'Nova', pfTitle:'Les teves fotos', pfFile:'fotos', pfCount:n=>n===1?'1 foto':n+' fotos', pfBtn:n=>n===1?'Fes un vídeo amb aquesta foto':`Fes un vídeo amb aquestes ${n} fotos`, pfHint:'Marca una o diverses emocions per fer el vídeo només amb les seves fotos.', infRes:'Resum', infEmo:'Emocions', infHab:'Hàbits', infWords:'Paraules', createShort:'Crea', vsNote:'La barra clara és el període anterior; la fletxa, quants punts ha canviat.', noWords:'Encara no hi ha paraules en aquest període.', exMore:'Més detalls: dies, hores, tipus, calaixos i paraules', fbShort:'Dona’m la teva opinió', tutShort:'Veure el tutorial', remAdd:pf=>pf==='android'?'Afegeix a Google Calendar':'Afegeix al calendari', playRate:'Valora a Google Play', tSaved2:'Desat',
+  remShort:'Un avís cada dia al teu propi calendari, a l’hora que triïs. Sense servidors.', bkSave:'Desa una còpia', smpTitle:'Records d’exemple', smpHint:n=>`Tens ${n} records d’exemple. Esborra’ls quan vulguis començar només amb els teus.`, smpDel:'Esborra els exemples', tSmpDel:n=>`${n} records d’exemple esborrats`, snapDel:'Esborra aquesta còpia', tSnapDel:'Còpia esborrada', saveShort:'Desa', newDrawerChip:'Nou calaix', newDrawerPh:'Nom del calaix', streakShort:n=>`${n} dies seguits`, bkDueShort:'Toca desar una còpia', nzWeekShort:e=>`El teu color de la setmana: ${e}`, nzMissShort:e=>`${e}: fa dies que no apareix`, nzSee:'Veure', palLead2:'Toca una emoció per canviar-ne el nom o el color.', emoAddSub:'Crea la teva', emoPanel:'Emoció', emoSee:'veure’ls', emoColorHint:'o tria’n un d’aquests:', emoDel:'Esborra aquesta emoció', againShort:'Esborrar?', tabEmos:'Emocions', tabTypes:'Tipus', emoNewShort:'Nova', pfTitle:'Les teves fotos', pfFile:'fotos', pfCount:n=>n===1?'1 foto':n+' fotos', pfBtn:n=>n===1?'Fes un vídeo amb aquesta foto':`Fes un vídeo amb aquestes ${n} fotos`, pfHint:'Marca una o diverses emocions per fer el vídeo només amb les seves fotos.', infRes:'Resum', infEmo:'Emocions', infHab:'Hàbits', infWords:'Paraules', createShort:'Crea', vsNote:'La barra clara és el període anterior; la fletxa, quants punts ha canviat.', noWords:'Encara no hi ha paraules en aquest període.', exMore:'Més detalls: dies, hores, tipus, calaixos i paraules', photosVoice:'Fotos i sons', auRec:'Grava un so', auRecShort:'So', auStop:'Atura', auPlay:'Escolta', auRemove:'Treu el so', auUpload:'o puja un àudio', auHintFree:'(gratis: 1 de fins a 1 min)', auHintPlus:'(fins a 3, de 5 min)', auLimitFree:'Amb Plus pots desar fins a 3 sons de 5 minuts.', auLimitPlus:'Ja tens 3 sons en aquest record.', auLongFree:'Aquest àudio dura més d’1 minut. Amb Plus, fins a 5.', auLongPlus:'Aquest àudio dura més de 5 minuts.', auNoMic:'No hi ha permís per al micròfon. Activa’l a la configuració del navegador.', auNoRec:'Aquest navegador no pot gravar àudio.', auBadFile:'Aquest àudio no es pot reproduir aquí.', auTooBig:'Aquest àudio és massa gran.', auMissing:'Aquest so no és en aquest mòbil (potser venia d’una còpia lleugera).', soundsMode:'Sons', sndTitle:'Els teus sons', sndEmpty:'Encara no hi ha records amb so aquí. Grava’n un des de «Fotos i sons» en desar un record.', sndAll:n=>n===1?'Escolta':`Escolta’ls tots (${n})`, sndStop:'Atura', sndCut:'Amb un clac entre sons', sndDone:'Fi dels teus sons', fbShort:'Dona’m la teva opinió', tutShort:'Veure el tutorial', remAdd:pf=>pf==='android'?'Afegeix a Google Calendar':'Afegeix al calendari', playRate:'Valora a Google Play', tSaved2:'Desat',
   meLead:`Tot és opcional i només ho veus tu. Em serveix per parlar-te a tu i, més endavant, perquè els informes amb intel·ligència artificial tinguin una mica de context.`,
   pfName:'Nom o àlies', pfBirth:'Any de naixement', pfAge:n=>`Ara tens uns ${n} anys.`, pfAbout:'Sobre tu',
   pfAboutPh:`Un parell de frases: a què et dediques, què et mou, quina etapa estàs vivint…`,
@@ -1380,7 +1401,7 @@ function renderNav(){
   const me=$('#me');if(me){const nm=(S.profile&&S.profile.name||'').trim();me.innerHTML=nm?esc(nm.charAt(0).toUpperCase()):'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4.1-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg>';me.setAttribute('aria-label',t('meBtn'));me.setAttribute('aria-current',view==='perfil'?'page':'false')}
   n.innerHTML=tab('hoy','navHoy')+tab('archivo','navArchivo')+`<button class="plus" data-act="new" aria-label="${esc(t('navNew'))}">${ICONS.plus}<span>${t('navNew')}</span></button>`+tab('paleta','navPaleta')+tab('informe','navInforme');
 }
-function go(v){view=v;render();window.scrollTo(0,0)}
+function go(v){if(typeof pl!=='undefined'&&pl&&v!=='archivo')plStop();view=v;render();window.scrollTo(0,0)}
 function render(){applyFont();
   renderNav();
   const m=$('#main');const hs={};m.querySelectorAll('[data-hs]').forEach(e=>hs[e.dataset.hs]=e.scrollLeft);const sameView=m.dataset.v===view;m.dataset.v=view;
@@ -1474,7 +1495,7 @@ function ficha(m,withEmo){
   return `<button class="ficha" data-act="open" data-id="${m.id}" style="--band:${band(m)}">
     ${withEmo?`<span class="ficha-who">${esc(authorName(m))}</span>`:''}
     ${(m.photos||[]).length?`<span class="ficha-photo"><img data-photo="${m.photos[0]}" alt=""></span>`:''}
-    <span class="ficha-meta"><span>${ty.label}</span><span>${esc(fmt(m.date,{day:'numeric',month:'short'}))}</span></span>
+    <span class="ficha-meta"><span>${ty.label}${(m.audios||[]).length?' · ♪':''}</span><span>${esc(fmt(m.date,{day:'numeric',month:'short'}))}</span></span>
     <span class="ficha-title">${esc(memTitle(m))}</span>
     ${m.source?`<span class="ficha-source">${esc(m.source)}</span>`:''}
     ${m.quote?`<span class="ficha-quote">«${esc(m.quote)}»</span>`:''}
@@ -1519,8 +1540,8 @@ function vArchivo(){
   ${active.length?`<div class="row active-filters" style="margin-bottom:6px">${active.join('')}</div>`:''}
   ${drawerBarHTML()}
   <div id="sel-bar">${selBarHTML()}</div>
-  <div class="arch-view"><div class="seg seg-full" role="group" aria-label="${esc(t('view'))}"><button data-act="mode" data-v="lista" aria-pressed="${archMode==='lista'}">${t('cards')}</button><button data-act="mode" data-v="constelacion" aria-pressed="${archMode==='constelacion'}">${t('sky')}</button><button data-act="mode" data-v="fotos" aria-pressed="${archMode==='fotos'}">${t('photos')}</button><button data-act="mode" data-v="tarjetas" aria-pressed="${archMode==='tarjetas'}">${t('cardsMode')}</button></div></div>
-  <div id="results">${archMode==='lista'?resultsHTML():archMode==='fotos'?galleryHTML():archMode==='tarjetas'?cardsHTML():`${skyHeaderHTML()}<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>${skyButtonsHTML()}`}</div>`;
+  <div class="arch-view"><div class="seg seg-full" role="group" aria-label="${esc(t('view'))}"><button data-act="mode" data-v="lista" aria-pressed="${archMode==='lista'}">${t('cards')}</button><button data-act="mode" data-v="constelacion" aria-pressed="${archMode==='constelacion'}">${t('sky')}</button><button data-act="mode" data-v="fotos" aria-pressed="${archMode==='fotos'}">${t('photos')}</button><button data-act="mode" data-v="sonidos" aria-pressed="${archMode==='sonidos'}">${esc(t('soundsMode'))}</button><button data-act="mode" data-v="tarjetas" aria-pressed="${archMode==='tarjetas'}">${t('cardsMode')}</button></div></div>
+  <div id="results">${archMode==='lista'?resultsHTML():archMode==='fotos'?galleryHTML():archMode==='sonidos'?soundsHTML():archMode==='tarjetas'?cardsHTML():`${skyHeaderHTML()}<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>${skyButtonsHTML()}`}</div>`;
 }
 function selInfo(){
   const parts=[];
@@ -1554,6 +1575,7 @@ function openCreate(sel){
   <div class="create-list">${opt('create-card',IMG_ICON,t('createCard'),t('createCardD'),'')}${opt('create-film','▶',t('createFilm'),t('createFilmD'),pb)}${opt('create-book','📖',t('createBook'),t('createBookD'),pb)}</div>`);
 }
 function selBarHTML(){
+  if(archMode==='sonidos'){const n=soundItems().length;if(!n)return '';const on=!!(pl&&pl.on);return `<div class="row sel-bar" style="margin:2px 0 14px;align-items:center;gap:12px">${on?`<button class="btn primary" data-act="snd-stop">■ ${esc(t('sndStop'))}</button>`:`<button class="btn primary" data-act="snd-all">▶ ${esc(t('sndAll',n))}</button>`}<label class="row" style="gap:6px;font-size:14px;flex-wrap:nowrap"><button class="switch" role="switch" aria-checked="${sndCut}" data-act="snd-cut" aria-label="${esc(t('sndCut'))}" style="transform:scale(.85)"></button>${esc(t('sndCut'))}</label></div>`}
   if(archMode==='fotos'){if(!isPlus())return '';const n=galleryItems().length;return `<p class="note" style="margin:-4px 0 8px;font-size:13.5px">${esc(t('pfHint'))}</p>`+(n?`<div class="row sel-bar" style="margin:2px 0 14px"><button class="btn primary" data-act="photo-film">▶ ${esc(t('pfBtn',n))}</button></div>`:'')}
   const s=selInfo();if(!s)return '';
   return `<div class="row sel-bar" style="align-items:center;gap:8px;margin:2px 0 14px"><span class="note" style="font-size:14px">${esc(t('selMake',s.ms.length))}</span><button class="btn" data-act="create-sel">✦ ${esc(t('createBtn'))}</button></div>`;
@@ -1715,7 +1737,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.80';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.82';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -1928,7 +1950,7 @@ const dlg=$('#dlg');
 function openDlg(html){const keep=$('#dlg-body').scrollTop,same=dlg.open&&draft&&html.includes('data-act="ed-save"');const hs={};document.querySelectorAll('#dlg-body [data-hs]').forEach(e=>hs[e.dataset.hs]=e.scrollLeft);dlg.classList.toggle('sheet',html.includes('data-act="ed-save"')||html.includes('data-sheet="1"'));dlg.classList.toggle('onbd',html.includes('data-onb="1"'));$('#dlg-body').innerHTML=html;if(same)document.querySelectorAll('#dlg-body [data-hs]').forEach(e=>{if(hs[e.dataset.hs])e.scrollLeft=hs[e.dataset.hs]});if(!dlg.open)dlg.showModal();$('#dlg-body').scrollTop=same?keep:0;hydratePhotos($('#dlg-body'))}
 function closeDlg(){if(dlg.open)dlg.close()}
 dlg.addEventListener('click',e=>{if(e.target===dlg)closeDlg()});
-dlg.addEventListener('close',()=>{if(emoPanel){emoPanel=null;if(view==='paleta')render()}if(draft&&!draft._saved&&draft._new&&draft._new.length){draft._new.forEach(dropPhoto);draft._new=[]}if(onbOpen){onbOpen=false;if(!S.settings.onboarded){S.settings.onboarded=true;savePalette()}}});
+dlg.addEventListener('close',()=>{if(rec)recStop(true);if(auEl){auEl.pause();auEl=null;auId=null}if(emoPanel){emoPanel=null;if(view==='paleta')render()}if(draft&&!draft._saved&&draft._new&&draft._new.length){draft._new.forEach(dropPhoto);draft._new=[]}if(onbOpen){onbOpen=false;if(!S.settings.onboarded){S.settings.onboarded=true;savePalette()}}});
 
 function related(m){
   return vis().filter(o=>o.id!==m.id&&!(m.links||[]).includes(o.id)).map(o=>{
@@ -1951,6 +1973,7 @@ function openDetail(id){
   <p class="note det-meta">${m.origin&&m.origin!==myId()&&m.author?esc(t('sdFrom',m.author))+' · ':''}${ty.label}, ${esc(fmt(m.date))}${timeOf(m)?', '+timeOf(m):''}${ds.length?`, ${esc(ds.length>1?t('inDrawers',joinY(ds.map(x=>x.name))):t('inDrawer',ds[0].name))}`:''}</p>
   <div class="wash" style="--c:${mainColor(m)};margin-top:12px">
     ${(m.photos||[]).length?`<div class="photos${m.photos.length>1?' multi':''}">${m.photos.map(pid=>`<div class="photos-item"><img data-photo="${pid}" alt="${esc(t('photoAlt'))}"></div>`).join('')}</div>`:''}
+    ${(m.audios||[]).length?`<div class="au-list" style="margin-top:12px">${m.audios.map(a=>auPill(a,false)).join('')}</div>`:''}
     <h2 class="detail-title">${esc(memTitle(m))}</h2>
     ${m.source?`<div class="note">${esc(m.source)}</div>`:''}
     ${m.quote?`<blockquote class="quote" style="--c:${mainColor(m)};margin:16px 0 0"><p>«${esc(m.quote)}»</p>${m.page?`<cite>${esc(t('pageAbbr',m.page))}</cite>`:''}</blockquote>`:''}
@@ -2027,7 +2050,7 @@ async function sendDrawer(id){
   const emoIds=new Set(ms.flatMap(m=>m.emotions||[]));const typeIds=new Set(ms.map(m=>m.type));
   const out={kind:'memorandum-drawer',v:1,from:name,fromId:me,sentAt:new Date().toISOString(),drawer:{name:d.name,shareKey:d.shareKey},
     emotions:[...S.emotions.filter(e=>emoIds.has(e.id)),...(S.guestEmotions||[]).filter(e=>emoIds.has(e.id))],customTypes:(S.customTypes||[]).filter(c=>typeIds.has(c.id)),
-    memories:ms.map(m=>{const c=clone(m);c.drawers=[];delete c.drawer;if(!withPhotos)c.photos=[];return c}),photos:{}};
+    memories:ms.map(m=>{const c=clone(m);c.drawers=[];delete c.drawer;delete c.audios;if(!withPhotos)c.photos=[];return c}),photos:{}};
   if(withPhotos){for(const m of ms)for(const pid of (m.photos||[])){try{const b=await IDB.get(pid);if(b)out.photos[pid]=await blobToDataURL(b)}catch(e){}}}
   savePalette();for(const m of ms)saveMem(m);
   const slug=(d.name||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'cajon';
@@ -2125,7 +2148,7 @@ function openEditor(id,preset={}){tagsAll=false;
   draft=m?clone(m):{id:null,type:preset.type||'dia',title:'',source:'',text:'',emotions:preset.emo?[preset.emo]:[],tags:[],drawers:(preset.type==='dia'&&drawerOf('d-diario'))?['d-diario']:[],date:preset.date||iso(new Date()),time:(()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')})(),links:[]};
   normDrawers(draft);
   if(!draft.time)draft.time=timeOf(draft)||'';
-  draft.photos=[...(draft.photos||[])];draft._new=[];draft._saved=false;draft._colors=null;
+  draft.photos=[...(draft.photos||[])];draft.audios=[...(draft.audios||[])];draft._new=[];draft._saved=false;draft._colors=null;
   edErr='';linkQ='';newDrawerName='';newDrawerOpen=false;newTypeOpen=false;newTypeName='';newEmoOpen=false;newEmoName='';newEmoColor='';renderEditor();
 }
 function recentTags(){const out=[];sorted(vis()).forEach(m=>(m.tags||[]).forEach(x=>{if(!out.includes(x))out.push(x)}));return out}
@@ -2164,8 +2187,10 @@ function renderEditor(focusSel){
   ${ty.page?`<label class="f" for="ed-page">${t('pageLbl')} <small>${t('optional')}</small></label><input class="in" id="ed-page" data-ed="page" value="${esc(draft.page||'')}" inputmode="numeric" maxlength="8" style="max-width:120px">`:''}
   <label class="f" for="ed-text">${t('text')}</label>
   <textarea class="in" id="ed-text" data-ed="text" placeholder="${esc(ty.ph)}">${esc(draft.text)}</textarea>
-  <label class="f">${t('photos')} <small>${esc(isPlus()?t('photoHintPlus',draft.photos.length):t('photoHintFree'))}</small></label>
-  <div class="photo-edit">${draft.photos.map(pid=>`<div class="pe"><img data-photo="${pid}" alt=""><button class="pe-x" data-act="ed-unphoto" data-v="${pid}" aria-label="${esc(t('removePhoto'))}">✕</button></div>`).join('')}${draft.photos.length<photoLimit()?`<label class="pe-add"><input type="file" accept="image/*" data-ed-photo class="vh"${photoLimit()-draft.photos.length>1?' multiple':''}><span aria-hidden="true">+</span><small>${esc(t('addPhoto'))}</small></label>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('limitFree'))}"><span aria-hidden="true">+</span><small>${plusBadge()}</small></button>`:'')}</div>
+  <label class="f">${t('photosVoice')} <small>${esc(isPlus()?t('photoHintPlus',draft.photos.length):t('photoHintFree'))}</small></label>
+  <div class="photo-edit">${draft.photos.map(pid=>`<div class="pe"><img data-photo="${pid}" alt=""><button class="pe-x" data-act="ed-unphoto" data-v="${pid}" aria-label="${esc(t('removePhoto'))}">✕</button></div>`).join('')}${draft.photos.length<photoLimit()?`<label class="pe-add"><input type="file" accept="image/*" data-ed-photo class="vh"${photoLimit()-draft.photos.length>1?' multiple':''}><span aria-hidden="true">+</span><small>${esc(t('addPhoto'))}</small></label>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('limitFree'))}"><span aria-hidden="true">+</span><small>${plusBadge()}</small></button>`:'')}${rec?`<button class="pe-add pe-rec" data-act="au-stop" aria-label="${esc(t('auStop'))}"><span aria-hidden="true">■</span><small id="au-rec-t">${fmtDur((Date.now()-rec.t0)/1000)}</small></button>`:(draft.audios||[]).length<auLim().n?`<button class="pe-add" data-act="au-rec" aria-label="${esc(t('auRec'))}"><span aria-hidden="true">🎙</span><small>${esc(t('auRecShort'))}</small></button>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('auLimitFree'))}"><span aria-hidden="true">🎙</span><small>${plusBadge()}</small></button>`:'')}</div>
+  ${(draft.audios||[]).length?`<div class="au-list">${draft.audios.map(a=>auPill(a,true)).join('')}</div>`:''}
+  ${!rec&&(draft.audios||[]).length<auLim().n?`<label class="au-up">${esc(t('auUpload'))} <small>${esc(isPlus()?t('auHintPlus'):t('auHintFree'))}</small><input type="file" accept="audio/*" data-ed-audio class="vh"></label>`:''}
   ${colorsBlock()}
   <label class="f">${t('drawersTitle')} <small>${esc(t('drawersHint'))}</small></label>
   ${drawersRow}
@@ -2196,8 +2221,9 @@ async function saveDraft(){
   const m={...draft,id:draft.id||mkid('m'),title:draft.title.trim(),source:(draft.source||'').trim(),text:draft.text.trim(),createdAt:prev?.createdAt||Date.now(),updatedAt:Date.now()};
   if(!typeOf(m.type).src)m.source='';
   m.quote=typeOf(m.type).q?(draft.quote||'').trim():'';m.page=typeOf(m.type).page?String(draft.page||'').trim():'';if(!m.quote)delete m.quote;if(!m.page)delete m.page;
-  delete m._new;delete m._saved;delete m._colors;m.drawers=[...(draft.drawers||[])];normDrawers(m);m.photos=[...(draft.photos||[])];draft._saved=true;
-  (prev&&prev.photos||[]).filter(x=>!m.photos.includes(x)).forEach(dropPhoto);(draft._new||[]).filter(x=>!m.photos.includes(x)).forEach(dropPhoto);
+  delete m._new;delete m._saved;delete m._colors;m.drawers=[...(draft.drawers||[])];normDrawers(m);m.photos=[...(draft.photos||[])];m.audios=[...(draft.audios||[])];if(!m.audios.length)delete m.audios;draft._saved=true;
+  const keepIds=new Set([...m.photos,...(m.audios||[]).map(a=>a.id)]);
+  (prev&&prev.photos||[]).filter(x=>!keepIds.has(x)).forEach(dropPhoto);(prev&&prev.audios||[]).filter(a=>!keepIds.has(a.id)).forEach(a=>dropPhoto(a.id));(draft._new||[]).filter(x=>!keepIds.has(x)).forEach(dropPhoto);
   if(isNew)S.memories.push(m);else S.memories[S.memories.findIndex(x=>x.id===m.id)]=m;
   const before=prev?prev.links||[]:[];
   const touched=[];
@@ -2211,7 +2237,7 @@ async function saveDraft(){
 }
 async function deleteMem(id){
   const m=memOf(id);if(!m)return;
-  S.memories=S.memories.filter(x=>x.id!==id);(m.photos||[]).forEach(dropPhoto);
+  S.memories=S.memories.filter(x=>x.id!==id);(m.photos||[]).forEach(dropPhoto);(m.audios||[]).forEach(a=>dropPhoto(a.id));
   const touched=S.memories.filter(o=>(o.links||[]).includes(id));touched.forEach(o=>o.links=o.links.filter(x=>x!==id));
   closeDlg();toast(t('tDeleted'));render();
   await deleteMemCloud(id);for(const o of touched)await saveMem(o);
@@ -2958,6 +2984,7 @@ async function exportData(full){
   if(full===false)payload.cards=[];
   if(full!==false&&(S.cards||[]).length){const ci={};for(const c of S.cards){try{const bb=await IDB.get(c.id,'cards');if(bb)ci[c.id]=await blobToDataURL(bb)}catch(e){}}payload.cardImgs=ci}
   if(full!==false&&hasPhotos()){toast(t('exportPreparing'));const photos={};for(const pid of new Set(S.memories.flatMap(m=>m.photos||[]))){try{const b=await IDB.get(pid);if(b)photos[pid]=await blobToDataURL(b)}catch(e){}}payload.photos=photos}
+  if(full!==false&&S.memories.some(m=>(m.audios||[]).length)){const au={};for(const a of S.memories.flatMap(m=>m.audios||[])){try{const b=await IDB.get(a.id);if(b)au[a.id]=await blobToDataURL(b)}catch(e){}}payload.audios=au}
   const data=JSON.stringify(payload);
   const name='memorandum-'+iso(new Date())+(payload.photos?'-fotos':'')+'.json';
   if(!window.claude){bkPending={name,data};const canSh=!!shareableFile(name,new Blob([data],{type:'application/json'}));
@@ -2994,6 +3021,7 @@ $('#importer').addEventListener('change',async e=>{
     S.memories=[...mm.values()];
     if(p.cardImgs&&typeof p.cardImgs==='object'){for(const [cid,u] of Object.entries(p.cardImgs)){try{if(typeof u==='string'&&u.startsWith('data:image/'))await IDB.put(cid,dataURLToBlob(u),'cards')}catch(err){}}}
     if(p.photos&&typeof p.photos==='object'){for(const [pid,u] of Object.entries(p.photos)){try{if(typeof u==='string'&&u.startsWith('data:image/'))await IDB.put(pid,dataURLToBlob(u))}catch(err){}}}
+    if(p.audios&&typeof p.audios==='object'){for(const [aid,u] of Object.entries(p.audios)){try{if(typeof u==='string'&&u.startsWith('data:audio/'))await IDB.put(aid,dataURLToBlob(u))}catch(err){}}}
     if(p.profile)Object.keys(p.profile).forEach(k=>{if(!S.profile[k])S.profile[k]=p.profile[k]});
     if(!S.settings.lastBackup&&typeof p.exportedAt==='string')S.settings.lastBackup=p.exportedAt.slice(0,10);
     if(p.settings){if(p.settings.lastBackup&&!S.settings.lastBackup)S.settings.lastBackup=p.settings.lastBackup;if(fresh&&p.settings.backupFreq)S.settings.backupFreq=p.settings.backupFreq}
@@ -3056,6 +3084,76 @@ const photoURLs=new Map();
 async function photoURL(id){if(photoURLs.has(id))return photoURLs.get(id);try{const b=await IDB.get(id);if(!b)return null;const u=URL.createObjectURL(b);photoURLs.set(id,u);return u}catch(e){return null}}
 function dropPhoto(id){const u=photoURLs.get(id);if(u){URL.revokeObjectURL(u);photoURLs.delete(id)}IDB.del(id).catch(()=>{})}
 function hydratePhotos(root){(root||document).querySelectorAll('img[data-photo]:not([src])').forEach(async img=>{const u=await photoURL(img.dataset.photo);if(u)img.src=u;else if(img.parentElement)img.parentElement.classList.add('missing')});(root||document).querySelectorAll('img[data-card]:not([src])').forEach(async img=>{const u=await cardURL(img.dataset.card);if(u)img.src=u})}
+/* ---------- Notas de voz: se guardan solo en este dispositivo, junto a las fotos ---------- */
+const AU_FREE={n:1,sec:60},AU_PLUS={n:3,sec:300};
+function auLim(){return isPlus()?AU_PLUS:AU_FREE}
+function fmtDur(x){x=Math.max(0,Math.round(x||0));return Math.floor(x/60)+':'+String(x%60).padStart(2,'0')}
+let rec=null,auEl=null,auId=null;
+function auMime(){if(typeof MediaRecorder==='undefined')return null;return ['audio/webm;codecs=opus','audio/mp4','audio/webm','audio/ogg;codecs=opus'].find(m=>{try{return MediaRecorder.isTypeSupported(m)}catch(e){return false}})||''}
+async function recStart(){
+  if(!draft||rec)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus();return}
+  const mime=auMime();if(mime===null||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast(t('auNoRec'));return}
+  let stream;try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){toast(t('auNoMic'));return}
+  let mr;try{mr=new MediaRecorder(stream,mime?{mimeType:mime,audioBitsPerSecond:64000}:undefined)}catch(e){stream.getTracks().forEach(x=>x.stop());toast(t('auNoRec'));return}
+  const r={mr,chunks:[],t0:Date.now(),stream,lim};rec=r;
+  mr.ondataavailable=e=>{if(e.data&&e.data.size)r.chunks.push(e.data)};
+  mr.onstop=async()=>{clearInterval(r.timer);r.stream.getTracks().forEach(x=>x.stop());if(rec===r)rec=null;const dur=(Date.now()-r.t0)/1000;
+    if(r.discard||!draft||dur<0.8){if(draft&&dlg.open)renderEditor();return}
+    const type=((mr.mimeType||mime||'audio/webm').split(';')[0])||'audio/webm';await addAudioBlob(new Blob(r.chunks,{type}),Math.min(dur,lim.sec))};
+  mr.start(400);
+  r.timer=setInterval(()=>{const sec=(Date.now()-r.t0)/1000;const el=$('#au-rec-t');if(el)el.textContent=fmtDur(sec);if(sec>=lim.sec)recStop()},250);
+  renderEditor();
+}
+function recStop(discard){if(!rec)return;if(discard)rec.discard=true;try{if(rec.mr.state!=='inactive')rec.mr.stop()}catch(e){}}
+async function addAudioBlob(blob,dur){
+  if(!draft)return;if(blob.size>20e6){toast(t('auTooBig'));return}
+  const id=mkid('au');try{await IDB.put(id,blob)}catch(e){toast(t('auNoRec'));return}
+  draft.audios=[...(draft.audios||[]),{id,dur:Math.round(dur||0)}];draft._new=[...(draft._new||[]),id];renderEditor();
+}
+async function addAudioFile(f){
+  if(!draft||!f)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus();return}
+  const dur=await new Promise(res=>{const u=URL.createObjectURL(f);const a=new Audio();a.preload='metadata';const done=v=>{URL.revokeObjectURL(u);res(v)};a.onloadedmetadata=()=>done(isFinite(a.duration)?a.duration:0);a.onerror=()=>done(-1);setTimeout(()=>done(0),4000);a.src=u});
+  if(dur<0){toast(t('auBadFile'));return}
+  if(dur>lim.sec+1){toast(isPlus()?t('auLongPlus'):t('auLongFree'));return}
+  await addAudioBlob(f,dur);
+}
+function auPill(a,rm){return `<span class="au-item"><button class="au-play" data-act="au-play" data-v="${a.id}" aria-label="${esc(t('auPlay'))}"><span class="au-ic" aria-hidden="true">▶</span><span class="au-bar"><i></i></span><span class="au-t">${fmtDur(a.dur)}</span></button>${rm?`<button class="ico" data-act="ed-unaudio" data-v="${a.id}" aria-label="${esc(t('auRemove'))}" title="${esc(t('auRemove'))}">✕</button>`:''}</span>`}
+function auUI(id,playing,pct){document.querySelectorAll(`[data-act="au-play"][data-v="${id}"]`).forEach(b=>{const ic=b.querySelector('.au-ic');if(ic)ic.textContent=playing?'❚❚':'▶';const bar=b.querySelector('.au-bar i');if(bar)bar.style.width=(pct||0)+'%';b.classList.toggle('on',!!playing)})}
+async function auToggle(id){
+  if(pl&&pl.on&&!(pl.q[pl.i]&&pl.q[pl.i].a.id===id)){plStop()}
+  if(auEl&&auId===id){if(auEl.paused){auEl.play().catch(()=>{});auUI(id,true,auEl.currentTime/(auEl.duration||1)*100)}else{auEl.pause();auUI(id,false,auEl.currentTime/(auEl.duration||1)*100)}return}
+  if(auEl){auEl.pause();auUI(auId,false,0)}
+  const u=await photoURL(id);if(!u){toast(t('auMissing'));return}
+  const el=new Audio(u);auEl=el;auId=id;
+  el.ontimeupdate=()=>{const d=isFinite(el.duration)?el.duration:0;auUI(id,!el.paused,d?el.currentTime/d*100:0)};
+  el.onended=()=>{auUI(id,false,0);if(auEl===el){auEl=null;auId=null}};
+  el.play().then(()=>auUI(id,true,0)).catch(()=>{if(auEl===el)toast(t('auBadFile'))});
+}
+function soundItems(){return sorted(filtered().filter(m=>(m.audios||[]).length)).flatMap(m=>m.audios.map(a=>({m,a})))}
+function soundsHTML(){
+  const ms=sorted(filtered().filter(m=>(m.audios||[]).length));
+  if(!ms.length)return `<div class="empty-state"><p>${esc(t('sndEmpty'))}</p></div>`;
+  return `<h2 class="sec" style="margin-top:20px">${esc(t('sndTitle'))}</h2><div class="snd-list">${ms.map(m=>`<div class="snd-row${pl&&pl.on&&pl.q[pl.i]&&pl.q[pl.i].m.id===m.id?' now':''}" style="--c:${mainColor(m)}" data-snd="${m.id}"><i class="snd-band" style="background:${band(m)}"></i><div class="snd-body"><button class="snd-title" data-act="open" data-id="${m.id}">${esc(memTitle(m))}</button><small>${esc(fmt(m.date,{day:'numeric',month:'short',year:'numeric'}))}${(m.emotions||[]).map(emo).filter(Boolean).slice(0,3).map(e=>` · <span style="color:${e.color}">●</span> ${esc(e.name)}`).join('')}</small><div class="au-list" style="margin-top:6px">${m.audios.map(a=>auPill(a,false)).join('')}</div></div></div>`).join('')}</div>`;
+}
+let pl=null,sndCut=true,clackCtx=null;
+function playClack(){return new Promise(res=>{try{clackCtx=clackCtx||new (window.AudioContext||window.webkitAudioContext)();const c=clackCtx,now=c.currentTime;
+  const len=Math.floor(c.sampleRate*0.05),buf=c.createBuffer(1,len,c.sampleRate),d=buf.getChannelData(0);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,6);
+  const n=c.createBufferSource();n.buffer=buf;const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=2400;f.Q.value=0.8;const g=c.createGain();g.gain.value=0.55;n.connect(f).connect(g).connect(c.destination);n.start(now);
+  const o=c.createOscillator();o.type='sine';o.frequency.setValueAtTime(150,now);o.frequency.exponentialRampToValueAtTime(60,now+0.09);const og=c.createGain();og.gain.setValueAtTime(0.35,now);og.gain.exponentialRampToValueAtTime(0.001,now+0.12);o.connect(og).connect(c.destination);o.start(now);o.stop(now+0.13);
+  setTimeout(res,520)}catch(e){res()}})}
+function plMark(){document.querySelectorAll('.snd-row').forEach(r=>r.classList.toggle('now',!!(pl&&pl.on&&pl.q[pl.i]&&pl.q[pl.i].m.id===r.dataset.snd)))}
+async function plPlay(i){
+  if(!pl||!pl.on)return;if(i>=pl.q.length){plStop();toast(t('sndDone'));return}
+  pl.i=i;plMark();const it=pl.q[i];const row=document.querySelector(`.snd-row[data-snd="${it.m.id}"]`);if(row)row.scrollIntoView({behavior:'smooth',block:'center'});
+  if(auEl){auEl.pause();if(auId)auUI(auId,false,0)}
+  const u=await photoURL(it.a.id);if(!u||!pl||!pl.on){if(pl&&pl.on)plPlay(i+1);return}
+  const el=new Audio(u);auEl=el;auId=it.a.id;const id=it.a.id,tok=pl.tok;
+  el.ontimeupdate=()=>{const d=isFinite(el.duration)?el.duration:0;auUI(id,!el.paused,d?el.currentTime/d*100:0)};
+  el.onended=async()=>{auUI(id,false,0);if(!pl||!pl.on||pl.tok!==tok)return;if(sndCut&&i+1<pl.q.length)await playClack();if(pl&&pl.on&&pl.tok===tok)plPlay(i+1)};
+  el.play().then(()=>auUI(id,true,0)).catch(()=>{if(pl&&pl.on&&pl.tok===tok)plPlay(i+1)});
+}
+function plStart(){const q=soundItems();if(!q.length)return;pl={q,i:0,on:true,tok:Date.now()};const sb=document.getElementById('sel-bar');if(sb)sb.innerHTML=selBarHTML();try{clackCtx=clackCtx||new (window.AudioContext||window.webkitAudioContext)();clackCtx.resume&&clackCtx.resume()}catch(e){}plPlay(0)}
+function plStop(){if(pl)pl.on=false;if(auEl){auEl.pause();if(auId)auUI(auId,false,0);auEl=null;auId=null}pl=null;plMark();const sb=document.getElementById('sel-bar');if(sb)sb.innerHTML=selBarHTML()}
 function photoLimit(){return isPlus()?PHOTO_MAX_PLUS:PHOTO_MAX_FREE}
 function hasPhotos(){return S.memories.some(m=>(m.photos||[]).length)}
 function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src})}
@@ -3760,7 +3858,7 @@ document.addEventListener('click',e=>{
     case 'drawer-go':filters={...NOFILTER(),drawer:id};go('archivo');break;
     case 'clear':filters[b.dataset.k]=null;render();break;
     case 'clear-all':filters=NOFILTER();render();break;
-    case 'mode':archMode=v;render();break;
+    case 'mode':if(pl)plStop();archMode=v;render();break;
     case 'gal-emo':galEmos.has(v)?galEmos.delete(v):galEmos.add(v);render();break;
     case 'period':rep={period:v,offset:0};render();break;
     case 'inf-tab':infTab=v;render();window.scrollTo(0,0);break;
@@ -3847,6 +3945,13 @@ document.addEventListener('click',e=>{
     case 'drawer-del':armed(b,async()=>{S.drawers=S.drawers.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.drawers||[]).includes(id));tt.forEach(m=>{m.drawers=m.drawers.filter(x=>x!==id);normDrawers(m)});render();await savePalette();for(const m of tt)await saveMem(m)});break;
     case 'export':exportData(true);break;
     case 'export-light':exportData(false);break;
+    case 'au-rec':recStart();break;
+    case 'snd-all':plStart();break;
+    case 'snd-stop':plStop();break;
+    case 'snd-cut':sndCut=!sndCut;{const sb=document.getElementById('sel-bar');if(sb)sb.innerHTML=selBarHTML()}break;
+    case 'au-stop':recStop();break;
+    case 'au-play':auToggle(v);break;
+    case 'ed-unaudio':draft.audios=(draft.audios||[]).filter(a=>a.id!==v);if(auId===v&&auEl){auEl.pause();auEl=null;auId=null}renderEditor();break;
     case 'ed-unphoto':draft.photos=draft.photos.filter(x=>x!==v);if(!draft.photos.length)draft._colors=null;renderEditor();break;
     case 'ed-use-suggest':if(draft._colors){draft.emotions=draft._colors.suggest.filter(id=>emo(id)).slice(0,3);renderEditor()}break;
     case 'go-plus':goPlus();break;
@@ -3937,7 +4042,7 @@ document.addEventListener('input',e=>{
     if(k==='name')renderNav();
     return;
   }
-  if(f==='q'){filters.q=el.value;{const sb=document.getElementById('sel-bar');if(sb)sb.innerHTML=selBarHTML()}if(archMode==='lista'){$('#results').innerHTML=resultsHTML();hydratePhotos($('#results'))}else if(archMode==='fotos'){$('#results').innerHTML=galleryHTML();hydratePhotos($('#results'))}else drawSky();return}
+  if(f==='q'){filters.q=el.value;{const sb=document.getElementById('sel-bar');if(sb)sb.innerHTML=selBarHTML()}if(archMode==='lista'){$('#results').innerHTML=resultsHTML();hydratePhotos($('#results'))}else if(archMode==='fotos'){$('#results').innerHTML=galleryHTML();hydratePhotos($('#results'))}else if(archMode==='sonidos'){$('#results').innerHTML=soundsHTML();const sb=document.getElementById('sel-bar');if(sb)sb.innerHTML=selBarHTML()}else drawSky();return}
   if(f==='emo-name'||f==='emo-color'||f==='drawer-name'||f==='type-name'){
     const list=f==='drawer-name'?S.drawers:f==='type-name'?S.customTypes:S.emotions;const it=list.find(x=>x.id===el.dataset.id);if(!it)return;
     if(f==='emo-color'){it.color=el.value;const pl=el.closest('.pal,.emo-panel');if(pl)pl.style.setProperty('--c',el.value)}else it.name=el.value.slice(0,40)||t('noName');
@@ -3948,6 +4053,7 @@ document.addEventListener('change',e=>{
   const el=e.target;
   if(el.matches('[data-share-opt]')&&shareState){shareState[el.dataset.shareOpt]=el.checked;drawShare();return}
   if(el.matches('[data-dayjump]')){if(el.value)openDay(el.value);return}
+  if(el.matches('[data-ed-audio]')){const f=(el.files||[])[0];el.value='';addAudioFile(f);return}
   if(el.matches('[data-ed-photo]')){const fs=[...(el.files||[])];el.value='';addPhotosToDraft(fs);return}
   if(el.id==='story-q'){storyQuote=el.checked;drawStory();return}
   if(el.matches('[data-bkfreq]')){S.settings.backupFreq=el.value;S.settings.snoozeUntil=null;savePalette();toast(t('tSaved2'));return}
