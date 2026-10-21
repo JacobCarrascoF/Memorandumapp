@@ -1737,7 +1737,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.86';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.87';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -3158,8 +3158,8 @@ function plStop(){if(pl)pl.on=false;if(auEl){auEl.pause();if(auId)auUI(auId,fals
 function photoLimit(){return isPlus()?PHOTO_MAX_PLUS:PHOTO_MAX_FREE}
 function hasPhotos(){return S.memories.some(m=>(m.photos||[]).length)}
 function loadImg(src){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src})}
-const HEIC_LIB='https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js';
-function loadScriptOnce(src){return new Promise((res,rej)=>{if(document.querySelector(`script[data-src="${src}"]`)){const t0=Date.now();const w=()=>window.heic2any?res():Date.now()-t0>20000?rej(new Error('timeout')):setTimeout(w,100);return w()}const sc=document.createElement('script');sc.src=src;sc.async=true;sc.crossOrigin='anonymous';sc.dataset.src=src;sc.onload=()=>res();sc.onerror=()=>{sc.remove();rej(new Error('load'))};document.head.appendChild(sc)})}
+const HEIC_LIB='heic2any.min.js'; // heic2any 0.0.4, alojado en memorandumapp.com (sha256 0963cfa5…)
+function loadScriptOnce(src){return new Promise((res,rej)=>{if(document.querySelector(`script[data-src="${src}"]`)){const t0=Date.now();const w=()=>window.heic2any?res():Date.now()-t0>20000?rej(new Error('timeout')):setTimeout(w,100);return w()}const sc=document.createElement('script');sc.src=src;sc.async=true;sc.dataset.src=src;sc.onload=()=>res();sc.onerror=()=>{sc.remove();rej(new Error('load'))};document.head.appendChild(sc)})}
 async function isHeic(file){if(/hei[cf]/i.test(file.type||'')||/\.hei[cf]$/i.test(file.name||''))return true;try{const b=new Uint8Array(await file.slice(0,16).arrayBuffer());const tag=String.fromCharCode(...b.slice(4,8)),brand=String.fromCharCode(...b.slice(8,12));return tag==='ftyp'&&/^(heic|heix|hevc|hevx|heim|heis|mif1|msf1)$/.test(brand)}catch(e){return false}}
 async function heicToJpeg(file){if(!window.heic2any)await loadScriptOnce(HEIC_LIB);const out=await window.heic2any({blob:file,toType:'image/jpeg',quality:0.9});const b=Array.isArray(out)?out[0]:out;return new File([b],(file.name||'foto').replace(/\.\w+$/,'')+'.jpg',{type:'image/jpeg'})}
 async function decodeImg(file){
