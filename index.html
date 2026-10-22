@@ -390,8 +390,8 @@ html[data-font="maquina"] .greet,html[data-font="mano"] .greet{letter-spacing:-.
 .sky.full svg{width:100%;height:100%;max-height:none;min-height:0}
 .sky.full .sky-fs-bar{display:block;position:absolute;left:0;right:56px;top:calc(10px + env(safe-area-inset-top,0px));padding:0 0 0 10px}
 .sky.full .sky-fs-bar .hscroll{margin:0;padding:2px 0}
-.sky.full .sky-fs-bar .chip{background:rgba(249,248,252,.9);box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.sky.full .sky-fs-bar .chip[aria-pressed="true"]{background:var(--ink)}
+.sky.full .sky-fs-bar .chip{background:rgba(249,248,252,.94);color:#26233D;border-color:rgba(38,35,61,.18);box-shadow:0 2px 8px rgba(0,0,0,.14)}
+.sky.full .sky-fs-bar .chip[aria-pressed="true"]{background:#26233D;color:#F9F8FC;border-color:#26233D}
 .sky.full .sky-ctrl{top:calc(10px + env(safe-area-inset-top,0px))}
 .sky.full .sky-info{bottom:calc(14px + env(safe-area-inset-bottom,0px))}
 body.sky-fs{overflow:hidden}
@@ -1718,13 +1718,13 @@ function skyApply(){
     const sh=skyShow(),sel=skySel===i,on=lit&&lit.has(i);
     const ph=g.querySelector('.ph');let below=n.y+r;
     const rk=skyLast.order.get(i),z2=z*z,top=k=>rk<k;
-    if(ph){const vis=sel||(sh.photos&&(skyLast.phN<=12||skyLast.phOrder.get(i)<Math.round(6*z2)));ph.style.display=vis?'':'none';if(vis){const pr=(sel?40:16)*u*Math.min(2,Math.pow(z,.35));const cx=sel?n.x:n.x+r+pr*.7,cy=sel?n.y-r-pr-6*u:n.y-r-pr*.5;
+    if(ph){const vis=sel||(sh.photos&&(skyLast.phN<=12||skyLast.phOrder.get(i)<Math.round(6*z2)));ph.style.display=vis?'':'none';if(vis){const pr=(sel?56:22)*u*Math.min(2,Math.pow(z,.35));const cx=sel?n.x:n.x+r+pr*.7,cy=sel?n.y-r-pr-6*u:n.y-r-pr*.5;
       const rg=ph.querySelector('.ph-ring');rg.setAttribute('cx',cx);rg.setAttribute('cy',cy);rg.setAttribute('r',pr+1.5*u);const im=ph.querySelector('image');im.setAttribute('x',cx-pr);im.setAttribute('y',cy-pr);im.setAttribute('width',pr*2);im.setAttribute('height',pr*2)}}
-    const tx2=g.querySelector('.t1');tx2.setAttribute('font-size',12*u);tx2.setAttribute('y',below+16*u);
+    const tx2=g.querySelector('.t1');tx2.setAttribute('font-size',14*u);tx2.setAttribute('y',below+18*u);
     const show=sel||on||(sh.titles&&(N<=20||top(Math.round(8*z2))));tx2.style.display=show?'':'none';
-    let yy=below+16*u;const t2=g.querySelector('.t2'),t3=g.querySelector('.t3');
-    if(t2){const v=show&&(sel||(sh.tags&&(N<=10||(z>=2&&top(Math.round(3*z2))))));t2.style.display=v?'':'none';if(v){yy+=13*u;t2.setAttribute('font-size',10*u);t2.setAttribute('y',yy)}}
-    if(t3){const v=show&&(sel||(sh.texts&&(N<=5||(z>=3&&top(Math.round(2*z2))))));t3.style.display=v?'':'none';if(v){yy+=13*u;t3.setAttribute('font-size',10.5*u);t3.setAttribute('y',yy)}}
+    let yy=below+18*u;const t2=g.querySelector('.t2'),t3=g.querySelector('.t3');
+    if(t2){const v=show&&(sel||(sh.tags&&(N<=10||(z>=2&&top(Math.round(3*z2))))));t2.style.display=v?'':'none';if(v){yy+=14*u;t2.setAttribute('font-size',11*u);t2.setAttribute('y',yy)}}
+    if(t3){const v=show&&(sel||(sh.texts&&(N<=5||(z>=3&&top(Math.round(2*z2))))));t3.style.display=v?'':'none';if(v){yy+=14*u;t3.setAttribute('font-size',11.5*u);t3.setAttribute('y',yy)}}
     g.classList.toggle('lit',!!(lit&&lit.has(i)))});
   svg.classList.toggle('has-sel',skySel!=null);
   svg.querySelectorAll('line.edge').forEach(l=>{const a=+l.dataset.a,b=+l.dataset.b;l.classList.toggle('lit',skySel!=null&&(a===skySel||b===skySel))});
@@ -1777,7 +1777,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.90';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.91';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
