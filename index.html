@@ -195,8 +195,10 @@ textarea.in{min-height:120px;resize:vertical;font-family:var(--serif);font-size:
 .sky svg{display:block;width:100%;height:auto;max-height:72vh;user-select:none;-webkit-user-select:none}
 @media (max-width:600px){.sky svg{max-height:none;min-height:60vh}}
 .sky g.node{cursor:pointer;transition:opacity .2s}
-.sky g.node:focus{outline:none}
-.sky g.node:focus circle.dot{stroke:currentColor;stroke-width:2}
+.sky,.sky *{-webkit-tap-highlight-color:transparent}
+.sky svg:focus,.sky svg:focus-visible,.sky g.node:focus,.sky g.node:focus-visible{outline:none}
+.sky g.node:focus circle.dot{stroke:none}
+
 .sky text{font-family:var(--sans);pointer-events:none}
 .sky line.edge{transition:opacity .2s}
 #skysvg.has-sel g.node:not(.lit){opacity:.14}
@@ -1798,7 +1800,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.97';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.98';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
