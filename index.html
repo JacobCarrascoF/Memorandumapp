@@ -392,8 +392,8 @@ html[data-font="maquina"] .greet,html[data-font="mano"] .greet{letter-spacing:-.
 .sky.full .sky-fs-bar .hscroll{margin:0;padding:2px 0}
 .sky.full .sky-fs-bar .chip{background:rgba(255,255,255,.72);color:#8A86A0;border:1px dashed rgba(38,35,61,.28);box-shadow:none}
 .sky.full .sky-fs-bar .chip[aria-pressed="true"]{background:#26233D;color:#F9F8FC;border:1px solid #26233D;box-shadow:0 2px 8px rgba(0,0,0,.18)}
-.sky.full.dark .sky-fs-bar .chip{background:rgba(255,255,255,.06);color:rgba(236,233,245,.55);border-color:rgba(255,255,255,.28)}
-.sky.full.dark .sky-fs-bar .chip[aria-pressed="true"]{background:#C9C3F0;color:#1B1A26;border-color:#C9C3F0}
+.sky.full.dark .sky-fs-bar .chip{background:#26233D;color:#FFFFFF;border:1px solid rgba(255,255,255,.22)}
+.sky.full.dark .sky-fs-bar .chip[aria-pressed="true"]{background:#F9F8FC;color:#1B1A26;border-color:#F9F8FC}
 .sky.full .sky-fs-bar .chip[aria-pressed="true"]::before{content:"✓";font-weight:700;margin-right:2px}
 .sky.full .sky-ctrl{top:calc(10px + env(safe-area-inset-top,0px))}
 .sky.full .sky-info{bottom:calc(14px + env(safe-area-inset-bottom,0px))}
@@ -1780,7 +1780,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.92';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.93';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
