@@ -1742,7 +1742,7 @@ function skyToUser(svg,cx,cy){const p=svg.createSVGPoint();p.x=cx;p.y=cy;return 
 function skyZoomAt(f,nz){nz=Math.max(1,Math.min(10,nz));const {z,tx,ty}=skyView;skyView={z:nz,tx:f.x-(f.x-tx)*(nz/z),ty:f.y-(f.y-ty)*(nz/z)};if(nz===1){skyView.tx=0;skyView.ty=0}skyApply()}
 let skyRing=null;
 function skyNeighbors(i){const ns=skyLast.edges.filter(e=>e.a===i||e.b===i).map(e=>e.a===i?e.b:e.a);return [...new Set(ns)].sort((a,b)=>skyLast.nodes[a].m.date.localeCompare(skyLast.nodes[b].m.date))}
-function skyStep(d){if(!skyRing||skyRing.list.length<2)return;skyRing.pos=(skyRing.pos+d+skyRing.list.length)%skyRing.list.length;const i=skyRing.list[skyRing.pos];skySelect(i,true,d);skyCenterOn(i)}
+function skyStep(d){if(!skyRing||skyRing.list.length<2)return;skyRing.pos=(skyRing.pos+d+skyRing.list.length)%skyRing.list.length;const i=skyRing.list[skyRing.pos];skySelect(i,true,d)}
 function skyCenterOn(i){if(!skyLast||skyView.z<=1.05)return;const n=skyLast.nodes[i],bb=skyLast.bbox;const cx=bb.x+bb.w/2,cy=bb.y+bb.h/2;skyView.tx=(cx-n.x)*skyView.z+ (cx-cx*skyView.z);skyView.ty=(cy-n.y)*skyView.z+(cy-cy*skyView.z);skyView.tx=cx-n.x*skyView.z;skyView.ty=cy-n.y*skyView.z;skyApply()}
 function skySelect(i,keepRing,dir){
   if(!keepRing)skyRing=i==null?null:{list:[i,...skyNeighbors(i)],pos:0};
@@ -1793,7 +1793,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.95';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='0.96';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
