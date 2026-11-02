@@ -7,6 +7,9 @@
 <meta name="theme-color" content="#16151E" media="(prefers-color-scheme: dark)">
 <meta name="description" content="Memorándum, tu fábrica de recuerdos: guarda lo que vives, lees y escuchas con el color de cómo te hizo sentir.">
 <title>Memorándum</title>
+<link rel="manifest" href="manifest.webmanifest" id="manifest-link">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <style>
 /* Tipografías incluidas en la app: Instrument Serif e Instrument Sans,
    ambas con licencia SIL Open Font License 1.1 (https://openfontlicense.org). */
@@ -1809,7 +1812,7 @@ function swatchesHTML(e){
   return `<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.04';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.05';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -4298,9 +4301,6 @@ document.addEventListener('change',e=>{
 {const hd=document.querySelector('header.top');const onSc=()=>hd&&hd.classList.toggle('scrolled',window.scrollY>4);window.addEventListener('scroll',onSc,{passive:true});onSc()}
 if(!window.claude){
   const add=(tag,attrs)=>{const el=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));document.head.appendChild(el)};
-  add('link',{rel:'manifest',href:'manifest.webmanifest',id:'manifest-link'});
-  add('link',{rel:'icon',type:'image/png',sizes:'32x32',href:'icons/favicon-32.png'});
-  add('link',{rel:'apple-touch-icon',href:'icons/apple-touch-icon.png'});
   add('meta',{name:'apple-mobile-web-app-capable',content:'yes'});
   add('meta',{name:'mobile-web-app-capable',content:'yes'});
   add('meta',{name:'apple-mobile-web-app-title',content:t('brand'),id:'apple-title'});
