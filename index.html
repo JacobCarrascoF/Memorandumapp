@@ -643,7 +643,7 @@ es:{
   archEmpty:'Aquí se irán archivando tus recuerdos, ordenados por meses.', noMatch:'Nada coincide con estos filtros. Quita alguno o prueba otra palabra.', clearAll:'Quitar filtros',
   palTitle:'Biblioteca de emociones', palLead:'Cada color es una emoción con el nombre que tú le des. Renómbralos, cambia el tono o crea los tuyos. Toca un color para ver todo lo que guarda.',
   seeMemsOf:n=>`Ver recuerdos de ${n}`, emoName:'Nombre de la emoción', colorOf:n=>`Color de ${n}`, del:'Borrar',
-  newEmo:'Nueva emoción', emoNamePh:'Nombre de la emoción', emoCreate:'Crear', emoColorLbl:'Color de la emoción', emoCreated:n=>`«${n}» creada y añadida a tu paleta.`, newEmoHint:'Inventa una: «domingo de lluvia», «olor a casa»…',
+  newEmo:'Nueva emoción', emoNamePh:'Nombre de la emoción', emoCreate:'Crear', emoCreateAdd:'Crear y añadir al recuerdo', emoCreateBtn:'Crear', emoDone:'Listo', emoDiscarded:'Emoción descartada', emoColorLbl:'Color de la emoción', emoCreated:n=>`«${n}» creada y añadida a tu paleta.`, newEmoHint:'Inventa una: «domingo de lluvia», «olor a casa»…',
   drawersTitle:'Cajones', drawersLead:'Los sitios donde se archivan tus recuerdos. Un recuerdo puede vivir en varios a la vez.', drawerName:'Nombre del cajón', newDrawerName:'Nombre del nuevo cajón', addDrawer:'Añadir cajón',
   backupTitle:'Copia de seguridad', savedCloud:'Tus recuerdos se guardan solos en tu cuenta y solo tú puedes verlos.', savedLocal:'Tus recuerdos se guardan solos en este dispositivo.',
   backupNote:'Además, te avisaré para guardar una copia en un archivo, que puedes llevar a Archivos, Drive o donde prefieras.',
@@ -871,7 +871,7 @@ en:{
   archEmpty:'Your memories will be filed here, month by month.', noMatch:'Nothing matches these filters. Remove one or try another word.', clearAll:'Clear filters',
   palTitle:'Library of emotions', palLead:'Each colour is an emotion with whatever name you give it. Rename them, change their shade or create your own. Tap a colour to see everything it holds.',
   seeMemsOf:n=>`See memories of ${n}`, emoName:'Emotion name', colorOf:n=>`Colour of ${n}`, del:'Delete',
-  newEmo:'New emotion', emoNamePh:'Emotion name', emoCreate:'Create', emoColorLbl:'Emotion colour', emoCreated:n=>`“${n}” created and added to your palette.`, newEmoHint:'Invent one: “rainy Sunday”, “smell of home”…',
+  newEmo:'New emotion', emoNamePh:'Emotion name', emoCreate:'Create', emoCreateAdd:'Create and add to the memory', emoCreateBtn:'Create', emoDone:'Done', emoDiscarded:'Emotion discarded', emoColorLbl:'Emotion colour', emoCreated:n=>`“${n}” created and added to your palette.`, newEmoHint:'Invent one: “rainy Sunday”, “smell of home”…',
   drawersTitle:'Drawers', drawersLead:'The places where your memories are filed. A memory can live in several at once.', drawerName:'Drawer name', newDrawerName:'New drawer name', addDrawer:'Add drawer',
   backupTitle:'Backup', savedCloud:'Your memories are saved automatically to your account and only you can see them.', savedLocal:'Your memories are saved automatically on this device.',
   backupNote:'I will also remind you to save a copy as a file, which you can keep in Files, Drive or wherever you like.',
@@ -1099,7 +1099,7 @@ ca:{
   archEmpty:`Aquí s'aniran arxivant els teus records, ordenats per mesos.`, noMatch:`No hi ha res que coincideixi amb aquests filtres. Treu-ne algun o prova una altra paraula.`, clearAll:'Treu els filtres',
   palTitle:`Biblioteca d'emocions`, palLead:`Cada color és una emoció amb el nom que tu li donis. Canvia'ls el nom, el to o crea'n de teus. Toca un color per veure tot el que guarda.`,
   seeMemsOf:n=>`Veure records de ${n}`, emoName:`Nom de l'emoció`, colorOf:n=>`Color de ${n}`, del:'Esborra',
-  newEmo:'Nova emoció', emoNamePh:'Nom de l’emoció', emoCreate:'Crea', emoColorLbl:'Color de l’emoció', emoCreated:n=>`«${n}» creada i afegida a la teva paleta.`, newEmoHint:`Inventa'n una: «diumenge de pluja», «olor de casa»…`,
+  newEmo:'Nova emoció', emoNamePh:'Nom de l’emoció', emoCreate:'Crea', emoCreateAdd:'Crea i afegeix al record', emoCreateBtn:'Crea', emoDone:'Fet', emoDiscarded:'Emoció descartada', emoColorLbl:'Color de l’emoció', emoCreated:n=>`«${n}» creada i afegida a la teva paleta.`, newEmoHint:`Inventa'n una: «diumenge de pluja», «olor de casa»…`,
   drawersTitle:'Calaixos', drawersLead:`Els llocs on s'arxiven els teus records. Un record pot viure en diversos alhora.`, drawerName:'Nom del calaix', newDrawerName:'Nom del nou calaix', addDrawer:'Afegeix un calaix',
   backupTitle:'Còpia de seguretat', savedCloud:'Els teus records es desen sols al teu compte i només tu els pots veure.', savedLocal:'Els teus records es desen sols en aquest dispositiu.',
   backupNote:`A més, t'avisaré per desar una còpia en un fitxer, que pots portar a Fitxers, Drive o on prefereixis.`,
@@ -1885,7 +1885,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.09';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.10';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -1912,8 +1912,19 @@ function sendFeedback(){
 /* ---------- Paleta ---------- */
 const ICO={open:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',share:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 13v6h14v-6"/></svg>',del:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',eye:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',eyeoff:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>',stop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>'};
 let emoPanel=null;
+let edScroll=0,emoFresh=null,edNewEmo=null;
+function openNewEmo(focus){const e={id:'__new',name:newEmoName,color:newEmoColor||'#A3B18A'};
+  openDlg(`<div class="dlg-head" data-sheet="1"><button class="btn quiet icon-x" data-act="newemo-back" aria-label="${esc(t('close'))}">✕</button><h2>${esc(t('newEmo'))}</h2><span style="width:40px"></span></div>
+  <div class="emo-panel" style="--c:${e.color}"><div class="emo-hero" aria-hidden="true"><span id="newemo-prev">${esc(newEmoName||t('emoNamePh'))}</span></div>
+  <label class="f" for="ed-newemo">${esc(t('emoName'))}</label><input class="in" id="ed-newemo" data-ed-newemo maxlength="40" placeholder="${esc(t('emoNamePh'))}" value="${esc(newEmoName)}">
+  <p class="note" style="margin:6px 0 0;font-size:13px">${esc(t('newEmoHint'))}</p>
+  <label class="f">${esc(t('emoColorLbl'))}</label><div class="row" style="align-items:center"><input type="color" value="${e.color}" data-ed-newemo-color aria-label="${esc(t('emoColorLbl'))}" style="width:48px;height:40px;border:1px solid var(--line);border-radius:10px;padding:0;background:none"><span class="note">${esc(t('emoColorHint'))}</span></div>
+  ${swatchesHTML(e)}
+  <div class="actions" style="margin-top:22px"><button class="btn primary" data-act="ed-addemo" style="width:100%">${esc(t('emoCreateAdd'))}</button></div></div>`);
+  if(focus)setTimeout(()=>$('#ed-newemo')?.focus(),60)}
+function backToEditor(){renderEditor();setTimeout(()=>{const bd=$('#dlg-body');if(bd)bd.scrollTop=edScroll},0)}
 function openEmo(id){const e=S.emotions.find(x=>x.id===id);if(!e){closeDlg();return}emoPanel=id;const n=S.memories.filter(m=>(m.emotions||[]).includes(id)).length;
-  openDlg(`<div class="dlg-head" data-sheet="1"><button class="btn quiet icon-x" data-act="close" aria-label="${esc(t('close'))}">✕</button><h2>${esc(t('emoPanel'))}</h2><span style="width:40px"></span></div>
+  openDlg(`<div class="dlg-head" data-sheet="1"><button class="btn quiet icon-x" data-act="${emoFresh===id?'emo-x':'close'}" data-id="${id}" aria-label="${esc(t('close'))}">✕</button><h2>${esc(t('emoPanel'))}</h2><button class="btn primary" data-act="emo-done" style="padding:8px 16px">${esc(emoFresh===id?t('emoCreateBtn'):t('emoDone'))}</button></div>
   <div class="emo-panel" style="--c:${e.color}"><button class="emo-hero" data-act="filter-emo-go" data-v="${e.id}"><span>${esc(t('nMem',n))}${n?' · '+esc(t('emoSee'))+' →':''}</span></button>
   <label class="f" for="emo-name-in">${esc(t('emoName'))}</label><input class="in" id="emo-name-in" value="${esc(e.name)}" data-field="emo-name" data-id="${e.id}" maxlength="40">
   <label class="f">${esc(t('emoColorLbl'))}</label><div class="row" style="align-items:center"><input type="color" value="${e.color}" data-field="emo-color" data-id="${e.id}" aria-label="${esc(t('colorOf',e.name))}" style="width:48px;height:40px;border:1px solid var(--line);border-radius:10px;padding:0;background:none"><span class="note">${esc(t('emoColorHint'))}</span></div>
@@ -2311,7 +2322,7 @@ function openEditor(id,preset={}){tagsAll=false;
   normDrawers(draft);
   if(!draft.time)draft.time=timeOf(draft)||'';
   draft.photos=[...(draft.photos||[])];draft.audios=[...(draft.audios||[])];draft._new=[];draft._saved=false;draft._colors=null;
-  edErr='';phErr='';linkQ='';newDrawerName='';newDrawerOpen=false;newTypeOpen=false;newTypeName='';newEmoOpen=false;newEmoName='';newEmoColor='';renderEditor();
+  edErr='';phErr='';linkQ='';newDrawerName='';newDrawerOpen=false;newTypeOpen=false;newTypeName='';newEmoOpen=false;newEmoName='';newEmoColor='';edNewEmo=null;renderEditor();
 }
 function recentTags(){const out=[];sorted(vis()).forEach(m=>(m.tags||[]).forEach(x=>{if(!out.includes(x))out.push(x)}));return out}
 let tagsAll=false,newDrawerOpen=false,phErr='';
@@ -2331,8 +2342,7 @@ function renderEditor(focusSel){
   const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('remove'))}</span>`;
   const typesRow=`<div class="hscroll" data-hs="types">${typesByUse().filter(id=>!typeHidden(id)||draft.type===id).map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${esc(typeOf(id).label)}</button>`).join('')}<button class="chip" data-act="ed-newtype-toggle" aria-expanded="${newTypeOpen}" style="border-style:dashed">${t('otherType')}</button></div>
   ${newTypeOpen?`<div class="row" style="margin-top:8px;flex-wrap:nowrap"><input class="in" style="flex:1;min-width:0" id="ed-newtype" data-ed-newtype placeholder="${esc(t('newTypePh'))}" value="${esc(newTypeName)}" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="ed-addtype">${t('createType')}</button></div>`:''}`;
-  const emosRow=`<div class="hscroll hs-emos" data-hs="emos">${emosByUse().map(e=>{const i=draft.emotions.indexOf(e.id);return `<button class="chip" style="--c:${e.color}" data-act="ed-emo" data-v="${e.id}" aria-pressed="${i>=0}"><i></i>${esc(e.name)}${i===0&&draft.emotions.length>1?` <small>${t('principal')}</small>`:''}</button>`}).join('')}<button class="chip" data-act="ed-newemo" aria-expanded="${newEmoOpen}" style="border-style:dashed">+ ${esc(t('newEmo'))}</button></div>
-  ${newEmoOpen?`<div class="row" style="margin-top:8px;align-items:center;flex-wrap:nowrap"><input type="color" id="ed-newemo-color" data-ed-newemo-color value="${esc(newEmoColor)}" aria-label="${esc(t('emoColorLbl'))}" style="width:44px;height:40px;border:1px solid var(--line);border-radius:8px;padding:0;background:none;flex:none"><input class="in" style="flex:1;min-width:0" id="ed-newemo" data-ed-newemo maxlength="40" placeholder="${esc(t('emoNamePh'))}" value="${esc(newEmoName)}"><button class="btn" data-act="ed-addemo">${esc(t('emoCreate'))}</button></div>`:''}`;
+  const emosRow=`<div class="hscroll hs-emos" data-hs="emos">${(edNewEmo&&emo(edNewEmo)?[emo(edNewEmo),...emosByUse().filter(x=>x.id!==edNewEmo)]:emosByUse()).map(e=>{const i=draft.emotions.indexOf(e.id);return `<button class="chip" style="--c:${e.color}" data-act="ed-emo" data-v="${e.id}" aria-pressed="${i>=0}"><i></i>${esc(e.name)}${i===0&&draft.emotions.length>1?` <small>${t('principal')}</small>`:''}</button>`}).join('')}<button class="chip" data-act="ed-newemo" style="border-style:dashed">+ ${esc(t('newEmo'))}</button></div>`;
   const drawersRow=`<div class="hscroll" data-hs="drawers">${drawersByUse().map(d=>`<button class="chip" data-act="ed-drawer" data-v="${d.id}" aria-pressed="${draft.drawers.includes(d.id)}">${esc(d.name)}</button>`).join('')}<button class="chip" data-act="ed-newdrawer-toggle" aria-expanded="${newDrawerOpen}" style="border-style:dashed">+ ${esc(t('newDrawerChip'))}</button></div>
   ${newDrawerOpen?`<div class="row" style="margin-top:8px;flex-wrap:nowrap"><input class="in" style="flex:1;min-width:0" id="ed-newdrawer" data-ed-newdrawer placeholder="${esc(t('newDrawerPh'))}" value="${esc(newDrawerName)}"><button class="btn" data-act="ed-adddrawer">${t('createDrawer')}</button></div>`:''}`;
   openDlg(`<div class="dlg-head"><button class="btn quiet icon-x" data-act="close" aria-label="${esc(t('cancel'))}" title="${esc(t('cancel'))}">✕</button><h2>${draft.id?t('editMem'):t('newMem')}</h2><button class="btn primary" data-act="ed-save">${esc(t('saveShort'))}</button></div>
@@ -4233,13 +4243,13 @@ document.addEventListener('click',e=>{
     case 'sd-send':sendDrawer(id);break;
     case 'set-theme':S.settings.theme=v==='auto'?'':v;applyTheme();savePalette();{const y=window.scrollY;render();window.scrollTo(0,y)}break;
     case 'set-font':S.settings.font=v;applyFont();savePalette();{const y=window.scrollY;render();window.scrollTo(0,y)}break;
-    case 'sw-fam':{swFam=v;if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y);break}
-    case 'sw-more':{swOpen.has(id)?swOpen.delete(id):swOpen.add(id);if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y);break}
+    case 'sw-fam':{swFam=v;if(id==='__new'){openNewEmo();break}if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y);break}
+    case 'sw-more':{if(id==='__new'){swOpen.has(id)?swOpen.delete(id):swOpen.add(id);openNewEmo();break}swOpen.has(id)?swOpen.delete(id):swOpen.add(id);if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y);break}
     case 'emo-open':openEmo(id);break;
     case 'pal-tab':palTab=v;render();break;
     case 'sky-show':{if(SKY_PLUS_LAYERS.includes(v)&&!isPlus()){goPlus();break}const cur=skyShow();cur[v]=!cur[v];S.settings.skyShow=cur;saveLocal();document.querySelectorAll(`[data-act="sky-show"][data-v="${v}"]`).forEach(x=>x.setAttribute('aria-pressed',String(cur[v])));skyApply();break}
     case 'sky-fs':skyFsSet(!skyFs);break;
-    case 'emo-swatch':{if(!isPlus()){goPlus();break}const it=S.emotions.find(x=>x.id===id);if(it){const o=S.emotions.find(x=>x.id!==id&&(x.color||'').toUpperCase()===v);if(o)toast(t('swUsedBy',o.name));it.color=v;saveLocal();savePalette();if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y)}break}
+    case 'emo-swatch':{if(!isPlus()){goPlus();break}if(id==='__new'){const o=S.emotions.find(x=>(x.color||'').toUpperCase()===v);if(o)toast(t('swUsedBy',o.name));newEmoColor=v;openNewEmo();break}const it=S.emotions.find(x=>x.id===id);if(it){const o=S.emotions.find(x=>x.id!==id&&(x.color||'').toUpperCase()===v);if(o)toast(t('swUsedBy',o.name));it.color=v;saveLocal();savePalette();if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y)}break}
     case 'share-theme':if(shareState){shareState.theme=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'share-save':if(shareBlob){const nm=shareState?shareState.kind:'tarjeta';deliverFile('memorandum-'+nm+'-'+iso(new Date())+'.png',shareBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}break;
     case 'story-tpl':{const pl=STORY_TPLS.find(z=>z[0]===v);if(pl&&pl[1]&&!isPlus()){goPlus();break}storyTpl=v;refreshStoryControls();drawStory();break}
@@ -4248,7 +4258,9 @@ document.addEventListener('click',e=>{
       if(storyBlob){deliverFile('memorandum-'+rep.period+'-'+iso(new Date())+'.png',storyBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}
       break;
     case 'link-pair':{const x=memOf(b.dataset.a),y=memOf(b.dataset.b);if(x&&y){x.links=[...new Set([...(x.links||[]),y.id])];y.links=[...new Set([...(y.links||[]),x.id])];toast(t('tLinked'));render();saveMem(x).then(()=>saveMem(y))}break}
-    case 'emo-add':{const fr=freeSuggest(null);const pal=['#A3B18A','#F4A261','#9D8189','#6D9DC5','#C08497','#84A59D'];const ne={id:mkid('e-'),name:t('newEmo'),color:fr[0]||pal[S.emotions.length%pal.length]};S.emotions.push(ne);render();savePalette();openEmo(ne.id);setTimeout(()=>{const el=$('#emo-name-in');if(el){el.focus();el.select()}},60);break}
+    case 'emo-done':emoFresh=null;closeDlg();break;
+    case 'emo-x':{const it=S.emotions.find(x=>x.id===id);if(emoFresh===id&&it&&it.name===t('newEmo')&&!S.memories.some(m=>(m.emotions||[]).includes(id))){S.emotions=S.emotions.filter(x=>x.id!==id);emoFresh=null;emoPanel=null;closeDlg();render();savePalette();toast(t('emoDiscarded'))}else{emoFresh=null;closeDlg()}break}
+    case 'emo-add':{const fr=freeSuggest(null);const pal=['#A3B18A','#F4A261','#9D8189','#6D9DC5','#C08497','#84A59D'];const ne={id:mkid('e-'),name:t('newEmo'),color:fr[0]||pal[S.emotions.length%pal.length]};S.emotions.push(ne);emoFresh=ne.id;render();savePalette();openEmo(ne.id);setTimeout(()=>{const el=$('#emo-name-in');if(el){el.focus();el.select()}},60);break}
     case 'emo-del':armed(b,async()=>{if(emoPanel===id){emoPanel=null;closeDlg()}S.emotions=S.emotions.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.emotions||[]).includes(id));tt.forEach(m=>m.emotions=m.emotions.filter(x=>x!==id));if(filters.emotion===id)filters.emotion=null;render();await savePalette();for(const m of tt)await saveMem(m)});break;
     case 'drawer-add':{const inp=document.querySelector('[data-field="new-drawer-pal"]');const n=(inp?.value||'').trim();if(!n){inp?.focus();break}S.drawers.push({id:mkid('d-'),name:cut(n,40)});render();savePalette();break}
     case 'drawer-del':armed(b,async()=>{S.drawers=S.drawers.filter(x=>x.id!==id);const tt=S.memories.filter(m=>(m.drawers||[]).includes(id));tt.forEach(m=>{m.drawers=m.drawers.filter(x=>x!==id);normDrawers(m)});render();await savePalette();for(const m of tt)await saveMem(m)});break;
@@ -4300,8 +4312,9 @@ document.addEventListener('click',e=>{
     case 'ed-untag':draft.tags=draft.tags.filter(x=>x!==v);renderEditor();break;
     case 'ed-link':{const i=draft.links.indexOf(v);if(i>=0)draft.links.splice(i,1);else draft.links.push(v);renderEditor('#ed-link');break}
     case 'ed-newdrawer-toggle':{newDrawerOpen=!newDrawerOpen;renderEditor();if(newDrawerOpen)setTimeout(()=>$('#ed-newdrawer')?.focus(),30);break}
-    case 'ed-newemo':{newEmoOpen=!newEmoOpen;if(newEmoOpen&&!newEmoColor){const fr=freeSuggest(null);newEmoColor=fr[0]||'#A3B18A'}renderEditor();if(newEmoOpen)setTimeout(()=>$('#ed-newemo')?.focus(),30);break}
-    case 'ed-addemo':{const n=newEmoName.trim();if(!n){$('#ed-newemo')?.focus();break}const ne={id:mkid('e-'),name:cut(n,40),color:newEmoColor||'#A3B18A'};S.emotions.push(ne);if(draft.emotions.length<3)draft.emotions.push(ne.id);else toast(t('max3'));newEmoOpen=false;newEmoName='';newEmoColor='';savePalette();renderEditor();toast(t('emoCreated',ne.name));break}
+    case 'ed-newemo':{edScroll=$('#dlg-body')?.scrollTop||0;newEmoName='';const fr=freeSuggest(null);newEmoColor=fr[0]||'#A3B18A';openNewEmo(true);break}
+    case 'newemo-back':{newEmoName='';newEmoColor='';backToEditor();break}
+    case 'ed-addemo':{const n=newEmoName.trim();if(!n){$('#ed-newemo')?.focus();break}const ne={id:mkid('e-'),name:cut(n,40),color:newEmoColor||'#A3B18A'};S.emotions.push(ne);if(draft.emotions.length<3)draft.emotions.push(ne.id);else toast(t('max3'));edNewEmo=ne.id;newEmoOpen=false;newEmoName='';newEmoColor='';savePalette();backToEditor();setTimeout(()=>{const r=document.querySelector('#dlg-body [data-hs="emos"]');if(r)r.scrollLeft=0},30);toast(t('emoCreated',ne.name));break}
     case 'ed-adddrawer':{const n=newDrawerName.trim();if(!n){$('#ed-newdrawer')?.focus();break}const nd={id:mkid('d-'),name:cut(n,40)};S.drawers.push(nd);draft.drawers.push(nd.id);newDrawerName='';newDrawerOpen=false;savePalette();renderEditor();break}
     case 'ed-save':saveDraft();break;
     case 'ed-drawer':{const i=draft.drawers.indexOf(v);if(i>=0)draft.drawers.splice(i,1);else draft.drawers.push(v);renderEditor();break}
@@ -4339,8 +4352,8 @@ document.addEventListener('input',e=>{
     return}
   if(el.matches('[data-ed-link]')){linkQ=el.value;renderEditor('#ed-link');return}
   if(el.matches('[data-ed-newdrawer]')){newDrawerName=el.value;return}
-  if(el.matches('[data-ed-newemo]')){newEmoName=el.value;return}
-  if(el.matches('[data-ed-newemo-color]')){newEmoColor=el.value;return}
+  if(el.matches('[data-ed-newemo]')){newEmoName=el.value;const pv=$('#newemo-prev');if(pv)pv.textContent=el.value||t('emoNamePh');return}
+  if(el.matches('[data-ed-newemo-color]')){newEmoColor=el.value;const pl=el.closest('.emo-panel');if(pl)pl.style.setProperty('--c',el.value);return}
   if(el.matches('[data-ed-newtype]')){newTypeName=el.value;return}
   if(el.id==='story-q'){storyQuote=el.checked;drawStory();return}
   const f=el.dataset.field;if(!f)return;
