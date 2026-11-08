@@ -1885,7 +1885,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.11';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.12';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -4400,7 +4400,12 @@ if(!window.claude){
   add('meta',{name:'mobile-web-app-capable',content:'yes'});
   add('meta',{name:'apple-mobile-web-app-title',content:t('brand'),id:'apple-title'});
   add('meta',{name:'apple-mobile-web-app-status-bar-style',content:'default'});
-  if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  if('serviceWorker' in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+    const hadCtl=!!navigator.serviceWorker.controller;let swReloading=false;
+    const swReload=()=>{if(swReloading)return;if((dlg&&dlg.open)||rec){window._swPending=true;return}swReloading=true;location.reload()};
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadCtl)swReload()});
+    dlg.addEventListener('close',()=>{if(window._swPending)setTimeout(()=>{if(!(dlg&&dlg.open))swReload()},400)});
+    let swLastCheck=Date.now();document.addEventListener('visibilitychange',()=>{if(document.hidden||Date.now()-swLastCheck<60000)return;swLastCheck=Date.now();navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{})})}
 }
 const local=loadLocal();if(local)S=local;ensureSettings();
 applyLang();render();

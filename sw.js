@@ -1,6 +1,6 @@
 // Memorándum: funcionamiento sin conexión.
 // Cambia VERSION cada vez que subas un index.html nuevo para que los teléfonos se actualicen.
-const VERSION='memorandum-v73';
+const VERSION='memorandum-v74';
 const CORE=['./','index.html','manifest.webmanifest','manifest-ca.webmanifest','manifest-en.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png','icons/favicon-32.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
@@ -24,7 +24,9 @@ self.addEventListener('fetch',e=>{
     // Con cobertura mala (la red no responde ni falla), a los 3 segundos se abre la copia guardada.
     e.respondWith((async()=>{
       const saved=await caches.match('index.html');
-      const net=fetch(req.url,{cache:'no-cache',credentials:'same-origin'}).catch(()=>fetch(req)).then(r=>{if(r.ok){const cp=r.clone();caches.open(VERSION).then(c=>c.put('index.html',cp))}return r});
+      const net=fetch(req.url,{cache:'no-cache',credentials:'same-origin'}).catch(()=>fetch(req));
+      // Aunque se abra la copia guardada, la versión nueva se termina de descargar y se guarda para la próxima vez.
+      e.waitUntil(net.then(r=>{if(r&&r.ok)return caches.open(VERSION).then(c=>c.put('index.html',r.clone()))}).catch(()=>{}));
       if(!saved)return net.catch(()=>new Response('Sin conexión',{status:503}));
       const timeout=new Promise(res=>setTimeout(()=>res(null),3000));
       try{const r=await Promise.race([net,timeout]);if(r&&r.ok)return r;return saved}catch(err){return saved}
