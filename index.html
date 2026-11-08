@@ -643,7 +643,7 @@ es:{
   archEmpty:'Aquí se irán archivando tus recuerdos, ordenados por meses.', noMatch:'Nada coincide con estos filtros. Quita alguno o prueba otra palabra.', clearAll:'Quitar filtros',
   palTitle:'Biblioteca de emociones', palLead:'Cada color es una emoción con el nombre que tú le des. Renómbralos, cambia el tono o crea los tuyos. Toca un color para ver todo lo que guarda.',
   seeMemsOf:n=>`Ver recuerdos de ${n}`, emoName:'Nombre de la emoción', colorOf:n=>`Color de ${n}`, del:'Borrar',
-  newEmo:'Nueva emoción', emoNamePh:'Nombre de la emoción', emoCreate:'Crear', emoCreateAdd:'Crear y añadir al recuerdo', emoCreateBtn:'Crear', emoDone:'Listo', emoDiscarded:'Emoción descartada', emoColorLbl:'Color de la emoción', emoCreated:n=>`«${n}» creada y añadida a tu paleta.`, newEmoHint:'Inventa una: «domingo de lluvia», «olor a casa»…',
+  newEmo:'Nueva emoción', emoNamePh:'Nombre de la emoción', emoCreate:'Crear', songLink:'Enlace para escucharla', songLinkPh:'Pega aquí el enlace de Spotify, YouTube…', songListen:'Escuchar', emoCreateAdd:'Crear y añadir al recuerdo', emoCreateBtn:'Crear', emoDone:'Listo', emoDiscarded:'Emoción descartada', emoColorLbl:'Color de la emoción', emoCreated:n=>`«${n}» creada y añadida a tu paleta.`, newEmoHint:'Inventa una: «domingo de lluvia», «olor a casa»…',
   drawersTitle:'Cajones', drawersLead:'Los sitios donde se archivan tus recuerdos. Un recuerdo puede vivir en varios a la vez.', drawerName:'Nombre del cajón', newDrawerName:'Nombre del nuevo cajón', addDrawer:'Añadir cajón',
   backupTitle:'Copia de seguridad', savedCloud:'Tus recuerdos se guardan solos en tu cuenta y solo tú puedes verlos.', savedLocal:'Tus recuerdos se guardan solos en este dispositivo.',
   backupNote:'Además, te avisaré para guardar una copia en un archivo, que puedes llevar a Archivos, Drive o donde prefieras.',
@@ -871,7 +871,7 @@ en:{
   archEmpty:'Your memories will be filed here, month by month.', noMatch:'Nothing matches these filters. Remove one or try another word.', clearAll:'Clear filters',
   palTitle:'Library of emotions', palLead:'Each colour is an emotion with whatever name you give it. Rename them, change their shade or create your own. Tap a colour to see everything it holds.',
   seeMemsOf:n=>`See memories of ${n}`, emoName:'Emotion name', colorOf:n=>`Colour of ${n}`, del:'Delete',
-  newEmo:'New emotion', emoNamePh:'Emotion name', emoCreate:'Create', emoCreateAdd:'Create and add to the memory', emoCreateBtn:'Create', emoDone:'Done', emoDiscarded:'Emotion discarded', emoColorLbl:'Emotion colour', emoCreated:n=>`“${n}” created and added to your palette.`, newEmoHint:'Invent one: “rainy Sunday”, “smell of home”…',
+  newEmo:'New emotion', emoNamePh:'Emotion name', emoCreate:'Create', songLink:'Link to listen', songLinkPh:'Paste a Spotify, YouTube… link', songListen:'Listen', emoCreateAdd:'Create and add to the memory', emoCreateBtn:'Create', emoDone:'Done', emoDiscarded:'Emotion discarded', emoColorLbl:'Emotion colour', emoCreated:n=>`“${n}” created and added to your palette.`, newEmoHint:'Invent one: “rainy Sunday”, “smell of home”…',
   drawersTitle:'Drawers', drawersLead:'The places where your memories are filed. A memory can live in several at once.', drawerName:'Drawer name', newDrawerName:'New drawer name', addDrawer:'Add drawer',
   backupTitle:'Backup', savedCloud:'Your memories are saved automatically to your account and only you can see them.', savedLocal:'Your memories are saved automatically on this device.',
   backupNote:'I will also remind you to save a copy as a file, which you can keep in Files, Drive or wherever you like.',
@@ -1099,7 +1099,7 @@ ca:{
   archEmpty:`Aquí s'aniran arxivant els teus records, ordenats per mesos.`, noMatch:`No hi ha res que coincideixi amb aquests filtres. Treu-ne algun o prova una altra paraula.`, clearAll:'Treu els filtres',
   palTitle:`Biblioteca d'emocions`, palLead:`Cada color és una emoció amb el nom que tu li donis. Canvia'ls el nom, el to o crea'n de teus. Toca un color per veure tot el que guarda.`,
   seeMemsOf:n=>`Veure records de ${n}`, emoName:`Nom de l'emoció`, colorOf:n=>`Color de ${n}`, del:'Esborra',
-  newEmo:'Nova emoció', emoNamePh:'Nom de l’emoció', emoCreate:'Crea', emoCreateAdd:'Crea i afegeix al record', emoCreateBtn:'Crea', emoDone:'Fet', emoDiscarded:'Emoció descartada', emoColorLbl:'Color de l’emoció', emoCreated:n=>`«${n}» creada i afegida a la teva paleta.`, newEmoHint:`Inventa'n una: «diumenge de pluja», «olor de casa»…`,
+  newEmo:'Nova emoció', emoNamePh:'Nom de l’emoció', emoCreate:'Crea', songLink:'Enllaç per escoltar-la', songLinkPh:'Enganxa aquí l’enllaç de Spotify, YouTube…', songListen:'Escolta', emoCreateAdd:'Crea i afegeix al record', emoCreateBtn:'Crea', emoDone:'Fet', emoDiscarded:'Emoció descartada', emoColorLbl:'Color de l’emoció', emoCreated:n=>`«${n}» creada i afegida a la teva paleta.`, newEmoHint:`Inventa'n una: «diumenge de pluja», «olor de casa»…`,
   drawersTitle:'Calaixos', drawersLead:`Els llocs on s'arxiven els teus records. Un record pot viure en diversos alhora.`, drawerName:'Nom del calaix', newDrawerName:'Nom del nou calaix', addDrawer:'Afegeix un calaix',
   backupTitle:'Còpia de seguretat', savedCloud:'Els teus records es desen sols al teu compte i només tu els pots veure.', savedLocal:'Els teus records es desen sols en aquest dispositiu.',
   backupNote:`A més, t'avisaré per desar una còpia en un fitxer, que pots portar a Fitxers, Drive o on prefereixis.`,
@@ -1885,7 +1885,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.10';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.11';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -2139,6 +2139,8 @@ function tagBlock(m){
   if(!groups.length)return '';
   return `<h3 class="month" style="margin-top:22px">${esc(t('byTags'))}</h3>`+groups.map(g=>`<div style="margin:10px 0 16px"><button class="chip" data-act="tag-go" data-v="${esc(g.tg)}" style="margin-bottom:8px">#${esc(g.tg)} (${g.ms.length})</button>${miniList(g.ms.slice(0,5))}${g.ms.length>5?`<button class="btn quiet" data-act="tag-go" data-v="${esc(g.tg)}">${esc(t('seeAllTag',g.ms.length))}</button>`:''}</div>`).join('');
 }
+function safeLink(u){u=String(u||'').trim();if(!u)return '';if(!/^https?:\/\//i.test(u))u='https://'+u;try{const x=new URL(u);return /^https?:$/.test(x.protocol)&&x.hostname.includes('.')?x.href:''}catch(e){return ''}}
+function linkHost(u){try{const h=new URL(u).hostname.replace(/^www\.|^m\.|^open\.|^music\./,'');return h.includes('spotify')?'Spotify':h.includes('youtu')?'YouTube':h.includes('apple')?'Apple Music':h.includes('soundcloud')?'SoundCloud':h.includes('deezer')?'Deezer':h.includes('tidal')?'Tidal':h.includes('bandcamp')?'Bandcamp':h}catch(e){return ''}}
 function openDetail(id){
   const m=memOf(id);if(!m)return;const ty=typeOf(m.type);const ds=(m.drawers||[]).map(drawerOf).filter(Boolean);
   const links=(m.links||[]).map(memOf).filter(Boolean);const rel=related(m);
@@ -2149,6 +2151,7 @@ function openDetail(id){
     ${(m.audios||[]).length?`<div class="au-list" style="margin-top:12px">${m.audios.map(a=>auPill(a,false)).join('')}</div>`:''}
     <h2 class="detail-title">${esc(memTitle(m))}</h2>
     ${m.source?`<div class="note">${esc(m.source)}</div>`:''}
+    ${safeLink(m.link)?`<a class="btn" href="${esc(safeLink(m.link))}" target="_blank" rel="noopener noreferrer" style="margin:12px 0 12px;display:flex;width:fit-content;align-items:center;gap:8px">▶ ${esc(t('songListen'))} <small style="opacity:.7">${esc(linkHost(safeLink(m.link)))}</small></a>`:''}
     ${m.quote?`<blockquote class="quote" style="--c:${mainColor(m)};margin:16px 0 0"><p>«${esc(m.quote)}»</p>${m.page?`<cite>${esc(t('pageAbbr',m.page))}</cite>`:''}</blockquote>`:''}
     ${m.text?`<div class="detail-text">${esc(m.text)}</div>`:''}
     <div class="row">${(m.emotions||[]).map(emo).filter(Boolean).map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo-go" data-v="${e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
@@ -2353,6 +2356,7 @@ function renderEditor(focusSel){
   <input class="in" id="ed-title" data-ed="title" value="${esc(draft.title)}" list="ed-titles" autocomplete="off">
   <datalist id="ed-titles">${[...new Set(S.memories.filter(o=>o.type===draft.type&&o.title).map(o=>o.title))].map(x=>`<option value="${esc(x)}"></option>`).join('')}</datalist>
   ${ty.src?`<label class="f" for="ed-src">${ty.src} <small>${t('optional')}</small></label><input class="in" id="ed-src" data-ed="source" value="${esc(draft.source)}">`:''}
+  ${draft.type==='cancion'?`<label class="f" for="ed-link">${esc(t('songLink'))} <small>${t('optional')}</small></label><input class="in" id="ed-link" type="url" inputmode="url" autocomplete="off" data-ed="link" placeholder="${esc(t('songLinkPh'))}" value="${esc(draft.link||'')}">`:''}
   <label class="f">${t('emotions')} <small>${t('emoHint')}</small></label>
   ${emosRow}
   ${ty.q?`<label class="f" for="ed-quote">${ty.q} <small>${t('optional')}</small></label><textarea class="in" id="ed-quote" data-ed="quote" placeholder="${esc(ty.qph)}" style="min-height:80px;font-style:italic">${esc(draft.quote||'')}</textarea>`:''}
@@ -2391,7 +2395,7 @@ async function saveDraft(){
   if(!draft.title.trim()&&!draft.text.trim()){edErr=t('errEmpty');renderEditor();return}
   if(!/^\d{4}-\d{2}-\d{2}$/.test(draft.date))draft.date=iso(new Date());
   const isNew=!draft.id;const prev=isNew?null:memOf(draft.id);
-  const m={...draft,id:draft.id||mkid('m'),title:draft.title.trim(),source:(draft.source||'').trim(),text:draft.text.trim(),createdAt:prev?.createdAt||Date.now(),updatedAt:Date.now()};
+  const m={...draft,id:draft.id||mkid('m'),title:draft.title.trim(),source:(draft.source||'').trim(),link:safeLink(draft.type==='cancion'?draft.link:''),text:draft.text.trim(),createdAt:prev?.createdAt||Date.now(),updatedAt:Date.now()};
   if(!typeOf(m.type).src)m.source='';
   m.quote=typeOf(m.type).q?(draft.quote||'').trim():'';m.page=typeOf(m.type).page?String(draft.page||'').trim():'';if(!m.quote)delete m.quote;if(!m.page)delete m.page;
   delete m._new;delete m._saved;delete m._colors;m.drawers=[...(draft.drawers||[])];normDrawers(m);m.photos=[...(draft.photos||[])];m.audios=[...(draft.audios||[])];if(!m.audios.length)delete m.audios;draft._saved=true;
@@ -4305,7 +4309,7 @@ document.addEventListener('click',e=>{
     case 'onb-done':finishOnboarding();break;
     case 'onb-seed':finishOnboarding();seed();break;
     // editor
-    case 'ed-type':draft.type=v;if(!typeOf(v).src)draft.source='';renderEditor();break;
+    case 'ed-type':draft.type=v;if(v!=='cancion')draft.link='';if(!typeOf(v).src)draft.source='';renderEditor();break;
     case 'ed-emo':{const i=draft.emotions.indexOf(v);if(i>=0)draft.emotions.splice(i,1);else if(draft.emotions.length<3)draft.emotions.push(v);else toast(t('max3'));renderEditor();break}
     case 'ed-tag':addTag(v);renderEditor('#ed-tag');break;
     case 'ed-tags-all':tagsAll=!tagsAll;{const el=document.getElementById('ed-sugg');if(el)el.innerHTML=tagSuggHTML(tagSugg(''),'')}break;
