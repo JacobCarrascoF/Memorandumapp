@@ -1,9 +1,11 @@
 // Memorándum: funcionamiento sin conexión.
 // Cambia VERSION cada vez que subas un index.html nuevo para que los teléfonos se actualicen.
-const VERSION='memorandum-v74';
+const VERSION='memorandum-v75';
 const CORE=['./','index.html','manifest.webmanifest','manifest-ca.webmanifest','manifest-en.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png','icons/favicon-32.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+// Al activarse una versión nueva: las pantallas de la app que estén abiertas en segundo plano se recargan solas,
+// para que al volver a la app ya esté la versión nueva (las que estás viendo no se tocan, para no interrumpirte).
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()).then(()=>self.clients.matchAll({type:'window'})).then(cs=>Promise.all(cs.map(c=>c.visibilityState==='hidden'&&c.navigate?c.navigate(c.url).catch(()=>{}):null))).catch(()=>{}))});
 self.addEventListener('fetch',e=>{
   const req=e.request;
   // Android: recibir un archivo desde el menú «Compartir» (por ejemplo, un cajón enviado por WhatsApp).
