@@ -521,7 +521,12 @@ body.sky-fs nav.tabs,body.sky-fs header.top{visibility:hidden}
 @media (prefers-reduced-motion:reduce){.reloj-ring.bump svg{animation:none}}
 .rj-how{border:0;background:none;padding:0;font:inherit;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 /* ---------- Tu diario ---------- */
-.diary-open{display:flex;justify-content:center;margin:-2px 0 14px}
+.arch-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.arch-head h1{margin-right:auto}
+.dy-cta{flex:none;margin-top:16px;display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 8px;border-radius:12px;border:1px solid #e2d9c3;background-color:#F4EEDF;background-image:radial-gradient(circle,#d3c8b0 .8px,transparent 1.1px);background-size:9px 9px;color:#26305C;font-family:DiaryPen,cursive;font-size:21px;line-height:1;cursor:pointer;box-shadow:0 2px 6px rgba(38,35,61,.12);transform:rotate(-1.5deg);transition:transform .15s}
+.dy-cta:active{transform:rotate(0) scale(.97)}
+.dy-cta .nb{position:relative;width:22px;height:28px;border-radius:2px 4px 4px 2px;background:#1d1d1f;box-shadow:inset 2px 0 0 rgba(255,255,255,.08)}
+.dy-cta .nb::after{content:"";position:absolute;right:4px;top:0;bottom:0;width:3px;background:#3a3a3d}
+.dy-cta span{padding-top:4px;white-space:nowrap}
 #diary{position:fixed;inset:0;z-index:60;background:var(--paper);display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 #diary[hidden]{display:none}
 .dy-top{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 6px;color:var(--ink)}
@@ -1920,7 +1925,7 @@ function vArchivo(){
   if(filters.span)active.push(`<button class="chip" data-act="clear" data-k="span">${esc(filters.span.label)} ${rm}</button>`);
   const shD=filters.drawer&&drawerOf(filters.drawer);const shared=shD&&(shD.shared||hasForeign(shD.id));
   return `${shared?`<button class="btn quiet" data-act="sky-map" data-v="" style="margin:4px 0 0">← ${esc(t('skyBack'))}</button><h1 class="greet" style="font-size:clamp(34px,7vw,50px)">👥 ${esc(shD.name)}</h1>
-  <p class="lead">${esc(t('shLead'))}</p>`:`<h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${t('archTitle')}</h1>
+  <p class="lead">${esc(t('shLead'))}</p>`:`<div class="arch-head"><h1 class="greet" style="font-size:clamp(38px,8vw,54px)">${t('archTitle')}</h1>${vis().length?`<button class="dy-cta" data-act="dy-open" aria-label="${esc(t('diaryOpen'))}"><i class="nb" aria-hidden="true"></i><span>${esc(t('diaryTitle'))}</span></button>`:''}</div>
   <p class="lead">${esc(t('archLead',vis().length))} <button class="link" style="font-family:var(--sans);color:var(--ink)" data-act="go-map">${esc(t('mapSeeYear'))}</button></p>`}
   <div class="search"><input class="in" type="search" placeholder="${esc(t('search'))}" value="${esc(filters.q)}" data-field="q" aria-label="${esc(t('searchLbl'))}"></div>
   <div class="hscroll arch-filters" data-hs="filters">
@@ -1933,7 +1938,7 @@ function vArchivo(){
   ${drawerBarHTML()}
   <div id="sel-bar">${selBarHTML()}</div>
   <div class="arch-view"><div class="seg seg-full" role="group" aria-label="${esc(t('view'))}"><button data-act="mode" data-v="lista" aria-pressed="${archMode==='lista'}">${t('cards')}</button><button data-act="mode" data-v="constelacion" aria-pressed="${archMode==='constelacion'}">${t('sky')}</button><button data-act="mode" data-v="fotos" aria-pressed="${archMode==='fotos'}">${t('photos')}</button><button data-act="mode" data-v="sonidos" aria-pressed="${archMode==='sonidos'}">${esc(t('soundsMode'))}</button><button data-act="mode" data-v="tarjetas" aria-pressed="${archMode==='tarjetas'}">${t('cardsMode')}</button></div></div>
-  ${archMode==='lista'&&filtered().length?`<div class="diary-open"><button class="btn quiet" data-act="dy-open">📖 ${esc(t('diaryOpen'))}</button></div>`:''}
+
   <div id="results">${archMode==='lista'?resultsHTML():archMode==='fotos'?galleryHTML():archMode==='sonidos'?soundsHTML():archMode==='tarjetas'?cardsHTML():`${skyHeaderHTML()}<div class="sky" id="sky"></div><p class="note" style="margin-top:10px">${esc(t('skyNote'))}</p>${skyButtonsHTML()}`}</div>`;
 }
 function selInfo(){
@@ -2192,7 +2197,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.21';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.22';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
