@@ -514,11 +514,9 @@ body.sky-fs nav.tabs,body.sky-fs header.top{visibility:hidden}
 @media (prefers-reduced-motion:reduce){.reloj-ring.anim svg{animation:none;-webkit-mask:none;mask:none}}
 .reloj-acts{justify-content:center;gap:8px;margin:6px 0 4px}
 .reloj .reloj-ring{touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.reloj-ring.from-r svg{animation:rjInR .38s cubic-bezier(.2,.7,.3,1) both}.reloj-ring.from-l svg{animation:rjInL .38s cubic-bezier(.2,.7,.3,1) both}
-@keyframes rjInR{from{opacity:0;transform:translateX(60px) rotate(18deg)}to{opacity:1;transform:none}}@keyframes rjInL{from{opacity:0;transform:translateX(-60px) rotate(-18deg)}to{opacity:1;transform:none}}
 .reloj-ring.bump svg{animation:rjBump .32s ease}@keyframes rjBump{30%{transform:translateX(-10px)}60%{transform:translateX(8px)}}
 .rj-dots{display:flex;justify-content:center;gap:7px;margin:2px 0 8px}.rj-dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}.rj-dots i.on{background:var(--ink);width:16px;border-radius:3px}
-@media (prefers-reduced-motion:reduce){.reloj-ring.from-r svg,.reloj-ring.from-l svg,.reloj-ring.bump svg{animation:none}}
+@media (prefers-reduced-motion:reduce){.reloj-ring.bump svg{animation:none}}
 .rj-how{border:0;background:none;padding:0;font:inherit;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .rj-how-list{margin:6px 0 4px;padding-left:18px;line-height:1.5;font-size:15px;color:var(--ink)}.rj-how-list li{margin:0 0 8px}.rj-how-list b{font-weight:600}
 .rumbo-trend{display:inline-flex;align-items:center;gap:6px}
@@ -1586,7 +1584,7 @@ function rjSVG(scale,size){
 function relojHTML(){
   const sc=rjScale(),an=rjAnim,dir=rjDir;rjAnim=false;rjDir=0;
   return `<section class="reloj" aria-label="${esc(t('relojAria'))}"><div class="seg seg-full" role="group" aria-label="${esc(t('relojLbl'))}">${RJ.map(k=>`<button data-act="rj-scale" data-v="${k}" aria-pressed="${k===sc}">${esc(t('relojScales')[k])}</button>`).join('')}</div>
-  <div class="reloj-ring${dir?(dir>0?' from-r':' from-l'):an?' anim':''}">${rjSVG(sc,360)}</div>${RJ.length?`<div class="rj-dots" aria-hidden="true">${RJ.map(k=>`<i${k===sc?' class="on"':''}></i>`).join('')}</div>`:''}
+  <div class="reloj-ring${an||dir?' anim':''}">${rjSVG(sc,360)}</div>${RJ.length?`<div class="rj-dots" aria-hidden="true">${RJ.map(k=>`<i${k===sc?' class="on"':''}></i>`).join('')}</div>`:''}
   <div class="row reloj-acts">${showShare()?`<button class="btn quiet" data-act="rj-share">✦ ${esc(t('relojShare'))}</button>`:''}<button class="btn quiet" data-act="rj-see">${esc(t('relojSee'))}</button></div>
   <p class="note" style="text-align:center;font-size:13px;margin:4px 0 0">${esc(t('relojTap')[sc])} <button class="linkbtn rj-how" data-act="rj-how">ⓘ ${esc(t('relojHow'))}</button></p></section>`}
 function rjHow(){openDlg(`<div class="dlg-head"><h2>${esc(t('relojHowT'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
@@ -2019,7 +2017,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.18';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.19';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
