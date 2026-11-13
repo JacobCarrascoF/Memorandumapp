@@ -756,7 +756,7 @@ es:{
   tags:'Etiquetas', tagHint:'escribe una palabra y pulsa Enter', tagPh:'mar, padre, verano…', remove:'Quitar',
   drawer:'Cajón', noDrawer:'Sin cajón', date:'Fecha', orNewDrawer:'O crea un cajón nuevo', createDrawer:'Crear cajón',
   linkWith:'Enlazar con otros recuerdos', linkPh:'Busca por título o palabra', nothing:'Nada coincide.',
-  errEmpty:'Escribe un título o un texto para guardar el recuerdo.', saveMem:'Guardar recuerdo', max3:'Elige como máximo tres emociones.',
+  errEmpty:'Escribe un título o un texto para guardar el recuerdo.', saveMem:'Guardar recuerdo', max3:'Hasta 3 emociones, para que el color no se diluya. Quita una para cambiarla o añade el matiz como #etiqueta.',
   tSavedRel:x=>`Guardado. Resuena con «${x}».`, tSavedN:c=>`Guardado. Ya tienes ${c} recuerdo${c===1?'':'s'} en el archivo.`,
   tChanged:'Cambios guardados.', tDeleted:'Recuerdo borrado.', tLinked:'Enlazados.', tSeed:'Ejemplos cargados. Puedes borrarlos cuando quieras.',
   tCloudFail:'No se pudo guardar en tu cuenta. Queda guardado en este dispositivo.', tBackup:'Copia guardada.', tBackupMarked:'Copia anotada.',
@@ -984,7 +984,7 @@ en:{
   tags:'Tags', tagHint:'type a word and press Enter', tagPh:'sea, father, summer…', remove:'Remove',
   drawer:'Drawer', noDrawer:'No drawer', date:'Date', orNewDrawer:'Or create a new drawer', createDrawer:'Create drawer',
   linkWith:'Link to other memories', linkPh:'Search by title or word', nothing:'Nothing matches.',
-  errEmpty:'Write a title or some text to save the memory.', saveMem:'Save memory', max3:'Choose three emotions at most.',
+  errEmpty:'Write a title or some text to save the memory.', saveMem:'Save memory', max3:'Up to 3 emotions, so the colour doesn’t get diluted. Remove one to swap it, or add the nuance as a #tag.',
   tSavedRel:x=>`Saved. It resonates with “${x}”.`, tSavedN:c=>`Saved. You now have ${c} memor${c===1?'y':'ies'} in the archive.`,
   tChanged:'Changes saved.', tDeleted:'Memory deleted.', tLinked:'Linked.', tSeed:'Examples loaded. You can delete them whenever you like.',
   tCloudFail:"Couldn't save to your account. It's saved on this device.", tBackup:'Copy saved.', tBackupMarked:'Copy noted.',
@@ -1212,7 +1212,7 @@ ca:{
   tags:'Etiquetes', tagHint:'escriu una paraula i prem Retorn', tagPh:'mar, pare, estiu…', remove:'Treu',
   drawer:'Calaix', noDrawer:'Sense calaix', date:'Data', orNewDrawer:'O crea un calaix nou', createDrawer:'Crea el calaix',
   linkWith:'Enllaça amb altres records', linkPh:'Cerca per títol o paraula', nothing:'No hi ha cap coincidència.',
-  errEmpty:'Escriu un títol o un text per desar el record.', saveMem:'Desa el record', max3:'Tria com a màxim tres emocions.',
+  errEmpty:'Escriu un títol o un text per desar el record.', saveMem:'Desa el record', max3:'Fins a 3 emocions, perquè el color no es dilueixi. Treu-ne una per canviar-la o afegeix el matís com a #etiqueta.',
   tSavedRel:x=>`Desat. Ressona amb «${x}».`, tSavedN:c=>`Desat. Ja tens ${c} record${c===1?'':'s'} a l'arxiu.`,
   tChanged:'Canvis desats.', tDeleted:'Record esborrat.', tLinked:'Enllaçats.', tSeed:'Exemples carregats. Els pots esborrar quan vulguis.',
   tCloudFail:`No s'ha pogut desar al teu compte. Queda desat en aquest dispositiu.`, tBackup:'Còpia desada.', tBackupMarked:'Còpia anotada.',
@@ -2197,7 +2197,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.22';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.23';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
