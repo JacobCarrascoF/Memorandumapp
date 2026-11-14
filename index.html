@@ -1901,11 +1901,12 @@ function vHoy(){
     resurfIdx=resurfIdx%pool.length;const m=pool[resurfIdx];
     h+=`<div class="resurf-mini" data-n="${pool.length}" style="--c:${mainColor(m)}"><button class="rm-main" data-act="open" data-id="${m.id}">${rmItemHTML(m)}</button>${pool.length>1?rmCtlHTML():''}</div>`;
   }
-  h+=`<h2 class="sec">${esc(t('latest'))}</h2><div class="fichas">${sorted(vis()).slice(0,6).map(ficha).join('')}</div>
+  h+=`<h2 class="sec">${esc(t('latest'))}</h2><div class="fichas">${hoyList().map(ficha).join('')}</div>
   <div class="row" style="margin-top:14px"><button class="btn quiet" data-act="nav" data-v="archivo">${esc(t('seeAll'))}</button>${hoySel()?`<button class="btn quiet" data-act="create-hoy">✦ ${esc(t('createBtn'))}</button>`:''}</div>`;
   return h;
 }
 
+function hoyList(){const all=sorted(vis());const from=iso(addDays(new Date(),-6));const wk=all.filter(m=>m.date>=from);return (wk.length>=6?wk:all.slice(0,6)).slice(0,40)}
 /* ---------- Ficha ---------- */
 function ficha(m,withEmo){
   const ty=typeOf(m.type);
@@ -2219,7 +2220,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.24';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.25';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
