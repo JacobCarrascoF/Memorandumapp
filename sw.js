@@ -1,6 +1,6 @@
 // Memorándum: funcionamiento sin conexión.
 // Cambia VERSION cada vez que subas un index.html nuevo para que los teléfonos se actualicen.
-const VERSION='memorandum-v85';
+const VERSION='memorandum-v86';
 const CORE=['./','index.html','manifest.webmanifest','manifest-ca.webmanifest','manifest-en.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png','icons/favicon-32.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 // Al activarse una versión nueva: las pantallas de la app que estén abiertas en segundo plano se recargan solas,
