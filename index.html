@@ -2237,7 +2237,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.27';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.28';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -4322,7 +4322,7 @@ async function playRestore(manual){
   if(manual)toast(found?t('playRestored'):t('playNothing'));
 }
 function buyRowHTML(){
-  if(isPlayApp()){if(!playSvc)return '';const py=playPrices[PLAY_SKUS.year]||'9,99 €',pl=playPrices[PLAY_SKUS.life]||'24,99 €';
+  if(isPlayApp()){if(!playSvc||!playPrices[PLAY_SKUS.year]||!playPrices[PLAY_SKUS.life])return '';const py=playPrices[PLAY_SKUS.year],pl=playPrices[PLAY_SKUS.life];
     return `<div class="buy-row"><button class="btn primary" data-act="play-buy" data-v="year">${esc(t('playBuyYear',py))}</button><button class="btn" data-act="play-buy" data-v="life">${esc(t('playBuyLife',pl))}</button></div><p class="note" style="margin:0 0 8px">${esc(t('playNote'))} <button class="link-plain" data-act="play-restore">${esc(t('playRestore'))}</button></p>`}
   return !BUY_ON?`<p class="note">${esc(t('plusSoon'))}</p>`:`<div class="buy-row"><a class="btn primary" href="${PLUS_URL_YEAR}" target="_blank" rel="noopener">${esc(t('plusBuyYear'))}</a><a class="btn" href="${PLUS_URL_LIFE}" target="_blank" rel="noopener">${esc(t('plusBuyLife'))}</a></div>`;
 }
@@ -4343,7 +4343,7 @@ function openPlusCompare(){
   const mk=v=>v===1?'<span class="ok" aria-label="✓">✓</span>':v===0?'<span class="no" aria-label="—">—</span>':esc(v);
   const rows=t('cmpRows').filter(r=>SHARE_ON||!/compart|Shared/.test(r[0]));
   const st=plusState(),has=st==='active';
-  const buy=has?'':(isPlayApp()?(playSvc?`<div style="margin-top:14px">${buyRowHTML()}</div>`:''):(!BUY_ON?'':`<p style="margin:14px 0 4px;font-size:14.5px">${esc(t('plusPrice'))}</p>${buyRowHTML()}`));
+  const buy=has?'':(isPlayApp()?(buyRowHTML()?`<div style="margin-top:14px">${buyRowHTML()}</div>`:''):(!BUY_ON?'':`<p style="margin:14px 0 4px;font-size:14.5px">${esc(t('plusPrice'))}</p>${buyRowHTML()}`));
   openDlg(`<div class="dlg-head"><h2>${esc(t('cmpTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
   ${has?`<p class="note" style="font-size:15px;margin:0 0 10px">${esc(t('cmpYou'))}</p>`:trialActive()?`<div class="wash" style="--c:var(--accent);margin-bottom:10px"><p style="margin:0">${esc(t('trialActive',trialLeft()))}</p></div>`:''}
   <table class="cmp"><thead><tr><th></th><th>${esc(t('cmpFree'))}</th><th>Plus</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${mk(r[1])}</td><td>${mk(r[2])}</td></tr>`).join('')}</tbody></table>
