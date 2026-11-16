@@ -521,7 +521,7 @@ body.sky-fs nav.tabs,body.sky-fs header.top{visibility:hidden}
 @media (prefers-reduced-motion:reduce){.reloj-ring.bump svg{animation:none}}
 .rj-how{border:0;background:none;padding:0;font:inherit;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 /* ---------- Tu diario ---------- */
-.arch-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.arch-head h1{margin-right:auto}
+.arch-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.arch-head h1{margin-right:auto}.hoy-head{align-items:flex-start}.hoy-head .dy-cta{margin-top:22px}@media (max-width:380px){.hoy-head .dy-cta span{display:none}.hoy-head .dy-cta{padding:7px 8px}}
 .dy-cta{flex:none;margin-top:16px;display:inline-flex;align-items:center;gap:9px;padding:7px 14px 7px 8px;border-radius:12px;border:1px solid #e2d9c3;background-color:#F4EEDF;background-image:radial-gradient(circle,#d3c8b0 .8px,transparent 1.1px);background-size:9px 9px;color:#26305C;font-family:DiaryPen,cursive;font-size:21px;line-height:1;cursor:pointer;box-shadow:0 2px 6px rgba(38,35,61,.12);transform:rotate(-1.5deg);transition:transform .15s}
 .dy-cta:active{transform:rotate(0) scale(.97)}
 .dy-cta .nb{position:relative;width:22px;height:28px;border-radius:2px 4px 4px 2px;background:#1d1d1f;box-shadow:inset 2px 0 0 rgba(255,255,255,.08)}
@@ -1704,8 +1704,8 @@ function dyRender(dir){
   dy.anchor=(p.find(x=>x.id)||{}).id;
 }
 function dyGo(i,dir){if(!dy)return;i=Math.max(0,Math.min(dy.pages.length-1,i));if(i===dy.i&&dir)return;dy.i=i;dyRender(dir)}
-function dyOpen(){
-  const ms=asc(filtered());if(!ms.length){toast(t('diaryEmpty'));return}
+function dyOpen(all){
+  const ms=asc(all?vis():filtered());if(!ms.length){toast(t('diaryEmpty'));return}
   const mc={};const cnt={};ms.forEach(m=>{const k=m.date.slice(0,7);const id=(m.emotions||[])[0];if(emo(id)){cnt[k]=cnt[k]||{};cnt[k][id]=(cnt[k][id]||0)+1}});Object.keys(cnt).forEach(k=>{const top=Object.entries(cnt[k]).sort((a,b)=>b[1]-a[1])[0];mc[k]=emo(top[0]).color});
   dy={ms,i:0,pages:[],monthColor:mc};let root=document.getElementById('diary');
   if(!root){root=document.createElement('div');root.id='diary';document.body.appendChild(root)}
@@ -1898,7 +1898,7 @@ function vHoy(){
   const grow=firstHoy;firstHoy=false;
   const today=iso(new Date());
   const nm=(S.profile.name||'').trim();
-  let h=`<h1 class="greet">${t('hello',new Date().getHours())}${nm?', '+esc(nm):''}.</h1>
+  let h=`<div class="arch-head hoy-head"><h1 class="greet">${t('hello',new Date().getHours())}${nm?', '+esc(nm):''}.</h1>${vis().length?`<button class="dy-cta" data-act="dy-open" data-v="all" aria-label="${esc(t('diaryOpen'))}"><i class="nb" aria-hidden="true"></i><span>${esc(t('diaryTitle'))}</span></button>`:''}</div>
   <p class="today-date">${esc(cap(fmt(today,{weekday:'long',day:'numeric',month:'long'})))}${streakHTML()}</p>
   ${photoLostHTML()}${S.memories.length?nudgeHTML():''}
   <div class="strip${grow?' grow':''}" aria-label="${esc(t('stripCap'))}">${stripHTML()}</div>
@@ -2237,7 +2237,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.28';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.29';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -4508,7 +4508,7 @@ document.addEventListener('click',e=>{
     case 'rj-tap':rjTap(v);break;
     case 'rj-see':rjSee();break;
     case 'rj-how':rjHow();break;
-    case 'dy-open':dyOpen();break;
+    case 'dy-open':dyOpen(v==='all');break;
     case 'dy-close':dyClose();break;
     case 'dy-prev':dyGo(dy.i-1,-1);break;
     case 'dy-next':dyGo(dy.i+1,1);break;
