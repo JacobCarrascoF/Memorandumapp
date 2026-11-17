@@ -115,6 +115,22 @@ p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
 .ficha-meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
 .ficha-title{font-family:var(--serif);font-size:22px;line-height:1.15}
 .ficha-source{font-size:13.5px;color:var(--muted);margin-top:-2px}
+.td-card{border-radius:22px;padding:20px 18px;margin:18px 0 6px}.td-card h3{font-family:var(--serif);font-weight:400;font-size:26px;margin:0 0 4px}.td-card>p{margin:0 0 12px;color:var(--muted);font-size:14.5px}
+.td-am{background:linear-gradient(135deg,#FBEBD6,#F6E1E6);color:#2A2433;--muted:#6F6378}.td-am .in{background:#fff}
+.td-pm{background:#3B3560;color:#F1EEF9;--muted:#C7C1DE}.td-pm .chip{background:rgba(255,255,255,.08);color:#F1EEF9;border-color:rgba(255,255,255,.18)}.td-pm .chip[aria-pressed=true]{background:#F1EEF9;color:#2A2433}
+.td-pm .in{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2)}.td-pm .seg{background:rgba(255,255,255,.08)}.td-pm .seg button{color:#F1EEF9}.td-pm .seg button[aria-pressed=true]{background:#F1EEF9;color:#2A2433}
+.td-pm .btn.primary{background:#F1EEF9;color:#2A2433;border-color:#F1EEF9}
+.td-intro{background:var(--card,transparent);border:1px solid var(--line)}.td-ic{font-size:20px;letter-spacing:6px;display:block;margin-bottom:4px}
+.td-lbl{font-size:14px;color:var(--muted);margin:14px 0 8px}.td-emos{display:flex;flex-wrap:wrap;gap:6px}.td-emos .chip[data-full]{opacity:.55}
+.td-q{margin:0 0 4px;border-left:2px solid rgba(255,255,255,.4);padding:2px 0 2px 12px;font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.3}.td-q small{display:block;font-family:var(--sans);font-style:normal;font-size:12.5px;opacity:.75;margin-top:4px}
+.td-gb{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.td-gb span{display:block;font-size:13.5px;color:var(--muted);margin-bottom:6px}.td-gb .in{width:100%}
+.td-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:16px}.td-foot small{color:var(--muted);font-size:13px}
+.td-mini{display:flex;gap:12px;align-items:flex-start;border-radius:18px;padding:14px 16px;margin:16px 0 4px;background:linear-gradient(135deg,#FBEBD6,#F6E1E6);color:#2A2433}.td-mini.night{background:#3B3560;color:#F1EEF9}.td-mini>span{font-size:22px;line-height:1.2}
+.td-mini small{display:block;font-size:12.5px;opacity:.75}.td-mini b{display:block;font-family:var(--serif);font-weight:400;font-size:20px;line-height:1.25}.td-mini em{display:block;font-size:13px;opacity:.8;font-style:normal;margin-top:2px}.td-acts{display:block;margin-top:6px;font-size:13px}.td-acts .link{color:inherit;font-size:13px;text-decoration:underline}
+.td-rep{border:1px solid var(--line);border-radius:22px;padding:20px 18px;margin:0 0 18px}.td-rep h3{font-family:var(--serif);font-weight:400;font-size:26px;margin:0 0 2px}
+.td-ring{position:relative;width:220px;height:220px;margin:16px auto 10px;border-radius:50%;background:var(--o)}.td-ring::before,.td-ring::after{content:"";position:absolute;border-radius:50%}.td-ring::before{inset:13%;background:var(--paper)}.td-ring::after{inset:17%;background:var(--i)}.td-ring .c{position:absolute;inset:30%;border-radius:50%;background:var(--paper);z-index:1;display:grid;place-content:center;text-align:center}.td-ring b{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1}.td-ring small{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.2}
+.td-bars{display:grid;gap:8px;margin-top:6px}.td-bar{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:10px;font-size:14px}.td-bar div{display:grid;gap:3px}.td-bar i{display:block;height:7px;border-radius:4px}
+.td-ph{margin:12px 0 0;font-size:15.5px}.td-pct b{font-family:var(--serif);font-weight:400;font-size:34px}
 .stars-in{display:flex;gap:4px}.stars-in button{border:0;background:none;font-size:30px;line-height:1;padding:4px 3px;color:var(--line);cursor:pointer}.stars-in button.on{color:#D9A441}
 .tpl-h{margin:12px 0 6px;font-size:13.5px}.tpl-row{gap:6px}
 .arch-sort{margin:4px 0 14px}
@@ -929,6 +945,7 @@ es:{
   pfAboutPh:'Un par de frases: a qué te dedicas, qué te mueve, qué etapa estás viviendo…',
   onbName:'¿Cómo quieres que te llame?', onbNamePh:'Tu nombre o un alias (opcional)',
   youWere:n=>`. Tenías ${n} años.`,
+  tdMorningQ:'¿Qué quieres para hoy?', tdMorningSub:'Una intención para el día. Esta noche verás cómo ha ido.', tdPh:'Por ejemplo: que el día vaya tranquilo', tdWant:'Me gustaría sentir…', tdPick2:'Elige hasta 2', tdSaveIntent:'Guardar intención', tdNightQ:'¿Cómo ha ido?', tdYouWanted:'Esta mañana querías:', tdFeel:'sentir', tdDone:'¿Se ha cumplido?', tdDoneL:{si:'Sí',medias:'A medias',no:'No pudo ser'}, tdFelt:'¿Cómo te has sentido?', tdGood:'Lo bueno', tdBad:'Lo malo', tdSaveBal:'Guardar balance', tdSavedNote:'Se guarda junto a tu intención', tdTodayIntent:'Hoy quieres', tdTonight:'Esta noche, cómo ha ido.', tdBalNow:'Hacer el balance ya', tdEdit:'Cambiar', tdBalDone:'Balance de hoy guardado', tdSeeDay:'Ver tu día', tdDrawer:'Mis días', tdNoIntent:'Balance del día', tdIntro:'Nuevo: «Tu día»', tdIntroP:'Por la mañana, una intención. Por la noche, cómo ha ido. Un minuto, dos veces al día.', tdTry:'Probarlo', tdLater:'Ahora no', tdSetLbl:'«Tu día»', tdSetHint:'Intención por la mañana y balance por la noche, en Hoy.', tdRepT:'Lo que buscabas y lo que viviste', tdRepSub:'Dentro, lo que querías; fuera, lo que sentiste.', tdPct:'intenciones cumplidas', tdFound:(e,a,b)=>`Buscabas ${e} ${a} ${a===1?'día':'días'} y la encontraste ${b}.`, tdBarsNote:'Barra clara: días que la buscaste · oscura: días que la sentiste', tdFiltAll:'Todos', tdWantShort:'querías', tdErr:'Escribe una intención o elige una emoción.', tdErrBal:'Elige cómo te has sentido o escribe algo.', tdMore:'Ver la comparativa completa', tTdIntent:'Intención guardada. Esta noche, el balance.', tTdBal:'Balance guardado en «Mis días».',
   tplHead:'Plantillas', tplOwn:'O crea el tuyo', sortDate:'Por fecha', sortBest:'★ Mejor puntuados', starsLbl:n=>n?`${n} de 5`:'Sin valorar',
   otherType:'+ Otro tipo', newTypePh:'Por ejemplo: sueño, viaje, receta', createType:'Crear tipo', titleLbl:'Título', customPh:'Lo que quieras recordar de esto',
   typesTitle:'Tipos de recuerdo', typesLead:'Además de los siete tipos de siempre, puedes crear los tuyos: sueños, viajes, recetas, conciertos… Si borras uno, sus recuerdos pasan a Idea.',
@@ -949,7 +966,8 @@ es:{
     cancion:{label:'Canción',plural:'canciones',t:'Canción',src:'Artista',q:'Un verso',qph:'El verso que se te quedó',ph:'Qué te trae cuando suena'},
     lugar:{label:'Lugar',plural:'lugares',t:'Lugar',src:null,ph:'Cómo olía, cómo sonaba, con quién estabas'},
     persona:{label:'Persona',plural:'personas',t:'Persona',src:null,ph:'Un gesto, una frase, una costumbre'},
-    idea:{label:'Idea',plural:'ideas',t:'Idea',src:null,ph:'Anótala antes de que se vaya'}
+    idea:{label:'Idea',plural:'ideas',t:'Idea',src:null,ph:'Anótala antes de que se vaya'},
+    tudia:{label:'Tu día',plural:'tus días',t:'Intención',src:null,ph:'Lo bueno y lo malo del día'}
   },
   defEmo:{'e-nostalgia':'Nostalgia','e-calma':'Calma','e-alegria':'Alegría','e-melancolia':'Melancolía','e-ternura':'Ternura','e-asombro':'Asombro','e-inquietud':'Inquietud','e-fuerza':'Fuerza'},
   defDrawer:{'d-lecturas':'Lecturas','d-diario':'Diario','d-pantalla':'Pantalla','d-musica':'Música','d-lugares':'Lugares'},
@@ -1158,6 +1176,7 @@ en:{
   pfAboutPh:"A couple of sentences: what you do, what moves you, what stage of life you're in…",
   onbName:'What should I call you?', onbNamePh:'Your name or a nickname (optional)',
   youWere:n=>`. You were ${n}.`,
+  tdMorningQ:'What do you want for today?', tdMorningSub:"An intention for the day. Tonight you'll see how it went.", tdPh:'For example: a calm, easy day', tdWant:"I'd like to feel…", tdPick2:'Pick up to 2', tdSaveIntent:'Save intention', tdNightQ:'How did it go?', tdYouWanted:'This morning you wanted:', tdFeel:'to feel', tdDone:'Did it happen?', tdDoneL:{si:'Yes',medias:'Partly',no:"It wasn't to be"}, tdFelt:'How did you feel?', tdGood:'The good', tdBad:'The bad', tdSaveBal:'Save review', tdSavedNote:'Saved with your intention', tdTodayIntent:'Today you want', tdTonight:'Tonight, how it went.', tdBalNow:'Review now', tdEdit:'Change', tdBalDone:"Today's review saved", tdSeeDay:'See your day', tdDrawer:'My days', tdNoIntent:'Day review', tdIntro:'New: “Your day”', tdIntroP:'In the morning, an intention. At night, how it went. One minute, twice a day.', tdTry:'Try it', tdLater:'Not now', tdSetLbl:'“Your day”', tdSetHint:'Morning intention and evening review, in Today.', tdRepT:'What you looked for and what you lived', tdRepSub:'Inside, what you wanted; outside, what you felt.', tdPct:'intentions fulfilled', tdFound:(e,a,b)=>`You looked for ${e} on ${a} ${a===1?'day':'days'} and found it on ${b}.`, tdBarsNote:'Light bar: days you looked for it · dark: days you felt it', tdFiltAll:'All', tdWantShort:'wanted', tdErr:'Write an intention or pick an emotion.', tdErrBal:'Pick how you felt or write something.', tdMore:'See the full comparison', tTdIntent:'Intention saved. Tonight, the review.', tTdBal:'Review saved in “My days”.',
   tplHead:'Templates', tplOwn:'Or create your own', sortDate:'By date', sortBest:'★ Top rated', starsLbl:n=>n?`${n} out of 5`:'Not rated',
   otherType:'+ Another type', newTypePh:'For example: dream, trip, recipe', createType:'Create type', titleLbl:'Title', customPh:'Whatever you want to remember about it',
   typesTitle:'Types of memory', typesLead:'As well as the seven usual types, you can create your own: dreams, trips, recipes, concerts… If you delete one, its memories become Ideas.',
@@ -1178,7 +1197,8 @@ en:{
     cancion:{label:'Song',plural:'songs',t:'Song',src:'Artist',q:'A lyric',qph:'The line that stayed with you',ph:'What it brings back when it plays'},
     lugar:{label:'Place',plural:'places',t:'Place',src:null,ph:'How it smelled, how it sounded, who you were with'},
     persona:{label:'Person',plural:'people',t:'Person',src:null,ph:'A gesture, a phrase, a habit'},
-    idea:{label:'Idea',plural:'ideas',t:'Idea',src:null,ph:'Write it down before it slips away'}
+    idea:{label:'Idea',plural:'ideas',t:'Idea',src:null,ph:'Write it down before it slips away'},
+    tudia:{label:'Your day',plural:'your days',t:'Intention',src:null,ph:'The good and the bad of the day'}
   },
   defEmo:{'e-nostalgia':'Nostalgia','e-calma':'Calm','e-alegria':'Joy','e-melancolia':'Melancholy','e-ternura':'Tenderness','e-asombro':'Wonder','e-inquietud':'Restlessness','e-fuerza':'Strength'},
   defDrawer:{'d-lecturas':'Reading','d-diario':'Diary','d-pantalla':'Screen','d-musica':'Music','d-lugares':'Places'},
@@ -1387,6 +1407,7 @@ ca:{
   pfAboutPh:`Un parell de frases: a què et dediques, què et mou, quina etapa estàs vivint…`,
   onbName:'Com vols que et digui?', onbNamePh:'El teu nom o un àlies (opcional)',
   youWere:n=>`. Tenies ${n} anys.`,
+  tdMorningQ:'Què vols per avui?', tdMorningSub:'Una intenció per al dia. Aquesta nit veuràs com ha anat.', tdPh:'Per exemple: que el dia vagi tranquil', tdWant:"M'agradaria sentir…", tdPick2:'Tria fins a 2', tdSaveIntent:'Desa la intenció', tdNightQ:'Com ha anat?', tdYouWanted:'Aquest matí volies:', tdFeel:'sentir', tdDone:"S'ha complert?", tdDoneL:{si:'Sí',medias:'A mitges',no:'No ha pogut ser'}, tdFelt:"Com t'has sentit?", tdGood:'El bo', tdBad:'El dolent', tdSaveBal:'Desa el balanç', tdSavedNote:'Es desa amb la teva intenció', tdTodayIntent:'Avui vols', tdTonight:'Aquesta nit, com ha anat.', tdBalNow:'Fes el balanç ara', tdEdit:'Canvia', tdBalDone:"Balanç d'avui desat", tdSeeDay:'Mira el teu dia', tdDrawer:'Els meus dies', tdNoIntent:'Balanç del dia', tdIntro:'Nou: «El teu dia»', tdIntroP:'Al matí, una intenció. A la nit, com ha anat. Un minut, dues vegades al dia.', tdTry:'Prova-ho', tdLater:'Ara no', tdSetLbl:'«El teu dia»', tdSetHint:'Intenció al matí i balanç a la nit, a Avui.', tdRepT:'El que buscaves i el que has viscut', tdRepSub:'A dins, el que volies; a fora, el que vas sentir.', tdPct:'intencions complertes', tdFound:(e,a,b)=>`Buscaves ${e} ${a} ${a===1?'dia':'dies'} i la vas trobar ${b}.`, tdBarsNote:'Barra clara: dies que la vas buscar · fosca: dies que la vas sentir', tdFiltAll:'Tots', tdWantShort:'volies', tdErr:'Escriu una intenció o tria una emoció.', tdErrBal:"Tria com t'has sentit o escriu alguna cosa.", tdMore:'Mira la comparativa completa', tTdIntent:'Intenció desada. Aquesta nit, el balanç.', tTdBal:'Balanç desat a «Els meus dies».',
   tplHead:'Plantilles', tplOwn:'O crea el teu', sortDate:'Per data', sortBest:'★ Més ben valorats', starsLbl:n=>n?`${n} de 5`:'Sense valorar',
   otherType:'+ Un altre tipus', newTypePh:'Per exemple: somni, viatge, recepta', createType:'Crea el tipus', titleLbl:'Títol', customPh:`El que vulguis recordar d'això`,
   typesTitle:'Tipus de record', typesLead:`A més dels set tipus de sempre, en pots crear de teus: somnis, viatges, receptes, concerts… Si n'esborres un, els seus records passen a Idea.`,
@@ -1407,7 +1428,8 @@ ca:{
     cancion:{label:'Cançó',plural:'cançons',t:'Cançó',src:'Artista',q:'Un vers',qph:`El vers que se t'ha quedat`,ph:'Què et porta quan sona'},
     lugar:{label:'Lloc',plural:'llocs',t:'Lloc',src:null,ph:'Com feia olor, com sonava, amb qui hi eres'},
     persona:{label:'Persona',plural:'persones',t:'Persona',src:null,ph:'Un gest, una frase, un costum'},
-    idea:{label:'Idea',plural:'idees',t:'Idea',src:null,ph:`Apunta-la abans que se'n vagi`}
+    idea:{label:'Idea',plural:'idees',t:'Idea',src:null,ph:`Apunta-la abans que se'n vagi`},
+    tudia:{label:'El teu dia',plural:'els teus dies',t:'Intenció',src:null,ph:'El bo i el dolent del dia'}
   },
   defEmo:{'e-nostalgia':'Nostàlgia','e-calma':'Calma','e-alegria':'Alegria','e-melancolia':'Malenconia','e-ternura':'Tendresa','e-asombro':'Meravella','e-inquietud':'Inquietud','e-fuerza':'Força'},
   defDrawer:{'d-lecturas':'Lectures','d-diario':'Diari','d-pantalla':'Pantalla','d-musica':'Música','d-lugares':'Llocs'},
@@ -1435,7 +1457,7 @@ ca:{
 /* =========================================================
    Datos base
    ========================================================= */
-const TYPE_IDS=['dia','libro','pelicula','cancion','lugar','persona','idea'];
+const TYPE_IDS=['dia','libro','pelicula','cancion','lugar','persona','idea','tudia'];
 const DEFAULT_EMOTIONS=[
   {id:'e-nostalgia',color:'#D4A373'},{id:'e-calma',color:'#8FA9C7'},{id:'e-alegria',color:'#E9C46A'},{id:'e-melancolia',color:'#5B5F97'},
   {id:'e-ternura',color:'#E5A9B4'},{id:'e-asombro',color:'#7FB7A4'},{id:'e-inquietud',color:'#8E5572'},{id:'e-fuerza',color:'#B23A48'}
@@ -1475,6 +1497,57 @@ function typeOf(id){
   if(c)return {id,label:c.name,plural:c.name.toLowerCase(),t:t('titleLbl'),src:null,ph:t('customPh'),custom:true};
   return {id:'dia',...ty.dia};
 }
+
+/* ---------- «Tu día»: intención por la mañana y balance por la noche ---------- */
+let tdD=null,tdErr='',tdForce='',archTd='all';
+function tdOn(){return !!(S.settings&&S.settings.tudia)}
+function tdToday(){const d=iso(new Date());return S.memories.find(m=>m.type==='tudia'&&m.date===d&&!hiddenMem(m))}
+function tdNight(){if(tdForce==='night'||tdForce==='editnight')return true;if(tdForce==='edit')return false;const m=tdToday();if(m&&m.td&&m.td.balance)return true;return new Date().getHours()>=19}
+function tdState(){const d=iso(new Date());if(!tdD||tdD.date!==d){const m=tdToday(),x=(m&&m.td)||{};tdD={date:d,intent:x.intent||'',want:[...(x.want||[])],done:x.done||'',felt:x.balance?[...(m.emotions||[])]:[],good:x.good||'',bad:x.bad||''}}return tdD}
+function tdLine(m){const x=m.td||{};const w=(x.want||[]).map(emo).filter(Boolean).map(e=>e.name.toLowerCase());const p=[];if(w.length)p.push('☀ '+w.join(', '));if(x.done)p.push('☾ '+t('tdDoneL')[x.done]);return p.join(' · ')}
+function tdDrawerId(){let d=drawerOf('d-misdias');if(!d){d={id:'d-misdias',name:t('tdDrawer')};S.drawers.push(d);savePalette()}return d.id}
+function tdChips(act,sel,max){return `<div class="td-emos">${emosByUse().map(e=>`<button class="chip" style="--c:${e.color}" data-act="${act}" data-v="${e.id}" aria-pressed="${sel.includes(e.id)}"${!sel.includes(e.id)&&sel.length>=max?' data-full="1"':''}><i></i>${esc(e.name)}</button>`).join('')}</div>`}
+function tdCardHTML(){
+  if(!S.memories.length)return '';
+  if(!tdOn())return S.settings.tdIntroSeen?'':`<div class="td-card td-intro"><b class="td-ic" aria-hidden="true">☀ ☾</b><h3>${esc(t('tdIntro'))}</h3><p>${esc(t('tdIntroP'))}</p><div class="row"><button class="btn primary" data-act="td-try">${esc(t('tdTry'))}</button><button class="btn quiet" data-act="td-later">${esc(t('tdLater'))}</button></div></div>`;
+  const m=tdToday(),x=(m&&m.td)||{},st=tdState();const err=tdErr?`<div class="err" role="alert">${esc(tdErr)}</div>`:'';
+  const wantNames=(x.want||[]).map(emo).filter(Boolean);
+  if(!tdNight()){
+    if(x.intent||wantNames.length){if(tdForce!=='edit')return `<div class="td-mini"><span aria-hidden="true">☀</span><div><small>${esc(t('tdTodayIntent'))}</small><b>${esc(x.intent||wantNames.map(e=>e.name).join(', '))}</b>${x.intent&&wantNames.length?`<em>${esc(t('tdFeel'))} ${esc(wantNames.map(e=>e.name.toLowerCase()).join(' · '))}</em>`:''}<span class="td-acts"><button class="link" data-act="td-edit">${esc(t('tdEdit'))}</button> · <button class="link" data-act="td-night-now">${esc(t('tdBalNow'))}</button></span></div></div>`}
+    return `<div class="td-card td-am"><h3><span aria-hidden="true">☀</span> ${esc(t('tdMorningQ'))}</h3><p>${esc(t('tdMorningSub'))}</p>${err}
+    <input class="in" data-td="intent" id="td-intent" maxlength="140" placeholder="${esc(t('tdPh'))}" value="${esc(st.intent)}" aria-label="${esc(t('tdMorningQ'))}">
+    <p class="td-lbl">${esc(t('tdWant'))}</p>${tdChips('td-want',st.want,2)}
+    <div class="td-foot"><small>${esc(t('tdPick2'))}</small><button class="btn primary" data-act="td-save-am">${esc(t('tdSaveIntent'))}</button></div></div>`}
+  if(x.balance&&tdForce!=='editnight')return `<div class="td-mini night"><span aria-hidden="true">☾</span><div><small>${esc(t('tdBalDone'))}</small><b>${esc(m.title)}</b>${x.done?`<em>${esc(t('tdDoneL')[x.done])}</em>`:''}<span class="td-acts"><button class="link" data-act="open" data-id="${m.id}">${esc(t('tdSeeDay'))}</button> · <button class="link" data-act="td-edit">${esc(t('tdEdit'))}</button></span></div></div>`;
+  const had=x.intent||wantNames.length;
+  return `<div class="td-card td-pm"><h3><span aria-hidden="true">☾</span> ${esc(t('tdNightQ'))}</h3>${err}
+  ${had?`<p class="td-lbl">${esc(t('tdYouWanted'))}</p><blockquote class="td-q">${esc(x.intent||'')}${wantNames.length?`<small>${esc(t('tdFeel'))} ${esc(wantNames.map(e=>e.name.toLowerCase()).join(' · '))}</small>`:''}</blockquote>
+  <p class="td-lbl">${esc(t('tdDone'))}</p><div class="seg seg-full td-done" role="group">${['si','medias','no'].map(k=>`<button data-act="td-done" data-v="${k}" aria-pressed="${st.done===k}">${esc(t('tdDoneL')[k])}</button>`).join('')}</div>`:''}
+  <p class="td-lbl">${esc(t('tdFelt'))}</p>${tdChips('td-felt',st.felt,3)}
+  <div class="td-gb"><label><span>${esc(t('tdGood'))}</span><input class="in" data-td="good" maxlength="200" value="${esc(st.good)}"></label><label><span>${esc(t('tdBad'))}</span><input class="in" data-td="bad" maxlength="200" value="${esc(st.bad)}"></label></div>
+  <div class="td-foot"><small>${had?esc(t('tdSavedNote')):''}</small><button class="btn primary" data-act="td-save-pm">${esc(t('tdSaveBal'))}</button></div></div>`}
+function tdNew(){const d=new Date();return {id:mkid('m'),type:'tudia',title:'',source:'',text:'',emotions:[],tags:[],drawers:[tdDrawerId()],date:iso(d),time:String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'),links:[],photos:[],audios:[],td:{},createdAt:Date.now()}}
+async function tdSave(night){const st=tdState();let m=tdToday();const isNew=!m;if(isNew)m=tdNew();m.td={...(m.td||{})};
+  if(!night){if(!st.intent.trim()&&!st.want.length){tdErr=t('tdErr');render();return}m.td.intent=st.intent.trim();m.td.want=st.want.slice(0,2)}
+  else{if(!st.felt.length&&!st.good.trim()&&!st.bad.trim()&&!st.done){tdErr=t('tdErrBal');render();return}
+    m.td.done=st.done||'';m.td.good=st.good.trim();m.td.bad=st.bad.trim();m.td.balance=true;m.emotions=st.felt.slice(0,3);
+    m.text=[m.td.good?t('tdGood')+': '+m.td.good:'',m.td.bad?t('tdBad')+': '+m.td.bad:''].filter(Boolean).join('\n')}
+  m.title=m.td.intent||t('tdNoIntent');m.updatedAt=Date.now();if(!(m.drawers||[]).length)m.drawers=[tdDrawerId()];
+  if(isNew)S.memories.push(m);tdErr='';tdForce='';render();toast(night?t('tTdBal'):t('tTdIntent'));await saveMem(m)}
+function tdReportHTML(r){
+  const ms=vis().filter(m=>m.type==='tudia'&&m.td&&m.date>=r.s&&m.date<=r.e);const wd=ms.filter(m=>(m.td.want||[]).length||m.td.intent);
+  if(wd.length<2)return '';
+  const dn=wd.filter(m=>m.td.done);const pct=dn.length?Math.round(100*dn.reduce((a,m)=>a+(m.td.done==='si'?1:m.td.done==='medias'?.5:0),0)/dn.length):null;
+  const W={},F={};wd.forEach(m=>(m.td.want||[]).forEach(id=>{if(!emo(id))return;W[id]=(W[id]||0)+1;if(m.td.balance&&(m.emotions||[]).includes(id))F[id]=(F[id]||0)+1}));
+  const top=Object.entries(W).sort((a,b)=>b[1]-a[1]);
+  const phrase=top.length?t('tdFound',`<b>${esc(emo(top[0][0]).name.toLowerCase())}</b>`,top[0][1],F[top[0][0]]||0):'';
+  const conic=list=>{const c={};list.forEach(id=>{if(emo(id))c[id]=(c[id]||0)+1});const tot=Object.values(c).reduce((a,b)=>a+b,0);if(!tot)return 'var(--line)';let acc=0;return 'conic-gradient('+Object.entries(c).sort((a,b)=>b[1]-a[1]).map(([id,n])=>{const a=acc*360/tot;acc+=n;return `${emo(id).color} ${a}deg ${acc*360/tot}deg`}).join(',')+')'};
+  const inner=conic(wd.flatMap(m=>m.td.want||[])),outer=conic(ms.filter(m=>m.td.balance).flatMap(m=>m.emotions||[]));
+  const max=Math.max(1,...top.map(x=>x[1]));
+  const full=isPlus()?`<div class="td-ring" style="--o:${outer};--i:${inner}"><div class="c"><b>${pct==null?'–':pct+' %'}</b><small>${esc(t('tdPct'))}</small></div></div>
+  <div class="td-bars">${top.slice(0,6).map(([id,n])=>{const e=emo(id);return `<div class="td-bar"><span>${esc(e.name)}</span><div><i style="width:${n/max*100}%;background:${e.color};opacity:.35"></i><i style="width:${(F[id]||0)/max*100}%;background:${e.color}"></i></div></div>`}).join('')}</div><p class="note" style="font-size:12.5px;margin:8px 0 0">${esc(t('tdBarsNote'))}</p>`
+  :`${pct!=null?`<p class="td-pct"><b>${pct} %</b> ${esc(t('tdPct'))}</p>`:''}<button class="btn" data-act="go-plus" style="margin-top:10px">${esc(t('tdMore'))} ${plusBadge()}</button>`;
+  return `<div class="td-rep"><h3>${esc(t('tdRepT'))}</h3><p class="note">${esc(t('tdRepSub'))}</p>${full}${phrase?`<p class="td-ph">${phrase}</p>`:''}</div>`}
 /* ---------- Tipos con plantilla (Vino, Restaurante…) ---------- */
 const TPL_RATE={es:'Valoración',ca:'Valoració',en:'Rating'},TPL_WITH={es:'Con quién',ca:'Amb qui',en:'Who with'};
 const TPL={
@@ -1491,7 +1564,7 @@ const TPL={
 };
 function tplFields(k){const T=TPL[k];if(!T)return null;const l=lang();return T.f.map(([key,kind,lb])=>({k:key,kind,label:lb[l]||lb.es}))}
 function stars(n,plain){n=Math.max(0,Math.min(5,+n||0));return plain?`${n}/5`:'★★★★★'.slice(0,n)+'☆☆☆☆☆'.slice(0,5-n)}
-function fieldLine(m,plain){const fs=typeOf(m.type).fields;if(!fs||!m.fields)return '';return fs.map(f=>{const v=m.fields[f.k];if(f.kind==='stars')return v?stars(v,plain):'';return (v||'').trim()}).filter(Boolean).join(' · ')}
+function fieldLine(m,plain){if(m.type==='tudia')return tdLine(m);const fs=typeOf(m.type).fields;if(!fs||!m.fields)return '';return fs.map(f=>{const v=m.fields[f.k];if(f.kind==='stars')return v?stars(v,plain):'';return (v||'').trim()}).filter(Boolean).join(' · ')}
 function srcOf(m,plain){return [m.source,fieldLine(m,plain)].filter(Boolean).join(' · ')}
 function hasStars(id){const fs=id&&typeOf(id).fields;return !!(fs&&fs.some(f=>f.kind==='stars'))}
 function createTplType(k){const T=TPL[k];const ex=(S.customTypes||[]).find(c=>c.tpl===k);if(ex)return ex;const nt={id:mkid('t-'),name:T.name[lang()]||T.name.es,tpl:k};S.customTypes.push(nt);savePalette();toast(t('tTypeCreated',nt.name));return nt}
@@ -1543,6 +1616,8 @@ function hasForeign(did){return S.memories.some(m=>foreignMem(m)&&(m.drawers||[]
 function cut(s,n){s=String(s||'');return s.length>n?s.slice(0,n-1).trimEnd()+'…':s}
 function band(m){
   const cs=(m.emotions||[]).map(emo).filter(Boolean);
+  const wn=(m.type==='tudia'&&m.td&&m.td.want||[]).map(emo).filter(Boolean);
+  if(wn.length){const seg=(l,a,b)=>l.length?l.map((c,i)=>`${c.color} ${a+i*(b-a)/l.length}% ${a+(i+1)*(b-a)/l.length}%`).join(','):`var(--line) ${a}% ${b}%`;return `linear-gradient(to bottom,${seg(wn,0,50)},${seg(cs,50,100)})`}
   if(!cs.length) return 'var(--line)';
   return 'linear-gradient(to bottom,'+cs.map((c,i)=>`${c.color} ${i*100/cs.length}% ${(i+1)*100/cs.length}%`).join(',')+')';
 }
@@ -1978,6 +2053,7 @@ function vHoy(){
   ${photoLostHTML()}${S.memories.length?nudgeHTML():''}
   <div class="strip${grow?' grow':''}" aria-label="${esc(t('stripCap'))}">${stripHTML()}</div>
   <div class="strip-cap"><span>${t('stripCap')}</span><span>${t('today')}</span></div>${rumboHTML(grow)}
+  ${tdCardHTML()}
   <h2 class="sec">${t('whichColor')}</h2>
   <div class="${S.emotions.length>9?'checkin hscroll hs-emos':'checkin'}" data-hs="checkin">${emosByUse().map(e=>`<button class="swatch-btn" style="--c:${e.color}" data-act="new" data-type="dia" data-emo="${e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>`;
   h+=installBanner();
@@ -2110,6 +2186,8 @@ function resultsHTML(){
     if(cur)out+='</div>';
     return out;
   }
+  if(filters.type==='tudia'){out+=`<div class="seg arch-sort" role="group">${[['all',t('tdFiltAll')],['si','✓ '+t('tdDoneL').si],['medias','½ '+t('tdDoneL').medias],['no',t('tdDoneL').no]].map(([k,l])=>`<button data-act="arch-td" data-v="${k}" aria-pressed="${archTd===k}">${esc(l)}</button>`).join('')}</div>`;
+    if(archTd!=='all'){const f=ms.filter(m=>m.td&&m.td.done===archTd);return out+(f.length?`<div class="fichas">${f.map(m=>ficha(m)).join('')}</div>`:`<p class="note">${esc(t('noMatch'))}</p>`)}}
   if(hasStars(filters.type)){out+=`<div class="seg arch-sort" role="group"><button data-act="arch-sort" data-v="fecha" aria-pressed="${archSort!=='best'}">${esc(t('sortDate'))}</button><button data-act="arch-sort" data-v="best" aria-pressed="${archSort==='best'}">${esc(t('sortBest'))}</button></div>`;
     if(archSort==='best'){const rk=m=>{const f=typeOf(m.type).fields.find(x=>x.kind==='stars');return +((m.fields||{})[f.k])||0};return out+`<div class="fichas">${[...ms].sort((a,b)=>rk(b)-rk(a)||b.date.localeCompare(a.date)).map(m=>ficha(m)).join('')}</div>`}}
   for(const m of ms){
@@ -2314,7 +2392,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.32';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.33';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -2421,6 +2499,7 @@ function lookBody(){
   <div class="ps-sub">${esc(t('langTitle'))}</div>${langChips()}
   <div class="ps-sub" style="margin-bottom:0">${esc(t('psShow'))}</div>
   ${swRow(t('shareShowLbl'),t('shareShowHint'),'share-show',showShare())}
+  ${swRow(t('tdSetLbl'),t('tdSetHint'),'td-show',tdOn())}
   ${swRow(t('nzLbl'),t('nzHint'),'nudge-show',nudgesOn())}
   ${swRow(t('recapLbl'),t('recapHint'),'recap-show',recapOn())}
   ${recapOn()?swRow(t('recapWeekLbl'),t('recapWeekHint'),'recap-week-show',recapWeekOn()):''}
@@ -2516,6 +2595,7 @@ function vInforme(){
     return h+`<div class="empty-state"><p>${esc(t('repEmpty',word))}</p><button class="btn primary" data-act="new">${t('navNew')}</button></div>`;
   }
   h+=`<div class="seg seg-full" role="tablist" style="margin:2px 0 14px">${[['res','infRes'],['emo','infEmo'],['hab','infHab'],['words','infWords']].map(([k,l])=>`<button role="tab" data-act="inf-tab" data-v="${k}" aria-pressed="${infTab===k}">${esc(t(l))}</button>`).join('')}</div>`;
+  if(infTab==='res')h+=tdReportHTML(r);
   if(infTab==='emo'||infTab==='hab')return h+(isPlus()?'':`<p class="note" style="margin:0 0 10px">${esc(t('statsLocked'))} ${plusBadge()}</p>`)+plusStatsHTML(r,st,ps,infTab);
   if(infTab==='words'){
     if(st.tags.length){const mx=st.tags[0][1];h+=`<div class="words" style="margin-top:4px">${st.tags.slice(0,14).map(([x,c])=>`<button data-act="tag-go" data-v="${esc(x)}" style="font-size:${18+Math.round(c/mx*20)}px">${esc(x)}</button>`).join('')}</div>`}
@@ -2774,7 +2854,7 @@ function renderEditor(focusSel){
   const lq=linkQ.trim().toLowerCase();
   const cands=S.memories.filter(o=>o.id!==draft.id&&!draft.links.includes(o.id)&&(!lq||[o.title,o.text,o.source,o.quote,...(o.tags||[])].join(' ').toLowerCase().includes(lq)));
   const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('remove'))}</span>`;
-  const typesRow=`<div class="hscroll" data-hs="types">${typesByUse().filter(id=>!typeHidden(id)||draft.type===id).map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${esc(typeOf(id).label)}</button>`).join('')}<button class="chip" data-act="ed-newtype-toggle" aria-expanded="${newTypeOpen}" style="border-style:dashed">${t('otherType')}</button></div>
+  const typesRow=`<div class="hscroll" data-hs="types">${typesByUse().filter(id=>(!typeHidden(id)&&id!=='tudia')||draft.type===id).map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${esc(typeOf(id).label)}</button>`).join('')}<button class="chip" data-act="ed-newtype-toggle" aria-expanded="${newTypeOpen}" style="border-style:dashed">${t('otherType')}</button></div>
   ${newTypeOpen?(()=>{const free=Object.keys(TPL).filter(k=>!(S.customTypes||[]).some(c=>c.tpl===k));return free.length?`<p class="note tpl-h">${esc(t('tplHead'))}</p><div class="row tpl-row">${free.map(k=>`<button class="chip" data-act="ed-tpl" data-v="${k}">${esc(TPL[k].name[lang()]||TPL[k].name.es)}</button>`).join('')}</div><p class="note tpl-h">${esc(t('tplOwn'))}</p>`:''})():''}
   ${newTypeOpen?`<div class="row" style="margin-top:8px;flex-wrap:nowrap"><input class="in" style="flex:1;min-width:0" id="ed-newtype" data-ed-newtype placeholder="${esc(t('newTypePh'))}" value="${esc(newTypeName)}" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="ed-addtype">${t('createType')}</button></div>`:''}`;
   const emosRow=`<div class="hscroll hs-emos" data-hs="emos">${(edNewEmo&&emo(edNewEmo)?[emo(edNewEmo),...emosByUse().filter(x=>x.id!==edNewEmo)]:emosByUse()).map(e=>{const i=draft.emotions.indexOf(e.id);return `<button class="chip" style="--c:${e.color}" data-act="ed-emo" data-v="${e.id}" aria-pressed="${i>=0}"><i></i>${esc(e.name)}${i===0&&draft.emotions.length>1?` <small>${t('principal')}</small>`:''}</button>`}).join('')}<button class="chip" data-act="ed-newemo" style="border-style:dashed">+ ${esc(t('newEmo'))}</button></div>`;
@@ -4668,6 +4748,16 @@ document.addEventListener('click',e=>{
     case 'share-style':if(shareState){shareState.style=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'nz-close':S.settings.nudgeClosed=iso(new Date());saveLocal();render();break;
     case 'nz-week':rep={period:'semana',offset:0};go('informe');break;
+    case 'td-show':S.settings.tudia=v==='on';S.settings.tdIntroSeen=true;savePalette();render();break;
+    case 'td-try':S.settings.tudia=true;S.settings.tdIntroSeen=true;savePalette();render();break;
+    case 'td-later':S.settings.tdIntroSeen=true;savePalette();render();break;
+    case 'td-want':case 'td-felt':{const st=tdState(),k=a==='td-want'?'want':'felt',mx=k==='want'?2:3;const arr=st[k];const i=arr.indexOf(v);if(i>=0)arr.splice(i,1);else{if(arr.length>=mx)arr.shift();arr.push(v)}tdErr='';render();break}
+    case 'td-done':{const st=tdState();st.done=st.done===v?'':v;render();break}
+    case 'td-save-am':tdSave(false);break;
+    case 'td-save-pm':tdSave(true);break;
+    case 'td-edit':tdD=null;tdForce=tdNight()?'editnight':'edit';render();setTimeout(()=>{const i=document.querySelector('[data-td]');if(i)i.focus()},50);break;
+    case 'td-night-now':tdD=null;tdForce='night';render();break;
+    case 'arch-td':archTd=v;render();break;
     case 'nudge-show':S.settings.nudges=v==='on';savePalette();render();break;
     case 'rem-ics':remIcs();break;
     case 'rem-google':remGoogle();break;
@@ -4819,6 +4909,7 @@ document.addEventListener('keydown',e=>{
 let saveT;
 document.addEventListener('input',e=>{
   const el=e.target;
+  if(el.dataset.td){tdState()[el.dataset.td]=el.value}
   if(el.dataset.edf&&draft){draft.fields={...(draft.fields||{}),[el.dataset.edf]:el.value}}
   if(el.dataset.ed&&draft){draft[el.dataset.ed]=el.value;
     if(el.dataset.ed==='title'&&typeOf(draft.type).src&&!(draft.source||'').trim()){const k=el.value.trim().toLowerCase();const f=k&&S.memories.find(o=>o.type===draft.type&&o.id!==draft.id&&(o.title||'').trim().toLowerCase()===k&&o.source);if(f){draft.source=f.source;const si=$('#ed-src');if(si)si.value=f.source}}
