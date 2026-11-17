@@ -1686,7 +1686,7 @@ function lpHTML(){const L=LP[lang()]||LP.es,lg=lang();const im=n=>`img/portada/$
   <div class="lp-final lp-wrap"><h2>${L.finalT}</h2><button class="lp-btn p" data-act="lp-start">${L.start} →</button></div>
   <footer class="lp-foot">${L.foot} · <a href="${lg==='es'?'legal.html':'legal-'+lg+'.html'}">${L.legal}</a></footer>`}
 function lpShow(){let el=document.getElementById('landing');if(!el){el=document.createElement('div');el.id='landing';document.body.appendChild(el)}el.innerHTML=lpHTML();el.hidden=false;document.body.classList.add('lp-on');
-  if(LP_COUNTER&&!lpShow.counted){lpShow.counted=1;try{const i=new Image();i.src=`https://${LP_COUNTER}.goatcounter.com/count?p=${encodeURIComponent('/portada')}&r=${encodeURIComponent(document.referrer||'')}&rnd=${Math.random().toString(36).slice(2)}`}catch(e){}}}
+  if(LP_COUNTER&&!lpShow.counted){lpShow.counted=1;try{const i=new Image();i.src=`https://${LP_COUNTER}.goatcounter.com/count?p=${encodeURIComponent('/portada')}&r=${encodeURIComponent((()=>{try{const r=new URLSearchParams(location.search).get('ref');return r?'ref:'+r:''}catch(e){return ''}})()||document.referrer||'')}&rnd=${Math.random().toString(36).slice(2)}`}catch(e){}}}
 function lpCount(path){if(!LP_COUNTER)return;try{const i=new Image();i.src=`https://${LP_COUNTER}.goatcounter.com/count?p=${encodeURIComponent(path)}&e=true&rnd=${Math.random().toString(36).slice(2)}`}catch(e){}}
 function lpHide(){const el=document.getElementById('landing');if(el){el.hidden=true;el.innerHTML=''}document.body.classList.remove('lp-on');window.scrollTo(0,0)}
 /* ---------- Tu diario: leer los recuerdos como una libreta ---------- */
@@ -2284,7 +2284,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.31';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.31.1';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
