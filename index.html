@@ -115,6 +115,10 @@ p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
 .ficha-meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
 .ficha-title{font-family:var(--serif);font-size:22px;line-height:1.15}
 .ficha-source{font-size:13.5px;color:var(--muted);margin-top:-2px}
+.stars-in{display:flex;gap:4px}.stars-in button{border:0;background:none;font-size:30px;line-height:1;padding:4px 3px;color:var(--line);cursor:pointer}.stars-in button.on{color:#D9A441}
+.tpl-h{margin:12px 0 6px;font-size:13.5px}.tpl-row{gap:6px}
+.arch-sort{margin:4px 0 14px}
+.dy-fl{font-size:.82em;opacity:.7;margin:2px 0 8px;letter-spacing:.02em}
 .ficha-text{font-size:14.5px;color:color-mix(in srgb,var(--ink) 80%,var(--muted));display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .ficha-tags{font-size:12.5px;color:var(--muted);margin-top:auto;padding-top:4px}
 .ficha-emos,.who-pal{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--muted);padding-top:4px}
@@ -925,6 +929,7 @@ es:{
   pfAboutPh:'Un par de frases: a qué te dedicas, qué te mueve, qué etapa estás viviendo…',
   onbName:'¿Cómo quieres que te llame?', onbNamePh:'Tu nombre o un alias (opcional)',
   youWere:n=>`. Tenías ${n} años.`,
+  tplHead:'Plantillas', tplOwn:'O crea el tuyo', sortDate:'Por fecha', sortBest:'★ Mejor puntuados', starsLbl:n=>n?`${n} de 5`:'Sin valorar',
   otherType:'+ Otro tipo', newTypePh:'Por ejemplo: sueño, viaje, receta', createType:'Crear tipo', titleLbl:'Título', customPh:'Lo que quieras recordar de esto',
   typesTitle:'Tipos de recuerdo', typesLead:'Además de los siete tipos de siempre, puedes crear los tuyos: sueños, viajes, recetas, conciertos… Si borras uno, sus recuerdos pasan a Idea.',
   typeName:'Nombre del tipo', addType:'Añadir tipo', newTypeName:'Nombre del nuevo tipo', tTypeCreated:n=>`Tipo «${n}» creado.`,
@@ -1153,6 +1158,7 @@ en:{
   pfAboutPh:"A couple of sentences: what you do, what moves you, what stage of life you're in…",
   onbName:'What should I call you?', onbNamePh:'Your name or a nickname (optional)',
   youWere:n=>`. You were ${n}.`,
+  tplHead:'Templates', tplOwn:'Or create your own', sortDate:'By date', sortBest:'★ Top rated', starsLbl:n=>n?`${n} out of 5`:'Not rated',
   otherType:'+ Another type', newTypePh:'For example: dream, trip, recipe', createType:'Create type', titleLbl:'Title', customPh:'Whatever you want to remember about it',
   typesTitle:'Types of memory', typesLead:'As well as the seven usual types, you can create your own: dreams, trips, recipes, concerts… If you delete one, its memories become Ideas.',
   typeName:'Type name', addType:'Add type', newTypeName:'New type name', tTypeCreated:n=>`Type “${n}” created.`,
@@ -1381,6 +1387,7 @@ ca:{
   pfAboutPh:`Un parell de frases: a què et dediques, què et mou, quina etapa estàs vivint…`,
   onbName:'Com vols que et digui?', onbNamePh:'El teu nom o un àlies (opcional)',
   youWere:n=>`. Tenies ${n} anys.`,
+  tplHead:'Plantilles', tplOwn:'O crea el teu', sortDate:'Per data', sortBest:'★ Més ben valorats', starsLbl:n=>n?`${n} de 5`:'Sense valorar',
   otherType:'+ Un altre tipus', newTypePh:'Per exemple: somni, viatge, recepta', createType:'Crea el tipus', titleLbl:'Títol', customPh:`El que vulguis recordar d'això`,
   typesTitle:'Tipus de record', typesLead:`A més dels set tipus de sempre, en pots crear de teus: somnis, viatges, receptes, concerts… Si n'esborres un, els seus records passen a Idea.`,
   typeName:'Nom del tipus', addType:'Afegeix un tipus', newTypeName:'Nom del nou tipus', tTypeCreated:n=>`Tipus «${n}» creat.`,
@@ -1451,7 +1458,7 @@ function ensureSettings(){guestEmoFix();if(S.settings&&!S.settings.trialStart)S.
 
 let view='hoy', firstHoy=true;
 let filters={q:'',emotion:null,type:'',drawer:'',tag:null,date:null};
-let archMode='lista';
+let archMode='lista',archSort='fecha';
 let rep={period:'semana',offset:0};
 let resurfIdx=0;
 let draft=null, edErr='', linkQ='', newDrawerName='', newTypeOpen=false, newTypeName='', newEmoOpen=false, newEmoName='', newEmoColor='';
@@ -1464,9 +1471,30 @@ function t(k,...a){const v=I18N[lang()][k]??I18N.es[k];return typeof v==='functi
 function typeOf(id){
   const ty=I18N[lang()].types;if(ty[id])return {id,...ty[id]};
   const c=(S.customTypes||[]).find(x=>x.id===id);
+  if(c&&c.tpl&&TPL[c.tpl]){const T=TPL[c.tpl],l=lang();return {id,label:c.name,plural:c.name.toLowerCase(),t:T.t[l]||T.t.es,src:null,ph:T.ph[l]||T.ph.es,custom:true,tpl:c.tpl,fields:tplFields(c.tpl)}}
   if(c)return {id,label:c.name,plural:c.name.toLowerCase(),t:t('titleLbl'),src:null,ph:t('customPh'),custom:true};
   return {id:'dia',...ty.dia};
 }
+/* ---------- Tipos con plantilla (Vino, Restaurante…) ---------- */
+const TPL_RATE={es:'Valoración',ca:'Valoració',en:'Rating'},TPL_WITH={es:'Con quién',ca:'Amb qui',en:'Who with'};
+const TPL={
+  vino:{name:{es:'Vino',ca:'Vi',en:'Wine'},t:{es:'Vino',ca:'Vi',en:'Wine'},ph:{es:'A qué sabía, con quién lo compartiste',ca:'A què tenia gust, amb qui el vas compartir',en:'What it tasted like, who you shared it with'},
+    f:[['do','text',{es:'D.O.',ca:'D.O.',en:'Region (D.O.)'}],['rating','stars',TPL_RATE],['where','place',{es:'Dónde lo compraste o tomaste',ca:'On el vas comprar o prendre',en:'Where you bought or had it'}]]},
+  restaurante:{name:{es:'Restaurante',ca:'Restaurant',en:'Restaurant'},t:{es:'Restaurante',ca:'Restaurant',en:'Restaurant'},ph:{es:'Qué pediste, qué celebrabais',ca:'Què vas demanar, què celebràveu',en:'What you ordered, what you were celebrating'},
+    f:[['rating','stars',TPL_RATE],['where','place',{es:'Dónde',ca:'On',en:'Where'}],['with','text',TPL_WITH]]},
+  cafe:{name:{es:'Café',ca:'Cafè',en:'Coffee'},t:{es:'Café o cafetería',ca:'Cafè o cafeteria',en:'Coffee or café'},ph:{es:'El sitio, la luz, lo que leías',ca:'El lloc, la llum, el que llegies',en:'The place, the light, what you were reading'},
+    f:[['rating','stars',TPL_RATE],['where','place',{es:'Dónde',ca:'On',en:'Where'}]]},
+  concierto:{name:{es:'Concierto',ca:'Concert',en:'Concert'},t:{es:'Artista o concierto',ca:'Artista o concert',en:'Artist or concert'},ph:{es:'La canción que más te llegó',ca:'La cançó que més et va arribar',en:'The song that moved you most'},
+    f:[['rating','stars',TPL_RATE],['where','place',{es:'Sala o lugar',ca:'Sala o lloc',en:'Venue'}],['with','text',TPL_WITH]]},
+  viaje:{name:{es:'Viaje',ca:'Viatge',en:'Trip'},t:{es:'Viaje',ca:'Viatge',en:'Trip'},ph:{es:'Lo que no quieres olvidar',ca:'El que no vols oblidar',en:'What you don\'t want to forget'},
+    f:[['where','place',{es:'Destino',ca:'Destinació',en:'Destination'}],['with','text',TPL_WITH]]}
+};
+function tplFields(k){const T=TPL[k];if(!T)return null;const l=lang();return T.f.map(([key,kind,lb])=>({k:key,kind,label:lb[l]||lb.es}))}
+function stars(n,plain){n=Math.max(0,Math.min(5,+n||0));return plain?`${n}/5`:'★★★★★'.slice(0,n)+'☆☆☆☆☆'.slice(0,5-n)}
+function fieldLine(m,plain){const fs=typeOf(m.type).fields;if(!fs||!m.fields)return '';return fs.map(f=>{const v=m.fields[f.k];if(f.kind==='stars')return v?stars(v,plain):'';return (v||'').trim()}).filter(Boolean).join(' · ')}
+function srcOf(m,plain){return [m.source,fieldLine(m,plain)].filter(Boolean).join(' · ')}
+function hasStars(id){const fs=id&&typeOf(id).fields;return !!(fs&&fs.some(f=>f.kind==='stars'))}
+function createTplType(k){const T=TPL[k];const ex=(S.customTypes||[]).find(c=>c.tpl===k);if(ex)return ex;const nt={id:mkid('t-'),name:T.name[lang()]||T.name.es,tpl:k};S.customTypes.push(nt);savePalette();toast(t('tTypeCreated',nt.name));return nt}
 function allTypeIds(){return [...TYPE_IDS,...(S.customTypes||[]).map(c=>c.id)]}
 /* Tipos ordenados por uso; los ocultos no salen al crear un recuerdo, pero sus recuerdos se quedan */
 function emosByUse(list){list=list||S.emotions;const c={};S.memories.forEach(m=>(m.emotions||[]).forEach(id=>c[id]=(c[id]||0)+1));return list.map((e,i)=>({e,i,n:c[e.id]||0})).sort((a,b)=>b.n-a.n||a.i-b.i).map(x=>x.e)}
@@ -1703,7 +1731,7 @@ function dyMonth(d,st){const mo=fmtD(d,{month:'long'}),y=d.getFullYear();const M
 function dyEntry(m,st,o={}){
   if(o.cont)return dyCont(m,st,o.txt);
   const d=fromIso(m.date),kind=m.type&&m.type!=='dia'?typeOf(m.type).label.toLowerCase():'';const title=esc(memTitle(m));
-  const txv=o.txt!=null?o.txt:m.text;const tx=txv?`<div class="dy-tx">${esc(txv)}${o.txt!=null?' →':''}</div>`:'';const q=m.quote?`<div class="dy-q">«${esc(m.quote)}»${m.author?` — ${esc(m.author)}`:''}</div>`:'';
+  const txv=o.txt!=null?o.txt:m.text;const tx=txv?`<div class="dy-tx">${esc(txv)}${o.txt!=null?' →':''}</div>`:'';const fl=fieldLine(m);const q=(fl&&o.txt==null?`<div class="dy-fl">${esc(fl)}</div>`:'')+(m.quote?`<div class="dy-q">«${esc(m.quote)}»${m.author?` — ${esc(m.author)}`:''}</div>`:'');
   const es=(m.emotions||[]).map(emo).filter(Boolean),tags=(m.tags||[]);
   const phs=(m.photos||[]).slice(0,3);const ph=phs.length&&o.txt==null?`<div class="dy-phs n${phs.length}">${phs.map(id=>`<span class="dy-ph"><img data-photo="${id}" alt=""></span>`).join('')}</div>`:'';
   const tm=m.time?esc(m.time):'';const H=o.txt!=null;
@@ -1979,7 +2007,7 @@ function ficha(m,withEmo){
     ${(m.photos||[]).length?`<span class="ficha-photo"><img data-photo="${m.photos[0]}" alt=""></span>`:''}
     <span class="ficha-meta"><span>${ty.label}${(m.audios||[]).length?' · ♪':''}</span><span>${esc(fmt(m.date,{day:'numeric',month:'short'}))}</span></span>
     <span class="ficha-title">${esc(memTitle(m))}</span>
-    ${m.source?`<span class="ficha-source">${esc(m.source)}</span>`:''}
+    ${srcOf(m)?`<span class="ficha-source">${esc(srcOf(m))}</span>`:''}
     ${m.quote?`<span class="ficha-quote">«${esc(m.quote)}»</span>`:''}
     ${m.text?`<span class="ficha-text">${esc(m.text)}</span>`:''}
     ${withEmo&&(m.emotions||[]).length?`<span class="ficha-emos">${(m.emotions||[]).map(emo).filter(Boolean).map(e=>`<span><i style="background:${e.color}"></i>${esc(e.name)}</span>`).join('')}</span>`:''}
@@ -1999,7 +2027,7 @@ function filtered(){
     if(filters.tag&&!(m.tags||[]).includes(filters.tag))return false;
     if(filters.date&&m.date!==filters.date)return false;
     if(filters.span&&(m.date<filters.span.s||m.date>filters.span.e))return false;
-    if(q){const hay=[m.title,m.source,m.text,m.quote,...(m.tags||[])].join(' ').toLowerCase();if(!hay.includes(q))return false}
+    if(q){const hay=[m.title,m.source,m.text,m.quote,...(m.tags||[]),...Object.values(m.fields||{}).filter(v=>typeof v==='string')].join(' ').toLowerCase();if(!hay.includes(q))return false}
     return true;
   }));
 }
@@ -2082,6 +2110,8 @@ function resultsHTML(){
     if(cur)out+='</div>';
     return out;
   }
+  if(hasStars(filters.type)){out+=`<div class="seg arch-sort" role="group"><button data-act="arch-sort" data-v="fecha" aria-pressed="${archSort!=='best'}">${esc(t('sortDate'))}</button><button data-act="arch-sort" data-v="best" aria-pressed="${archSort==='best'}">${esc(t('sortBest'))}</button></div>`;
+    if(archSort==='best'){const rk=m=>{const f=typeOf(m.type).fields.find(x=>x.kind==='stars');return +((m.fields||{})[f.k])||0};return out+`<div class="fichas">${[...ms].sort((a,b)=>rk(b)-rk(a)||b.date.localeCompare(a.date)).map(m=>ficha(m)).join('')}</div>`}}
   for(const m of ms){
     const k=m.date.slice(0,7);
     if(k!==cur){if(cur)out+='</div>';cur=k;out+=`<div class="month">${esc(fmt(k+'-01',{month:'long',year:'numeric'}))}</div><div class="fichas">`}
@@ -2284,7 +2314,7 @@ function swatchesHTML(e){
   return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.31';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.32';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -2551,7 +2581,7 @@ function openDetail(id){
     ${(m.photos||[]).length?`<div class="photos${m.photos.length>1?' multi':''}">${m.photos.map(pid=>`<div class="photos-item"><img data-photo="${pid}" alt="${esc(t('photoAlt'))}"></div>`).join('')}</div>`:''}
     ${(m.audios||[]).length?`<div class="au-list" style="margin-top:12px">${m.audios.map(a=>auPill(a,false)).join('')}</div>`:''}
     <h2 class="detail-title">${esc(memTitle(m))}</h2>
-    ${m.source?`<div class="note">${esc(m.source)}</div>`:''}
+    ${srcOf(m)?`<div class="note">${esc(srcOf(m))}</div>`:''}
     ${safeLink(m.link)?`<a class="btn" href="${esc(safeLink(m.link))}" target="_blank" rel="noopener noreferrer" style="margin:12px 0 12px;display:flex;width:fit-content;align-items:center;gap:8px">▶ ${esc(t('songListen'))} <small style="opacity:.7">${esc(linkHost(safeLink(m.link)))}</small></a>`:''}
     ${m.quote?`<blockquote class="quote" style="--c:${mainColor(m)};margin:16px 0 0"><p>«${esc(m.quote)}»</p>${m.page?`<cite>${esc(t('pageAbbr',m.page))}</cite>`:''}</blockquote>`:''}
     ${m.text?`<div class="detail-text">${esc(m.text)}</div>`:''}
@@ -2745,6 +2775,7 @@ function renderEditor(focusSel){
   const cands=S.memories.filter(o=>o.id!==draft.id&&!draft.links.includes(o.id)&&(!lq||[o.title,o.text,o.source,o.quote,...(o.tags||[])].join(' ').toLowerCase().includes(lq)));
   const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('remove'))}</span>`;
   const typesRow=`<div class="hscroll" data-hs="types">${typesByUse().filter(id=>!typeHidden(id)||draft.type===id).map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${esc(typeOf(id).label)}</button>`).join('')}<button class="chip" data-act="ed-newtype-toggle" aria-expanded="${newTypeOpen}" style="border-style:dashed">${t('otherType')}</button></div>
+  ${newTypeOpen?(()=>{const free=Object.keys(TPL).filter(k=>!(S.customTypes||[]).some(c=>c.tpl===k));return free.length?`<p class="note tpl-h">${esc(t('tplHead'))}</p><div class="row tpl-row">${free.map(k=>`<button class="chip" data-act="ed-tpl" data-v="${k}">${esc(TPL[k].name[lang()]||TPL[k].name.es)}</button>`).join('')}</div><p class="note tpl-h">${esc(t('tplOwn'))}</p>`:''})():''}
   ${newTypeOpen?`<div class="row" style="margin-top:8px;flex-wrap:nowrap"><input class="in" style="flex:1;min-width:0" id="ed-newtype" data-ed-newtype placeholder="${esc(t('newTypePh'))}" value="${esc(newTypeName)}" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="ed-addtype">${t('createType')}</button></div>`:''}`;
   const emosRow=`<div class="hscroll hs-emos" data-hs="emos">${(edNewEmo&&emo(edNewEmo)?[emo(edNewEmo),...emosByUse().filter(x=>x.id!==edNewEmo)]:emosByUse()).map(e=>{const i=draft.emotions.indexOf(e.id);return `<button class="chip" style="--c:${e.color}" data-act="ed-emo" data-v="${e.id}" aria-pressed="${i>=0}"><i></i>${esc(e.name)}${i===0&&draft.emotions.length>1?` <small>${t('principal')}</small>`:''}</button>`}).join('')}<button class="chip" data-act="ed-newemo" style="border-style:dashed">+ ${esc(t('newEmo'))}</button></div>`;
   const drawersRow=`<div class="hscroll" data-hs="drawers">${drawersByUse().map(d=>`<button class="chip" data-act="ed-drawer" data-v="${d.id}" aria-pressed="${draft.drawers.includes(d.id)}">${esc(d.name)}</button>`).join('')}<button class="chip" data-act="ed-newdrawer-toggle" aria-expanded="${newDrawerOpen}" style="border-style:dashed">+ ${esc(t('newDrawerChip'))}</button></div>
@@ -2757,6 +2788,9 @@ function renderEditor(focusSel){
   <input class="in" id="ed-title" data-ed="title" value="${esc(draft.title)}" list="ed-titles" autocomplete="off">
   <datalist id="ed-titles">${[...new Set(S.memories.filter(o=>o.type===draft.type&&o.title).map(o=>o.title))].map(x=>`<option value="${esc(x)}"></option>`).join('')}</datalist>
   ${ty.src?`<label class="f" for="ed-src">${ty.src} <small>${t('optional')}</small></label><input class="in" id="ed-src" data-ed="source" value="${esc(draft.source)}">`:''}
+  ${(ty.fields||[]).map(f=>{const v=(draft.fields||{})[f.k];if(f.kind==='stars'){const n=+v||0;return `<label class="f">${esc(f.label)} <small>${t('optional')}</small></label><div class="stars-in" role="radiogroup" aria-label="${esc(f.label)}">${[1,2,3,4,5].map(i=>`<button type="button" role="radio" aria-checked="${n===i}" aria-label="${esc(t('starsLbl',i))}" data-act="ed-star" data-v="${f.k}:${i}" class="${i<=n?'on':''}">★</button>`).join('')}</div>`}
+    const prev=[...new Set(S.memories.filter(o=>o.type===draft.type&&o.fields&&o.fields[f.k]).map(o=>o.fields[f.k]))];
+    return `<label class="f" for="ed-f-${f.k}">${esc(f.label)} <small>${t('optional')}</small></label><input class="in" id="ed-f-${f.k}" data-edf="${f.k}" value="${esc(v||'')}" maxlength="80" autocomplete="off"${prev.length?` list="ed-fl-${f.k}"`:''}>${prev.length?`<datalist id="ed-fl-${f.k}">${prev.map(x=>`<option value="${esc(x)}"></option>`).join('')}</datalist>`:''}`}).join('')}
   ${draft.type==='cancion'?`<label class="f" for="ed-link">${esc(t('songLink'))} <small>${t('optional')}</small></label><input class="in" id="ed-link" type="url" inputmode="url" autocomplete="off" data-ed="link" placeholder="${esc(t('songLinkPh'))}" value="${esc(draft.link||'')}">`:''}
   <label class="f">${t('emotions')} <small>${t('emoHint')}</small></label>
   ${emosRow}
@@ -2798,6 +2832,7 @@ async function saveDraft(){
   const isNew=!draft.id;const prev=isNew?null:memOf(draft.id);
   const m={...draft,id:draft.id||mkid('m'),title:draft.title.trim(),source:(draft.source||'').trim(),link:safeLink(draft.type==='cancion'?draft.link:''),text:draft.text.trim(),createdAt:prev?.createdAt||Date.now(),updatedAt:Date.now()};
   if(!typeOf(m.type).src)m.source='';
+  {const fs=typeOf(m.type).fields;if(fs){const o={};fs.forEach(f=>{const v=(m.fields||{})[f.k];if(f.kind==='stars'){if(+v)o[f.k]=+v}else if((v||'').trim())o[f.k]=cut(v.trim(),80)});if(Object.keys(o).length)m.fields=o;else delete m.fields}else delete m.fields}
   m.quote=typeOf(m.type).q?(draft.quote||'').trim():'';m.page=typeOf(m.type).page?String(draft.page||'').trim():'';if(!m.quote)delete m.quote;if(!m.page)delete m.page;
   delete m._new;delete m._saved;delete m._colors;m.drawers=[...(draft.drawers||[])];normDrawers(m);m.photos=[...(draft.photos||[])];m.audios=[...(draft.audios||[])];if(!m.audios.length)delete m.audios;draft._saved=true;
   const keepIds=new Set([...m.photos,...(m.audios||[]).map(a=>a.id)]);
@@ -2961,7 +2996,7 @@ function drawSpecialMem(x,m,s,P){
     x.fillStyle=paper;x.fillRect(0,0,W,H);
     x.strokeStyle=rgba(ec,.45);x.lineWidth=2;x.beginPath();x.moveTo(150,0);x.lineTo(150,H);x.stroke();
     x.fillStyle=ec;x.beginPath();x.moveTo(880,0);x.lineTo(940,0);x.lineTo(940,250);x.lineTo(910,222);x.lineTo(880,250);x.closePath();x.fill();
-    x.fillStyle=soft;x.font=`italic 34px ${serif}`;x.textAlign='center';x.fillText(cut(memTitle(m)+(m.source?' · '+m.source:''),52),W/2,170);x.textAlign='left';
+    x.fillStyle=soft;x.font=`italic 34px ${serif}`;x.textAlign='center';x.fillText(cut(memTitle(m)+(srcOf(m)?' · '+srcOf(m):''),52),W/2,170);x.textAlign='left';
     x.strokeStyle=soft;x.lineWidth=1;x.beginPath();x.moveTo(200,200);x.lineTo(W-200,200);x.stroke();
     const body=(s.quote&&m.quote)?m.quote:(m.text&&s.text?m.text:memTitle(m));
     let size=72;let ls=wrapAt(body,`${size}px ${serif}`,740,12);while(ls.length>9&&size>46){size-=4;ls=wrapAt(body,`${size}px ${serif}`,740,12)}
@@ -2983,7 +3018,7 @@ function drawSpecialMem(x,m,s,P){
     x.fillStyle=MU;x.font=`700 28px ${sans}`;x.fillText(t('ticketSession').toUpperCase().split('').join(' '),X+60,Y+90);
     x.font=`500 32px ${sans}`;x.fillText(fmt(m.date)+(timeOf(m)?', '+timeOf(m):''),X+60,Y+140);
     let y=Y+270;x.fillStyle=TX;wrapAt(memTitle(m),`92px ${serif}`,740,3).forEach(l=>{x.font=`92px ${serif}`;x.fillText(l,X+60,y);y+=96});
-    if(m.source){x.fillStyle=MU;x.font=`500 36px ${sans}`;x.fillText(cut(m.source,36),X+60,y+6);y+=60}
+    if(srcOf(m)){x.fillStyle=MU;x.font=`500 36px ${sans}`;x.fillText(cut(srcOf(m),36),X+60,y+6);y+=60}
     const ql=(s.quote&&m.quote)?wrapAt('«'+m.quote+'»',`italic 52px ${serif}`,740,(cut1-y-60)/62|0):[];x.fillStyle=TX;x.font=`italic 52px ${serif}`;ql.forEach((l,i)=>x.fillText(l,X+60,y+50+i*62));
     const sc=lumOf(ec)>150?'#1C1A28':'#FFFFFF';x.fillStyle=sc;x.font=`500 38px ${sans}`;x.fillText(cs.map(e=>e.name).join(' · ')||'',X+60,cut1+130);
     if(s.text&&m.text){x.font=`italic 40px ${serif}`;wrapLines(x,m.text,740,4).forEach((l,i)=>x.fillText(l,X+60,cut1+210+i*50))}
@@ -3003,7 +3038,7 @@ function drawSpecialMem(x,m,s,P){
       x.restore();x.fillStyle=BG;x.beginPath();x.arc(cx,cy,14,0,Math.PI*2);x.fill();
       let y=1260;x.fillStyle=MU;x.font=`500 34px ${sans}`;x.fillText(fmt(m.date),90,y-130);
       x.fillStyle=TX;wrapAt(memTitle(m),`104px ${serif}`,900,2).forEach(l=>{x.font=`104px ${serif}`;x.fillText(l,90,y);y+=106});
-      if(m.source){x.fillStyle=MU;x.font=`500 40px ${sans}`;x.fillText(cut(m.source,40),90,y);y+=80}
+      if(srcOf(m)){x.fillStyle=MU;x.font=`500 40px ${sans}`;x.fillText(cut(srcOf(m),40),90,y);y+=80}
       if(s.quote&&m.quote){x.fillStyle=TX;x.font=`italic 54px ${serif}`;wrapLines(x,m.quote,900,3).forEach((l,i)=>x.fillText(l,90,y+20+i*64));y+=3*64}
       else if(s.text&&m.text){x.fillStyle=TX;x.font=`italic 46px ${serif}`;wrapLines(x,m.text,900,3).forEach((l,i)=>x.fillText(l,90,y+20+i*56))}
       let X=90;cs.forEach(e=>{x.fillStyle=e.color;rr(x,X,1730,90,16,8);x.fill();X+=104});
@@ -3098,7 +3133,7 @@ async function drawShare(){
     let y=img?top:Math.max(top,top+(1760-top-blockH)/2);
     x.fillStyle=MU;x.font=`500 34px ${sans}`;x.fillText(ty.label+', '+fmt(m.date),90,y);y+=60+tSize*.75;
     x.fillStyle=TX;x.font=`${tSize}px ${serif}`;tl.forEach(l=>{x.fillText(l,90,y);y+=tSize*1.05});
-    if(m.source){x.fillStyle=MU;x.font=`500 38px ${sans}`;x.fillText(cut(m.source,40),90,y+8);y+=70}else y+=20;
+    if(srcOf(m)){x.fillStyle=MU;x.font=`500 38px ${sans}`;x.fillText(cut(srcOf(m),40),90,y+8);y+=70}else y+=20;
     if(ql.length){x.font=`italic ${qSize}px ${serif}`;x.fillStyle=cs[0]?cs[0].color:MU;rr(x,90,y-qSize+10,8,ql.length*qSize*1.2,4);x.fill();x.fillStyle=TX;ql.forEach((l,i)=>x.fillText(l,124,y+i*qSize*1.2));y+=ql.length*qSize*1.2;
       if(m.page){x.fillStyle=MU;x.font=`500 32px ${sans}`;x.fillText(t('pageAbbr',m.page),124,y+10);y+=70}else y+=20}
     if(xl.length){x.fillStyle=TX;x.font=`${xSize}px ${serif}`;xl.forEach((l,i)=>x.fillText(l,90,y+10+i*xSize*1.3));y+=xl.length*xSize*1.3+20}
@@ -3576,7 +3611,7 @@ async function buildBookPDF(opts,onStep){
       y=fh+6+30}
     txt(F.sans,7,MU,M,y,meta);y+=small?24:30;
     y=para(F.serif,small?17:24,TX,M,y,memTitle(m),CW,small?20:27,small?2:3);
-    if(m.source)y=para(F.ital,small?9.5:12,MU,M,y+(small?0:2),m.source,CW,small?12:15,2)+2;
+    if(srcOf(m,true))y=para(F.ital,small?9.5:12,MU,M,y+(small?0:2),srcOf(m,true),CW,small?12:15,2)+2;
     y+=small?5:8;let ex=M;const es=small?8.5:9.5;colorsOf(m).filter(e=>e.name).forEach(e=>{const w=pdfW(F.sans,e.name,es)+16;if(ex+w>W-M){ex=M;y+=14}circle(ex+3.5,y-3,small?3.2:4,e.color);txt(F.sans,es,TX,ex+11,y,e.name);ex+=w+8});y+=small?16:18;
     const bottom=()=>H-58-connH-((m.tags||[]).length?16:0);
     if(text&&m.quote&&!qIn){const qz=small?10.5:13.5,ql=small?14:18;const qs=pdfWrap(F.ital,'«'+m.quote+'»',qz,CW-12,small?4:8);const qh=qs.length*ql;rect(M,y-qz*.8,2,qh,colorsOf(m)[0].color);qs.forEach((l,j)=>txt(F.ital,qz,TX,M+10,y+j*ql,l));y+=qh+(small?6:10)}
@@ -4739,6 +4774,9 @@ document.addEventListener('click',e=>{
     case 'onb-done':finishOnboarding();break;
     case 'onb-seed':finishOnboarding();seed();break;
     // editor
+    case 'ed-tpl':{const nt=createTplType(v);draft.type=nt.id;draft.source='';draft.link='';newTypeOpen=false;newTypeName='';renderEditor();break}
+    case 'ed-star':{const [k,n]=v.split(':');const f={...(draft.fields||{})};f[k]=(+f[k]===+n)?0:+n;draft.fields=f;renderEditor();break}
+    case 'arch-sort':archSort=v;render();break;
     case 'ed-type':draft.type=v;if(v!=='cancion')draft.link='';if(!typeOf(v).src)draft.source='';renderEditor();break;
     case 'ed-emo':{const i=draft.emotions.indexOf(v);if(i>=0)draft.emotions.splice(i,1);else if(draft.emotions.length<3)draft.emotions.push(v);else toast(t('max3'));renderEditor();break}
     case 'ed-tag':addTag(v);renderEditor('#ed-tag');break;
@@ -4781,6 +4819,7 @@ document.addEventListener('keydown',e=>{
 let saveT;
 document.addEventListener('input',e=>{
   const el=e.target;
+  if(el.dataset.edf&&draft){draft.fields={...(draft.fields||{}),[el.dataset.edf]:el.value}}
   if(el.dataset.ed&&draft){draft[el.dataset.ed]=el.value;
     if(el.dataset.ed==='title'&&typeOf(draft.type).src&&!(draft.source||'').trim()){const k=el.value.trim().toLowerCase();const f=k&&S.memories.find(o=>o.type===draft.type&&o.id!==draft.id&&(o.title||'').trim().toLowerCase()===k&&o.source);if(f){draft.source=f.source;const si=$('#ed-src');if(si)si.value=f.source}}
     return}
