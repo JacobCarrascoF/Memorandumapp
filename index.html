@@ -131,6 +131,11 @@ p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
 .td-ring{position:relative;width:220px;height:220px;margin:16px auto 10px;border-radius:50%;background:var(--o)}.td-ring::before,.td-ring::after{content:"";position:absolute;border-radius:50%}.td-ring::before{inset:13%;background:var(--paper)}.td-ring::after{inset:17%;background:var(--i)}.td-ring .c{position:absolute;inset:30%;border-radius:50%;background:var(--paper);z-index:1;display:grid;place-content:center;text-align:center}.td-ring b{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1}.td-ring small{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.2}
 .td-bars{display:grid;gap:8px;margin-top:6px}.td-bar{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:10px;font-size:14px}.td-bar div{display:grid;gap:3px}.td-bar i{display:block;height:7px;border-radius:4px}
 .td-ph{margin:12px 0 0;font-size:15.5px}.td-pct b{font-family:var(--serif);font-weight:400;font-size:34px}
+.det-fab{position:sticky;bottom:14px;display:flex;justify-content:flex-end;align-items:center;gap:10px;margin:-40px 0 0;pointer-events:none;z-index:3}.det-fab button{pointer-events:auto;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 22px rgba(30,26,40,.25)}
+.fab-main{width:58px;height:58px;background:var(--accent);color:var(--on-accent)}.fab-sm{width:44px;height:44px;background:var(--paper);color:var(--ink);border:1px solid var(--line)!important}
+.fab-main.busy svg{animation:qsPulse 1s ease-in-out infinite}@keyframes qsPulse{50%{opacity:.35}}
+.td-emos.hscroll{flex-wrap:nowrap}.td-rems{margin:4px 0 14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px}.td-rem{display:grid;grid-template-columns:1fr 136px auto;gap:8px;align-items:center;margin-top:6px}
+.td-late{display:block;margin:2px 0 4px;color:inherit;font-family:var(--sans);font-size:14px;opacity:.85}
 .stars-in{display:flex;gap:4px}.stars-in button{border:0;background:none;font-size:30px;line-height:1;padding:4px 3px;color:var(--line);cursor:pointer}.stars-in button.on{color:#D9A441}
 .tpl-h{margin:12px 0 6px;font-size:13.5px}.tpl-row{gap:6px}
 .arch-sort{margin:4px 0 14px}
@@ -945,6 +950,7 @@ es:{
   pfAboutPh:'Un par de frases: a qué te dedicas, qué te mueve, qué etapa estás viviendo…',
   onbName:'¿Cómo quieres que te llame?', onbNamePh:'Tu nombre o un alias (opcional)',
   youWere:n=>`. Tenías ${n} años.`,
+  qsAria:'Compartir este recuerdo', qsOpts:'Elegir estilo', qsReady:'Tu tarjeta está lista', qsSaved:'Guardada también en Tarjetas', tdRemLbl:'Avisos de «Tu día»', tdRemHint:'Se añaden a tu calendario, sin servidores.', tdRemAm:'☀ Mañana', tdRemPm:'☾ Noche', tdRemAdd:'Añadir', tdRemTitleAm:'☀ ¿Qué quieres para hoy?', tdRemTitlePm:'☾ ¿Cómo ha ido el día?', tdRemDesc:'Un minuto en Memorándum.', tdLate:'Añadir lo que querías esta mañana', tdIntroRem:'Puedes ponerte avisos en Ajustes.',
   tdMorningQ:'¿Qué quieres para hoy?', tdMorningSub:'Una intención para el día. Esta noche verás cómo ha ido.', tdPh:'Por ejemplo: que el día vaya tranquilo', tdWant:'Me gustaría sentir…', tdPick2:'Elige hasta 2', tdSaveIntent:'Guardar intención', tdNightQ:'¿Cómo ha ido?', tdYouWanted:'Esta mañana querías:', tdFeel:'sentir', tdDone:'¿Se ha cumplido?', tdDoneL:{si:'Sí',medias:'A medias',no:'No pudo ser'}, tdFelt:'¿Cómo te has sentido?', tdGood:'Lo bueno', tdBad:'Lo malo', tdSaveBal:'Guardar balance', tdSavedNote:'Se guarda junto a tu intención', tdTodayIntent:'Hoy quieres', tdTonight:'Esta noche, cómo ha ido.', tdBalNow:'Hacer el balance ya', tdEdit:'Cambiar', tdBalDone:'Balance de hoy guardado', tdSeeDay:'Ver tu día', tdDrawer:'Mis días', tdNoIntent:'Balance del día', tdIntro:'Nuevo: «Tu día»', tdIntroP:'Por la mañana, una intención. Por la noche, cómo ha ido. Un minuto, dos veces al día.', tdTry:'Probarlo', tdLater:'Ahora no', tdSetLbl:'«Tu día»', tdSetHint:'Intención por la mañana y balance por la noche, en Hoy.', tdRepT:'Lo que buscabas y lo que viviste', tdRepSub:'Dentro, lo que querías; fuera, lo que sentiste.', tdPct:'intenciones cumplidas', tdFound:(e,a,b)=>`Buscabas ${e} ${a} ${a===1?'día':'días'} y la encontraste ${b}.`, tdBarsNote:'Barra clara: días que la buscaste · oscura: días que la sentiste', tdFiltAll:'Todos', tdWantShort:'querías', tdErr:'Escribe una intención o elige una emoción.', tdErrBal:'Elige cómo te has sentido o escribe algo.', tdMore:'Ver la comparativa completa', tTdIntent:'Intención guardada. Esta noche, el balance.', tTdBal:'Balance guardado en «Mis días».',
   tplHead:'Plantillas', tplOwn:'O crea el tuyo', sortDate:'Por fecha', sortBest:'★ Mejor puntuados', starsLbl:n=>n?`${n} de 5`:'Sin valorar',
   otherType:'+ Otro tipo', newTypePh:'Por ejemplo: sueño, viaje, receta', createType:'Crear tipo', titleLbl:'Título', customPh:'Lo que quieras recordar de esto',
@@ -1176,6 +1182,7 @@ en:{
   pfAboutPh:"A couple of sentences: what you do, what moves you, what stage of life you're in…",
   onbName:'What should I call you?', onbNamePh:'Your name or a nickname (optional)',
   youWere:n=>`. You were ${n}.`,
+  qsAria:'Share this memory', qsOpts:'Choose style', qsReady:'Your card is ready', qsSaved:'Also saved in Cards', tdRemLbl:'“Your day” reminders', tdRemHint:'Added to your calendar, no servers.', tdRemAm:'☀ Morning', tdRemPm:'☾ Night', tdRemAdd:'Add', tdRemTitleAm:'☀ What do you want for today?', tdRemTitlePm:'☾ How did your day go?', tdRemDesc:'One minute in Memorándum.', tdLate:'Add what you wanted this morning', tdIntroRem:'You can set reminders in Settings.',
   tdMorningQ:'What do you want for today?', tdMorningSub:"An intention for the day. Tonight you'll see how it went.", tdPh:'For example: a calm, easy day', tdWant:"I'd like to feel…", tdPick2:'Pick up to 2', tdSaveIntent:'Save intention', tdNightQ:'How did it go?', tdYouWanted:'This morning you wanted:', tdFeel:'to feel', tdDone:'Did it happen?', tdDoneL:{si:'Yes',medias:'Partly',no:"It wasn't to be"}, tdFelt:'How did you feel?', tdGood:'The good', tdBad:'The bad', tdSaveBal:'Save review', tdSavedNote:'Saved with your intention', tdTodayIntent:'Today you want', tdTonight:'Tonight, how it went.', tdBalNow:'Review now', tdEdit:'Change', tdBalDone:"Today's review saved", tdSeeDay:'See your day', tdDrawer:'My days', tdNoIntent:'Day review', tdIntro:'New: “Your day”', tdIntroP:'In the morning, an intention. At night, how it went. One minute, twice a day.', tdTry:'Try it', tdLater:'Not now', tdSetLbl:'“Your day”', tdSetHint:'Morning intention and evening review, in Today.', tdRepT:'What you looked for and what you lived', tdRepSub:'Inside, what you wanted; outside, what you felt.', tdPct:'intentions fulfilled', tdFound:(e,a,b)=>`You looked for ${e} on ${a} ${a===1?'day':'days'} and found it on ${b}.`, tdBarsNote:'Light bar: days you looked for it · dark: days you felt it', tdFiltAll:'All', tdWantShort:'wanted', tdErr:'Write an intention or pick an emotion.', tdErrBal:'Pick how you felt or write something.', tdMore:'See the full comparison', tTdIntent:'Intention saved. Tonight, the review.', tTdBal:'Review saved in “My days”.',
   tplHead:'Templates', tplOwn:'Or create your own', sortDate:'By date', sortBest:'★ Top rated', starsLbl:n=>n?`${n} out of 5`:'Not rated',
   otherType:'+ Another type', newTypePh:'For example: dream, trip, recipe', createType:'Create type', titleLbl:'Title', customPh:'Whatever you want to remember about it',
@@ -1407,6 +1414,7 @@ ca:{
   pfAboutPh:`Un parell de frases: a què et dediques, què et mou, quina etapa estàs vivint…`,
   onbName:'Com vols que et digui?', onbNamePh:'El teu nom o un àlies (opcional)',
   youWere:n=>`. Tenies ${n} anys.`,
+  qsAria:'Comparteix aquest record', qsOpts:"Tria l'estil", qsReady:'La teva targeta és a punt', qsSaved:'Desada també a Targetes', tdRemLbl:'Avisos de «El teu dia»', tdRemHint:'Afegits al teu calendari, sense servidors.', tdRemAm:'☀ Matí', tdRemPm:'☾ Nit', tdRemAdd:'Afegeix', tdRemTitleAm:'☀ Què vols per avui?', tdRemTitlePm:'☾ Com ha anat el dia?', tdRemDesc:'Un minut a Memorándum.', tdLate:'Afegeix el que volies aquest matí', tdIntroRem:'Pots posar-te avisos a Ajustos.',
   tdMorningQ:'Què vols per avui?', tdMorningSub:'Una intenció per al dia. Aquesta nit veuràs com ha anat.', tdPh:'Per exemple: que el dia vagi tranquil', tdWant:"M'agradaria sentir…", tdPick2:'Tria fins a 2', tdSaveIntent:'Desa la intenció', tdNightQ:'Com ha anat?', tdYouWanted:'Aquest matí volies:', tdFeel:'sentir', tdDone:"S'ha complert?", tdDoneL:{si:'Sí',medias:'A mitges',no:'No ha pogut ser'}, tdFelt:"Com t'has sentit?", tdGood:'El bo', tdBad:'El dolent', tdSaveBal:'Desa el balanç', tdSavedNote:'Es desa amb la teva intenció', tdTodayIntent:'Avui vols', tdTonight:'Aquesta nit, com ha anat.', tdBalNow:'Fes el balanç ara', tdEdit:'Canvia', tdBalDone:"Balanç d'avui desat", tdSeeDay:'Mira el teu dia', tdDrawer:'Els meus dies', tdNoIntent:'Balanç del dia', tdIntro:'Nou: «El teu dia»', tdIntroP:'Al matí, una intenció. A la nit, com ha anat. Un minut, dues vegades al dia.', tdTry:'Prova-ho', tdLater:'Ara no', tdSetLbl:'«El teu dia»', tdSetHint:'Intenció al matí i balanç a la nit, a Avui.', tdRepT:'El que buscaves i el que has viscut', tdRepSub:'A dins, el que volies; a fora, el que vas sentir.', tdPct:'intencions complertes', tdFound:(e,a,b)=>`Buscaves ${e} ${a} ${a===1?'dia':'dies'} i la vas trobar ${b}.`, tdBarsNote:'Barra clara: dies que la vas buscar · fosca: dies que la vas sentir', tdFiltAll:'Tots', tdWantShort:'volies', tdErr:'Escriu una intenció o tria una emoció.', tdErrBal:"Tria com t'has sentit o escriu alguna cosa.", tdMore:'Mira la comparativa completa', tTdIntent:'Intenció desada. Aquesta nit, el balanç.', tTdBal:'Balanç desat a «Els meus dies».',
   tplHead:'Plantilles', tplOwn:'O crea el teu', sortDate:'Per data', sortBest:'★ Més ben valorats', starsLbl:n=>n?`${n} de 5`:'Sense valorar',
   otherType:'+ Un altre tipus', newTypePh:'Per exemple: somni, viatge, recepta', createType:'Crea el tipus', titleLbl:'Títol', customPh:`El que vulguis recordar d'això`,
@@ -1500,16 +1508,18 @@ function typeOf(id){
 
 /* ---------- «Tu día»: intención por la mañana y balance por la noche ---------- */
 let tdD=null,tdErr='',tdForce='',archTd='all';
+function tdRemHTML(){const row=(k,def)=>`<div class="td-rem"><span>${esc(t(k==='am'?'tdRemAm':'tdRemPm'))}</span><input class="in" type="time" id="td-${k}-time" value="${esc(S.settings['tdRem_'+k]||def)}" aria-label="${esc(t(k==='am'?'tdRemAm':'tdRemPm'))}"><button class="btn" data-act="td-rem" data-v="${k}">${esc(t('tdRemAdd'))}</button></div>`;
+  return `<div class="td-rems"><p class="note" style="margin:0 0 8px"><b>${esc(t('tdRemLbl'))}</b> · ${esc(t('tdRemHint'))}</p>${row('am','08:30')}${row('pm','21:30')}</div>`}
 function tdOn(){return !!(S.settings&&S.settings.tudia)}
 function tdToday(){const d=iso(new Date());return S.memories.find(m=>m.type==='tudia'&&m.date===d&&!hiddenMem(m))}
 function tdNight(){if(tdForce==='night'||tdForce==='editnight')return true;if(tdForce==='edit')return false;const m=tdToday();if(m&&m.td&&m.td.balance)return true;return new Date().getHours()>=19}
 function tdState(){const d=iso(new Date());if(!tdD||tdD.date!==d){const m=tdToday(),x=(m&&m.td)||{};tdD={date:d,intent:x.intent||'',want:[...(x.want||[])],done:x.done||'',felt:x.balance?[...(m.emotions||[])]:[],good:x.good||'',bad:x.bad||''}}return tdD}
 function tdLine(m){const x=m.td||{};const w=(x.want||[]).map(emo).filter(Boolean).map(e=>e.name.toLowerCase());const p=[];if(w.length)p.push('☀ '+w.join(', '));if(x.done)p.push('☾ '+t('tdDoneL')[x.done]);return p.join(' · ')}
 function tdDrawerId(){let d=drawerOf('d-misdias');if(!d){d={id:'d-misdias',name:t('tdDrawer')};S.drawers.push(d);savePalette()}return d.id}
-function tdChips(act,sel,max){return `<div class="td-emos">${emosByUse().map(e=>`<button class="chip" style="--c:${e.color}" data-act="${act}" data-v="${e.id}" aria-pressed="${sel.includes(e.id)}"${!sel.includes(e.id)&&sel.length>=max?' data-full="1"':''}><i></i>${esc(e.name)}</button>`).join('')}</div>`}
+function tdChips(act,sel,max){return `<div class="td-emos hscroll" data-hs="${act}">${emosByUse().map(e=>`<button class="chip" style="--c:${e.color}" data-act="${act}" data-v="${e.id}" aria-pressed="${sel.includes(e.id)}"${!sel.includes(e.id)&&sel.length>=max?' data-full="1"':''}><i></i>${esc(e.name)}</button>`).join('')}</div>`}
 function tdCardHTML(){
   if(!S.memories.length)return '';
-  if(!tdOn())return S.settings.tdIntroSeen?'':`<div class="td-card td-intro"><b class="td-ic" aria-hidden="true">☀ ☾</b><h3>${esc(t('tdIntro'))}</h3><p>${esc(t('tdIntroP'))}</p><div class="row"><button class="btn primary" data-act="td-try">${esc(t('tdTry'))}</button><button class="btn quiet" data-act="td-later">${esc(t('tdLater'))}</button></div></div>`;
+  if(!tdOn())return S.settings.tdIntroSeen?'':`<div class="td-card td-intro"><b class="td-ic" aria-hidden="true">☀ ☾</b><h3>${esc(t('tdIntro'))}</h3><p>${esc(t('tdIntroP'))} ${esc(t('tdIntroRem'))}</p><div class="row"><button class="btn primary" data-act="td-try">${esc(t('tdTry'))}</button><button class="btn quiet" data-act="td-later">${esc(t('tdLater'))}</button></div></div>`;
   const m=tdToday(),x=(m&&m.td)||{},st=tdState();const err=tdErr?`<div class="err" role="alert">${esc(tdErr)}</div>`:'';
   const wantNames=(x.want||[]).map(emo).filter(Boolean);
   if(!tdNight()){
@@ -1523,6 +1533,7 @@ function tdCardHTML(){
   return `<div class="td-card td-pm"><h3><span aria-hidden="true">☾</span> ${esc(t('tdNightQ'))}</h3>${err}
   ${had?`<p class="td-lbl">${esc(t('tdYouWanted'))}</p><blockquote class="td-q">${esc(x.intent||'')}${wantNames.length?`<small>${esc(t('tdFeel'))} ${esc(wantNames.map(e=>e.name.toLowerCase()).join(' · '))}</small>`:''}</blockquote>
   <p class="td-lbl">${esc(t('tdDone'))}</p><div class="seg seg-full td-done" role="group">${['si','medias','no'].map(k=>`<button data-act="td-done" data-v="${k}" aria-pressed="${st.done===k}">${esc(t('tdDoneL')[k])}</button>`).join('')}</div>`:''}
+  ${!had?(st.late?`<input class="in" data-td="intent" maxlength="140" placeholder="${esc(t('tdPh'))}" value="${esc(st.intent)}" aria-label="${esc(t('tdMorningQ'))}" style="margin-top:4px"><p class="td-lbl">${esc(t('tdWant'))}</p>${tdChips('td-want',st.want,2)}`:`<button class="link td-late" data-act="td-late">☀ ${esc(t('tdLate'))}</button>`):''}
   <p class="td-lbl">${esc(t('tdFelt'))}</p>${tdChips('td-felt',st.felt,3)}
   <div class="td-gb"><label><span>${esc(t('tdGood'))}</span><input class="in" data-td="good" maxlength="200" value="${esc(st.good)}"></label><label><span>${esc(t('tdBad'))}</span><input class="in" data-td="bad" maxlength="200" value="${esc(st.bad)}"></label></div>
   <div class="td-foot"><small>${had?esc(t('tdSavedNote')):''}</small><button class="btn primary" data-act="td-save-pm">${esc(t('tdSaveBal'))}</button></div></div>`}
@@ -1530,6 +1541,7 @@ function tdNew(){const d=new Date();return {id:mkid('m'),type:'tudia',title:'',s
 async function tdSave(night){const st=tdState();let m=tdToday();const isNew=!m;if(isNew)m=tdNew();m.td={...(m.td||{})};
   if(!night){if(!st.intent.trim()&&!st.want.length){tdErr=t('tdErr');render();return}m.td.intent=st.intent.trim();m.td.want=st.want.slice(0,2)}
   else{if(!st.felt.length&&!st.good.trim()&&!st.bad.trim()&&!st.done){tdErr=t('tdErrBal');render();return}
+    if(st.intent.trim()&&!m.td.intent)m.td.intent=st.intent.trim();if(st.want.length&&!(m.td.want||[]).length)m.td.want=st.want.slice(0,2);
     m.td.done=st.done||'';m.td.good=st.good.trim();m.td.bad=st.bad.trim();m.td.balance=true;m.emotions=st.felt.slice(0,3);
     m.text=[m.td.good?t('tdGood')+': '+m.td.good:'',m.td.bad?t('tdBad')+': '+m.td.bad:''].filter(Boolean).join('\n')}
   m.title=m.td.intent||t('tdNoIntent');m.updatedAt=Date.now();if(!(m.drawers||[]).length)m.drawers=[tdDrawerId()];
@@ -2499,7 +2511,7 @@ function lookBody(){
   <div class="ps-sub">${esc(t('langTitle'))}</div>${langChips()}
   <div class="ps-sub" style="margin-bottom:0">${esc(t('psShow'))}</div>
   ${swRow(t('shareShowLbl'),t('shareShowHint'),'share-show',showShare())}
-  ${swRow(t('tdSetLbl'),t('tdSetHint'),'td-show',tdOn())}
+  ${swRow(t('tdSetLbl'),t('tdSetHint'),'td-show',tdOn())}${tdOn()?tdRemHTML():''}
   ${swRow(t('nzLbl'),t('nzHint'),'nudge-show',nudgesOn())}
   ${swRow(t('recapLbl'),t('recapHint'),'recap-show',recapOn())}
   ${recapOn()?swRow(t('recapWeekLbl'),t('recapWeekHint'),'recap-week-show',recapWeekOn()):''}
@@ -2671,8 +2683,8 @@ function openDetail(id){
   ${links.length?`<h3 class="month" style="margin-top:22px">${t('linkedWith')}</h3>${miniList(links)}`:''}
   ${moreFromBlock(m)}
   ${tagBlock(m)}
-  ${showShare()?`<div class="actions"><button class="btn" data-act="share-mem" data-id="${m.id}">${IMG_ICON}${esc(t('shareBtn'))}</button></div>`:''}
-  <div class="actions" style="border-top:1px solid var(--line);padding-top:16px;margin-top:22px"><button class="btn quiet danger" data-act="del" data-id="${m.id}" style="padding-left:0">${t('del')}</button></div>`);
+  <div class="actions" style="border-top:1px solid var(--line);padding-top:16px;margin-top:22px"><button class="btn quiet danger" data-act="del" data-id="${m.id}" style="padding-left:0">${t('del')}</button></div>
+  ${showShare()?`<div class="det-fab"><button class="fab-sm" data-act="share-mem" data-id="${m.id}" aria-label="${esc(t('qsOpts'))}" title="${esc(t('qsOpts'))}">${IMG_ICON.replace('margin-right:6px','margin:0')}</button><button class="fab-main" data-act="share-quick" data-id="${m.id}" aria-label="${esc(t('qsAria'))}" title="${esc(t('qsAria'))}">${SHARE_ICON}</button></div>`:''}`);
 }
 
 
@@ -3128,6 +3140,17 @@ function drawSpecialMem(x,m,s,P){
 }
 
 const IMG_ICON='<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" style="vertical-align:-3px;margin-right:6px" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>';
+const SHARE_ICON='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>';
+async function quickShare(id,btn){const m=memOf(id);if(!m)return;if(btn)btn.classList.add('busy');
+  try{shareState={kind:'mem',data:id,theme:(shareState&&shareState.theme)||'dark',photo:true,quote:true,text:!m.quote,style:'tipo',names:false};
+    await drawShare();const c=window._shareCanvas;const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',0.92));if(!blob)throw 0;
+    const cid=mkid('c');await IDB.put(cid,blob,'cards');S.cards=[{id:cid,kind:'mem',label:memTitle(m),createdAt:Date.now()},...(S.cards||[])];saveLocal();
+    if(btn)btn.classList.remove('busy');
+    const name='memorandum-'+iso(new Date())+'.jpg';const f=new File([blob],name,{type:'image/jpeg'});
+    if(!window.claude&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f]});toast(t('qsSaved'));return}catch(e){if(e&&e.name==='AbortError'){toast(t('qsSaved'));return}}}
+    const u=await cardURL(cid);
+    openDlg(`<div class="dlg-head"><h2>${esc(t('qsReady'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><div class="story-prev"><img src="${u}" alt=""></div><p class="note" style="text-align:center;margin:8px auto 0">${esc(t('qsSaved'))}</p><div class="actions" style="justify-content:center"><button class="btn primary" data-act="card-share" data-id="${cid}">${SHARE_ICON.replace('width="24" height="24"','width="18" height="18" style="vertical-align:-3px;margin-right:6px"')}${esc(t('cardShare'))}</button></div>`);
+  }catch(e){if(btn)btn.classList.remove('busy');toast(t('tCardErr'))}}
 function showShare(){return !(S.settings&&S.settings.share===false)}
 /* ---------- Mis tarjetas: imágenes guardadas solo en este dispositivo ---------- */
 const cardURLs=new Map();
@@ -4535,20 +4558,20 @@ function openCare(){openDlg(`<div class="dlg-head"><h2>${esc(t('careTitle'))}</h
   <div class="actions"><button class="btn primary" data-act="export">${t('saveBackup')}</button>${canInstallUI()?`<button class="btn" data-act="install-how">${esc(t('instHow'))}</button>`:''}</div>`)}
 /* ---------- Recordatorio diario en el calendario del móvil: sin servidor ---------- */
 function remindTime(){return (S.settings&&S.settings.remindTime)||'21:30'}
-function remStart(){const tm=($('#rem-time')&&$('#rem-time').value)||remindTime();S.settings.remindTime=tm;saveLocal();const [h,mi]=tm.split(':').map(Number);const now=new Date();for(let k=0;k<8;k++){const d=new Date();d.setDate(d.getDate()+k);d.setHours(h,mi,0,0);if(d>now&&remAllowed(d))return d}const d=new Date();d.setHours(h,mi,0,0);d.setDate(d.getDate()+1);return d}
+function remStart(tm0){const tm=tm0||($('#rem-time')&&$('#rem-time').value)||remindTime();if(!tm0){S.settings.remindTime=tm;saveLocal()}const [h,mi]=tm.split(':').map(Number);const now=new Date();for(let k=0;k<8;k++){const d=new Date();d.setDate(d.getDate()+k);d.setHours(h,mi,0,0);if(d>now&&remAllowed(d))return d}const d=new Date();d.setHours(h,mi,0,0);d.setDate(d.getDate()+1);return d}
 const pad2=n=>String(n).padStart(2,'0');
 const icsDT=d=>`${d.getFullYear()}${pad2(d.getMonth()+1)}${pad2(d.getDate())}T${pad2(d.getHours())}${pad2(d.getMinutes())}00`;
 function remEnd(d){return new Date(d.getTime()+10*60000)}
-async function remIcs(){
-  const d=remStart(),e=remEnd(d),url='https://memorandumapp.com/';
+async function remIcs(o={}){
+  const d=remStart(o.time),e=remEnd(d),url='https://memorandumapp.com/';
   const esc2=x=>String(x).replace(/[\\,;]/g,m=>'\\'+m).replace(/\n/g,'\\n');
-  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Memorandum//ES','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:memorandum-diario-'+Date.now()+'@memorandumapp.com','DTSTAMP:'+icsDT(new Date()),'DTSTART:'+icsDT(d),'DTEND:'+icsDT(e),'RRULE:'+remRule(),'SUMMARY:'+esc2(t('remTitle')),'DESCRIPTION:'+esc2(t('remDesc')+' '+url),'URL:'+url,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc2(t('remTitle')),'TRIGGER:PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Memorandum//ES','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:memorandum-'+(o.uid||'diario')+'-'+Date.now()+'@memorandumapp.com','DTSTAMP:'+icsDT(new Date()),'DTSTART:'+icsDT(d),'DTEND:'+icsDT(e),'RRULE:'+(o.rule||remRule()),'SUMMARY:'+esc2(o.title||t('remTitle')),'DESCRIPTION:'+esc2((o.desc||t('remDesc'))+' '+url),'URL:'+url,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc2(o.title||t('remTitle')),'TRIGGER:PT0M','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
   const blob=new Blob([ics],{type:'text/calendar'});
   if(platform()==='ios'&&!window.claude){const u=URL.createObjectURL(blob);location.href=u;setTimeout(()=>URL.revokeObjectURL(u),60000);return}
   const r=await deliverFile('memorandum-'+t('remFile')+'.ics',blob,'text/calendar',{download:true});if(r==='ok')toast(t('remDone'))}
-function remGoogle(){
-  const d=remStart(),e=remEnd(d),url='https://memorandumapp.com/';
-  const q=new URLSearchParams({action:'TEMPLATE',text:t('remTitle'),dates:icsDT(d)+'/'+icsDT(e),details:t('remDesc')+' '+url,recur:'RRULE:'+remRule()});
+function remGoogle(o={}){
+  const d=remStart(o.time),e=remEnd(d),url='https://memorandumapp.com/';
+  const q=new URLSearchParams({action:'TEMPLATE',text:o.title||t('remTitle'),dates:icsDT(d)+'/'+icsDT(e),details:(o.desc||t('remDesc'))+' '+url,recur:'RRULE:'+(o.rule||remRule())});
   window.open('https://calendar.google.com/calendar/render?'+q.toString(),'_blank','noopener')}
 function openInstallHow(){
   const p=platform();const steps=t(p==='ios'?'stepsIos':p==='android'?'stepsAndroid':'stepsDesktop');
@@ -4742,6 +4765,7 @@ document.addEventListener('click',e=>{
     case 'next':if(rep.offset<0){rep.offset++;render()}break;
     case 'story':openStory();break;
     case 'share-mem':openShare('mem',id);break;
+    case 'share-quick':quickShare(id,b);break;
     case 'share-day':openShare('day',v);break;
     case 'share-conn':openShare('conn',{a:b.dataset.a,b:b.dataset.b,se:(b.dataset.se||'').split(',').filter(Boolean),st:[b.dataset.st]});break;
     case 'share-stat':if(!isPlus()){goPlus();break}openShare('stat',{mode:b.dataset.m,id:v});break;
@@ -4750,6 +4774,8 @@ document.addEventListener('click',e=>{
     case 'nz-week':rep={period:'semana',offset:0};go('informe');break;
     case 'td-show':S.settings.tudia=v==='on';S.settings.tdIntroSeen=true;savePalette();render();break;
     case 'td-try':S.settings.tudia=true;S.settings.tdIntroSeen=true;savePalette();render();break;
+    case 'td-rem':{const i=$('#td-'+v+'-time');const tm=(i&&i.value)||(v==='am'?'08:30':'21:30');S.settings['tdRem_'+v]=tm;saveLocal();const o={time:tm,rule:'FREQ=DAILY',uid:'tudia-'+v,title:t(v==='am'?'tdRemTitleAm':'tdRemTitlePm'),desc:t('tdRemDesc')};if(platform()==='android')remGoogle(o);else remIcs(o);break}
+    case 'td-late':tdState().late=true;render();setTimeout(()=>{const i=document.querySelector('[data-td=intent]');if(i)i.focus()},50);break;
     case 'td-later':S.settings.tdIntroSeen=true;savePalette();render();break;
     case 'td-want':case 'td-felt':{const st=tdState(),k=a==='td-want'?'want':'felt',mx=k==='want'?2:3;const arr=st[k];const i=arr.indexOf(v);if(i>=0)arr.splice(i,1);else{if(arr.length>=mx)arr.shift();arr.push(v)}tdErr='';render();break}
     case 'td-done':{const st=tdState();st.done=st.done===v?'':v;render();break}
