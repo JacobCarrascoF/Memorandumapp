@@ -136,7 +136,14 @@ p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
 .fab-main.busy svg{animation:qsPulse 1s ease-in-out infinite}@keyframes qsPulse{50%{opacity:.35}}
 .td-emos.hscroll{flex-wrap:nowrap}.td-rems{margin:4px 0 14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px}.td-rem{display:grid;grid-template-columns:1fr 136px auto;gap:8px;align-items:center;margin-top:6px}
 .td-late{display:block;margin:2px 0 4px;color:inherit;font-family:var(--sans);font-size:14px;opacity:.85}
-.lens-pick{border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin:0 0 12px}.lib-btn{margin:0 0 16px}
+.lens-car{position:relative;height:104px;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;margin:0 -16px}
+.lc{position:absolute;top:6px;width:68%;left:16%;height:92px;border-radius:16px;background:var(--paper);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:8px 12px;box-sizing:border-box;transition:transform .35s ease,opacity .35s ease;box-shadow:0 8px 22px rgba(30,26,40,.12)}
+.lc.prev{transform:translateX(-86%) scale(.86);opacity:.55;cursor:pointer}.lc.next{transform:translateX(86%) scale(.86);opacity:.55;cursor:pointer}.lc.cur{z-index:2}
+.lc-band{position:absolute;inset:0 0 38px 0}.lc b{position:relative;font-family:var(--serif);font-weight:400;font-size:15.5px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lc-dots{position:relative;display:flex;gap:3px;margin-top:4px}.lc-dots i{width:8px;height:8px;border-radius:50%}
+.lens-car.in-r .lc.cur{animation:lcR .35s ease}.lens-car.in-l .lc.cur{animation:lcL .35s ease}@keyframes lcR{from{transform:translateX(60%) scale(.9);opacity:.5}}@keyframes lcL{from{transform:translateX(-60%) scale(.9);opacity:.5}}
+.lens-ind{display:flex;justify-content:center;gap:8px;margin-top:4px}.lens-ind button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}.lens-ind button[aria-pressed=true]{background:var(--ink);width:20px;border-radius:4px}
+.lc-ph{text-align:center;margin:6px 0 0;font-size:14px}.lc-acts{text-align:center;margin:2px 0 0;font-size:13.5px;color:var(--muted)}.lc-acts .link{font-family:var(--sans);font-size:13.5px;color:var(--ink)}.lp-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 6px;font-size:14px;color:var(--muted)}.lp-head .link{font-family:var(--sans);font-size:14px;color:var(--ink)}
+.lens-pick{margin:0 0 16px}.lib-btn{margin:0 0 16px}
 .lens-bar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between;border-radius:16px;padding:12px 14px;margin:6px 0 14px;background:linear-gradient(90deg,rgba(233,185,73,.18),rgba(91,175,196,.18),rgba(200,75,75,.14));border:1px solid var(--line)}
 .lens-bar b{font-weight:600;font-size:14.5px}.lens-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;background:conic-gradient(#E9B949,#8DBF8B,#3F7F6E,#5BAFC4,#5672A6,#8D6BAF,#C84B4B,#E8874A,#E9B949)}.lens-bar p{margin:2px 0 0;font-size:14.5px}.lens-bar small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}.lens-bar .link{font-family:var(--sans);font-size:12.5px}.lens-bar .row{gap:6px}.lens-info{max-width:52ch;line-height:1.45}
 .lib-fam{margin:0 0 14px}.lib-fam h4{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-family:var(--serif);font-weight:400;font-size:20px}.lib-fam h4 i{width:12px;height:12px;border-radius:50%}.lib-fam .row{gap:6px}.lib-fam .chip[disabled]{opacity:.6}
@@ -1565,7 +1572,21 @@ function lensPhrase(){const st=lensStats();if(!st.tot)return '';
   const top=Object.entries(st.c).sort((a,b)=>b[1]-a[1])[0];return t('lensPh')[LENS](famName(top[0]),Math.round(100*top[1]/st.tot))}
 function lensBarHTML(){if(!LENS)return '';const un=S.emotions.filter(e=>!emoFam(e)).length;const ph=lensPhrase();
   return `<div class="lens-bar"><div><b><span class="lens-dot" aria-hidden="true"></span>${esc(t('lensBarNow',t('lensL')[LENS]))}</b>${ph?`<p>${esc(ph)}</p>`:''}${LENS==='rus'&&!lensInfoOpen?`<small>${esc(t('lensRusLegend'))}</small>`:''}${lensInfoOpen?`<small class="lens-info">${esc(t('lensInfo')[LENS])}</small>`:`<small><button class="link" data-act="lens-info">${esc(t('lensWhat'))}</button></small>`}${un?`<small>${esc(t('lensUnassigned',un))} <button class="link" data-act="nav" data-v="paleta">${esc(t('lensAssign'))}</button></small>`:''}</div><div class="row"><button class="btn" data-act="lens" data-v="">${esc(t('lensBack'))}</button><button class="btn quiet" data-act="lens-keep">${esc(t('lensKeep'))}</button></div></div>`}
-function lensPickHTML(){return `<div class="lens-pick"><p class="f" style="margin:0 0 8px">${esc(t('lensTitle'))}</p><div class="row">${['','plut','rus','ek'].map(k=>`<button class="chip" data-act="lens" data-v="${k}" aria-pressed="${LENS===k}">${esc(t('lensL')[k||'mine'])}</button>`).join('')}</div><p class="note" style="margin:8px 0 0;font-size:13.5px">${esc(t('lensHint'))}</p>${S.settings.prevColors?`<button class="link" data-act="lens-undo" style="margin-top:8px;font-family:var(--sans);font-size:14px">${esc(t('lensUndo'))}</button>`:''}</div>`}
+const LENSES=['','plut','rus','ek'];let lensDir=0;
+function lensCardHTML(L,cls){const es=emosByUse(S.emotions.map(e=>emoRaw(e.id))).map(e=>LENSES.includes(L)&&L?{...e,color:lensColor(emoRaw(e.id),L)||e.color}:emoRaw(e.id)).slice(0,10);
+  const g=`linear-gradient(100deg,${es.map((e,i)=>`${e.color} ${Math.round(i*100/Math.max(1,es.length-1))}%`).join(',')})`;
+  return `<div class="lc ${cls}" ${cls==='cur'?'':`data-act="lens" data-v="${L}"`} aria-hidden="${cls!=='cur'}"><div class="lc-band" style="background:${g}"></div><b>${esc(t('lensL')[L||'mine'])}</b><span class="lc-dots">${es.map(e=>`<i style="background:${e.color}"></i>`).join('')}</span></div>`}
+function lensPickHTML(){const i=LENSES.indexOf(LENS),n=LENSES.length,p=LENSES[(i+n-1)%n],q=LENSES[(i+1)%n];const ph=LENS?lensPhrase():'';
+  return `<div class="lens-pick"><div class="lp-head"><span>${esc(t('lensTitle'))}</span><button class="link" data-act="lib-open">✦ ${esc(t('libBtn'))}</button></div>
+  <div class="lens-car${lensDir?(lensDir>0?' in-r':' in-l'):''}" role="group" aria-label="${esc(t('lensTitle'))}">${lensCardHTML(p,'prev')}${lensCardHTML(LENS,'cur')}${lensCardHTML(q,'next')}</div>
+  <div class="lens-ind">${LENSES.map(k=>`<button data-act="lens" data-v="${k}" aria-pressed="${LENS===k}" aria-label="${esc(t('lensL')[k||'mine'])}"></button>`).join('')}</div>
+  ${LENS?`${ph?`<p class="lc-ph">${esc(ph)}</p>`:''}${lensInfoOpen?`<p class="note lens-info" style="margin:4px 0 0;font-size:13px">${esc(t('lensInfo')[LENS])}</p>`:''}<p class="lc-acts"><button class="link" data-act="lens-info">${esc(lensInfoOpen?t('close'):t('lensWhat'))}</button> · <button class="link" data-act="lens-keep">${esc(t('lensKeep'))}</button></p>`:''}
+  ${S.settings.prevColors&&!LENS?`<button class="link" data-act="lens-undo" style="margin-top:8px;font-family:var(--sans);font-size:14px">${esc(t('lensUndo'))}</button>`:''}</div>`}
+(function(){let sx=null,sy=null;
+  document.addEventListener('pointerdown',e=>{const r=e.target.closest&&e.target.closest('.lens-car');if(!r){sx=null;return}sx=e.clientX;sy=e.clientY},{passive:true});
+  document.addEventListener('pointerup',e=>{if(sx==null)return;const dx=e.clientX-sx,dy=e.clientY-sy;sx=null;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3){const n=LENSES.length,i=LENSES.indexOf(LENS);LENS=LENSES[(i+(dx<0?1:-1)+n)%n];lensDir=dx<0?1:-1;lensInfoOpen=false;const y=window.scrollY;render();window.scrollTo(0,y);lensDir=0}});
+  document.addEventListener('pointercancel',()=>{sx=null});})();
 function famPickHTML(e){const f=e.fam==='none'?null:emoFam(e);const cur=f&&!Array.isArray(f.fam)?f.fam:'';
   return `<label class="f">${esc(t('famQ'))} <small>${esc(t('famHint'))}</small></label>${f&&Array.isArray(f.fam)?`<p class="note" style="margin:0 0 8px">${esc(t('famMix',famName(f.fam[0]),famName(f.fam[1])))}</p>`:''}
   <div class="row fam-pick">${FAM_IDS.map(k=>`<button class="chip" style="--c:${FAM[k].c}" data-act="emo-fam" data-id="${e.id}" data-v="${k}" aria-pressed="${cur===k}"><i></i>${esc(cap(famName(k)))}</button>`).join('')}<button class="chip" data-act="emo-fam" data-id="${e.id}" data-v="none" aria-pressed="${!f}">${esc(t('famNone'))}</button></div>
@@ -1767,7 +1788,7 @@ function render(){applyFont();
   else if(view==='paleta')m.innerHTML=vPaleta();
   else if(view==='informe')m.innerHTML=vInforme();
   else if(view==='perfil')m.innerHTML=vPerfil();
-  if(LENS&&view!=='perfil')m.insertAdjacentHTML('afterbegin',lensBarHTML());
+  if(LENS&&view!=='perfil'&&view!=='paleta')m.insertAdjacentHTML('afterbegin',lensBarHTML());
   else if(view==='mapa')m.innerHTML=vMapa();
   if(sameView)m.querySelectorAll('[data-hs]').forEach(e=>{if(hs[e.dataset.hs])e.scrollLeft=hs[e.dataset.hs]});
   hydratePhotos(m);
@@ -2541,7 +2562,7 @@ function vPaleta(){
     <p class="note" style="margin:4px 0 6px">${esc(t('typeHideNote'))}</p>
   </div>`:`
   <p class="lead">${esc(t('palLead2'))}</p>
-  ${lensPickHTML()}<button class="btn lib-btn" data-act="lib-open">✦ ${esc(t('libBtn'))}</button>
+  ${lensPickHTML()}
   <div class="emo-grid"><button class="emo-tile add" data-act="emo-add"><span class="emo-sw"><b>+</b></span><b>${esc(t('emoNewShort'))}</b><small>${esc(t('emoAddSub'))}</small></button>${S.emotions.map(lensEmo).map(e=>`<button class="emo-tile" style="--c:${e.color}" data-act="emo-open" data-id="${e.id}"><span class="emo-sw"></span><b>${esc(e.name)}</b><small>${esc(t('nMem',cnt(e.id)))}</small></button>`).join('')}</div>
 `);
 }
@@ -4900,8 +4921,8 @@ document.addEventListener('click',e=>{
     case 'lib-open':openLib();break;
     case 'lib-open-fresh':{const e=S.emotions.find(x=>x.id===id);if(e&&emoFresh===id&&!S.memories.some(m=>(m.emotions||[]).includes(id))){S.emotions=S.emotions.filter(x=>x.id!==id);emoFresh=null;savePalette();render()}openLib();break}
     case 'lib-add':libAdd(+v);break;
-    case 'lens-info':lensInfoOpen=!lensInfoOpen;render();break;
-    case 'lens':LENS=v||'';lensInfoOpen=false;render();window.scrollTo(0,0);break;
+    case 'lens-info':{lensInfoOpen=!lensInfoOpen;const y=window.scrollY;render();window.scrollTo(0,y);break}
+    case 'lens':{const i0=LENSES.indexOf(LENS),i1=LENSES.indexOf(v||'');lensDir=i1>i0?1:-1;LENS=v||'';lensInfoOpen=false;if(view==='paleta'){const y=window.scrollY;render();window.scrollTo(0,y)}else{render();window.scrollTo(0,0)}lensDir=0;break}
     case 'lens-keep':{if(!LENS)break;const prev={};S.emotions.forEach(e=>{const c=lensColor(e,LENS);if(c){prev[e.id]=e.color;e.color=c}});S.settings.prevColors=prev;LENS='';savePalette();render();toast(t('tLensKept'));break}
     case 'lens-undo':{const p=S.settings.prevColors||{};S.emotions.forEach(e=>{if(p[e.id])e.color=p[e.id]});delete S.settings.prevColors;savePalette();render();toast(t('tLensUndone'));break}
     case 'emo-fam':{const e=S.emotions.find(x=>x.id===id);if(!e)break;e.fam=v;if(v!=='none'&&e.lvl==null)e.lvl=1;savePalette();openEmo(id);render();break}
