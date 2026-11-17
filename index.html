@@ -118,6 +118,7 @@ p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
 .det-fab{position:sticky;bottom:14px;display:flex;justify-content:flex-end;align-items:center;gap:10px;margin:-40px 0 0;pointer-events:none;z-index:3}.det-fab button{pointer-events:auto;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 22px rgba(30,26,40,.25)}
 .fab-main{width:58px;height:58px;background:var(--accent);color:var(--on-accent)}.fab-sm{width:44px;height:44px;background:var(--paper);color:var(--ink);border:1px solid var(--line)!important}
 .fab-main.busy svg{animation:qsPulse 1s ease-in-out infinite}@keyframes qsPulse{50%{opacity:.35}}
+.why-box{border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:6px}.why-box b{display:block;font-weight:600;font-size:16px}.why-box p{margin:6px 0 0;color:var(--muted);font-size:15px}.sw-lock{font-size:13.5px;margin:8px 0 6px}
 .stars-in{display:flex;gap:4px}.stars-in button{border:0;background:none;font-size:30px;line-height:1;padding:4px 3px;color:var(--line);cursor:pointer}.stars-in button.on{color:#D9A441}
 .tpl-h{margin:12px 0 6px;font-size:13.5px}.tpl-row{gap:6px}
 .arch-sort{margin:4px 0 14px}
@@ -932,6 +933,7 @@ es:{
   pfAboutPh:'Un par de frases: a qué te dedicas, qué te mueve, qué etapa estás viviendo…',
   onbName:'¿Cómo quieres que te llame?', onbNamePh:'Tu nombre o un alias (opcional)',
   youWere:n=>`. Tenías ${n} años.`,
+  whyTitle:'Esto es de Plus', whyNoPlus:'Tu prueba de Plus ha terminado, pero todo lo que guardaste sigue ahí.', why:{swatch:['Elegir colores de la paleta sugerida','Sin Plus puedes elegir cualquier color con el cuadro de color que hay justo encima.'],diary:['Leer tu diario a máquina o en imprenta','La letra de pluma es gratis y la tienes siempre.'],film:['Tu película en color',''],photofilm:['La película de tus fotos',''],skyfilm:['El vídeo de tu constelación',''],book:['Tu libro en PDF',''],audio:['Más sonidos por recuerdo','Gratis puedes guardar uno por recuerdo.'],sharestat:['La imagen de esta estadística',''],sharedrawer:['Enviar un cajón a otra persona','Recibir cajones es gratis.'],skylayer:['Ver etiquetas y textos en la constelación','Los colores y las conexiones se ven gratis.'],storytpl:['Esta plantilla de historia','Aura, Paleta y Frase son gratis.'],mapyear:['Ver los años anteriores en el mapa','El año actual se ve gratis.'],mapsave:['Guardar la imagen del mapa','']}, whySeePlus:'Ver qué incluye Plus',
   qsAria:'Compartir este recuerdo', qsOpts:'Elegir estilo', qsReady:'Tu tarjeta está lista', qsSaved:'Guardada también en Tarjetas',
   tplHead:'Plantillas', tplOwn:'O crea el tuyo', sortDate:'Por fecha', sortBest:'★ Mejor puntuados', starsLbl:n=>n?`${n} de 5`:'Sin valorar',
   otherType:'+ Otro tipo', newTypePh:'Por ejemplo: sueño, viaje, receta', createType:'Crear tipo', titleLbl:'Título', customPh:'Lo que quieras recordar de esto',
@@ -1162,6 +1164,7 @@ en:{
   pfAboutPh:"A couple of sentences: what you do, what moves you, what stage of life you're in…",
   onbName:'What should I call you?', onbNamePh:'Your name or a nickname (optional)',
   youWere:n=>`. You were ${n}.`,
+  whyTitle:'This is part of Plus', whyNoPlus:'Your Plus trial has ended, but everything you saved is still here.', why:{swatch:['Picking colours from the suggested palette','Without Plus you can pick any colour with the colour box just above.'],diary:['Reading your diary in typewriter or print','Fountain pen is free, always.'],film:['Your film in colour',''],photofilm:['The film of your photos',''],skyfilm:['The video of your constellation',''],book:['Your PDF book',''],audio:['More sounds per memory','Free lets you keep one per memory.'],sharestat:['The image of this statistic',''],sharedrawer:['Sending a drawer to someone','Receiving drawers is free.'],skylayer:['Tags and texts in the constellation','Colours and connections are free.'],storytpl:['This story template','Aura, Palette and Quote are free.'],mapyear:['Past years on the map','The current year is free.'],mapsave:['Saving the map image','']}, whySeePlus:'See what Plus includes',
   qsAria:'Share this memory', qsOpts:'Choose style', qsReady:'Your card is ready', qsSaved:'Also saved in Cards',
   tplHead:'Templates', tplOwn:'Or create your own', sortDate:'By date', sortBest:'★ Top rated', starsLbl:n=>n?`${n} out of 5`:'Not rated',
   otherType:'+ Another type', newTypePh:'For example: dream, trip, recipe', createType:'Create type', titleLbl:'Title', customPh:'Whatever you want to remember about it',
@@ -1392,6 +1395,7 @@ ca:{
   pfAboutPh:`Un parell de frases: a què et dediques, què et mou, quina etapa estàs vivint…`,
   onbName:'Com vols que et digui?', onbNamePh:'El teu nom o un àlies (opcional)',
   youWere:n=>`. Tenies ${n} anys.`,
+  whyTitle:'Això és de Plus', whyNoPlus:"La teva prova de Plus s'ha acabat, però tot el que vas desar continua aquí.", why:{swatch:['Triar colors de la paleta suggerida',"Sense Plus pots triar qualsevol color amb el quadre de color que hi ha just a sobre."],diary:['Llegir el teu diari a màquina o en impremta','La lletra de ploma és gratis i la tens sempre.'],film:['La teva pel·lícula en color',''],photofilm:['La pel·lícula de les teves fotos',''],skyfilm:['El vídeo de la teva constel·lació',''],book:['El teu llibre en PDF',''],audio:['Més sons per record','Gratis pots desar-ne un per record.'],sharestat:["La imatge d'aquesta estadística",''],sharedrawer:['Enviar un calaix a una altra persona','Rebre calaixos és gratis.'],skylayer:['Veure etiquetes i textos a la constel·lació','Els colors i les connexions es veuen gratis.'],storytpl:["Aquesta plantilla d'història",'Aura, Paleta i Frase són gratis.'],mapyear:['Veure els anys anteriors al mapa',"L'any actual es veu gratis."],mapsave:['Desar la imatge del mapa','']}, whySeePlus:'Mira què inclou Plus',
   qsAria:'Comparteix aquest record', qsOpts:"Tria l'estil", qsReady:'La teva targeta és a punt', qsSaved:'Desada també a Targetes',
   tplHead:'Plantilles', tplOwn:'O crea el teu', sortDate:'Per data', sortBest:'★ Més ben valorats', starsLbl:n=>n?`${n} de 5`:'Sense valorar',
   otherType:'+ Un altre tipus', newTypePh:'Per exemple: somni, viatge, recepta', createType:'Crea el tipus', titleLbl:'Títol', customPh:`El que vulguis recordar d'això`,
@@ -2317,7 +2321,7 @@ function swatchesHTML(e){
   const lock=!isPlus();
   const more=hidden>0?`<button class="sw-more" data-act="sw-more" data-id="${e.id}" aria-expanded="${open}">${esc(open?t('swLess'):t('swMore',hidden))}</button>`:'';
   const fams=`<div class="hscroll sw-fams" data-hs="swfam" role="group" aria-label="${esc(t('swFamLbl'))}">${Object.keys(SW_FAMS).map(k=>`<button class="chip" data-act="sw-fam" data-id="${e.id}" data-v="${k}" aria-pressed="${fam===k}">${esc(t('swFams')[k])}</button>`).join('')}</div>`;
-  return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
+  return fams+(lock?`<p class="note sw-lock">${plusBadge()} ${esc(t('why').swatch[1])}</p>`:'')+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
 const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.32';
@@ -3243,7 +3247,7 @@ let film=null;
 function filmPeriodTitle(){return t('filmT_'+rep.period)}
 function galleryItems(){const all=filtered().filter(m=>(m.photos||[]).length&&galOk(m));const ms=(galYear?all.filter(m=>m.date.startsWith(galYear)):all).sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0));return ms.flatMap(m=>m.photos.map(pid=>({m,pid})))}
 async function openPhotoFilm(){
-  if(!isPlus()){goPlus();return}
+  if(!isPlus()){goPlus('photofilm');return}
   let items=galleryItems();if(!items.length){toast(t('galleryEmpty'));return}
   const MAX=50;if(items.length>MAX){const st=items.length/MAX;items=Array.from({length:MAX},(_,i)=>items[Math.floor(i*st)])}
   const ms=[...new Map(items.map(x=>[x.m.id,x.m])).values()];
@@ -3259,7 +3263,7 @@ async function openPhotoFilm(){
   filmStart();
 }
 async function openFilm(sel,opts){
-  const rc=opts&&opts.recap;if(!isPlus()&&!rc){goPlus();return}
+  const rc=opts&&opts.recap;if(!isPlus()&&!rc){goPlus('film');return}
   let ms,label,title;
   if(sel){ms=sel.ms.slice(-36);label=sel.label;title=sel.title}
   else{const r=range(rep.period,rep.offset);ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0)).slice(-36);label=r.label;title=filmPeriodTitle()}
@@ -3368,7 +3372,7 @@ function filmFrame(cv,ts){
 }
 /* ---------- Vídeo de la constelación: el cielo se dibuja recuerdo a recuerdo (Plus) ---------- */
 async function openSkyFilm(){
-  if(!isPlus()){goPlus();return}
+  if(!isPlus()){goPlus('skyfilm');return}
   const L=skyLast;if(!L||L.nodes.length<2){toast(t('skyMin'));return}
   const N=L.nodes.length;const cn=skyLayout(L.nodes.map(n=>n.m),L.edges,'card');
   const ord=L.nodes.map((n,i)=>i).sort((a,b)=>L.nodes[a].m.date.localeCompare(L.nodes[b].m.date)||(L.nodes[a].m.createdAt||0)-(L.nodes[b].m.createdAt||0));
@@ -3678,7 +3682,7 @@ async function buildBookPDF(opts,onStep){
   return {blob:new Blob(chunks,{type:'application/pdf'}),pages:pages.length};
 }
 function openBook(sel){
-  if(!isPlus()){goPlus();return}
+  if(!isPlus()){goPlus('book');return}
   let ms,label,title,period;
   if(sel){({ms,label,title,period}=sel)}
   else{const r=range(rep.period,rep.offset);ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0));label=r.label;title=t('filmT_'+rep.period);period=rep.period}
@@ -3836,7 +3840,7 @@ function fmtDur(x){x=Math.max(0,Math.round(x||0));return Math.floor(x/60)+':'+St
 let rec=null,auEl=null,auId=null;
 function auMime(){if(typeof MediaRecorder==='undefined')return null;return ['audio/webm;codecs=opus','audio/mp4','audio/webm','audio/ogg;codecs=opus'].find(m=>{try{return MediaRecorder.isTypeSupported(m)}catch(e){return false}})||''}
 async function recStart(){
-  if(!draft||rec)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus();return}
+  if(!draft||rec)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus('audio');return}
   const mime=auMime();if(mime===null||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast(t('auNoRec'));return}
   let stream;try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){toast(t('auNoMic'));return}
   let mr;try{mr=new MediaRecorder(stream,mime?{mimeType:mime,audioBitsPerSecond:64000}:undefined)}catch(e){stream.getTracks().forEach(x=>x.stop());toast(t('auNoRec'));return}
@@ -3856,7 +3860,7 @@ async function addAudioBlob(blob,dur){
   draft.audios=[...(draft.audios||[]),{id,dur:Math.round(dur||0)}];draft._new=[...(draft._new||[]),id];renderEditor();
 }
 async function addAudioFile(f){
-  if(!draft||!f)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus();return}
+  if(!draft||!f)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus('audio');return}
   const dur=await new Promise(res=>{const u=URL.createObjectURL(f);const a=new Audio();a.preload='metadata';const done=v=>{URL.revokeObjectURL(u);res(v)};a.onloadedmetadata=()=>done(isFinite(a.duration)?a.duration:0);a.onerror=()=>done(-1);setTimeout(()=>done(0),4000);a.src=u});
   if(dur<0){toast(t('auBadFile'));return}
   if(dur>lim.sec+1){toast(isPlus()?t('auLongPlus'):t('auLongFree'));return}
@@ -4437,7 +4441,12 @@ function plusSection(){
   return `<div class="ps-card">${head}${intro}${isPlayApp()?'':`<p style="margin:10px 0 2px;font-size:15px">${esc(t('plusPrice'))}</p><p class="note" style="margin:0 0 4px">${esc(t('plusNoAuto'))}</p>`}${buy}${links(st==='expired'?t('plusRenewCode'):t('plusHaveCode'))}${codeRow(st==='expired'?t('plusRenewCode'):t('plusHaveCode'))}</div>`;
 }
 function goPlusSec(){closeDlg();go('perfil');setTimeout(()=>{const el=$('#plus-sec');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},80)}
-function goPlus(){openPlusCompare()}
+function goPlus(k){const w=k&&(t('why')||{})[k];if(!w){openPlusCompare();return}
+  const ended=!trialActive()&&plusState()!=='active'&&S.settings&&S.settings.trialStart;
+  openDlg(`<div class="dlg-head"><h2>${esc(t('whyTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  <div class="why-box"><b>${plusBadge()} ${esc(w[0])}</b>${w[1]?`<p>${esc(w[1])}</p>`:''}</div>
+  ${ended?`<p class="note" style="margin:10px 0 0">${esc(t('whyNoPlus'))}</p>`:''}
+  <div class="actions"><button class="btn quiet" data-act="plus-code-go">${esc(t('cmpCode'))}</button><button class="btn primary" data-act="go-plus">${esc(t('whySeePlus'))}</button></div>`)}
 function openPlusCompare(){
   const mk=v=>v===1?'<span class="ok" aria-label="✓">✓</span>':v===0?'<span class="no" aria-label="—">—</span>':esc(v);
   const rows=t('cmpRows').filter(r=>SHARE_ON||!/compart|Shared/.test(r[0]));
@@ -4612,7 +4621,7 @@ document.addEventListener('click',e=>{
     case 'dy-prev':dyGo(dy.i-1,-1);break;
     case 'dy-next':dyGo(dy.i+1,1);break;
     case 'dy-aa':dyAa();break;
-    case 'dy-style':{if(v!=='pluma'&&!isPlus()){goPlus();break}S.settings.diaryStyle=v;saveLocal();closeDlg();dyRestyle();break}
+    case 'dy-style':{if(v!=='pluma'&&!isPlus()){goPlus('diary');break}S.settings.diaryStyle=v;saveLocal();closeDlg();dyRestyle();break}
     case 'ph-recover':$('#ph-importer').click();break;
     case 'ph-info':openDlg(`<div class="dlg-head"><h2>${esc(t('phLostInfoT'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><p style="white-space:pre-line;margin:4px 0 0;max-width:46ch">${esc(t('phLostInfoTx'))}</p><div class="actions"><button class="btn primary" data-act="ph-recover">${esc(t('phLostBtn'))}</button></div>`);break;
     case 'ph-snooze':S.settings.phLostSnooze=lostTotal();saveLocal();render();break;
@@ -4682,7 +4691,7 @@ document.addEventListener('click',e=>{
     case 'share-quick':quickShare(id,b);break;
     case 'share-day':openShare('day',v);break;
     case 'share-conn':openShare('conn',{a:b.dataset.a,b:b.dataset.b,se:(b.dataset.se||'').split(',').filter(Boolean),st:[b.dataset.st]});break;
-    case 'share-stat':if(!isPlus()){goPlus();break}openShare('stat',{mode:b.dataset.m,id:v});break;
+    case 'share-stat':if(!isPlus()){goPlus('sharestat');break}openShare('stat',{mode:b.dataset.m,id:v});break;
     case 'share-style':if(shareState){shareState.style=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'nz-close':S.settings.nudgeClosed=iso(new Date());saveLocal();render();break;
     case 'nz-week':rep={period:'semana',offset:0};go('informe');break;
@@ -4723,7 +4732,7 @@ document.addEventListener('click',e=>{
     case 'share-dual':openShare('dual',{ids:String(v).split(',')});break;
     case 'rc-open':closeDlg();filters=NOFILTER();filters.drawer=id;archMode='lista';go('archivo');break;
     case 'noop':break;
-    case 'sd-open':if(!isPlus()){goPlus();break}openShareDrawer(id);break;
+    case 'sd-open':if(!isPlus()){goPlus('sharedrawer');break}openShareDrawer(id);break;
     case 'sd-send':sendDrawer(id);break;
     case 'set-theme':S.settings.theme=v==='auto'?'':v;applyTheme();savePalette();{const y=window.scrollY;render();window.scrollTo(0,y)}break;
     case 'set-font':S.settings.font=v;applyFont();savePalette();{const y=window.scrollY;render();window.scrollTo(0,y)}break;
@@ -4731,12 +4740,12 @@ document.addEventListener('click',e=>{
     case 'sw-more':{if(id==='__new'){swOpen.has(id)?swOpen.delete(id):swOpen.add(id);openNewEmo();break}swOpen.has(id)?swOpen.delete(id):swOpen.add(id);if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y);break}
     case 'emo-open':openEmo(id);break;
     case 'pal-tab':palTab=v;render();break;
-    case 'sky-show':{if(SKY_PLUS_LAYERS.includes(v)&&!isPlus()){goPlus();break}const cur=skyShow();cur[v]=!cur[v];S.settings.skyShow=cur;saveLocal();document.querySelectorAll(`[data-act="sky-show"][data-v="${v}"]`).forEach(x=>x.setAttribute('aria-pressed',String(cur[v])));skyApply();break}
+    case 'sky-show':{if(SKY_PLUS_LAYERS.includes(v)&&!isPlus()){goPlus('skylayer');break}const cur=skyShow();cur[v]=!cur[v];S.settings.skyShow=cur;saveLocal();document.querySelectorAll(`[data-act="sky-show"][data-v="${v}"]`).forEach(x=>x.setAttribute('aria-pressed',String(cur[v])));skyApply();break}
     case 'sky-fs':skyFsSet(!skyFs);break;
-    case 'emo-swatch':{if(!isPlus()){goPlus();break}if(id==='__new'){simOpen=null;newEmoColor=v;openNewEmo();break}const it=S.emotions.find(x=>x.id===id);if(it){simOpen=null;it.color=v;saveLocal();savePalette();if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y)}break}
+    case 'emo-swatch':{if(!isPlus()){goPlus('swatch');break}if(id==='__new'){simOpen=null;newEmoColor=v;openNewEmo();break}const it=S.emotions.find(x=>x.id===id);if(it){simOpen=null;it.color=v;saveLocal();savePalette();if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y)}break}
     case 'share-theme':if(shareState){shareState.theme=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'share-save':if(shareBlob){const nm=shareState?shareState.kind:'tarjeta';deliverFile('memorandum-'+nm+'-'+iso(new Date())+'.png',shareBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}break;
-    case 'story-tpl':{const pl=STORY_TPLS.find(z=>z[0]===v);if(pl&&pl[1]&&!isPlus()){goPlus();break}storyTpl=v;refreshStoryControls();drawStory();break}
+    case 'story-tpl':{const pl=STORY_TPLS.find(z=>z[0]===v);if(pl&&pl[1]&&!isPlus()){goPlus('storytpl');break}storyTpl=v;refreshStoryControls();drawStory();break}
     case 'story-theme':storyTheme=v;refreshStoryControls();drawStory();break;
     case 'story-save':
       if(storyBlob){deliverFile('memorandum-'+rep.period+'-'+iso(new Date())+'.png',storyBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}
@@ -4772,10 +4781,10 @@ document.addEventListener('click',e=>{
     case 'day':openDay(v);break;
     case 'day-add':closeDlg();openEditor(null,{date:v});break;
     case 'go-map':closeDlg();mapRange=null;mapCustomOpen=false;go('mapa');break;
-    case 'map-year':{const y=+v;if(y!==new Date().getFullYear()&&!isPlus()){goPlus();break}mapRange={kind:'year',year:y,s:`${y}-01-01`,e:`${y}-12-31`,label:String(y)};mapCustomOpen=false;render();break}
-    case 'map-custom':if(!isPlus()){goPlus();break}mapCustomOpen=true;render();break;
+    case 'map-year':{const y=+v;if(y!==new Date().getFullYear()&&!isPlus()){goPlus('mapyear');break}mapRange={kind:'year',year:y,s:`${y}-01-01`,e:`${y}-12-31`,label:String(y)};mapCustomOpen=false;render();break}
+    case 'map-custom':if(!isPlus()){goPlus('mapyear');break}mapCustomOpen=true;render();break;
     case 'map-apply':{const a=($('#map-from')||{}).value,z=($('#map-to')||{}).value;if(!a||!z||a>z){toast(t('mapBadRange'));break}if(rangeDays({s:a,e:z})>1100){toast(t('mapBadRange'));break}mapRange={kind:'custom',s:a,e:z,label:fmt(a,{day:'numeric',month:'short',year:'numeric'})+' – '+fmt(z,{day:'numeric',month:'short',year:'numeric'})};render();break}
-    case 'map-save':if(isPlus())saveMapImage();else goPlus();break;
+    case 'map-save':if(isPlus())saveMapImage();else goPlus('mapsave');break;
     case 'plus-activate':activatePlus(($('#plus-code')||{}).value);break;
     case 'gal-year':galYear=v;render();break;
     case 'import':$('#importer').click();break;
