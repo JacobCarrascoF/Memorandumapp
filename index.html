@@ -541,7 +541,7 @@ body.sky-fs nav.tabs,body.sky-fs header.top{visibility:hidden}
 .reloj-ring.anim svg{-webkit-mask:conic-gradient(#000 var(--rj),transparent 0);mask:conic-gradient(#000 var(--rj),transparent 0);animation:rjDraw 1.2s cubic-bezier(.3,.7,.3,1) both}
 @keyframes rjDraw{from{--rj:0deg}to{--rj:360deg}}
 @media (prefers-reduced-motion:reduce){.reloj-ring.anim svg{animation:none;-webkit-mask:none;mask:none}}
-.reloj-acts{justify-content:center;gap:8px;margin:6px 0 4px}
+.reloj-acts{justify-content:center;gap:4px 8px;margin:6px 0 4px;flex-wrap:wrap}.map-ico{display:inline-block;width:12px;height:12px;margin-right:7px;vertical-align:-1px;background:linear-gradient(90deg,#D4A373 0 33%,#8FA9C7 0 66%,#E9C46A 0) top/100% 50% no-repeat,linear-gradient(90deg,#E5A9B4 0 33%,#7FB7A4 0 66%,#5B5F97 0) bottom/100% 50% no-repeat;border-radius:2px}
 .reloj .reloj-ring{touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .reloj-ring.bump svg{animation:rjBump .32s ease}@keyframes rjBump{30%{transform:translateX(-10px)}60%{transform:translateX(8px)}}
 .rj-dots{display:flex;justify-content:center;gap:7px;margin:2px 0 8px}.rj-dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}.rj-dots i.on{background:var(--ink);width:16px;border-radius:3px}
@@ -916,7 +916,7 @@ es:{
   exWhen:'Cuándo aparece', exWeekday:'Qué días pesa más', exDaypart:'A qué hora', exWords:'Palabras que la acompañan', exTypes:'En qué recuerdos',
   exMems:'Sus recuerdos', exSeeAll:'Ver todos en el Archivo', exNone:'Esta emoción no aparece en este periodo.',
   mapTitle:'Mapa en color', mapLead:'Cada cuadrado es un día, pintado con lo que sentiste. Toca uno para ver sus recuerdos.',
-  mapThisYear:'Este año', mapCustom:'Otras fechas', mapFrom:'Desde', mapTo:'Hasta', mapApply:'Ver', mapSeeYear:'Ver el mapa de tu año',
+  mapThisYear:'Este año', mapCustom:'Otras fechas', mapFrom:'Desde', mapTo:'Hasta', mapApply:'Ver', mapSeeYear:'Ver el mapa de tu año', mapShort:'Tu año en días',
   mapSave:'Guardar imagen', mapLocked:'Con Plus, puedes ver el mapa de cualquier año o de las fechas que quieras, y guardarlo como imagen.',
   mapDaysWith:(a,b)=>`${a} de ${b} días con recuerdos.`, mapCardCustom:'Mis días', mapBadRange:'Elige una fecha de inicio anterior a la de final.',
   goDay:'Ir a un día', dayEmpty:'No guardaste nada este día.', dayAdd:'Guardar un recuerdo en este día', daySameOther:'Ese mismo día, otros años', dayAround:'Días cercanos', prevDay:'Día anterior', nextDay:'Día siguiente',
@@ -1149,7 +1149,7 @@ en:{
   exWhen:'When it appears', exWeekday:'Which days it weighs most', exDaypart:'What time of day', exWords:'Words that come with it', exTypes:'In which memories',
   exMems:'Its memories', exSeeAll:'See them all in the Archive', exNone:"This emotion doesn't appear in this period.",
   mapTitle:'Colour map', mapLead:'Each square is a day, painted with what you felt. Tap one to see its memories.',
-  mapThisYear:'This year', mapCustom:'Other dates', mapFrom:'From', mapTo:'To', mapApply:'Show', mapSeeYear:'See the map of your year',
+  mapThisYear:'This year', mapCustom:'Other dates', mapFrom:'From', mapTo:'To', mapApply:'Show', mapSeeYear:'See the map of your year', mapShort:'Your year in days',
   mapSave:'Save image', mapLocked:'With Plus, you can see the map of any year or any dates you like, and save it as an image.',
   mapDaysWith:(a,b)=>`${a} of ${b} days with memories.`, mapCardCustom:'My days', mapBadRange:'Choose a start date before the end date.',
   goDay:'Go to a day', dayEmpty:"You didn't save anything on this day.", dayAdd:'Save a memory on this day', daySameOther:'This same day, other years', dayAround:'Nearby days', prevDay:'Previous day', nextDay:'Next day',
@@ -1382,7 +1382,7 @@ ca:{
   exWhen:'Quan apareix', exWeekday:'Quins dies pesa més', exDaypart:'A quina hora', exWords:"Paraules que l'acompanyen", exTypes:'En quins records',
   exMems:'Els seus records', exSeeAll:"Veure'ls tots a l'Arxiu", exNone:'Aquesta emoció no apareix en aquest període.',
   mapTitle:'Mapa en color', mapLead:"Cada quadrat és un dia, pintat amb el que vas sentir. Toca'n un per veure'n els records.",
-  mapThisYear:'Aquest any', mapCustom:'Altres dates', mapFrom:'Des de', mapTo:'Fins a', mapApply:'Veure', mapSeeYear:"Veure el mapa del teu any",
+  mapThisYear:'Aquest any', mapCustom:'Altres dates', mapFrom:'Des de', mapTo:'Fins a', mapApply:'Veure', mapSeeYear:"Veure el mapa del teu any", mapShort:"El teu any en dies",
   mapSave:'Desa la imatge', mapLocked:"Amb Plus, pots veure el mapa de qualsevol any o de les dates que vulguis, i desar-lo com a imatge.",
   mapDaysWith:(a,b)=>`${a} de ${b} dies amb records.`, mapCardCustom:'Els meus dies', mapBadRange:"Tria una data d'inici anterior a la de final.",
   goDay:'Anar a un dia', dayEmpty:'No vas desar res aquest dia.', dayAdd:'Desa un record en aquest dia', daySameOther:'Aquest mateix dia, altres anys', dayAround:'Dies propers', prevDay:'Dia anterior', nextDay:'Dia següent',
@@ -1970,7 +1970,7 @@ function relojHTML(){
   const sc=rjScale(),an=rjAnim,dir=rjDir;rjAnim=false;rjDir=0;
   return `<section class="reloj" aria-label="${esc(t('relojAria'))}"><div class="seg seg-full" role="group" aria-label="${esc(t('relojLbl'))}">${RJ.map(k=>`<button data-act="rj-scale" data-v="${k}" aria-pressed="${k===sc}">${esc(t('relojScales')[k])}</button>`).join('')}</div>
   <div class="reloj-ring${an||dir?' anim':''}">${rjSVG(sc,360)}</div>${RJ.length?`<div class="rj-dots" aria-hidden="true">${RJ.map(k=>`<i${k===sc?' class="on"':''}></i>`).join('')}</div>`:''}
-  <div class="row reloj-acts">${showShare()?`<button class="btn quiet" data-act="rj-share">✦ ${esc(t('relojShare'))}</button>`:''}<button class="btn quiet" data-act="rj-see">${esc(t('relojSee'))}</button></div>
+  <div class="row reloj-acts">${showShare()?`<button class="btn quiet" data-act="rj-share">✦ ${esc(t('relojShare'))}</button>`:''}<button class="btn quiet" data-act="rj-see">${esc(t('relojSee'))}</button><button class="btn quiet" data-act="go-map"><i class="map-ico" aria-hidden="true"></i>${esc(t('mapShort'))}</button></div>
   <p class="note" style="text-align:center;font-size:13px;margin:4px 0 0">${esc(t('relojTap')[sc])} <button class="linkbtn rj-how" data-act="rj-how">ⓘ ${esc(t('relojHow'))}</button></p></section>`}
 function rjHow(){openDlg(`<div class="dlg-head"><h2>${esc(t('relojHowT'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
   <div class="reloj-ring" style="max-width:220px;margin:0 auto 6px">${rjSVG(rjScale(),360)}</div>
