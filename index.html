@@ -115,6 +115,15 @@ p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
 .ficha-meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
 .ficha-title{font-family:var(--serif);font-size:22px;line-height:1.15}
 .ficha-source{font-size:13.5px;color:var(--muted);margin-top:-2px}
+.det-fab{position:sticky;bottom:14px;display:flex;justify-content:flex-end;align-items:center;gap:10px;margin:-40px 0 0;pointer-events:none;z-index:3}.det-fab button{pointer-events:auto;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 22px rgba(30,26,40,.25)}
+.fab-main{width:58px;height:58px;background:var(--accent);color:var(--on-accent)}.fab-sm{width:44px;height:44px;background:var(--paper);color:var(--ink);border:1px solid var(--line)!important}
+.fab-main.busy svg{animation:qsPulse 1s ease-in-out infinite}@keyframes qsPulse{50%{opacity:.35}}
+.why-box{border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:6px}.why-box b{display:block;font-weight:600;font-size:16px}.why-box p{margin:6px 0 0;color:var(--muted);font-size:15px}.sw-lock{font-size:13.5px;margin:8px 0 6px}
+.stars-in{display:flex;gap:4px}.stars-in button{border:0;background:none;font-size:30px;line-height:1;padding:4px 3px;color:var(--line);cursor:pointer}.stars-in button.on{color:#D9A441}
+.tpl-h{margin:12px 0 6px;font-size:13.5px}.tpl-row{gap:6px}
+.arch-sort{margin:4px 0 14px}
+.dy-link{display:inline-block;margin:4px 0 6px;font-size:.8em;color:inherit;text-decoration:underline;text-underline-offset:3px;opacity:.8;position:relative;z-index:2}
+.dy-fl{font-size:.82em;opacity:.7;margin:2px 0 8px;letter-spacing:.02em}
 .ficha-text{font-size:14.5px;color:color-mix(in srgb,var(--ink) 80%,var(--muted));display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .ficha-tags{font-size:12.5px;color:var(--muted);margin-top:auto;padding-top:4px}
 .ficha-emos,.who-pal{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--muted);padding-top:4px}
@@ -514,7 +523,7 @@ body.sky-fs nav.tabs,body.sky-fs header.top{visibility:hidden}
 .reloj-ring.anim svg{-webkit-mask:conic-gradient(#000 var(--rj),transparent 0);mask:conic-gradient(#000 var(--rj),transparent 0);animation:rjDraw 1.2s cubic-bezier(.3,.7,.3,1) both}
 @keyframes rjDraw{from{--rj:0deg}to{--rj:360deg}}
 @media (prefers-reduced-motion:reduce){.reloj-ring.anim svg{animation:none;-webkit-mask:none;mask:none}}
-.reloj-acts{justify-content:center;gap:8px;margin:6px 0 4px}
+.reloj-acts{justify-content:center;gap:4px 8px;margin:6px 0 4px;flex-wrap:wrap}.map-ico{display:inline-block;width:12px;height:12px;margin-right:7px;vertical-align:-1px;background:linear-gradient(90deg,#D4A373 0 33%,#8FA9C7 0 66%,#E9C46A 0) top/100% 50% no-repeat,linear-gradient(90deg,#E5A9B4 0 33%,#7FB7A4 0 66%,#5B5F97 0) bottom/100% 50% no-repeat;border-radius:2px}
 .reloj .reloj-ring{touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .reloj-ring.bump svg{animation:rjBump .32s ease}@keyframes rjBump{30%{transform:translateX(-10px)}60%{transform:translateX(8px)}}
 .rj-dots{display:flex;justify-content:center;gap:7px;margin:2px 0 8px}.rj-dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}.rj-dots i.on{background:var(--ink);width:16px;border-radius:3px}
@@ -758,7 +767,7 @@ es:{
   archEmpty:'Aquí se irán archivando tus recuerdos, ordenados por meses.', noMatch:'Nada coincide con estos filtros. Quita alguno o prueba otra palabra.', clearAll:'Quitar filtros',
   palTitle:'Biblioteca de emociones', palLead:'Cada color es una emoción con el nombre que tú le des. Renómbralos, cambia el tono o crea los tuyos. Toca un color para ver todo lo que guarda.',
   seeMemsOf:n=>`Ver recuerdos de ${n}`, emoName:'Nombre de la emoción', colorOf:n=>`Color de ${n}`, del:'Borrar',
-  newEmo:'Nueva emoción', emoNamePh:'Nombre de la emoción', emoCreate:'Crear', simWarn:n=>`Se parece mucho a «${n}»`, simFam:'Si son de la misma familia, puede estar bien.', simSuggest:'Sugerir otro', simKeep:'Dejarlo así', simPick:'Elige uno:', simNone:'No encuentro un tono cercano que se distinga bien. Prueba otra familia de color.', songLink:'Enlace para escucharla', songLinkPh:'Pega aquí el enlace de Spotify, YouTube…', songListen:'Escuchar', emoCreateAdd:'Crear y añadir al recuerdo', emoCreateBtn:'Crear', emoDone:'Listo', emoDiscarded:'Emoción descartada', emoColorLbl:'Color de la emoción', emoCreated:n=>`«${n}» creada y añadida a tu paleta.`, newEmoHint:'Inventa una: «domingo de lluvia», «olor a casa»…',
+  newEmo:'Nueva emoción', emoNamePh:'Nombre de la emoción', emoCreate:'Crear', simWarn:n=>`Se parece mucho a «${n}»`, simFam:'Si son de la misma familia, puede estar bien.', simSuggest:'Sugerir otro', simKeep:'Dejarlo así', simPick:'Elige uno:', simNone:'No encuentro un tono cercano que se distinga bien. Prueba otra familia de color.', webLink:'Enlace', webLinkPh:'https://… una web, un artículo, un vídeo', openLink:'Abrir enlace', songLink:'Enlace para escucharla', songLinkPh:'Pega aquí el enlace de Spotify, YouTube…', songListen:'Escuchar', emoCreateAdd:'Crear y añadir al recuerdo', emoCreateBtn:'Crear', emoDone:'Listo', emoDiscarded:'Emoción descartada', emoColorLbl:'Color de la emoción', emoCreated:n=>`«${n}» creada y añadida a tu paleta.`, newEmoHint:'Inventa una: «domingo de lluvia», «olor a casa»…',
   drawersTitle:'Cajones', drawersLead:'Los sitios donde se archivan tus recuerdos. Un recuerdo puede vivir en varios a la vez.', drawerName:'Nombre del cajón', newDrawerName:'Nombre del nuevo cajón', addDrawer:'Añadir cajón',
   backupTitle:'Copia de seguridad', savedCloud:'Tus recuerdos se guardan solos en tu cuenta y solo tú puedes verlos.', savedLocal:'Tus recuerdos se guardan solos en este dispositivo.',
   backupNote:'Además, te avisaré para guardar una copia en un archivo, que puedes llevar a Archivos, Drive o donde prefieras.',
@@ -889,7 +898,7 @@ es:{
   exWhen:'Cuándo aparece', exWeekday:'Qué días pesa más', exDaypart:'A qué hora', exWords:'Palabras que la acompañan', exTypes:'En qué recuerdos',
   exMems:'Sus recuerdos', exSeeAll:'Ver todos en el Archivo', exNone:'Esta emoción no aparece en este periodo.',
   mapTitle:'Mapa en color', mapLead:'Cada cuadrado es un día, pintado con lo que sentiste. Toca uno para ver sus recuerdos.',
-  mapThisYear:'Este año', mapCustom:'Otras fechas', mapFrom:'Desde', mapTo:'Hasta', mapApply:'Ver', mapSeeYear:'Ver el mapa de tu año',
+  mapThisYear:'Este año', mapCustom:'Otras fechas', mapFrom:'Desde', mapTo:'Hasta', mapApply:'Ver', mapSeeYear:'Ver el mapa de tu año', mapShort:'Tu año en días',
   mapSave:'Guardar imagen', mapLocked:'Con Plus, puedes ver el mapa de cualquier año o de las fechas que quieras, y guardarlo como imagen.',
   mapDaysWith:(a,b)=>`${a} de ${b} días con recuerdos.`, mapCardCustom:'Mis días', mapBadRange:'Elige una fecha de inicio anterior a la de final.',
   goDay:'Ir a un día', dayEmpty:'No guardaste nada este día.', dayAdd:'Guardar un recuerdo en este día', daySameOther:'Ese mismo día, otros años', dayAround:'Días cercanos', prevDay:'Día anterior', nextDay:'Día siguiente',
@@ -925,6 +934,9 @@ es:{
   pfAboutPh:'Un par de frases: a qué te dedicas, qué te mueve, qué etapa estás viviendo…',
   onbName:'¿Cómo quieres que te llame?', onbNamePh:'Tu nombre o un alias (opcional)',
   youWere:n=>`. Tenías ${n} años.`,
+  whyTitle:'Esto es de Plus', whyNoPlus:'Tu prueba de Plus ha terminado, pero todo lo que guardaste sigue ahí.', why:{swatch:['Elegir colores de la paleta sugerida','Sin Plus puedes elegir cualquier color con el cuadro de color que hay justo encima.'],diary:['Leer tu diario a máquina o en imprenta','La letra de pluma es gratis y la tienes siempre.'],film:['Tu película en color',''],photofilm:['La película de tus fotos',''],skyfilm:['El vídeo de tu constelación',''],book:['Tu libro en PDF',''],audio:['Más sonidos por recuerdo','Gratis puedes guardar uno por recuerdo.'],sharestat:['La imagen de esta estadística',''],sharedrawer:['Enviar un cajón a otra persona','Recibir cajones es gratis.'],skylayer:['Ver etiquetas y textos en la constelación','Los colores y las conexiones se ven gratis.'],storytpl:['Esta plantilla de historia','Aura, Paleta y Frase son gratis.'],mapyear:['Ver los años anteriores en el mapa','El año actual se ve gratis.'],mapsave:['Guardar la imagen del mapa','']}, whySeePlus:'Ver qué incluye Plus',
+  qsAria:'Compartir este recuerdo', qsOpts:'Elegir estilo', qsReady:'Tu tarjeta está lista', qsSaved:'Guardada también en Tarjetas',
+  tplHead:'Plantillas', tplOwn:'O crea el tuyo', sortDate:'Por fecha', sortBest:'★ Mejor puntuados', starsLbl:n=>n?`${n} de 5`:'Sin valorar',
   otherType:'+ Otro tipo', newTypePh:'Por ejemplo: sueño, viaje, receta', createType:'Crear tipo', titleLbl:'Título', customPh:'Lo que quieras recordar de esto',
   typesTitle:'Tipos de recuerdo', typesLead:'Además de los siete tipos de siempre, puedes crear los tuyos: sueños, viajes, recetas, conciertos… Si borras uno, sus recuerdos pasan a Idea.',
   typeName:'Nombre del tipo', addType:'Añadir tipo', newTypeName:'Nombre del nuevo tipo', tTypeCreated:n=>`Tipo «${n}» creado.`,
@@ -986,7 +998,7 @@ en:{
   archEmpty:'Your memories will be filed here, month by month.', noMatch:'Nothing matches these filters. Remove one or try another word.', clearAll:'Clear filters',
   palTitle:'Library of emotions', palLead:'Each colour is an emotion with whatever name you give it. Rename them, change their shade or create your own. Tap a colour to see everything it holds.',
   seeMemsOf:n=>`See memories of ${n}`, emoName:'Emotion name', colorOf:n=>`Colour of ${n}`, del:'Delete',
-  newEmo:'New emotion', emoNamePh:'Emotion name', emoCreate:'Create', simWarn:n=>`Looks a lot like “${n}”`, simFam:'If they belong to the same family, that may be fine.', simSuggest:'Suggest another', simKeep:'Keep it', simPick:'Pick one:', simNone:'I can’t find a close shade that stands out. Try another colour family.', songLink:'Link to listen', songLinkPh:'Paste a Spotify, YouTube… link', songListen:'Listen', emoCreateAdd:'Create and add to the memory', emoCreateBtn:'Create', emoDone:'Done', emoDiscarded:'Emotion discarded', emoColorLbl:'Emotion colour', emoCreated:n=>`“${n}” created and added to your palette.`, newEmoHint:'Invent one: “rainy Sunday”, “smell of home”…',
+  newEmo:'New emotion', emoNamePh:'Emotion name', emoCreate:'Create', simWarn:n=>`Looks a lot like “${n}”`, simFam:'If they belong to the same family, that may be fine.', simSuggest:'Suggest another', simKeep:'Keep it', simPick:'Pick one:', simNone:'I can’t find a close shade that stands out. Try another colour family.', webLink:'Link', webLinkPh:'https://… a website, an article, a video', openLink:'Open link', songLink:'Link to listen', songLinkPh:'Paste a Spotify, YouTube… link', songListen:'Listen', emoCreateAdd:'Create and add to the memory', emoCreateBtn:'Create', emoDone:'Done', emoDiscarded:'Emotion discarded', emoColorLbl:'Emotion colour', emoCreated:n=>`“${n}” created and added to your palette.`, newEmoHint:'Invent one: “rainy Sunday”, “smell of home”…',
   drawersTitle:'Drawers', drawersLead:'The places where your memories are filed. A memory can live in several at once.', drawerName:'Drawer name', newDrawerName:'New drawer name', addDrawer:'Add drawer',
   backupTitle:'Backup', savedCloud:'Your memories are saved automatically to your account and only you can see them.', savedLocal:'Your memories are saved automatically on this device.',
   backupNote:'I will also remind you to save a copy as a file, which you can keep in Files, Drive or wherever you like.',
@@ -1117,7 +1129,7 @@ en:{
   exWhen:'When it appears', exWeekday:'Which days it weighs most', exDaypart:'What time of day', exWords:'Words that come with it', exTypes:'In which memories',
   exMems:'Its memories', exSeeAll:'See them all in the Archive', exNone:"This emotion doesn't appear in this period.",
   mapTitle:'Colour map', mapLead:'Each square is a day, painted with what you felt. Tap one to see its memories.',
-  mapThisYear:'This year', mapCustom:'Other dates', mapFrom:'From', mapTo:'To', mapApply:'Show', mapSeeYear:'See the map of your year',
+  mapThisYear:'This year', mapCustom:'Other dates', mapFrom:'From', mapTo:'To', mapApply:'Show', mapSeeYear:'See the map of your year', mapShort:'Your year in days',
   mapSave:'Save image', mapLocked:'With Plus, you can see the map of any year or any dates you like, and save it as an image.',
   mapDaysWith:(a,b)=>`${a} of ${b} days with memories.`, mapCardCustom:'My days', mapBadRange:'Choose a start date before the end date.',
   goDay:'Go to a day', dayEmpty:"You didn't save anything on this day.", dayAdd:'Save a memory on this day', daySameOther:'This same day, other years', dayAround:'Nearby days', prevDay:'Previous day', nextDay:'Next day',
@@ -1153,6 +1165,9 @@ en:{
   pfAboutPh:"A couple of sentences: what you do, what moves you, what stage of life you're in…",
   onbName:'What should I call you?', onbNamePh:'Your name or a nickname (optional)',
   youWere:n=>`. You were ${n}.`,
+  whyTitle:'This is part of Plus', whyNoPlus:'Your Plus trial has ended, but everything you saved is still here.', why:{swatch:['Picking colours from the suggested palette','Without Plus you can pick any colour with the colour box just above.'],diary:['Reading your diary in typewriter or print','Fountain pen is free, always.'],film:['Your film in colour',''],photofilm:['The film of your photos',''],skyfilm:['The video of your constellation',''],book:['Your PDF book',''],audio:['More sounds per memory','Free lets you keep one per memory.'],sharestat:['The image of this statistic',''],sharedrawer:['Sending a drawer to someone','Receiving drawers is free.'],skylayer:['Tags and texts in the constellation','Colours and connections are free.'],storytpl:['This story template','Aura, Palette and Quote are free.'],mapyear:['Past years on the map','The current year is free.'],mapsave:['Saving the map image','']}, whySeePlus:'See what Plus includes',
+  qsAria:'Share this memory', qsOpts:'Choose style', qsReady:'Your card is ready', qsSaved:'Also saved in Cards',
+  tplHead:'Templates', tplOwn:'Or create your own', sortDate:'By date', sortBest:'★ Top rated', starsLbl:n=>n?`${n} out of 5`:'Not rated',
   otherType:'+ Another type', newTypePh:'For example: dream, trip, recipe', createType:'Create type', titleLbl:'Title', customPh:'Whatever you want to remember about it',
   typesTitle:'Types of memory', typesLead:'As well as the seven usual types, you can create your own: dreams, trips, recipes, concerts… If you delete one, its memories become Ideas.',
   typeName:'Type name', addType:'Add type', newTypeName:'New type name', tTypeCreated:n=>`Type “${n}” created.`,
@@ -1214,7 +1229,7 @@ ca:{
   archEmpty:`Aquí s'aniran arxivant els teus records, ordenats per mesos.`, noMatch:`No hi ha res que coincideixi amb aquests filtres. Treu-ne algun o prova una altra paraula.`, clearAll:'Treu els filtres',
   palTitle:`Biblioteca d'emocions`, palLead:`Cada color és una emoció amb el nom que tu li donis. Canvia'ls el nom, el to o crea'n de teus. Toca un color per veure tot el que guarda.`,
   seeMemsOf:n=>`Veure records de ${n}`, emoName:`Nom de l'emoció`, colorOf:n=>`Color de ${n}`, del:'Esborra',
-  newEmo:'Nova emoció', emoNamePh:'Nom de l’emoció', emoCreate:'Crea', simWarn:n=>`S’assembla molt a «${n}»`, simFam:'Si són de la mateixa família, pot estar bé.', simSuggest:'Suggereix-ne un altre', simKeep:'Deixa-ho així', simPick:'Tria’n un:', simNone:'No trobo un to proper que es distingeixi bé. Prova una altra família de color.', songLink:'Enllaç per escoltar-la', songLinkPh:'Enganxa aquí l’enllaç de Spotify, YouTube…', songListen:'Escolta', emoCreateAdd:'Crea i afegeix al record', emoCreateBtn:'Crea', emoDone:'Fet', emoDiscarded:'Emoció descartada', emoColorLbl:'Color de l’emoció', emoCreated:n=>`«${n}» creada i afegida a la teva paleta.`, newEmoHint:`Inventa'n una: «diumenge de pluja», «olor de casa»…`,
+  newEmo:'Nova emoció', emoNamePh:'Nom de l’emoció', emoCreate:'Crea', simWarn:n=>`S’assembla molt a «${n}»`, simFam:'Si són de la mateixa família, pot estar bé.', simSuggest:'Suggereix-ne un altre', simKeep:'Deixa-ho així', simPick:'Tria’n un:', simNone:'No trobo un to proper que es distingeixi bé. Prova una altra família de color.', webLink:'Enllaç', webLinkPh:'https://… una web, un article, un vídeo', openLink:'Obre l’enllaç', songLink:'Enllaç per escoltar-la', songLinkPh:'Enganxa aquí l’enllaç de Spotify, YouTube…', songListen:'Escolta', emoCreateAdd:'Crea i afegeix al record', emoCreateBtn:'Crea', emoDone:'Fet', emoDiscarded:'Emoció descartada', emoColorLbl:'Color de l’emoció', emoCreated:n=>`«${n}» creada i afegida a la teva paleta.`, newEmoHint:`Inventa'n una: «diumenge de pluja», «olor de casa»…`,
   drawersTitle:'Calaixos', drawersLead:`Els llocs on s'arxiven els teus records. Un record pot viure en diversos alhora.`, drawerName:'Nom del calaix', newDrawerName:'Nom del nou calaix', addDrawer:'Afegeix un calaix',
   backupTitle:'Còpia de seguretat', savedCloud:'Els teus records es desen sols al teu compte i només tu els pots veure.', savedLocal:'Els teus records es desen sols en aquest dispositiu.',
   backupNote:`A més, t'avisaré per desar una còpia en un fitxer, que pots portar a Fitxers, Drive o on prefereixis.`,
@@ -1345,7 +1360,7 @@ ca:{
   exWhen:'Quan apareix', exWeekday:'Quins dies pesa més', exDaypart:'A quina hora', exWords:"Paraules que l'acompanyen", exTypes:'En quins records',
   exMems:'Els seus records', exSeeAll:"Veure'ls tots a l'Arxiu", exNone:'Aquesta emoció no apareix en aquest període.',
   mapTitle:'Mapa en color', mapLead:"Cada quadrat és un dia, pintat amb el que vas sentir. Toca'n un per veure'n els records.",
-  mapThisYear:'Aquest any', mapCustom:'Altres dates', mapFrom:'Des de', mapTo:'Fins a', mapApply:'Veure', mapSeeYear:"Veure el mapa del teu any",
+  mapThisYear:'Aquest any', mapCustom:'Altres dates', mapFrom:'Des de', mapTo:'Fins a', mapApply:'Veure', mapSeeYear:"Veure el mapa del teu any", mapShort:"El teu any en dies",
   mapSave:'Desa la imatge', mapLocked:"Amb Plus, pots veure el mapa de qualsevol any o de les dates que vulguis, i desar-lo com a imatge.",
   mapDaysWith:(a,b)=>`${a} de ${b} dies amb records.`, mapCardCustom:'Els meus dies', mapBadRange:"Tria una data d'inici anterior a la de final.",
   goDay:'Anar a un dia', dayEmpty:'No vas desar res aquest dia.', dayAdd:'Desa un record en aquest dia', daySameOther:'Aquest mateix dia, altres anys', dayAround:'Dies propers', prevDay:'Dia anterior', nextDay:'Dia següent',
@@ -1381,6 +1396,9 @@ ca:{
   pfAboutPh:`Un parell de frases: a què et dediques, què et mou, quina etapa estàs vivint…`,
   onbName:'Com vols que et digui?', onbNamePh:'El teu nom o un àlies (opcional)',
   youWere:n=>`. Tenies ${n} anys.`,
+  whyTitle:'Això és de Plus', whyNoPlus:"La teva prova de Plus s'ha acabat, però tot el que vas desar continua aquí.", why:{swatch:['Triar colors de la paleta suggerida',"Sense Plus pots triar qualsevol color amb el quadre de color que hi ha just a sobre."],diary:['Llegir el teu diari a màquina o en impremta','La lletra de ploma és gratis i la tens sempre.'],film:['La teva pel·lícula en color',''],photofilm:['La pel·lícula de les teves fotos',''],skyfilm:['El vídeo de la teva constel·lació',''],book:['El teu llibre en PDF',''],audio:['Més sons per record','Gratis pots desar-ne un per record.'],sharestat:["La imatge d'aquesta estadística",''],sharedrawer:['Enviar un calaix a una altra persona','Rebre calaixos és gratis.'],skylayer:['Veure etiquetes i textos a la constel·lació','Els colors i les connexions es veuen gratis.'],storytpl:["Aquesta plantilla d'història",'Aura, Paleta i Frase són gratis.'],mapyear:['Veure els anys anteriors al mapa',"L'any actual es veu gratis."],mapsave:['Desar la imatge del mapa','']}, whySeePlus:'Mira què inclou Plus',
+  qsAria:'Comparteix aquest record', qsOpts:"Tria l'estil", qsReady:'La teva targeta és a punt', qsSaved:'Desada també a Targetes',
+  tplHead:'Plantilles', tplOwn:'O crea el teu', sortDate:'Per data', sortBest:'★ Més ben valorats', starsLbl:n=>n?`${n} de 5`:'Sense valorar',
   otherType:'+ Un altre tipus', newTypePh:'Per exemple: somni, viatge, recepta', createType:'Crea el tipus', titleLbl:'Títol', customPh:`El que vulguis recordar d'això`,
   typesTitle:'Tipus de record', typesLead:`A més dels set tipus de sempre, en pots crear de teus: somnis, viatges, receptes, concerts… Si n'esborres un, els seus records passen a Idea.`,
   typeName:'Nom del tipus', addType:'Afegeix un tipus', newTypeName:'Nom del nou tipus', tTypeCreated:n=>`Tipus «${n}» creat.`,
@@ -1451,7 +1469,7 @@ function ensureSettings(){guestEmoFix();if(S.settings&&!S.settings.trialStart)S.
 
 let view='hoy', firstHoy=true;
 let filters={q:'',emotion:null,type:'',drawer:'',tag:null,date:null};
-let archMode='lista';
+let archMode='lista',archSort='fecha';
 let rep={period:'semana',offset:0};
 let resurfIdx=0;
 let draft=null, edErr='', linkQ='', newDrawerName='', newTypeOpen=false, newTypeName='', newEmoOpen=false, newEmoName='', newEmoColor='';
@@ -1464,9 +1482,30 @@ function t(k,...a){const v=I18N[lang()][k]??I18N.es[k];return typeof v==='functi
 function typeOf(id){
   const ty=I18N[lang()].types;if(ty[id])return {id,...ty[id]};
   const c=(S.customTypes||[]).find(x=>x.id===id);
+  if(c&&c.tpl&&TPL[c.tpl]){const T=TPL[c.tpl],l=lang();return {id,label:c.name,plural:c.name.toLowerCase(),t:T.t[l]||T.t.es,src:null,ph:T.ph[l]||T.ph.es,custom:true,tpl:c.tpl,fields:tplFields(c.tpl)}}
   if(c)return {id,label:c.name,plural:c.name.toLowerCase(),t:t('titleLbl'),src:null,ph:t('customPh'),custom:true};
   return {id:'dia',...ty.dia};
 }
+/* ---------- Tipos con plantilla (Vino, Restaurante…) ---------- */
+const TPL_RATE={es:'Valoración',ca:'Valoració',en:'Rating'},TPL_WITH={es:'Con quién',ca:'Amb qui',en:'Who with'};
+const TPL={
+  vino:{name:{es:'Vino',ca:'Vi',en:'Wine'},t:{es:'Vino',ca:'Vi',en:'Wine'},ph:{es:'A qué sabía, con quién lo compartiste',ca:'A què tenia gust, amb qui el vas compartir',en:'What it tasted like, who you shared it with'},
+    f:[['do','text',{es:'D.O.',ca:'D.O.',en:'Region (D.O.)'}],['rating','stars',TPL_RATE],['where','place',{es:'Dónde lo compraste o tomaste',ca:'On el vas comprar o prendre',en:'Where you bought or had it'}]]},
+  restaurante:{name:{es:'Restaurante',ca:'Restaurant',en:'Restaurant'},t:{es:'Restaurante',ca:'Restaurant',en:'Restaurant'},ph:{es:'Qué pediste, qué celebrabais',ca:'Què vas demanar, què celebràveu',en:'What you ordered, what you were celebrating'},
+    f:[['rating','stars',TPL_RATE],['where','place',{es:'Dónde',ca:'On',en:'Where'}],['with','text',TPL_WITH]]},
+  cafe:{name:{es:'Café',ca:'Cafè',en:'Coffee'},t:{es:'Café o cafetería',ca:'Cafè o cafeteria',en:'Coffee or café'},ph:{es:'El sitio, la luz, lo que leías',ca:'El lloc, la llum, el que llegies',en:'The place, the light, what you were reading'},
+    f:[['rating','stars',TPL_RATE],['where','place',{es:'Dónde',ca:'On',en:'Where'}]]},
+  evento:{name:{es:'Evento',ca:'Esdeveniment',en:'Event'},t:{es:'Concierto, obra, exposición…',ca:'Concert, obra, exposició…',en:'Concert, play, exhibition…'},ph:{es:'El momento que más te llegó',ca:'El moment que més et va arribar',en:'The moment that moved you most'},
+    f:[['rating','stars',TPL_RATE],['where','place',{es:'Sala o lugar',ca:'Sala o lloc',en:'Venue'}],['with','text',TPL_WITH]]},
+  viaje:{name:{es:'Viaje',ca:'Viatge',en:'Trip'},t:{es:'Viaje',ca:'Viatge',en:'Trip'},ph:{es:'Lo que no quieres olvidar',ca:'El que no vols oblidar',en:'What you don\'t want to forget'},
+    f:[['where','place',{es:'Destino',ca:'Destinació',en:'Destination'}],['with','text',TPL_WITH]]}
+};
+function tplFields(k){const T=TPL[k];if(!T)return null;const l=lang();return T.f.map(([key,kind,lb])=>({k:key,kind,label:lb[l]||lb.es}))}
+function stars(n,plain){n=Math.max(0,Math.min(5,+n||0));return plain?`${n}/5`:'★★★★★'.slice(0,n)+'☆☆☆☆☆'.slice(0,5-n)}
+function fieldLine(m,plain){const fs=typeOf(m.type).fields;if(!fs||!m.fields)return '';return fs.map(f=>{const v=m.fields[f.k];if(f.kind==='stars')return v?stars(v,plain):'';return (v||'').trim()}).filter(Boolean).join(' · ')}
+function srcOf(m,plain){return [m.source,fieldLine(m,plain)].filter(Boolean).join(' · ')}
+function hasStars(id){const fs=id&&typeOf(id).fields;return !!(fs&&fs.some(f=>f.kind==='stars'))}
+function createTplType(k){const T=TPL[k];const ex=(S.customTypes||[]).find(c=>c.tpl===k);if(ex)return ex;const nt={id:mkid('t-'),name:T.name[lang()]||T.name.es,tpl:k};S.customTypes.push(nt);savePalette();toast(t('tTypeCreated',nt.name));return nt}
 function allTypeIds(){return [...TYPE_IDS,...(S.customTypes||[]).map(c=>c.id)]}
 /* Tipos ordenados por uso; los ocultos no salen al crear un recuerdo, pero sus recuerdos se quedan */
 function emosByUse(list){list=list||S.emotions;const c={};S.memories.forEach(m=>(m.emotions||[]).forEach(id=>c[id]=(c[id]||0)+1));return list.map((e,i)=>({e,i,n:c[e.id]||0})).sort((a,b)=>b.n-a.n||a.i-b.i).map(x=>x.e)}
@@ -1703,16 +1742,16 @@ function dyMonth(d,st){const mo=fmtD(d,{month:'long'}),y=d.getFullYear();const M
 function dyEntry(m,st,o={}){
   if(o.cont)return dyCont(m,st,o.txt);
   const d=fromIso(m.date),kind=m.type&&m.type!=='dia'?typeOf(m.type).label.toLowerCase():'';const title=esc(memTitle(m));
-  const txv=o.txt!=null?o.txt:m.text;const tx=txv?`<div class="dy-tx">${esc(txv)}${o.txt!=null?' →':''}</div>`:'';const q=m.quote?`<div class="dy-q">«${esc(m.quote)}»${m.author?` — ${esc(m.author)}`:''}</div>`:'';
+  const txv=o.txt!=null?o.txt:m.text;const tx=txv?`<div class="dy-tx">${esc(txv)}${o.txt!=null?' →':''}</div>`:'';const fl=fieldLine(m);const lk=o.txt==null&&!o.cont?safeLink(m.link):'';const lka=lk?`<a class="dy-link" href="${esc(lk)}" target="_blank" rel="noopener noreferrer" data-act="ext-link">↗ ${esc(linkHost(lk))}</a>`:'';const q=(fl&&o.txt==null?`<div class="dy-fl">${esc(fl)}</div>`:'')+(m.quote?`<div class="dy-q">«${esc(m.quote)}»${m.author?` — ${esc(m.author)}`:''}</div>`:'');
   const es=(m.emotions||[]).map(emo).filter(Boolean),tags=(m.tags||[]);
   const phs=(m.photos||[]).slice(0,3);const ph=phs.length&&o.txt==null?`<div class="dy-phs n${phs.length}">${phs.map(id=>`<span class="dy-ph"><img data-photo="${id}" alt=""></span>`).join('')}</div>`:'';
   const tm=m.time?esc(m.time):'';const H=o.txt!=null;
   if(st==='maquina'){const dd=String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear();
-    return `<div class="dy-e" data-act="dy-mem" data-id="${m.id}" role="button" tabindex="0"><div class="dy-dt">${dd}${tm?' — '+tm:''}${kind?' — '+esc(kind.toUpperCase()):''}</div><div class="dy-tt">${title}</div>${q}${tx}${ph}<div class="dy-mt">${es.map(e=>`<span class="dy-em" style="color:${dyInk(e.color,.3,[32,32,32])}">${esc(e.name)}</span>`).join('')} <span class="dy-tg">${esc(tags.join(' '))}</span></div></div>`}
+    return `<div class="dy-e" data-act="dy-mem" data-id="${m.id}" role="button" tabindex="0"><div class="dy-dt">${dd}${tm?' — '+tm:''}${kind?' — '+esc(kind.toUpperCase()):''}</div><div class="dy-tt">${title}</div>${q}${tx}${ph}<div class="dy-mt">${es.map(e=>`<span class="dy-em" style="color:${dyInk(e.color,.3,[32,32,32])}">${esc(e.name)}</span>`).join('')} <span class="dy-tg">${esc(tags.join(' '))}</span></div>${lka}</div>`}
   if(st==='imprenta'){const dt=fmtD(d,{weekday:'long',day:'numeric',month:'long'});
-    return `<div class="dy-e" data-act="dy-mem" data-id="${m.id}" role="button" tabindex="0"><div class="dy-dt">${esc(dt)}${tm?' · '+tm:''}</div><div class="dy-tt">${title}${kind?` <em>— ${esc(kind)}</em>`:''}</div>${q}${tx}${ph}<div class="dy-mt">${es.map(e=>`<span style="color:${dyInk(e.color,.3,[42,34,28])}">${esc(e.name.toLowerCase())}</span>`).join(' · ')}</div></div>`}
+    return `<div class="dy-e" data-act="dy-mem" data-id="${m.id}" role="button" tabindex="0"><div class="dy-dt">${esc(dt)}${tm?' · '+tm:''}</div><div class="dy-tt">${title}${kind?` <em>— ${esc(kind)}</em>`:''}</div>${q}${tx}${ph}<div class="dy-mt">${es.map(e=>`<span style="color:${dyInk(e.color,.3,[42,34,28])}">${esc(e.name.toLowerCase())}</span>`).join(' · ')}</div>${lka}</div>`}
   const rot=((dyHash(m.id)%140)/100-.7).toFixed(2);const dt=fmtD(d,{weekday:'long',day:'numeric',month:'long'});
-  return `<div class="dy-e" data-act="dy-mem" data-id="${m.id}" role="button" tabindex="0" style="transform:rotate(${rot}deg)"><div class="dy-dt"><u>${esc(dt)}</u>${tm?`<small>${tm}</small>`:''}</div><div class="dy-tt">${kind?`<span class="dy-k">${esc(kind)}</span>`:''}${title}</div>${q}${tx}${ph}<div class="dy-mt">${es.map(e=>`<span class="dy-em">${dyBlot(e.color,m.id)}<span style="color:${dyInk(e.color,.38,[38,48,92])}">${esc(e.name.toLowerCase())}</span></span>`).join(' ')} ${tags.length?`<span class="dy-tg">${esc(tags.map(x=>'#'+x).join(' '))}</span>`:''}</div></div>`}
+  return `<div class="dy-e" data-act="dy-mem" data-id="${m.id}" role="button" tabindex="0" style="transform:rotate(${rot}deg)"><div class="dy-dt"><u>${esc(dt)}</u>${tm?`<small>${tm}</small>`:''}</div><div class="dy-tt">${kind?`<span class="dy-k">${esc(kind)}</span>`:''}${title}</div>${q}${tx}${ph}<div class="dy-mt">${es.map(e=>`<span class="dy-em">${dyBlot(e.color,m.id)}<span style="color:${dyInk(e.color,.38,[38,48,92])}">${esc(e.name.toLowerCase())}</span></span>`).join(' ')} ${tags.length?`<span class="dy-tg">${esc(tags.map(x=>'#'+x).join(' '))}</span>`:''}</div>${lka}</div>`}
 function dyStripMeta(h){return h.replace(/<div class="dy-mt">[\s\S]*<\/div><\/div>$/,'</div>')}
 function dyCont(m,st,txt){const es=(m.emotions||[]).map(emo).filter(Boolean),tags=m.tags||[];const full=dyEntry(m,st);const mt=(full.match(/<div class="dy-mt">[\s\S]*<\/div>(?=<\/div>$)/)||[''])[0];
   const phs=(m.photos||[]).slice(0,3);const ph=phs.length?`<div class="dy-phs n${phs.length}">${phs.map(id=>`<span class="dy-ph"><img data-photo="${id}" alt=""></span>`).join('')}</div>`:'';
@@ -1850,7 +1889,7 @@ function relojHTML(){
   const sc=rjScale(),an=rjAnim,dir=rjDir;rjAnim=false;rjDir=0;
   return `<section class="reloj" aria-label="${esc(t('relojAria'))}"><div class="seg seg-full" role="group" aria-label="${esc(t('relojLbl'))}">${RJ.map(k=>`<button data-act="rj-scale" data-v="${k}" aria-pressed="${k===sc}">${esc(t('relojScales')[k])}</button>`).join('')}</div>
   <div class="reloj-ring${an||dir?' anim':''}">${rjSVG(sc,360)}</div>${RJ.length?`<div class="rj-dots" aria-hidden="true">${RJ.map(k=>`<i${k===sc?' class="on"':''}></i>`).join('')}</div>`:''}
-  <div class="row reloj-acts">${showShare()?`<button class="btn quiet" data-act="rj-share">✦ ${esc(t('relojShare'))}</button>`:''}<button class="btn quiet" data-act="rj-see">${esc(t('relojSee'))}</button></div>
+  <div class="row reloj-acts">${showShare()?`<button class="btn quiet" data-act="rj-share">✦ ${esc(t('relojShare'))}</button>`:''}<button class="btn quiet" data-act="rj-see">${esc(t('relojSee'))}</button><button class="btn quiet" data-act="go-map"><i class="map-ico" aria-hidden="true"></i>${esc(t('mapShort'))}</button></div>
   <p class="note" style="text-align:center;font-size:13px;margin:4px 0 0">${esc(t('relojTap')[sc])} <button class="linkbtn rj-how" data-act="rj-how">ⓘ ${esc(t('relojHow'))}</button></p></section>`}
 function rjHow(){openDlg(`<div class="dlg-head"><h2>${esc(t('relojHowT'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
   <div class="reloj-ring" style="max-width:220px;margin:0 auto 6px">${rjSVG(rjScale(),360)}</div>
@@ -1979,7 +2018,7 @@ function ficha(m,withEmo){
     ${(m.photos||[]).length?`<span class="ficha-photo"><img data-photo="${m.photos[0]}" alt=""></span>`:''}
     <span class="ficha-meta"><span>${ty.label}${(m.audios||[]).length?' · ♪':''}</span><span>${esc(fmt(m.date,{day:'numeric',month:'short'}))}</span></span>
     <span class="ficha-title">${esc(memTitle(m))}</span>
-    ${m.source?`<span class="ficha-source">${esc(m.source)}</span>`:''}
+    ${srcOf(m)?`<span class="ficha-source">${esc(srcOf(m))}</span>`:''}
     ${m.quote?`<span class="ficha-quote">«${esc(m.quote)}»</span>`:''}
     ${m.text?`<span class="ficha-text">${esc(m.text)}</span>`:''}
     ${withEmo&&(m.emotions||[]).length?`<span class="ficha-emos">${(m.emotions||[]).map(emo).filter(Boolean).map(e=>`<span><i style="background:${e.color}"></i>${esc(e.name)}</span>`).join('')}</span>`:''}
@@ -1999,7 +2038,7 @@ function filtered(){
     if(filters.tag&&!(m.tags||[]).includes(filters.tag))return false;
     if(filters.date&&m.date!==filters.date)return false;
     if(filters.span&&(m.date<filters.span.s||m.date>filters.span.e))return false;
-    if(q){const hay=[m.title,m.source,m.text,m.quote,...(m.tags||[])].join(' ').toLowerCase();if(!hay.includes(q))return false}
+    if(q){const hay=[m.title,m.source,m.text,m.quote,...(m.tags||[]),...Object.values(m.fields||{}).filter(v=>typeof v==='string')].join(' ').toLowerCase();if(!hay.includes(q))return false}
     return true;
   }));
 }
@@ -2082,6 +2121,8 @@ function resultsHTML(){
     if(cur)out+='</div>';
     return out;
   }
+  if(hasStars(filters.type)){out+=`<div class="seg arch-sort" role="group"><button data-act="arch-sort" data-v="fecha" aria-pressed="${archSort!=='best'}">${esc(t('sortDate'))}</button><button data-act="arch-sort" data-v="best" aria-pressed="${archSort==='best'}">${esc(t('sortBest'))}</button></div>`;
+    if(archSort==='best'){const rk=m=>{const f=typeOf(m.type).fields.find(x=>x.kind==='stars');return +((m.fields||{})[f.k])||0};return out+`<div class="fichas">${[...ms].sort((a,b)=>rk(b)-rk(a)||b.date.localeCompare(a.date)).map(m=>ficha(m)).join('')}</div>`}}
   for(const m of ms){
     const k=m.date.slice(0,7);
     if(k!==cur){if(cur)out+='</div>';cur=k;out+=`<div class="month">${esc(fmt(k+'-01',{month:'long',year:'numeric'}))}</div><div class="fichas">`}
@@ -2281,10 +2322,10 @@ function swatchesHTML(e){
   const lock=!isPlus();
   const more=hidden>0?`<button class="sw-more" data-act="sw-more" data-id="${e.id}" aria-expanded="${open}">${esc(open?t('swLess'):t('swMore',hidden))}</button>`:'';
   const fams=`<div class="hscroll sw-fams" data-hs="swfam" role="group" aria-label="${esc(t('swFamLbl'))}">${Object.keys(SW_FAMS).map(k=>`<button class="chip" data-act="sw-fam" data-id="${e.id}" data-v="${k}" aria-pressed="${fam===k}">${esc(t('swFams')[k])}</button>`).join('')}</div>`;
-  return fams+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
+  return fams+(lock?`<p class="note sw-lock">${plusBadge()} ${esc(t('why').swatch[1])}</p>`:'')+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.31.1';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.32';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -2551,18 +2592,18 @@ function openDetail(id){
     ${(m.photos||[]).length?`<div class="photos${m.photos.length>1?' multi':''}">${m.photos.map(pid=>`<div class="photos-item"><img data-photo="${pid}" alt="${esc(t('photoAlt'))}"></div>`).join('')}</div>`:''}
     ${(m.audios||[]).length?`<div class="au-list" style="margin-top:12px">${m.audios.map(a=>auPill(a,false)).join('')}</div>`:''}
     <h2 class="detail-title">${esc(memTitle(m))}</h2>
-    ${m.source?`<div class="note">${esc(m.source)}</div>`:''}
-    ${safeLink(m.link)?`<a class="btn" href="${esc(safeLink(m.link))}" target="_blank" rel="noopener noreferrer" style="margin:12px 0 12px;display:flex;width:fit-content;align-items:center;gap:8px">▶ ${esc(t('songListen'))} <small style="opacity:.7">${esc(linkHost(safeLink(m.link)))}</small></a>`:''}
+    ${srcOf(m)?`<div class="note">${esc(srcOf(m))}</div>`:''}
     ${m.quote?`<blockquote class="quote" style="--c:${mainColor(m)};margin:16px 0 0"><p>«${esc(m.quote)}»</p>${m.page?`<cite>${esc(t('pageAbbr',m.page))}</cite>`:''}</blockquote>`:''}
     ${m.text?`<div class="detail-text">${esc(m.text)}</div>`:''}
     <div class="row">${(m.emotions||[]).map(emo).filter(Boolean).map(e=>`<button class="chip" style="--c:${e.color}" data-act="filter-emo-go" data-v="${e.id}"><i></i>${esc(e.name)}</button>`).join('')}</div>
     ${(m.tags||[]).length?`<div class="row" style="margin-top:8px">${m.tags.map(x=>`<button class="chip" data-act="tag-go" data-v="${esc(x)}">#${esc(x)}</button>`).join('')}</div>`:''}
+    ${safeLink(m.link)?`<a class="btn" href="${esc(safeLink(m.link))}" target="_blank" rel="noopener noreferrer" style="margin:14px 0 2px;display:flex;width:fit-content;align-items:center;gap:8px">${m.type==='cancion'?'▶ '+esc(t('songListen')):'↗ '+esc(t('openLink'))} <small style="opacity:.7">${esc(linkHost(safeLink(m.link)))}</small></a>`:''}
   </div>
   ${links.length?`<h3 class="month" style="margin-top:22px">${t('linkedWith')}</h3>${miniList(links)}`:''}
   ${moreFromBlock(m)}
   ${tagBlock(m)}
-  ${showShare()?`<div class="actions"><button class="btn" data-act="share-mem" data-id="${m.id}">${IMG_ICON}${esc(t('shareBtn'))}</button></div>`:''}
-  <div class="actions" style="border-top:1px solid var(--line);padding-top:16px;margin-top:22px"><button class="btn quiet danger" data-act="del" data-id="${m.id}" style="padding-left:0">${t('del')}</button></div>`);
+  <div class="actions" style="border-top:1px solid var(--line);padding-top:16px;margin-top:22px"><button class="btn quiet danger" data-act="del" data-id="${m.id}" style="padding-left:0">${t('del')}</button></div>
+  ${showShare()?`<div class="det-fab"><button class="fab-sm" data-act="share-mem" data-id="${m.id}" aria-label="${esc(t('qsOpts'))}" title="${esc(t('qsOpts'))}">${IMG_ICON.replace('margin-right:6px','margin:0')}</button><button class="fab-main" data-act="share-quick" data-id="${m.id}" aria-label="${esc(t('qsAria'))}" title="${esc(t('qsAria'))}">${SHARE_ICON}</button></div>`:''}`);
 }
 
 
@@ -2745,6 +2786,7 @@ function renderEditor(focusSel){
   const cands=S.memories.filter(o=>o.id!==draft.id&&!draft.links.includes(o.id)&&(!lq||[o.title,o.text,o.source,o.quote,...(o.tags||[])].join(' ').toLowerCase().includes(lq)));
   const rm=`<span class="x" aria-hidden="true">✕</span><span class="vh">${esc(t('remove'))}</span>`;
   const typesRow=`<div class="hscroll" data-hs="types">${typesByUse().filter(id=>!typeHidden(id)||draft.type===id).map(id=>`<button class="chip" data-act="ed-type" data-v="${id}" aria-pressed="${draft.type===id}">${esc(typeOf(id).label)}</button>`).join('')}<button class="chip" data-act="ed-newtype-toggle" aria-expanded="${newTypeOpen}" style="border-style:dashed">${t('otherType')}</button></div>
+  ${newTypeOpen?(()=>{const free=Object.keys(TPL).filter(k=>!(S.customTypes||[]).some(c=>c.tpl===k));return free.length?`<p class="note tpl-h">${esc(t('tplHead'))}</p><div class="row tpl-row">${free.map(k=>`<button class="chip" data-act="ed-tpl" data-v="${k}">${esc(TPL[k].name[lang()]||TPL[k].name.es)}</button>`).join('')}</div><p class="note tpl-h">${esc(t('tplOwn'))}</p>`:''})():''}
   ${newTypeOpen?`<div class="row" style="margin-top:8px;flex-wrap:nowrap"><input class="in" style="flex:1;min-width:0" id="ed-newtype" data-ed-newtype placeholder="${esc(t('newTypePh'))}" value="${esc(newTypeName)}" aria-label="${esc(t('newTypeName'))}"><button class="btn" data-act="ed-addtype">${t('createType')}</button></div>`:''}`;
   const emosRow=`<div class="hscroll hs-emos" data-hs="emos">${(edNewEmo&&emo(edNewEmo)?[emo(edNewEmo),...emosByUse().filter(x=>x.id!==edNewEmo)]:emosByUse()).map(e=>{const i=draft.emotions.indexOf(e.id);return `<button class="chip" style="--c:${e.color}" data-act="ed-emo" data-v="${e.id}" aria-pressed="${i>=0}"><i></i>${esc(e.name)}${i===0&&draft.emotions.length>1?` <small>${t('principal')}</small>`:''}</button>`}).join('')}<button class="chip" data-act="ed-newemo" style="border-style:dashed">+ ${esc(t('newEmo'))}</button></div>`;
   const drawersRow=`<div class="hscroll" data-hs="drawers">${drawersByUse().map(d=>`<button class="chip" data-act="ed-drawer" data-v="${d.id}" aria-pressed="${draft.drawers.includes(d.id)}">${esc(d.name)}</button>`).join('')}<button class="chip" data-act="ed-newdrawer-toggle" aria-expanded="${newDrawerOpen}" style="border-style:dashed">+ ${esc(t('newDrawerChip'))}</button></div>
@@ -2757,13 +2799,16 @@ function renderEditor(focusSel){
   <input class="in" id="ed-title" data-ed="title" value="${esc(draft.title)}" list="ed-titles" autocomplete="off">
   <datalist id="ed-titles">${[...new Set(S.memories.filter(o=>o.type===draft.type&&o.title).map(o=>o.title))].map(x=>`<option value="${esc(x)}"></option>`).join('')}</datalist>
   ${ty.src?`<label class="f" for="ed-src">${ty.src} <small>${t('optional')}</small></label><input class="in" id="ed-src" data-ed="source" value="${esc(draft.source)}">`:''}
-  ${draft.type==='cancion'?`<label class="f" for="ed-link">${esc(t('songLink'))} <small>${t('optional')}</small></label><input class="in" id="ed-link" type="url" inputmode="url" autocomplete="off" data-ed="link" placeholder="${esc(t('songLinkPh'))}" value="${esc(draft.link||'')}">`:''}
+  ${(ty.fields||[]).map(f=>{const v=(draft.fields||{})[f.k];if(f.kind==='stars'){const n=+v||0;return `<label class="f">${esc(f.label)} <small>${t('optional')}</small></label><div class="stars-in" role="radiogroup" aria-label="${esc(f.label)}">${[1,2,3,4,5].map(i=>`<button type="button" role="radio" aria-checked="${n===i}" aria-label="${esc(t('starsLbl',i))}" data-act="ed-star" data-v="${f.k}:${i}" class="${i<=n?'on':''}">★</button>`).join('')}</div>`}
+    const prev=[...new Set(S.memories.filter(o=>o.type===draft.type&&o.fields&&o.fields[f.k]).map(o=>o.fields[f.k]))];
+    return `<label class="f" for="ed-f-${f.k}">${esc(f.label)} <small>${t('optional')}</small></label><input class="in" id="ed-f-${f.k}" data-edf="${f.k}" value="${esc(v||'')}" maxlength="80" autocomplete="off"${prev.length?` list="ed-fl-${f.k}"`:''}>${prev.length?`<datalist id="ed-fl-${f.k}">${prev.map(x=>`<option value="${esc(x)}"></option>`).join('')}</datalist>`:''}`}).join('')}
   <label class="f">${t('emotions')} <small>${t('emoHint')}</small></label>
   ${emosRow}
   ${ty.q?`<label class="f" for="ed-quote">${ty.q} <small>${t('optional')}</small></label><textarea class="in" id="ed-quote" data-ed="quote" placeholder="${esc(ty.qph)}" style="min-height:80px;font-style:italic">${esc(draft.quote||'')}</textarea>`:''}
   ${ty.page?`<label class="f" for="ed-page">${t('pageLbl')} <small>${t('optional')}</small></label><input class="in" id="ed-page" data-ed="page" value="${esc(draft.page||'')}" inputmode="numeric" maxlength="8" style="max-width:120px">`:''}
   <label class="f" for="ed-text">${t('text')}</label>
   <textarea class="in" id="ed-text" data-ed="text" placeholder="${esc(ty.ph)}">${esc(draft.text)}</textarea>
+  ${(()=>{const sg=draft.type==='cancion';return `<label class="f" for="ed-url">${esc(t(sg?'songLink':'webLink'))} <small>${t('optional')}</small></label><input class="in" id="ed-url" type="url" inputmode="url" autocomplete="off" data-ed="link" placeholder="${esc(t(sg?'songLinkPh':'webLinkPh'))}" value="${esc(draft.link||'')}">`})()}
   <label class="f">${t('photosVoice')} <small>${esc(isPlus()?t('photoHintPlus',draft.photos.length):t('photoHintFree'))}</small></label>
   <div class="photo-edit">${draft.photos.map(pid=>`<div class="pe"><img data-photo="${pid}" alt=""><button class="pe-x" data-act="ed-unphoto" data-v="${pid}" aria-label="${esc(t('removePhoto'))}">✕</button></div>`).join('')}${draft.photos.length<photoLimit()?`<label class="pe-add"><input type="file" accept="image/*" data-ed-photo class="vh"${photoLimit()-draft.photos.length>1&&!S.settings.onePick?' multiple':''}><span aria-hidden="true">+</span><small>${esc(t('addPhoto'))}</small></label>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('limitFree'))}"><span aria-hidden="true">+</span><small>${plusBadge()}</small></button>`:'')}${rec?`<button class="pe-add pe-rec" data-act="au-stop" aria-label="${esc(t('auStop'))}"><span aria-hidden="true">■</span><small id="au-rec-t">${fmtDur((Date.now()-rec.t0)/1000)}</small></button>`:(draft.audios||[]).length<auLim().n?`<button class="pe-add" data-act="au-rec" aria-label="${esc(t('auRec'))}"><span aria-hidden="true">🎙</span><small>${esc(t('auRecShort'))}</small></button>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('auLimitFree'))}"><span aria-hidden="true">🎙</span><small>${plusBadge()}</small></button>`:'')}</div>
   ${phErr?`<div class="err" role="alert">${esc(phErr)}</div>`:''}
@@ -2796,8 +2841,9 @@ async function saveDraft(){
   if(!draft.title.trim()&&!draft.text.trim()){edErr=t('errEmpty');renderEditor();return}
   if(!/^\d{4}-\d{2}-\d{2}$/.test(draft.date))draft.date=iso(new Date());
   const isNew=!draft.id;const prev=isNew?null:memOf(draft.id);
-  const m={...draft,id:draft.id||mkid('m'),title:draft.title.trim(),source:(draft.source||'').trim(),link:safeLink(draft.type==='cancion'?draft.link:''),text:draft.text.trim(),createdAt:prev?.createdAt||Date.now(),updatedAt:Date.now()};
+  const m={...draft,id:draft.id||mkid('m'),title:draft.title.trim(),source:(draft.source||'').trim(),link:safeLink(draft.link),text:draft.text.trim(),createdAt:prev?.createdAt||Date.now(),updatedAt:Date.now()};
   if(!typeOf(m.type).src)m.source='';
+  {const fs=typeOf(m.type).fields;if(fs){const o={};fs.forEach(f=>{const v=(m.fields||{})[f.k];if(f.kind==='stars'){if(+v)o[f.k]=+v}else if((v||'').trim())o[f.k]=cut(v.trim(),80)});if(Object.keys(o).length)m.fields=o;else delete m.fields}else delete m.fields}
   m.quote=typeOf(m.type).q?(draft.quote||'').trim():'';m.page=typeOf(m.type).page?String(draft.page||'').trim():'';if(!m.quote)delete m.quote;if(!m.page)delete m.page;
   delete m._new;delete m._saved;delete m._colors;m.drawers=[...(draft.drawers||[])];normDrawers(m);m.photos=[...(draft.photos||[])];m.audios=[...(draft.audios||[])];if(!m.audios.length)delete m.audios;draft._saved=true;
   const keepIds=new Set([...m.photos,...(m.audios||[]).map(a=>a.id)]);
@@ -2961,7 +3007,7 @@ function drawSpecialMem(x,m,s,P){
     x.fillStyle=paper;x.fillRect(0,0,W,H);
     x.strokeStyle=rgba(ec,.45);x.lineWidth=2;x.beginPath();x.moveTo(150,0);x.lineTo(150,H);x.stroke();
     x.fillStyle=ec;x.beginPath();x.moveTo(880,0);x.lineTo(940,0);x.lineTo(940,250);x.lineTo(910,222);x.lineTo(880,250);x.closePath();x.fill();
-    x.fillStyle=soft;x.font=`italic 34px ${serif}`;x.textAlign='center';x.fillText(cut(memTitle(m)+(m.source?' · '+m.source:''),52),W/2,170);x.textAlign='left';
+    x.fillStyle=soft;x.font=`italic 34px ${serif}`;x.textAlign='center';x.fillText(cut(memTitle(m)+(srcOf(m)?' · '+srcOf(m):''),52),W/2,170);x.textAlign='left';
     x.strokeStyle=soft;x.lineWidth=1;x.beginPath();x.moveTo(200,200);x.lineTo(W-200,200);x.stroke();
     const body=(s.quote&&m.quote)?m.quote:(m.text&&s.text?m.text:memTitle(m));
     let size=72;let ls=wrapAt(body,`${size}px ${serif}`,740,12);while(ls.length>9&&size>46){size-=4;ls=wrapAt(body,`${size}px ${serif}`,740,12)}
@@ -2983,7 +3029,7 @@ function drawSpecialMem(x,m,s,P){
     x.fillStyle=MU;x.font=`700 28px ${sans}`;x.fillText(t('ticketSession').toUpperCase().split('').join(' '),X+60,Y+90);
     x.font=`500 32px ${sans}`;x.fillText(fmt(m.date)+(timeOf(m)?', '+timeOf(m):''),X+60,Y+140);
     let y=Y+270;x.fillStyle=TX;wrapAt(memTitle(m),`92px ${serif}`,740,3).forEach(l=>{x.font=`92px ${serif}`;x.fillText(l,X+60,y);y+=96});
-    if(m.source){x.fillStyle=MU;x.font=`500 36px ${sans}`;x.fillText(cut(m.source,36),X+60,y+6);y+=60}
+    if(srcOf(m)){x.fillStyle=MU;x.font=`500 36px ${sans}`;x.fillText(cut(srcOf(m),36),X+60,y+6);y+=60}
     const ql=(s.quote&&m.quote)?wrapAt('«'+m.quote+'»',`italic 52px ${serif}`,740,(cut1-y-60)/62|0):[];x.fillStyle=TX;x.font=`italic 52px ${serif}`;ql.forEach((l,i)=>x.fillText(l,X+60,y+50+i*62));
     const sc=lumOf(ec)>150?'#1C1A28':'#FFFFFF';x.fillStyle=sc;x.font=`500 38px ${sans}`;x.fillText(cs.map(e=>e.name).join(' · ')||'',X+60,cut1+130);
     if(s.text&&m.text){x.font=`italic 40px ${serif}`;wrapLines(x,m.text,740,4).forEach((l,i)=>x.fillText(l,X+60,cut1+210+i*50))}
@@ -3003,7 +3049,7 @@ function drawSpecialMem(x,m,s,P){
       x.restore();x.fillStyle=BG;x.beginPath();x.arc(cx,cy,14,0,Math.PI*2);x.fill();
       let y=1260;x.fillStyle=MU;x.font=`500 34px ${sans}`;x.fillText(fmt(m.date),90,y-130);
       x.fillStyle=TX;wrapAt(memTitle(m),`104px ${serif}`,900,2).forEach(l=>{x.font=`104px ${serif}`;x.fillText(l,90,y);y+=106});
-      if(m.source){x.fillStyle=MU;x.font=`500 40px ${sans}`;x.fillText(cut(m.source,40),90,y);y+=80}
+      if(srcOf(m)){x.fillStyle=MU;x.font=`500 40px ${sans}`;x.fillText(cut(srcOf(m),40),90,y);y+=80}
       if(s.quote&&m.quote){x.fillStyle=TX;x.font=`italic 54px ${serif}`;wrapLines(x,m.quote,900,3).forEach((l,i)=>x.fillText(l,90,y+20+i*64));y+=3*64}
       else if(s.text&&m.text){x.fillStyle=TX;x.font=`italic 46px ${serif}`;wrapLines(x,m.text,900,3).forEach((l,i)=>x.fillText(l,90,y+20+i*56))}
       let X=90;cs.forEach(e=>{x.fillStyle=e.color;rr(x,X,1730,90,16,8);x.fill();X+=104});
@@ -3013,6 +3059,17 @@ function drawSpecialMem(x,m,s,P){
 }
 
 const IMG_ICON='<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" style="vertical-align:-3px;margin-right:6px" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>';
+const SHARE_ICON='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>';
+async function quickShare(id,btn){const m=memOf(id);if(!m)return;if(btn)btn.classList.add('busy');
+  try{shareState={kind:'mem',data:id,theme:(shareState&&shareState.theme)||'dark',photo:true,quote:true,text:!m.quote,style:'tipo',names:false};
+    await drawShare();const c=window._shareCanvas;const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',0.92));if(!blob)throw 0;
+    const cid=mkid('c');await IDB.put(cid,blob,'cards');S.cards=[{id:cid,kind:'mem',label:memTitle(m),createdAt:Date.now()},...(S.cards||[])];saveLocal();
+    if(btn)btn.classList.remove('busy');
+    const name='memorandum-'+iso(new Date())+'.jpg';const f=new File([blob],name,{type:'image/jpeg'});
+    if(!window.claude&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f]});toast(t('qsSaved'));return}catch(e){if(e&&e.name==='AbortError'){toast(t('qsSaved'));return}}}
+    const u=await cardURL(cid);
+    openDlg(`<div class="dlg-head"><h2>${esc(t('qsReady'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><div class="story-prev"><img src="${u}" alt=""></div><p class="note" style="text-align:center;margin:8px auto 0">${esc(t('qsSaved'))}</p><div class="actions" style="justify-content:center"><button class="btn primary" data-act="card-share" data-id="${cid}">${SHARE_ICON.replace('width="24" height="24"','width="18" height="18" style="vertical-align:-3px;margin-right:6px"')}${esc(t('cardShare'))}</button></div>`);
+  }catch(e){if(btn)btn.classList.remove('busy');toast(t('tCardErr'))}}
 function showShare(){return !(S.settings&&S.settings.share===false)}
 /* ---------- Mis tarjetas: imágenes guardadas solo en este dispositivo ---------- */
 const cardURLs=new Map();
@@ -3098,7 +3155,7 @@ async function drawShare(){
     let y=img?top:Math.max(top,top+(1760-top-blockH)/2);
     x.fillStyle=MU;x.font=`500 34px ${sans}`;x.fillText(ty.label+', '+fmt(m.date),90,y);y+=60+tSize*.75;
     x.fillStyle=TX;x.font=`${tSize}px ${serif}`;tl.forEach(l=>{x.fillText(l,90,y);y+=tSize*1.05});
-    if(m.source){x.fillStyle=MU;x.font=`500 38px ${sans}`;x.fillText(cut(m.source,40),90,y+8);y+=70}else y+=20;
+    if(srcOf(m)){x.fillStyle=MU;x.font=`500 38px ${sans}`;x.fillText(cut(srcOf(m),40),90,y+8);y+=70}else y+=20;
     if(ql.length){x.font=`italic ${qSize}px ${serif}`;x.fillStyle=cs[0]?cs[0].color:MU;rr(x,90,y-qSize+10,8,ql.length*qSize*1.2,4);x.fill();x.fillStyle=TX;ql.forEach((l,i)=>x.fillText(l,124,y+i*qSize*1.2));y+=ql.length*qSize*1.2;
       if(m.page){x.fillStyle=MU;x.font=`500 32px ${sans}`;x.fillText(t('pageAbbr',m.page),124,y+10);y+=70}else y+=20}
     if(xl.length){x.fillStyle=TX;x.font=`${xSize}px ${serif}`;xl.forEach((l,i)=>x.fillText(l,90,y+10+i*xSize*1.3));y+=xl.length*xSize*1.3+20}
@@ -3191,7 +3248,7 @@ let film=null;
 function filmPeriodTitle(){return t('filmT_'+rep.period)}
 function galleryItems(){const all=filtered().filter(m=>(m.photos||[]).length&&galOk(m));const ms=(galYear?all.filter(m=>m.date.startsWith(galYear)):all).sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0));return ms.flatMap(m=>m.photos.map(pid=>({m,pid})))}
 async function openPhotoFilm(){
-  if(!isPlus()){goPlus();return}
+  if(!isPlus()){goPlus('photofilm');return}
   let items=galleryItems();if(!items.length){toast(t('galleryEmpty'));return}
   const MAX=50;if(items.length>MAX){const st=items.length/MAX;items=Array.from({length:MAX},(_,i)=>items[Math.floor(i*st)])}
   const ms=[...new Map(items.map(x=>[x.m.id,x.m])).values()];
@@ -3207,7 +3264,7 @@ async function openPhotoFilm(){
   filmStart();
 }
 async function openFilm(sel,opts){
-  const rc=opts&&opts.recap;if(!isPlus()&&!rc){goPlus();return}
+  const rc=opts&&opts.recap;if(!isPlus()&&!rc){goPlus('film');return}
   let ms,label,title;
   if(sel){ms=sel.ms.slice(-36);label=sel.label;title=sel.title}
   else{const r=range(rep.period,rep.offset);ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0)).slice(-36);label=r.label;title=filmPeriodTitle()}
@@ -3316,7 +3373,7 @@ function filmFrame(cv,ts){
 }
 /* ---------- Vídeo de la constelación: el cielo se dibuja recuerdo a recuerdo (Plus) ---------- */
 async function openSkyFilm(){
-  if(!isPlus()){goPlus();return}
+  if(!isPlus()){goPlus('skyfilm');return}
   const L=skyLast;if(!L||L.nodes.length<2){toast(t('skyMin'));return}
   const N=L.nodes.length;const cn=skyLayout(L.nodes.map(n=>n.m),L.edges,'card');
   const ord=L.nodes.map((n,i)=>i).sort((a,b)=>L.nodes[a].m.date.localeCompare(L.nodes[b].m.date)||(L.nodes[a].m.createdAt||0)-(L.nodes[b].m.createdAt||0));
@@ -3576,7 +3633,7 @@ async function buildBookPDF(opts,onStep){
       y=fh+6+30}
     txt(F.sans,7,MU,M,y,meta);y+=small?24:30;
     y=para(F.serif,small?17:24,TX,M,y,memTitle(m),CW,small?20:27,small?2:3);
-    if(m.source)y=para(F.ital,small?9.5:12,MU,M,y+(small?0:2),m.source,CW,small?12:15,2)+2;
+    if(srcOf(m,true))y=para(F.ital,small?9.5:12,MU,M,y+(small?0:2),srcOf(m,true),CW,small?12:15,2)+2;
     y+=small?5:8;let ex=M;const es=small?8.5:9.5;colorsOf(m).filter(e=>e.name).forEach(e=>{const w=pdfW(F.sans,e.name,es)+16;if(ex+w>W-M){ex=M;y+=14}circle(ex+3.5,y-3,small?3.2:4,e.color);txt(F.sans,es,TX,ex+11,y,e.name);ex+=w+8});y+=small?16:18;
     const bottom=()=>H-58-connH-((m.tags||[]).length?16:0);
     if(text&&m.quote&&!qIn){const qz=small?10.5:13.5,ql=small?14:18;const qs=pdfWrap(F.ital,'«'+m.quote+'»',qz,CW-12,small?4:8);const qh=qs.length*ql;rect(M,y-qz*.8,2,qh,colorsOf(m)[0].color);qs.forEach((l,j)=>txt(F.ital,qz,TX,M+10,y+j*ql,l));y+=qh+(small?6:10)}
@@ -3626,7 +3683,7 @@ async function buildBookPDF(opts,onStep){
   return {blob:new Blob(chunks,{type:'application/pdf'}),pages:pages.length};
 }
 function openBook(sel){
-  if(!isPlus()){goPlus();return}
+  if(!isPlus()){goPlus('book');return}
   let ms,label,title,period;
   if(sel){({ms,label,title,period}=sel)}
   else{const r=range(rep.period,rep.offset);ms=[...vis().filter(m=>m.date>=r.s&&m.date<=r.e)].sort((a,b)=>a.date.localeCompare(b.date)||(a.createdAt||0)-(b.createdAt||0));label=r.label;title=t('filmT_'+rep.period);period=rep.period}
@@ -3784,7 +3841,7 @@ function fmtDur(x){x=Math.max(0,Math.round(x||0));return Math.floor(x/60)+':'+St
 let rec=null,auEl=null,auId=null;
 function auMime(){if(typeof MediaRecorder==='undefined')return null;return ['audio/webm;codecs=opus','audio/mp4','audio/webm','audio/ogg;codecs=opus'].find(m=>{try{return MediaRecorder.isTypeSupported(m)}catch(e){return false}})||''}
 async function recStart(){
-  if(!draft||rec)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus();return}
+  if(!draft||rec)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus('audio');return}
   const mime=auMime();if(mime===null||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast(t('auNoRec'));return}
   let stream;try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){toast(t('auNoMic'));return}
   let mr;try{mr=new MediaRecorder(stream,mime?{mimeType:mime,audioBitsPerSecond:64000}:undefined)}catch(e){stream.getTracks().forEach(x=>x.stop());toast(t('auNoRec'));return}
@@ -3804,7 +3861,7 @@ async function addAudioBlob(blob,dur){
   draft.audios=[...(draft.audios||[]),{id,dur:Math.round(dur||0)}];draft._new=[...(draft._new||[]),id];renderEditor();
 }
 async function addAudioFile(f){
-  if(!draft||!f)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus();return}
+  if(!draft||!f)return;const lim=auLim();if((draft.audios||[]).length>=lim.n){if(isPlus())toast(t('auLimitPlus'));else goPlus('audio');return}
   const dur=await new Promise(res=>{const u=URL.createObjectURL(f);const a=new Audio();a.preload='metadata';const done=v=>{URL.revokeObjectURL(u);res(v)};a.onloadedmetadata=()=>done(isFinite(a.duration)?a.duration:0);a.onerror=()=>done(-1);setTimeout(()=>done(0),4000);a.src=u});
   if(dur<0){toast(t('auBadFile'));return}
   if(dur>lim.sec+1){toast(isPlus()?t('auLongPlus'):t('auLongFree'));return}
@@ -4385,7 +4442,12 @@ function plusSection(){
   return `<div class="ps-card">${head}${intro}${isPlayApp()?'':`<p style="margin:10px 0 2px;font-size:15px">${esc(t('plusPrice'))}</p><p class="note" style="margin:0 0 4px">${esc(t('plusNoAuto'))}</p>`}${buy}${links(st==='expired'?t('plusRenewCode'):t('plusHaveCode'))}${codeRow(st==='expired'?t('plusRenewCode'):t('plusHaveCode'))}</div>`;
 }
 function goPlusSec(){closeDlg();go('perfil');setTimeout(()=>{const el=$('#plus-sec');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},80)}
-function goPlus(){openPlusCompare()}
+function goPlus(k){const w=k&&(t('why')||{})[k];if(!w){openPlusCompare();return}
+  const ended=!trialActive()&&plusState()!=='active'&&S.settings&&S.settings.trialStart;
+  openDlg(`<div class="dlg-head"><h2>${esc(t('whyTitle'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div>
+  <div class="why-box"><b>${plusBadge()} ${esc(w[0])}</b>${w[1]?`<p>${esc(w[1])}</p>`:''}</div>
+  ${ended?`<p class="note" style="margin:10px 0 0">${esc(t('whyNoPlus'))}</p>`:''}
+  <div class="actions"><button class="btn quiet" data-act="plus-code-go">${esc(t('cmpCode'))}</button><button class="btn primary" data-act="go-plus">${esc(t('whySeePlus'))}</button></div>`)}
 function openPlusCompare(){
   const mk=v=>v===1?'<span class="ok" aria-label="✓">✓</span>':v===0?'<span class="no" aria-label="—">—</span>':esc(v);
   const rows=t('cmpRows').filter(r=>SHARE_ON||!/compart|Shared/.test(r[0]));
@@ -4560,7 +4622,7 @@ document.addEventListener('click',e=>{
     case 'dy-prev':dyGo(dy.i-1,-1);break;
     case 'dy-next':dyGo(dy.i+1,1);break;
     case 'dy-aa':dyAa();break;
-    case 'dy-style':{if(v!=='pluma'&&!isPlus()){goPlus();break}S.settings.diaryStyle=v;saveLocal();closeDlg();dyRestyle();break}
+    case 'dy-style':{if(v!=='pluma'&&!isPlus()){goPlus('diary');break}S.settings.diaryStyle=v;saveLocal();closeDlg();dyRestyle();break}
     case 'ph-recover':$('#ph-importer').click();break;
     case 'ph-info':openDlg(`<div class="dlg-head"><h2>${esc(t('phLostInfoT'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><p style="white-space:pre-line;margin:4px 0 0;max-width:46ch">${esc(t('phLostInfoTx'))}</p><div class="actions"><button class="btn primary" data-act="ph-recover">${esc(t('phLostBtn'))}</button></div>`);break;
     case 'ph-snooze':S.settings.phLostSnooze=lostTotal();saveLocal();render();break;
@@ -4573,6 +4635,7 @@ document.addEventListener('click',e=>{
     case 'dy-size':{S.settings.diarySize=v;saveLocal();closeDlg();dyRestyle();break}
     case 'dy-share':dyShareAsk();break;
     case 'dy-share-go':closeDlg();dyShare();break;
+    case 'ext-link':break;
     case 'dy-mem':if(dy&&dy.sw){dy.sw=false;break}openDetail(id);break;
     case 'rj-share':rjShare();break;
     case 'rumbo-scale':{rumboPick=true;const y=window.scrollY;render();window.scrollTo(0,y);break}
@@ -4627,9 +4690,10 @@ document.addEventListener('click',e=>{
     case 'next':if(rep.offset<0){rep.offset++;render()}break;
     case 'story':openStory();break;
     case 'share-mem':openShare('mem',id);break;
+    case 'share-quick':quickShare(id,b);break;
     case 'share-day':openShare('day',v);break;
     case 'share-conn':openShare('conn',{a:b.dataset.a,b:b.dataset.b,se:(b.dataset.se||'').split(',').filter(Boolean),st:[b.dataset.st]});break;
-    case 'share-stat':if(!isPlus()){goPlus();break}openShare('stat',{mode:b.dataset.m,id:v});break;
+    case 'share-stat':if(!isPlus()){goPlus('sharestat');break}openShare('stat',{mode:b.dataset.m,id:v});break;
     case 'share-style':if(shareState){shareState.style=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'nz-close':S.settings.nudgeClosed=iso(new Date());saveLocal();render();break;
     case 'nz-week':rep={period:'semana',offset:0};go('informe');break;
@@ -4670,7 +4734,7 @@ document.addEventListener('click',e=>{
     case 'share-dual':openShare('dual',{ids:String(v).split(',')});break;
     case 'rc-open':closeDlg();filters=NOFILTER();filters.drawer=id;archMode='lista';go('archivo');break;
     case 'noop':break;
-    case 'sd-open':if(!isPlus()){goPlus();break}openShareDrawer(id);break;
+    case 'sd-open':if(!isPlus()){goPlus('sharedrawer');break}openShareDrawer(id);break;
     case 'sd-send':sendDrawer(id);break;
     case 'set-theme':S.settings.theme=v==='auto'?'':v;applyTheme();savePalette();{const y=window.scrollY;render();window.scrollTo(0,y)}break;
     case 'set-font':S.settings.font=v;applyFont();savePalette();{const y=window.scrollY;render();window.scrollTo(0,y)}break;
@@ -4678,12 +4742,12 @@ document.addEventListener('click',e=>{
     case 'sw-more':{if(id==='__new'){swOpen.has(id)?swOpen.delete(id):swOpen.add(id);openNewEmo();break}swOpen.has(id)?swOpen.delete(id):swOpen.add(id);if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y);break}
     case 'emo-open':openEmo(id);break;
     case 'pal-tab':palTab=v;render();break;
-    case 'sky-show':{if(SKY_PLUS_LAYERS.includes(v)&&!isPlus()){goPlus();break}const cur=skyShow();cur[v]=!cur[v];S.settings.skyShow=cur;saveLocal();document.querySelectorAll(`[data-act="sky-show"][data-v="${v}"]`).forEach(x=>x.setAttribute('aria-pressed',String(cur[v])));skyApply();break}
+    case 'sky-show':{if(SKY_PLUS_LAYERS.includes(v)&&!isPlus()){goPlus('skylayer');break}const cur=skyShow();cur[v]=!cur[v];S.settings.skyShow=cur;saveLocal();document.querySelectorAll(`[data-act="sky-show"][data-v="${v}"]`).forEach(x=>x.setAttribute('aria-pressed',String(cur[v])));skyApply();break}
     case 'sky-fs':skyFsSet(!skyFs);break;
-    case 'emo-swatch':{if(!isPlus()){goPlus();break}if(id==='__new'){simOpen=null;newEmoColor=v;openNewEmo();break}const it=S.emotions.find(x=>x.id===id);if(it){simOpen=null;it.color=v;saveLocal();savePalette();if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y)}break}
+    case 'emo-swatch':{if(!isPlus()){goPlus('swatch');break}if(id==='__new'){simOpen=null;newEmoColor=v;openNewEmo();break}const it=S.emotions.find(x=>x.id===id);if(it){simOpen=null;it.color=v;saveLocal();savePalette();if(emoPanel===id){openEmo(id);break}const y=window.scrollY;render();window.scrollTo(0,y)}break}
     case 'share-theme':if(shareState){shareState.theme=v;const el=$('#share-ctl');if(el)el.innerHTML=shareControls();drawShare()}break;
     case 'share-save':if(shareBlob){const nm=shareState?shareState.kind:'tarjeta';deliverFile('memorandum-'+nm+'-'+iso(new Date())+'.png',shareBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}break;
-    case 'story-tpl':{const pl=STORY_TPLS.find(z=>z[0]===v);if(pl&&pl[1]&&!isPlus()){goPlus();break}storyTpl=v;refreshStoryControls();drawStory();break}
+    case 'story-tpl':{const pl=STORY_TPLS.find(z=>z[0]===v);if(pl&&pl[1]&&!isPlus()){goPlus('storytpl');break}storyTpl=v;refreshStoryControls();drawStory();break}
     case 'story-theme':storyTheme=v;refreshStoryControls();drawStory();break;
     case 'story-save':
       if(storyBlob){deliverFile('memorandum-'+rep.period+'-'+iso(new Date())+'.png',storyBlob,'image/png').then(r=>{if(r==='ok')toast(t('tImg'));else if(r==='fallback')toast(t('tHold'))})}
@@ -4719,10 +4783,10 @@ document.addEventListener('click',e=>{
     case 'day':openDay(v);break;
     case 'day-add':closeDlg();openEditor(null,{date:v});break;
     case 'go-map':closeDlg();mapRange=null;mapCustomOpen=false;go('mapa');break;
-    case 'map-year':{const y=+v;if(y!==new Date().getFullYear()&&!isPlus()){goPlus();break}mapRange={kind:'year',year:y,s:`${y}-01-01`,e:`${y}-12-31`,label:String(y)};mapCustomOpen=false;render();break}
-    case 'map-custom':if(!isPlus()){goPlus();break}mapCustomOpen=true;render();break;
+    case 'map-year':{const y=+v;if(y!==new Date().getFullYear()&&!isPlus()){goPlus('mapyear');break}mapRange={kind:'year',year:y,s:`${y}-01-01`,e:`${y}-12-31`,label:String(y)};mapCustomOpen=false;render();break}
+    case 'map-custom':if(!isPlus()){goPlus('mapyear');break}mapCustomOpen=true;render();break;
     case 'map-apply':{const a=($('#map-from')||{}).value,z=($('#map-to')||{}).value;if(!a||!z||a>z){toast(t('mapBadRange'));break}if(rangeDays({s:a,e:z})>1100){toast(t('mapBadRange'));break}mapRange={kind:'custom',s:a,e:z,label:fmt(a,{day:'numeric',month:'short',year:'numeric'})+' – '+fmt(z,{day:'numeric',month:'short',year:'numeric'})};render();break}
-    case 'map-save':if(isPlus())saveMapImage();else goPlus();break;
+    case 'map-save':if(isPlus())saveMapImage();else goPlus('mapsave');break;
     case 'plus-activate':activatePlus(($('#plus-code')||{}).value);break;
     case 'gal-year':galYear=v;render();break;
     case 'import':$('#importer').click();break;
@@ -4739,7 +4803,10 @@ document.addEventListener('click',e=>{
     case 'onb-done':finishOnboarding();break;
     case 'onb-seed':finishOnboarding();seed();break;
     // editor
-    case 'ed-type':draft.type=v;if(v!=='cancion')draft.link='';if(!typeOf(v).src)draft.source='';renderEditor();break;
+    case 'ed-tpl':{const nt=createTplType(v);draft.type=nt.id;draft.source='';draft.link='';newTypeOpen=false;newTypeName='';renderEditor();break}
+    case 'ed-star':{const [k,n]=v.split(':');const f={...(draft.fields||{})};f[k]=(+f[k]===+n)?0:+n;draft.fields=f;renderEditor();break}
+    case 'arch-sort':archSort=v;render();break;
+    case 'ed-type':draft.type=v;if(!typeOf(v).src)draft.source='';renderEditor();break;
     case 'ed-emo':{const i=draft.emotions.indexOf(v);if(i>=0)draft.emotions.splice(i,1);else if(draft.emotions.length<3)draft.emotions.push(v);else toast(t('max3'));renderEditor();break}
     case 'ed-tag':addTag(v);renderEditor('#ed-tag');break;
     case 'ed-tags-all':tagsAll=!tagsAll;{const el=document.getElementById('ed-sugg');if(el)el.innerHTML=tagSuggHTML(tagSugg(''),'')}break;
@@ -4781,6 +4848,7 @@ document.addEventListener('keydown',e=>{
 let saveT;
 document.addEventListener('input',e=>{
   const el=e.target;
+  if(el.dataset.edf&&draft){draft.fields={...(draft.fields||{}),[el.dataset.edf]:el.value}}
   if(el.dataset.ed&&draft){draft[el.dataset.ed]=el.value;
     if(el.dataset.ed==='title'&&typeOf(draft.type).src&&!(draft.source||'').trim()){const k=el.value.trim().toLowerCase();const f=k&&S.memories.find(o=>o.type===draft.type&&o.id!==draft.id&&(o.title||'').trim().toLowerCase()===k&&o.source);if(f){draft.source=f.source;const si=$('#ed-src');if(si)si.value=f.source}}
     return}
