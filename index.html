@@ -5,8 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#EEEBF3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#16151E" media="(prefers-color-scheme: dark)">
-<meta name="description" content="Memorándum, tu fábrica de recuerdos: guarda lo que vives, lees y escuchas con el color de cómo te hizo sentir.">
-<title>Memorándum</title>
+<meta name="description" content="App de diario de emociones gratis: guarda tu día, lo que lees, ves y escuchas con el color de cómo te hizo sentir. También diario de gratitud. Sin cuenta, sin anuncios, en iPhone y Android.">
+<title>Memorándum · Tu diario de emociones en color (gratis)</title>
+<link rel="canonical" href="https://memorandumapp.com/" id="canon">
+<link rel="alternate" hreflang="es" href="https://memorandumapp.com/">
+<link rel="alternate" hreflang="ca" href="https://memorandumapp.com/?lang=ca">
+<link rel="alternate" hreflang="en" href="https://memorandumapp.com/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://memorandumapp.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Memorándum">
+<meta property="og:url" content="https://memorandumapp.com/">
+<meta property="og:title" content="Tu diario de emociones, en color">
+<meta property="og:description" content="Guarda lo que vives, lees, ves y escuchas con el color de cómo te hizo sentir. Gratis, sin cuenta y solo en tu móvil.">
+<meta property="og:image" content="https://memorandumapp.com/img/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Memorándum: tu diario de emociones, en color">
+<meta property="og:locale" content="es_ES"><meta property="og:locale:alternate" content="ca_ES"><meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Memorándum", "alternateName": "Memorándum, fábrica de recuerdos", "url": "https://memorandumapp.com/", "description": "App de diario de emociones gratis: guarda tu día, lo que lees, ves y escuchas con el color de cómo te hizo sentir. También diario de gratitud. Sin cuenta, sin anuncios, en iPhone y Android.", "applicationCategory": "LifestyleApplication", "operatingSystem": "iOS, Android, Web", "inLanguage": ["es", "ca", "en"], "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Jacob Carrasco"}, "image": "https://memorandumapp.com/img/og.png"}</script>
 <link rel="manifest" href="manifest.webmanifest" id="manifest-link">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -765,6 +781,17 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 </style>
 </head>
 <body>
+<noscript><main style="max-width:640px;margin:40px auto;padding:0 20px;font-family:system-ui,sans-serif;color:#26233D">
+<h1>Memorándum: tu diario de emociones, en color</h1>
+<p>Memorándum es una app gratuita de diario de emociones. Guarda lo que vives, lees, ves y escuchas, y ponle el color de cómo te hizo sentir. Con el tiempo descubres tu ritmo emocional y vuelves a tus recuerdos como en una libreta.</p>
+<h2>Qué puedes hacer</h2>
+<ul><li>Diario de emociones por colores, con tus propias emociones.</li><li>Diario de gratitud e intención del día: «Hoy doy gracias por…».</li><li>Recuerdos de libros, películas, canciones, viajes, vinos y restaurantes.</li><li>Tu gráfico de emociones por días, semanas, meses y años.</li><li>Tu diario escrito como en una libreta, con letra de pluma, máquina o imprenta.</li></ul>
+<h2>Privado de verdad</h2>
+<p>Sin cuenta, sin anuncios y sin servidores: tus recuerdos se quedan solo en tu móvil. Funciona sin conexión en iPhone, Android y ordenador.</p>
+<h2>Diari d'emocions en català</h2>
+<p>Memorándum també està en català: el teu diari d'emocions, en color, gratis i sense compte.</p>
+<p><a href="https://memorandumapp.com/">Abrir Memorándum</a> · <a href="legal.html">Privacidad y condiciones</a></p>
+</main></noscript>
 <div class="wrap">
   <header class="top">
     <div class="brand"><b id="brandname">Memorándum</b><span id="tagline"></span></div>
@@ -782,7 +809,7 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
    ========================================================= */
 const I18N={
 es:{
-  locale:'es-ES', brand:'Memorándum', tagline:'fábrica de recuerdos', docTitle:'Memorándum — fábrica de recuerdos',
+  locale:'es-ES', brand:'Memorándum', tagline:'fábrica de recuerdos', docTitle:'Memorándum · Tu diario de emociones en color (gratis)', docDesc:'App de diario de emociones gratis: guarda tu día, lo que lees, ves y escuchas con el color de cómo te hizo sentir. También diario de gratitud. Sin cuenta, sin anuncios, en iPhone y Android.',
   navHoy:'Hoy', navArchivo:'Archivo', navPaleta:'Paleta', navInforme:'Informe', navNew:'Guardar un recuerdo', sections:'Secciones',
   hello:h=>h<6?'Buenas noches':h<13?'Buenos días':h<21?'Buenas tardes':'Buenas noches',
   nMem:c=>`${c} recuerdo${c===1?'':'s'}`, nDays:c=>`${c} día${c===1?'':'s'}`,
@@ -1020,7 +1047,7 @@ es:{
   ]
 },
 en:{
-  locale:'en-GB', brand:'Memorandum', tagline:'a factory of memories', docTitle:'Memorandum — a factory of memories',
+  locale:'en-GB', brand:'Memorandum', tagline:'a factory of memories', docTitle:'Memorándum · Your emotion diary in colour (free)', docDesc:'A free emotion diary app: save your day and what you read, watch and listen to with the colour of how it made you feel. Gratitude journal too. No account, no ads, on iPhone and Android.',
   navHoy:'Today', navArchivo:'Archive', navPaleta:'Palette', navInforme:'Report', navNew:'Save a memory', sections:'Sections',
   hello:h=>h<5?'Good night':h<12?'Good morning':h<18?'Good afternoon':'Good evening',
   nMem:c=>`${c} memor${c===1?'y':'ies'}`, nDays:c=>`${c} day${c===1?'':'s'}`,
@@ -1258,7 +1285,7 @@ en:{
   ]
 },
 ca:{
-  locale:'ca-ES', brand:'Memoràndum', tagline:'fàbrica de records', docTitle:'Memoràndum — fàbrica de records',
+  locale:'ca-ES', brand:'Memoràndum', tagline:'fàbrica de records', docTitle:'Memoràndum · El teu diari d’emocions en color (gratis)', docDesc:'App de diari d’emocions gratis: desa el teu dia, el que llegeixes, veus i escoltes amb el color de com et va fer sentir. També diari de gratitud. Sense compte, sense anuncis, a iPhone i Android.',
   navHoy:'Avui', navArchivo:'Arxiu', navPaleta:'Paleta', navInforme:'Informe', navNew:'Desa un record', sections:'Seccions',
   hello:h=>h<6?'Bona nit':h<13?'Bon dia':h<21?'Bona tarda':'Bona nit',
   nMem:c=>`${c} record${c===1?'':'s'}`, nDays:c=>c===1?'1 dia':`${c} dies`,
@@ -1507,7 +1534,7 @@ const DEFAULT_EMOTIONS=[
 ];
 const DEFAULT_DRAWERS=['d-lecturas','d-diario','d-pantalla','d-musica','d-lugares'];
 const FREQ_DAYS={dia:1,semana:7,mes:30,nunca:0};
-function guessLang(){try{const l=(navigator.language||'').toLowerCase();if(l.startsWith('ca'))return 'ca';if(/^(es|gl|eu)/.test(l))return 'es';return 'en'}catch(e){return 'es'}}
+function guessLang(){try{const q=new URLSearchParams(location.search).get('lang');if(['es','ca','en'].includes(q))return q;if(/bot|crawl|spider|lighthouse/i.test(navigator.userAgent||''))return 'es';const l=(navigator.language||'').toLowerCase();if(l.startsWith('ca'))return 'ca';if(/^(es|gl|eu)/.test(l))return 'es';return 'en'}catch(e){return 'es'}}
 const DEFAULT_SETTINGS={backupFreq:'semana',lastBackup:null,snoozeUntil:null,onboarded:false,lang:guessLang()};
 function freshState(lang){
   const L=I18N[lang]||I18N.es;
@@ -1690,7 +1717,7 @@ function setLang(l){
   S.settings.lang=l;applyLang();savePalette();
 }
 function applyLang(){
-  document.documentElement.lang=lang();document.title=t('docTitle');
+  document.documentElement.lang=lang();document.title=t('docTitle');{const md=document.querySelector('meta[name=description]');if(md)md.setAttribute('content',t('docDesc'));const cn=$('#canon');if(cn)cn.setAttribute('href','https://memorandumapp.com/'+(lang()==='es'?'':'?lang='+lang()))}
   $('#brandname').textContent=t('brand');$('#tagline').textContent=t('tagline');
   const ml=$('#manifest-link');if(ml)ml.setAttribute('href',({ca:'manifest-ca.webmanifest',en:'manifest-en.webmanifest'}[lang()]||'manifest.webmanifest'));
   const at=$('#apple-title');if(at)at.setAttribute('content',t('brand'));
