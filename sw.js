@@ -25,7 +25,7 @@ self.addEventListener('fetch',e=>{
   if(req.mode==='navigate'){
     // La página: primero la red (para recibir actualizaciones); si la red falla, no responde en 3 s
     // o está bloqueada (p. ej. bloqueos de operadoras en días de partido), se abre la copia guardada.
-    const isApp=/\/(index\.html)?$/.test(url.pathname);
+    const isApp=/^\/(index\.html)?$/.test(url.pathname);
     const net=(async()=>{try{return await fetch(req.url,{cache:'no-cache',credentials:'same-origin'})}catch(_){try{return await fetch(req)}catch(__){return null}}})();
     // Solo la propia app se guarda como copia (nunca otras páginas como legal.html), y se termina de guardar aunque se abra la copia.
     e.waitUntil(net.then(r=>{if(isApp&&r&&r.ok&&!r.redirected&&(r.headers.get('content-type')||'').includes('text/html')){const cp=r.clone();return caches.open(VERSION).then(c=>c.put('index.html',cp))}}).catch(()=>{}));
