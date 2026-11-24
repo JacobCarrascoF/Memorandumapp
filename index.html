@@ -2122,10 +2122,13 @@ function rumboHTML(grow){
   const trend=best&&dd>.08?`<span class="rumbo-trend" style="--c:${emo(best).color}"><i aria-hidden="true"></i>→ ${esc(t('rumboMore',emo(best).name))}</span>`:`<span>${esc(t('rumboStable'))}</span>`;
   return `<div class="rumbo${grow?' grow':''}"><button class="rumbo-line" data-act="rumbo-open" aria-label="${esc(t('rumboOpen'))}"><i style="background:${g}"></i></button>${rumboPick?`<div class="hscroll rumbo-pick" data-hs="rumbo" role="group" aria-label="${esc(t('rumboChange'))}">${Object.keys(RUMBO).map(k=>`<button class="chip" data-act="rumbo-set" data-v="${k}" aria-pressed="${sc===k}">${esc(t('rumboScales')[k])}</button>`).join('')}</div>`:`<div class="strip-cap"><button class="rumbo-scale" data-act="rumbo-scale" aria-label="${esc(t('rumboChange'))}" aria-expanded="false"><b>${esc(t('rumboLbl'))}</b> · ${esc(t('rumboScales')[sc])} ⌄</button><button class="rumbo-reloj" data-act="reloj-open" aria-label="${esc(t('relojOpen'))}">${relojMini()}<b>${esc(t('relojShort'))}</b></button>${trend}</div>`}</div>`}
 function resurfPool(){
-  const today=iso(new Date());
-  const same=vis().filter(m=>m.date.slice(5)===today.slice(5)&&m.date<today);
-  const old=vis().filter(m=>daysAgo(m.date)>=14&&!same.includes(m));
-  return [...sorted(same),...old];
+  const today=iso(new Date());const ph=m=>(m.photos||[]).length>0;
+  const same=sorted(vis().filter(m=>m.date.slice(5)===today.slice(5)&&m.date<today));
+  const rest=vis().filter(m=>!same.includes(m));
+  /* Primero los recuerdos con foto (desde hace una semana), luego el resto (desde hace dos) */
+  const withPh=rest.filter(m=>ph(m)&&daysAgo(m.date)>=7),noPh=rest.filter(m=>!ph(m)&&daysAgo(m.date)>=14);
+  const seed=+today.replace(/-/g,'');const mix=a=>a.map((m,i)=>[((i+1)*2654435761+seed)%1000003,m]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+  return [...same.filter(ph),...same.filter(m=>!ph(m)),...mix(withPh),...noPh];
 }
 /* ---------- Recordatorio del día en Hoy: uno al día, se puede cerrar ---------- */
 function nudgesOn(){return !(S.settings&&S.settings.nudges===false)}
