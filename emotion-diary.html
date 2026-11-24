@@ -39,6 +39,11 @@ ol.steps b{display:block}
 .cta h2{margin:0 0 8px}.cta p{color:var(--muted);margin:0 0 18px}
 details{border-top:1px solid var(--line);padding:14px 0}details summary{font-weight:600;cursor:pointer}details p{margin:8px 0 0;color:var(--muted)}
 .more{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.more a{text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;font-size:15px}
+
+.stick{position:fixed;left:0;right:0;bottom:0;z-index:9;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;align-items:center;gap:12px;transform:translateY(110%);transition:transform .3s ease}
+.stick.on{transform:none}.stick span{flex:1;font-size:14px;line-height:1.3;color:var(--muted)}.stick span b{display:block;color:var(--ink);font-size:15.5px}
+.stick .btn{flex:none}body{padding-bottom:84px}
+.mid{text-align:center;margin:8px 0 30px}
 footer{max-width:760px;margin:0 auto;padding:24px 20px 40px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 @media(max-width:560px){.shots{grid-template-columns:1fr 1fr}.shots figure:nth-child(3){display:none}}
 </style>
@@ -70,7 +75,7 @@ footer{max-width:760px;margin:0 auto;padding:24px 20px 40px;border-top:1px solid
 <div class="ex" style="--c:#E9B949"><small>Saturday · Joy</small>Dinner with friends at home. We laughed so much.</div>
 <h2>With colours: how I do it in Memorándum</h2>
 <p>I made Memorándum because I wanted an emotion diary I could always carry with me and that showed me things at a glance. Each emotion has a colour, and each day is painted with what you felt.</p>
-<div class="shots"><figure><img src="/img/portada/hoy-en.webp" width="600" height="1299" loading="lazy" alt="Pick the colour of your day"><figcaption>Pick the colour of your day</figcaption></figure><figure><img src="/img/portada/diario-en.webp" width="600" height="1299" loading="lazy" alt="Reread your diary"><figcaption>Reread your diary</figcaption></figure><figure><img src="/img/portada/grafico-en.webp" width="600" height="1299" loading="lazy" alt="Discover your rhythm"><figcaption>Discover your rhythm</figcaption></figure></div>
+<div class="shots"><figure><img src="/img/portada/hoy-en.webp" width="600" height="1299" loading="lazy" alt="Pick the colour of your day"><figcaption>Pick the colour of your day</figcaption></figure><figure><img src="/img/portada/diario-en.webp" width="600" height="1299" loading="lazy" alt="Reread your diary"><figcaption>Reread your diary</figcaption></figure><figure><img src="/img/portada/grafico-en.webp" width="600" height="1299" loading="lazy" alt="Discover your rhythm"><figcaption>Discover your rhythm</figcaption></figure></div><p class="mid"><a class="btn" href="/?lang=en&ref=guia">Start for free →</a></p>
 <ul>
 <li><b>Your emotions, your colours.</b> Rename them, recolour them and create your own.</li>
 <li><b>“Your day”:</b> an intention in the morning, how it went at night, and a line of gratitude.</li>
@@ -83,4 +88,6 @@ footer{max-width:760px;margin:0 auto;padding:24px 20px 40px;border-top:1px solid
 <h2>Keep reading</h2><div class="more"><a href="/gratitude-journal">Gratitude journal</a><a href="/diario-de-emociones">En español</a><a href="/diari-d-emocions">En català</a></div>
 </article></main>
 <footer>Memorándum · a factory of memories · Made in Sant Boi de Llobregat, Barcelona · <a href="/legal-en.html">Privacy and terms</a></footer>
+<div class="stick" id="stick"><span><b>Your emotion diary, in colour</b>Free · no account · iPhone and Android</span><a class="btn sm" href="/?lang=en&ref=guia">Start for free</a></div>
+<script>(function(){var s=document.getElementById('stick');function f(){s.classList.toggle('on',scrollY>420)}addEventListener('scroll',f,{passive:true});f()})()</script>
 </body></html>

@@ -39,6 +39,11 @@ ol.steps b{display:block}
 .cta h2{margin:0 0 8px}.cta p{color:var(--muted);margin:0 0 18px}
 details{border-top:1px solid var(--line);padding:14px 0}details summary{font-weight:600;cursor:pointer}details p{margin:8px 0 0;color:var(--muted)}
 .more{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.more a{text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;font-size:15px}
+
+.stick{position:fixed;left:0;right:0;bottom:0;z-index:9;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;align-items:center;gap:12px;transform:translateY(110%);transition:transform .3s ease}
+.stick.on{transform:none}.stick span{flex:1;font-size:14px;line-height:1.3;color:var(--muted)}.stick span b{display:block;color:var(--ink);font-size:15.5px}
+.stick .btn{flex:none}body{padding-bottom:84px}
+.mid{text-align:center;margin:8px 0 30px}
 footer{max-width:760px;margin:0 auto;padding:24px 20px 40px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 @media(max-width:560px){.shots{grid-template-columns:1fr 1fr}.shots figure:nth-child(3){display:none}}
 </style>
@@ -63,11 +68,13 @@ footer{max-width:760px;margin:0 auto;padding:24px 20px 40px;border-top:1px solid
 <div class="ex" style="--c:#8FA9C7"><small>Sunday</small>Afternoon rain and a good book.</div>
 <h2>Gratitude and emotions, together</h2>
 <p>In Memorándum, gratitude is part of <b>“Your day”</b>: in the morning you write what you want from today and what you’re grateful for; at night, how it went and how you felt. In the report you see the week’s gratitude list, and what you looked for next to what you lived.</p>
-<div class="shots"><figure><img src="/img/portada/hoy-en.webp" width="600" height="1299" loading="lazy" alt="Pick the colour of your day"><figcaption>Pick the colour of your day</figcaption></figure><figure><img src="/img/portada/diario-en.webp" width="600" height="1299" loading="lazy" alt="Reread your diary"><figcaption>Reread your diary</figcaption></figure><figure><img src="/img/portada/grafico-en.webp" width="600" height="1299" loading="lazy" alt="Discover your rhythm"><figcaption>Discover your rhythm</figcaption></figure></div>
+<div class="shots"><figure><img src="/img/portada/hoy-en.webp" width="600" height="1299" loading="lazy" alt="Pick the colour of your day"><figcaption>Pick the colour of your day</figcaption></figure><figure><img src="/img/portada/diario-en.webp" width="600" height="1299" loading="lazy" alt="Reread your diary"><figcaption>Reread your diary</figcaption></figure><figure><img src="/img/portada/grafico-en.webp" width="600" height="1299" loading="lazy" alt="Discover your rhythm"><figcaption>Discover your rhythm</figcaption></figure></div><p class="mid"><a class="btn" href="/?lang=en&ref=guia">Start for free →</a></p>
 <p>All in the colours of your emotions, with no account and no ads. What you write stays only on your phone.</p>
 <section class="cta"><h2>Start your gratitude journal tomorrow morning</h2><p>One line each morning, free and with no account. On iPhone, Android and computer.</p><a class="btn" href="/?lang=en&ref=guia">Start for free</a></section>
 <h2>Frequently asked questions</h2><details><summary>How many things should I write each day?</summary><p>One is enough. Some people write three, but it’s easier to keep the habit if you start with a single line.</p></details><details><summary>Morning or night?</summary><p>In the morning it helps you start the day with a different outlook; at night, it helps you look back. With “Your day” you can do both.</p></details><details><summary>What if I can’t find anything to be grateful for?</summary><p>It happens. Look for something tiny: a meal, a quiet moment, a good night’s sleep. Or skip it without guilt and carry on tomorrow.</p></details><details><summary>Is Memorándum free?</summary><p>Yes, the essentials are free forever. “Your day” and the gratitude journal are included.</p></details>
 <h2>Keep reading</h2><div class="more"><a href="/emotion-diary">Emotion diary</a><a href="/diario-de-emociones">En español</a><a href="/diari-d-emocions">En català</a></div>
 </article></main>
 <footer>Memorándum · a factory of memories · Made in Sant Boi de Llobregat, Barcelona · <a href="/legal-en.html">Privacy and terms</a></footer>
+<div class="stick" id="stick"><span><b>Your emotion diary, in colour</b>Free · no account · iPhone and Android</span><a class="btn sm" href="/?lang=en&ref=guia">Start for free</a></div>
+<script>(function(){var s=document.getElementById('stick');function f(){s.classList.toggle('on',scrollY>420)}addEventListener('scroll',f,{passive:true});f()})()</script>
 </body></html>
