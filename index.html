@@ -161,7 +161,36 @@ p.lead{color:var(--muted);margin:0 0 16px;max-width:60ch}
 .lens-car.in-r .lc.cur{animation:lcR .35s ease}.lens-car.in-l .lc.cur{animation:lcL .35s ease}@keyframes lcR{from{transform:translateX(60%) scale(.9);opacity:.5}}@keyframes lcL{from{transform:translateX(-60%) scale(.9);opacity:.5}}
 .lens-ind{display:flex;justify-content:center;gap:8px;margin-top:4px}.lens-ind button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}.lens-ind button[aria-pressed=true]{background:var(--ink);width:20px;border-radius:4px}
 .lc-ph{text-align:center;margin:6px 0 0;font-size:14px}.lc-acts{text-align:center;margin:2px 0 0;font-size:13.5px;color:var(--muted)}.lc-acts .link{font-family:var(--sans);font-size:13.5px;color:var(--ink)}.lp-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 6px;font-size:14px;color:var(--muted)}.lp-i{font-size:15px!important;text-decoration:none!important;margin-left:2px;color:var(--muted)!important}.lens-ab-h{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--serif);font-weight:400;font-size:20px}.lens-ab-h .lc-dots{margin:0}.lp-head .link{font-family:var(--sans);font-size:14px;color:var(--ink)}
-.lens-pick{margin:0 0 16px}.lib-btn{margin:0 0 16px}
+.lens-pick{margin:0 0 16px}
+/* filtros tipo Instagram */
+.flt-btn{margin-left:auto}.flt-btn[hidden]{display:none}.flt-btn+.me{margin-left:8px}
+.flt-btn svg{width:20px;height:20px}
+.flt-btn{position:relative;z-index:27}:root[data-theme="dark"] .flt-btn g{mix-blend-mode:screen!important}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .flt-btn g{mix-blend-mode:screen!important}}.flt-btn svg{width:24px;height:24px}
+.flt-btn.has{border:2px solid var(--ink)}.flt-on{position:absolute;right:-1px;top:-1px;width:11px;height:11px;border-radius:50%;background:var(--ink);border:2px solid var(--paper)}
+.flt-btn[aria-pressed="true"]{border:2px solid var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--ink) 15%,transparent)}
+body.flt header.top{z-index:26}.fov{position:fixed;inset:0;z-index:24;touch-action:pan-y;background:transparent}.fov[hidden]{display:none}
+#main.f-in{animation:fIn .4s ease}@keyframes fIn{from{opacity:.55;filter:saturate(.3)}}
+.fbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:25;display:block;padding:8px 10px 10px;border-radius:24px;width:min(360px,calc(100% - 32px));background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);touch-action:pan-y;user-select:none;-webkit-user-select:none;max-width:calc(100% - 32px)}
+.fbar[hidden]{display:none}
+.fb-row{display:flex;align-items:center;justify-content:space-between}.fb-hint{margin:0 0 2px;text-align:center;font-size:12px;color:var(--muted)}.fb-acts{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:0 6px}.fb-acts .link{font-family:var(--sans);font-size:13.5px}
+.fb-row>button{border:0;background:none;color:var(--ink);width:38px;height:38px;border-radius:50%;font-size:22px;line-height:1;cursor:pointer;flex:none}
+.fbar .fb-i{font-size:17px;color:var(--muted)}
+.fb-mid{min-width:150px;text-align:center;padding:0 4px}
+.fb-mid b{display:block;font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.1}
+.fb-mid{flex:1}.fb-mid small{display:block;font-size:12.5px;line-height:1.3;color:var(--muted);margin:2px auto 0;max-width:240px}
+.fb-dots{display:flex;justify-content:center;gap:5px;margin-top:4px}.fb-dots i{width:5px;height:5px;border-radius:50%;background:var(--line)}.fb-dots i.on{background:var(--ink)}
+body.flt .toast{bottom:calc(230px + env(safe-area-inset-bottom,0px))}
+.fflash{position:fixed;left:0;right:0;top:40%;z-index:60;text-align:center;pointer-events:none;font-family:var(--serif);font-size:52px;color:var(--ink);text-shadow:0 0 22px var(--paper),0 0 40px var(--paper);opacity:0}
+body.flt #main{padding-bottom:170px}
+.fflash.on{animation:ffl 1.1s ease forwards}@keyframes ffl{0%{opacity:0;transform:scale(.94)}18%{opacity:1;transform:none}70%{opacity:1}100%{opacity:0}}
+.eq-seg{margin:6px 0 12px}
+.eq-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.eq-row i{flex:none;width:26px;height:26px;border-radius:8px;display:block}
+.eq-row b{flex:1;font-weight:500;font-size:15px}.eq-row .arw{color:var(--muted);flex:none}
+.eq-row small{color:var(--muted);font-size:13px}
+.pal-acts{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 16px}.pal-acts .link{font-family:var(--sans);font-size:14.5px}
+@media (min-width:860px){.fbar{bottom:28px}body.flt .toast{bottom:100px}}
+.lib-btn{margin:0 0 16px}
 .lens-bar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between;border-radius:16px;padding:12px 14px;margin:6px 0 14px;background:linear-gradient(90deg,rgba(233,185,73,.18),rgba(91,175,196,.18),rgba(200,75,75,.14));border:1px solid var(--line)}
 .lens-bar b{font-weight:600;font-size:14.5px}.lens-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;background:conic-gradient(#E9B949,#8DBF8B,#3F7F6E,#5BAFC4,#5672A6,#8D6BAF,#C84B4B,#E8874A,#E9B949)}.lens-bar p{margin:2px 0 0;font-size:14.5px}.lens-bar small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}.lens-bar .link{font-family:var(--sans);font-size:12.5px}.lens-bar .row{gap:6px}.lens-info{max-width:52ch;line-height:1.45}
 .lib-fam{margin:0 0 14px}.lib-fam h4{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-family:var(--serif);font-weight:400;font-size:20px}.lib-fam h4 i{width:12px;height:12px;border-radius:50%}.lib-fam .row{gap:6px}.lib-fam .chip[disabled]{opacity:.6}
@@ -796,6 +825,7 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
   <header class="top">
     <div class="brand"><b id="brandname">Memorándum</b><span id="tagline"></span></div>
     <nav class="tabs" id="nav"></nav>
+    <button class="me flt-btn" id="fltbtn" data-act="flt" aria-pressed="false"></button>
     <button class="me" id="me" data-act="me"></button>
   </header>
   <main id="main"></main>
@@ -996,8 +1026,8 @@ es:{
   youWere:n=>`. Tenías ${n} años.`,
   whyTitle:'Esto es de Plus', whyNoPlus:'Tu prueba de Plus ha terminado, pero todo lo que guardaste sigue ahí.', why:{swatch:['Elegir colores de la paleta sugerida','Sin Plus puedes elegir cualquier color con el cuadro de color que hay justo encima.'],diary:['Leer tu diario a máquina o en imprenta','La letra de pluma es gratis y la tienes siempre.'],film:['Tu película en color',''],photofilm:['La película de tus fotos',''],skyfilm:['El vídeo de tu constelación',''],book:['Tu libro en PDF',''],audio:['Más sonidos por recuerdo','Gratis puedes guardar uno por recuerdo.'],sharestat:['La imagen de esta estadística',''],sharedrawer:['Enviar un cajón a otra persona','Recibir cajones es gratis.'],skylayer:['Ver etiquetas y textos en la constelación','Los colores y las conexiones se ven gratis.'],storytpl:['Esta plantilla de historia','Aura, Paleta y Frase son gratis.'],mapyear:['Ver los años anteriores en el mapa','El año actual se ve gratis.'],mapsave:['Guardar la imagen del mapa','']}, whySeePlus:'Ver qué incluye Plus',
   libBtn:'Emociones sugeridas', libLead:'Emociones sugeridas por familias. Toca una para añadirla a tu paleta, ya con su color.', libAdded:'En tu paleta', tLibAdd:n=>`«${n}» añadida a tu paleta`, libMix:'Mezclas', libOr:'o elige una de las sugeridas',
-  lensTitle:'Ver tus emociones según…', lensL:{mine:'Mis colores',plut:'Rueda de Plutchik',rus:'Mapa de Russell: energía y agrado',ek:'Las 6 básicas de Ekman'}, lensWhat:'¿Qué es esto?', lensSwipe:'Desliza las tarjetas para pasar de una a otra.', lensKeepHint:'Si te gusta una, «Usar estos colores» la pasa a tu paleta, y se puede deshacer.', lensInfo:{plut:'Robert Plutchik (1980) ordenó las emociones en una rueda de 8 familias con sus colores, cada una de suave a intensa, y algunas se mezclan: nostalgia es alegría y tristeza.',rus:'James Russell (1980) sitúa cada emoción con dos preguntas: ¿es agradable o desagradable? ¿Tiene mucha o poca energía? Los colores los hemos elegido nosotros: cálido es agradable, frío desagradable; vivo es mucha energía, suave poca.',ek:'Paul Ekman estudió las caras en culturas de todo el mundo y encontró 6 emociones que todos reconocemos: alegría, tristeza, miedo, ira, asco y sorpresa. Los colores son asociaciones habituales, elegidos por nosotros.'}, lensHint:'Es solo una forma de mirar: no cambia tus colores ni tus recuerdos.', lensBarNow:l=>`Tus colores según: ${l}`, lensBack:'Volver a mis colores', lensKeep:'Usar estos colores', tLensKept:'Colores aplicados a tu paleta', lensUndo:'Volver a mis colores de antes', tLensUndone:'Tus colores de antes han vuelto', lensUnassigned:n=>`${n===1?'Una emoción sin asignar conserva':n+' emociones sin asignar conservan'} su color.`, lensAssign:'Asignar',
-  famQ:'¿A qué se parece?', famHint:'Sirve para las lentes de color. Tu color no cambia.', famNone:'Ninguna', lvlL:['Suave','Media','Intensa'], famMix:(a,b)=>`Mezcla de ${a} y ${b}`,
+  fltBtn:'Filtros de color', fltHint:'Desliza para cambiar · toca la pantalla para quedártelo', fltDone:'Listo', fltEqShort:'Equivalencias', fltOn:n=>`Filtro «${n}» puesto. Para cambiarlo, toca los tres colores.`, fltInfo:{riso:'Inspirado en la impresión risográfica: cada emoción toma la tinta fluorescente más cercana a su color. Para ver tus días con más contraste.',bn:'Tus propios colores convertidos a grises: lo claro y lo oscuro de tus días, sin el color.'},  fltPrev:'Filtro anterior', fltNext:'Filtro siguiente', fltEq:'Filtros: qué color es cada emoción', fltEqT:'Filtros de color', fltEqLead:'Cada filtro pinta tus emociones con otra mirada. Aquí ves en qué color se convierte cada una.', fltN:{mine:'Tus colores',plut:'Rueda',rus:'Pulso',ek:'Esencia',riso:'Riso',bn:'Blanco y negro'}, fltSub:{mine:'Sin filtro',plut:'Plutchik · 8 familias',rus:'Russell · energía y agrado',ek:'Ekman · 6 básicas',riso:'Tintas fluorescentes',bn:'Tus colores, en grises'}, fltMine:'Tu color', fltNoFam:'sin familia', fltFamNote:'Para elegir a qué familia se parece una emoción, toca «Asignar» o ábrela en Paleta.', fltKeepPal:n=>`Pasar «${n}» a mi paleta`, fltKeepLbl:'Recordar el filtro', fltKeepHint:'Al abrir la app, seguirá puesto el último filtro que usaste.', lensTitle:'Ver tus emociones según…', lensL:{mine:'Mis colores',plut:'Rueda de Plutchik',rus:'Mapa de Russell: energía y agrado',ek:'Las 6 básicas de Ekman'}, lensWhat:'¿Qué es esto?', lensSwipe:'Desliza las tarjetas para pasar de una a otra.', lensKeepHint:'Si te gusta una, «Usar estos colores» la pasa a tu paleta, y se puede deshacer.', lensInfo:{plut:'Robert Plutchik (1980) ordenó las emociones en una rueda de 8 familias con sus colores, cada una de suave a intensa, y algunas se mezclan: nostalgia es alegría y tristeza.',rus:'James Russell (1980) sitúa cada emoción con dos preguntas: ¿es agradable o desagradable? ¿Tiene mucha o poca energía? Los colores los hemos elegido nosotros: cálido es agradable, frío desagradable; vivo es mucha energía, suave poca.',ek:'Paul Ekman estudió las caras en culturas de todo el mundo y encontró 6 emociones que todos reconocemos: alegría, tristeza, miedo, ira, asco y sorpresa. Los colores son asociaciones habituales, elegidos por nosotros.'}, lensHint:'Es solo una forma de mirar: no cambia tus colores ni tus recuerdos.', lensBarNow:l=>`Tus colores según: ${l}`, lensBack:'Volver a mis colores', lensKeep:'Usar estos colores', tLensKept:'Colores aplicados a tu paleta', lensUndo:'Volver a mis colores de antes', tLensUndone:'Tus colores de antes han vuelto', lensUnassigned:n=>`${n===1?'Una emoción sin asignar conserva':n+' emociones sin asignar conservan'} su color.`, lensAssign:'Asignar',
+  famQ:'¿A qué se parece?', famHint:'Sirve para los filtros de color. Tu color no cambia.', famAuto:'La he elegido por el nombre o el color. Si no encaja, cámbiala.', famNone:'Ninguna', lvlL:['Suave','Media','Intensa'], famMix:(a,b)=>`Mezcla de ${a} y ${b}`,
   lensPh:{plut:(f,p)=>`En los últimos 30 días, tu familia más presente es la ${f} (${p} %).`,rus:x=>`Tus últimos 30 días han sido sobre todo ${x}.`,ek:(f,p)=>`Tu emoción básica más presente es la ${f} (${p} %).`}, rusW:{pa:'agradables y con energía',pb:'agradables y tranquilos',na:'intensos y desagradables',nb:'apagados'}, lensRusLegend:'Cálido: agradable · frío: desagradable · vivo: mucha energía · suave: poca.',
   famN:{alegria:'alegría',confianza:'confianza',miedo:'miedo',sorpresa:'sorpresa',tristeza:'tristeza',asco:'aversión',ira:'ira',anticipacion:'anticipación'},
   qsAria:'Compartir este recuerdo', qsOpts:'Elegir estilo', qsReady:'Tu tarjeta está lista', qsSaved:'Guardada también en Tarjetas', tdRemLbl:'Avisos de «Tu día»', tdRemHint:'Se añaden a tu calendario, sin servidores.', tdRemAm:'☀ Mañana', tdRemPm:'☾ Noche', tdRemAdd:'Añadir', tdRemTitleAm:'☀ ¿Qué quieres para hoy?', tdRemTitlePm:'☾ ¿Cómo ha ido el día?', tdRemDesc:'Un minuto en Memorándum.', tdLate:'Añadir lo que querías esta mañana', tdIntroRem:'Puedes ponerte avisos en Ajustes.',
@@ -1234,8 +1264,8 @@ en:{
   youWere:n=>`. You were ${n}.`,
   whyTitle:'This is part of Plus', whyNoPlus:'Your Plus trial has ended, but everything you saved is still here.', why:{swatch:['Picking colours from the suggested palette','Without Plus you can pick any colour with the colour box just above.'],diary:['Reading your diary in typewriter or print','Fountain pen is free, always.'],film:['Your film in colour',''],photofilm:['The film of your photos',''],skyfilm:['The video of your constellation',''],book:['Your PDF book',''],audio:['More sounds per memory','Free lets you keep one per memory.'],sharestat:['The image of this statistic',''],sharedrawer:['Sending a drawer to someone','Receiving drawers is free.'],skylayer:['Tags and texts in the constellation','Colours and connections are free.'],storytpl:['This story template','Aura, Palette and Quote are free.'],mapyear:['Past years on the map','The current year is free.'],mapsave:['Saving the map image','']}, whySeePlus:'See what Plus includes',
   libBtn:'Suggested emotions', libLead:'Suggested emotions by family. Tap one to add it to your palette, colour included.', libAdded:'In your palette', tLibAdd:n=>`“${n}” added to your palette`, libMix:'Blends', libOr:'or pick a suggested one',
-  lensTitle:'See your emotions through…', lensL:{mine:'My colours',plut:'Plutchik’s wheel',rus:'Russell’s map: energy and pleasantness',ek:'Ekman’s 6 basic emotions'}, lensWhat:'What is this?', lensSwipe:'Swipe the cards to move between them.', lensKeepHint:'If you like one, “Use these colours” copies it to your palette, and you can undo it.', lensInfo:{plut:'Robert Plutchik (1980) arranged emotions in a wheel of 8 families with their colours, each from soft to intense, and some blend: nostalgia is joy and sadness.',rus:'James Russell (1980) places each emotion with two questions: is it pleasant or unpleasant? Does it have high or low energy? We chose the colours: warm is pleasant, cold unpleasant; vivid is high energy, soft is low.',ek:'Paul Ekman studied faces across cultures worldwide and found 6 emotions everyone recognises: joy, sadness, fear, anger, disgust and surprise. The colours are common associations, chosen by us.'}, lensHint:'It’s just a way of looking: your colours and memories don’t change.', lensBarNow:l=>`Your colours through: ${l}`, lensBack:'Back to my colours', lensKeep:'Use these colours', tLensKept:'Colours applied to your palette', lensUndo:'Back to my previous colours', tLensUndone:'Your previous colours are back', lensUnassigned:n=>`${n===1?'One unassigned emotion keeps':n+' unassigned emotions keep'} their colour.`, lensAssign:'Assign',
-  famQ:'What is it like?', famHint:'Used by the colour lenses. Your colour doesn’t change.', famNone:'None', lvlL:['Soft','Medium','Intense'], famMix:(a,b)=>`A blend of ${a} and ${b}`,
+  fltBtn:'Colour filters', fltHint:'Swipe to change · tap the screen to keep it', fltDone:'Done', fltEqShort:'Equivalences', fltOn:n=>`“${n}” filter on. To change it, tap the three colours.`, fltInfo:{riso:'Inspired by risograph printing: each emotion takes the fluorescent ink closest to its colour. To see your days with more punch.',bn:'Your own colours turned into greys: the light and dark of your days, without colour.'},  fltPrev:'Previous filter', fltNext:'Next filter', fltEq:'Filters: what colour each emotion becomes', fltEqT:'Colour filters', fltEqLead:'Each filter paints your emotions with a different eye. Here you see what colour each one becomes.', fltN:{mine:'Your colours',plut:'Wheel',rus:'Pulse',ek:'Essence',riso:'Riso',bn:'Black & white'}, fltSub:{mine:'No filter',plut:'Plutchik · 8 families',rus:'Russell · energy and pleasantness',ek:'Ekman · 6 basic',riso:'Fluorescent inks',bn:'Your colours, in greys'}, fltMine:'Your colour', fltNoFam:'no family', fltFamNote:'To choose which family an emotion is like, tap “Assign” or open it in Palette.', fltKeepPal:n=>`Copy “${n}” to my palette`, fltKeepLbl:'Remember the filter', fltKeepHint:'When you open the app, the last filter you used stays on.', lensTitle:'See your emotions through…', lensL:{mine:'My colours',plut:'Plutchik’s wheel',rus:'Russell’s map: energy and pleasantness',ek:'Ekman’s 6 basic emotions'}, lensWhat:'What is this?', lensSwipe:'Swipe the cards to move between them.', lensKeepHint:'If you like one, “Use these colours” copies it to your palette, and you can undo it.', lensInfo:{plut:'Robert Plutchik (1980) arranged emotions in a wheel of 8 families with their colours, each from soft to intense, and some blend: nostalgia is joy and sadness.',rus:'James Russell (1980) places each emotion with two questions: is it pleasant or unpleasant? Does it have high or low energy? We chose the colours: warm is pleasant, cold unpleasant; vivid is high energy, soft is low.',ek:'Paul Ekman studied faces across cultures worldwide and found 6 emotions everyone recognises: joy, sadness, fear, anger, disgust and surprise. The colours are common associations, chosen by us.'}, lensHint:'It’s just a way of looking: your colours and memories don’t change.', lensBarNow:l=>`Your colours through: ${l}`, lensBack:'Back to my colours', lensKeep:'Use these colours', tLensKept:'Colours applied to your palette', lensUndo:'Back to my previous colours', tLensUndone:'Your previous colours are back', lensUnassigned:n=>`${n===1?'One unassigned emotion keeps':n+' unassigned emotions keep'} their colour.`, lensAssign:'Assign',
+  famQ:'What is it like?', famHint:'Used by the colour filters. Your colour doesn’t change.', famAuto:'I picked it from the name or colour. If it doesn’t fit, change it.', famNone:'None', lvlL:['Soft','Medium','Intense'], famMix:(a,b)=>`A blend of ${a} and ${b}`,
   lensPh:{plut:(f,p)=>`In the last 30 days, your most present family is ${f} (${p} %).`,rus:x=>`Your last 30 days have been mostly ${x}.`,ek:(f,p)=>`Your most present basic emotion is ${f} (${p} %).`}, rusW:{pa:'pleasant and energetic',pb:'pleasant and calm',na:'intense and unpleasant',nb:'low'}, lensRusLegend:'Warm: pleasant · cold: unpleasant · vivid: high energy · soft: low.',
   famN:{alegria:'joy',confianza:'trust',miedo:'fear',sorpresa:'surprise',tristeza:'sadness',asco:'disgust',ira:'anger',anticipacion:'anticipation'},
   qsAria:'Share this memory', qsOpts:'Choose style', qsReady:'Your card is ready', qsSaved:'Also saved in Cards', tdRemLbl:'“Your day” reminders', tdRemHint:'Added to your calendar, no servers.', tdRemAm:'☀ Morning', tdRemPm:'☾ Night', tdRemAdd:'Add', tdRemTitleAm:'☀ What do you want for today?', tdRemTitlePm:'☾ How did your day go?', tdRemDesc:'One minute in Memorándum.', tdLate:'Add what you wanted this morning', tdIntroRem:'You can set reminders in Settings.',
@@ -1472,8 +1502,8 @@ ca:{
   youWere:n=>`. Tenies ${n} anys.`,
   whyTitle:'Això és de Plus', whyNoPlus:"La teva prova de Plus s'ha acabat, però tot el que vas desar continua aquí.", why:{swatch:['Triar colors de la paleta suggerida',"Sense Plus pots triar qualsevol color amb el quadre de color que hi ha just a sobre."],diary:['Llegir el teu diari a màquina o en impremta','La lletra de ploma és gratis i la tens sempre.'],film:['La teva pel·lícula en color',''],photofilm:['La pel·lícula de les teves fotos',''],skyfilm:['El vídeo de la teva constel·lació',''],book:['El teu llibre en PDF',''],audio:['Més sons per record','Gratis pots desar-ne un per record.'],sharestat:["La imatge d'aquesta estadística",''],sharedrawer:['Enviar un calaix a una altra persona','Rebre calaixos és gratis.'],skylayer:['Veure etiquetes i textos a la constel·lació','Els colors i les connexions es veuen gratis.'],storytpl:["Aquesta plantilla d'història",'Aura, Paleta i Frase són gratis.'],mapyear:['Veure els anys anteriors al mapa',"L'any actual es veu gratis."],mapsave:['Desar la imatge del mapa','']}, whySeePlus:'Mira què inclou Plus',
   libBtn:'Emocions suggerides', libLead:'Emocions suggerides per famílies. Toca-ne una per afegir-la a la teva paleta, ja amb el seu color.', libAdded:'A la teva paleta', tLibAdd:n=>`«${n}» afegida a la teva paleta`, libMix:'Barreges', libOr:'o tria-ne una de les suggerides',
-  lensTitle:'Mira les teves emocions segons…', lensL:{mine:'Els meus colors',plut:'Roda de Plutchik',rus:'Mapa de Russell: energia i benestar',ek:'Les 6 bàsiques d’Ekman'}, lensWhat:'Què és això?', lensSwipe:'Llisca les targetes per passar de l’una a l’altra.', lensKeepHint:'Si te n’agrada una, «Fes servir aquests colors» la passa a la teva paleta, i es pot desfer.', lensInfo:{plut:'Robert Plutchik (1980) va ordenar les emocions en una roda de 8 famílies amb els seus colors, cadascuna de suau a intensa, i algunes es barregen: la nostàlgia és alegria i tristesa.',rus:'James Russell (1980) situa cada emoció amb dues preguntes: és agradable o desagradable? Té molta o poca energia? Els colors els hem triat nosaltres: càlid és agradable, fred desagradable; viu és molta energia, suau poca.',ek:'Paul Ekman va estudiar les cares en cultures de tot el món i va trobar 6 emocions que tothom reconeix: alegria, tristesa, por, ira, fàstic i sorpresa. Els colors són associacions habituals, triats per nosaltres.'}, lensHint:'És només una manera de mirar: no canvia els teus colors ni els teus records.', lensBarNow:l=>`Els teus colors segons: ${l}`, lensBack:'Torna als meus colors', lensKeep:'Fes servir aquests colors', tLensKept:'Colors aplicats a la teva paleta', lensUndo:"Torna als meus colors d'abans", tLensUndone:"Els teus colors d'abans han tornat", lensUnassigned:n=>`${n===1?'Una emoció sense assignar conserva':n+' emocions sense assignar conserven'} el seu color.`, lensAssign:'Assigna',
-  famQ:'A què s’assembla?', famHint:'Serveix per a les lents de color. El teu color no canvia.', famNone:'Cap', lvlL:['Suau','Mitjana','Intensa'], famMix:(a,b)=>`Barreja de ${a} i ${b}`,
+  fltBtn:'Filtres de color', fltHint:'Llisca per canviar · toca la pantalla per quedar-te’l', fltDone:'Fet', fltEqShort:'Equivalències', fltOn:n=>`Filtre «${n}» posat. Per canviar-lo, toca els tres colors.`, fltInfo:{riso:'Inspirat en la impressió risogràfica: cada emoció pren la tinta fluorescent més propera al seu color. Per veure els teus dies amb més contrast.',bn:'Els teus propis colors convertits en grisos: el clar i el fosc dels teus dies, sense color.'},  fltPrev:'Filtre anterior', fltNext:'Filtre següent', fltEq:'Filtres: de quin color és cada emoció', fltEqT:'Filtres de color', fltEqLead:'Cada filtre pinta les teves emocions amb una altra mirada. Aquí veus en quin color es converteix cadascuna.', fltN:{mine:'Els teus colors',plut:'Roda',rus:'Pols',ek:'Essència',riso:'Riso',bn:'Blanc i negre'}, fltSub:{mine:'Sense filtre',plut:'Plutchik · 8 famílies',rus:'Russell · energia i benestar',ek:'Ekman · 6 bàsiques',riso:'Tintes fluorescents',bn:'Els teus colors, en grisos'}, fltMine:'El teu color', fltNoFam:'sense família', fltFamNote:'Per triar a quina família s’assembla una emoció, toca «Assigna» o obre-la a Paleta.', fltKeepPal:n=>`Passa «${n}» a la meva paleta`, fltKeepLbl:'Recorda el filtre', fltKeepHint:'En obrir l’app, continuarà posat l’últim filtre que vas fer servir.', lensTitle:'Mira les teves emocions segons…', lensL:{mine:'Els meus colors',plut:'Roda de Plutchik',rus:'Mapa de Russell: energia i benestar',ek:'Les 6 bàsiques d’Ekman'}, lensWhat:'Què és això?', lensSwipe:'Llisca les targetes per passar de l’una a l’altra.', lensKeepHint:'Si te n’agrada una, «Fes servir aquests colors» la passa a la teva paleta, i es pot desfer.', lensInfo:{plut:'Robert Plutchik (1980) va ordenar les emocions en una roda de 8 famílies amb els seus colors, cadascuna de suau a intensa, i algunes es barregen: la nostàlgia és alegria i tristesa.',rus:'James Russell (1980) situa cada emoció amb dues preguntes: és agradable o desagradable? Té molta o poca energia? Els colors els hem triat nosaltres: càlid és agradable, fred desagradable; viu és molta energia, suau poca.',ek:'Paul Ekman va estudiar les cares en cultures de tot el món i va trobar 6 emocions que tothom reconeix: alegria, tristesa, por, ira, fàstic i sorpresa. Els colors són associacions habituals, triats per nosaltres.'}, lensHint:'És només una manera de mirar: no canvia els teus colors ni els teus records.', lensBarNow:l=>`Els teus colors segons: ${l}`, lensBack:'Torna als meus colors', lensKeep:'Fes servir aquests colors', tLensKept:'Colors aplicats a la teva paleta', lensUndo:"Torna als meus colors d'abans", tLensUndone:"Els teus colors d'abans han tornat", lensUnassigned:n=>`${n===1?'Una emoció sense assignar conserva':n+' emocions sense assignar conserven'} el seu color.`, lensAssign:'Assigna',
+  famQ:'A què s’assembla?', famHint:'Serveix per als filtres de color. El teu color no canvia.', famAuto:'L’he triat pel nom o el color. Si no encaixa, canvia-la.', famNone:'Cap', lvlL:['Suau','Mitjana','Intensa'], famMix:(a,b)=>`Barreja de ${a} i ${b}`,
   lensPh:{plut:(f,p)=>`Els últims 30 dies, la teva família més present és ${f} (${p} %).`,rus:x=>`Els teus últims 30 dies han estat sobretot ${x}.`,ek:(f,p)=>`La teva emoció bàsica més present és ${f} (${p} %).`}, rusW:{pa:'agradables i amb energia',pb:'agradables i tranquils',na:'intensos i desagradables',nb:'apagats'}, lensRusLegend:'Càlid: agradable · fred: desagradable · viu: molta energia · suau: poca.',
   famN:{alegria:'alegria',confianza:'confiança',miedo:'por',sorpresa:'sorpresa',tristeza:'tristesa',asco:'aversió',ira:'ira',anticipacion:'anticipació'},
   qsAria:'Comparteix aquest record', qsOpts:"Tria l'estil", qsReady:'La teva targeta és a punt', qsSaved:'Desada també a Targetes', tdRemLbl:'Avisos de «El teu dia»', tdRemHint:'Afegits al teu calendari, sense servidors.', tdRemAm:'☀ Matí', tdRemPm:'☾ Nit', tdRemAdd:'Afegeix', tdRemTitleAm:'☀ Què vols per avui?', tdRemTitlePm:'☾ Com ha anat el dia?', tdRemDesc:'Un minut a Memorándum.', tdLate:'Afegeix el que volies aquest matí', tdIntroRem:'Pots posar-te avisos a Ajustos.',
@@ -1584,12 +1614,70 @@ const LIB=[
  ['ira',0,'Molestia','Molèstia','Annoyance'],['ira',1,'Frustración','Frustració','Frustration'],['ira',1,'Enfado','Enuig','Anger'],['ira',2,'Rabia','Ràbia','Rage'],
  ['anticipacion',0,'Interés','Interès','Interest'],['anticipacion',1,'Ilusión','Il·lusió','Excitement'],['anticipacion',1,'Expectación','Expectació','Expectation'],['anticipacion',2,'Intensidad','Intensitat','Intensity'],
  [['alegria','confianza'],1,'Amor','Amor','Love'],[['alegria','anticipacion'],1,'Esperanza','Esperança','Hope'],[['alegria','tristeza'],1,'Nostalgia','Nostàlgia','Nostalgia'],[['miedo','anticipacion'],1,'Bucle','Bucle','Overthinking'],[['tristeza','asco'],0,'Desconexión','Desconnexió','Disconnection'],[['tristeza','miedo'],1,'Agobio','Angoixa','Overwhelm']];
-let LENS='',lensInfoOpen=false;
+let LENS='',lensInfoOpen=false,FMODE=false,fltInitDone=false;
+const FLTS=['','plut','rus','ek','riso','bn'];
+function fltInit(){if(fltInitDone||!S||!S.settings)return;fltInitDone=true;if(S.settings.lensKeep&&S.settings.lensLast&&FLTS.includes(S.settings.lensLast))LENS=S.settings.lensLast}
+function fltName(L){return t('fltN')[L||'mine']}
+function renderFbar(){let b=$('#fbar');if(!b){const ov=document.createElement('div');ov.id='fov';ov.className='fov';document.body.appendChild(ov);b=document.createElement('div');b.id='fbar';b.className='fbar';document.body.appendChild(b);const f=document.createElement('div');f.id='fflash';f.className='fflash';f.setAttribute('aria-hidden','true');document.body.appendChild(f)}
+  const on=FMODE&&view!=='perfil';b.hidden=!on;$('#fov').hidden=!on;document.body.classList.toggle('flt',on);if(!on)return;const ph=lensPhrase();
+  b.innerHTML=`<p class="fb-hint">${esc(t('fltHint'))}</p><div class="fb-row"><button data-act="flt-step" data-v="-1" aria-label="${esc(t('fltPrev'))}">‹</button><div class="fb-mid" aria-live="polite"><b>${esc(fltName(LENS))}</b><small>${esc(ph||t('fltSub')[LENS||'mine'])}</small><span class="fb-dots" aria-hidden="true">${FLTS.map(k=>`<i class="${k===LENS?'on':''}"></i>`).join('')}</span></div><button data-act="flt-step" data-v="1" aria-label="${esc(t('fltNext'))}">›</button></div><div class="fb-acts"><button class="link" data-act="flt-eq">ⓘ ${esc(t('fltEqShort'))}</button><button class="btn primary sm" data-act="flt-done">${esc(t('fltDone'))}</button></div>`}
+function fltSet(L,flash){LENS=L;S.settings.lensLast=L;try{saveLocal()}catch(e){}const y=window.scrollY;render();window.scrollTo(0,y);const mm=$('#main');if(mm){mm.classList.remove('f-in');void mm.offsetWidth;mm.classList.add('f-in')}
+  if(flash){const f=$('#fflash');if(f){f.textContent=fltName(L);f.classList.remove('on');void f.offsetWidth;f.classList.add('on')}}}
+function fltStep(d){const n=FLTS.length,i=Math.max(0,FLTS.indexOf(LENS));fltSet(FLTS[(i+d+n)%n],true)}
+let eqL='';
+function eqHTML(){const L=eqL||'plut';const ph=(()=>{const o=LENS;LENS=L;const r=lensPhrase();LENS=o;return r})();
+  const rows=emosByUse(S.emotions.map(e=>emoRaw(e.id))).map(e=>{const c=lensColor(e,L);return `<div class="eq-row"><i style="background:${(emoRaw(e.id)||e).color}"></i><b>${esc(e.name)}</b>${c?`<span class="arw">→</span><i style="background:${c}"></i>`:`<small>${esc(t('fltNoFam'))}</small> <button class="link" data-act="emo-open" data-id="${e.id}" style="font-family:var(--sans);font-size:13px">${esc(t('lensAssign'))}</button>`}</div>`}).join('');
+  return `<div class="row eq-seg" role="group">${FLTS.filter(Boolean).map(k=>`<button class="chip" data-act="eq-l" data-v="${k}" aria-pressed="${k===L}">${esc(fltName(k))}</button>`).join('')}</div>
+  <p class="note" style="margin:0 0 8px">${esc(t('lensInfo')[L]||t('fltInfo')[L])}</p>${ph?`<p style="margin:0 0 8px"><b>${esc(ph)}</b></p>`:''}${L==='rus'?`<p class="note" style="margin:0 0 8px;font-size:13px">${esc(t('lensRusLegend'))}</p>`:''}
+  <div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin:10px 0 2px"><span>${esc(t('fltMine'))}</span><span>${esc(fltName(L))}</span></div>${rows}
+  <p class="note" style="margin:14px 0 0;font-size:13px">${esc(t('fltFamNote'))}</p>
+  <p style="margin:12px 0 0"><button class="link" data-act="flt-keep" data-v="${L}" style="font-family:var(--sans);font-size:14px">${esc(t('fltKeepPal',fltName(L)))}</button>${S.settings.prevColors?` · <button class="link" data-act="lens-undo" style="font-family:var(--sans);font-size:14px">${esc(t('lensUndo'))}</button>`:''}</p>`}
+function openEq(){eqL=LENS||'plut';openDlg(`<div class="dlg-head"><h2>${esc(t('fltEqT'))}</h2><button class="btn quiet" data-act="close">${t('close')}</button></div><p class="note" style="margin:6px 0 10px">${esc(t('fltEqLead'))}</p><div id="eq-body">${eqHTML()}</div>`)}
+(function(){let sx=null,sy=null,onOv=false;
+  document.addEventListener('pointerdown',e=>{sx=null;if(!FMODE)return;const tg=e.target;if(!tg.closest||!tg.closest('#fov,#fbar'))return;onOv=!!tg.closest('#fov');sx=e.clientX;sy=e.clientY},{passive:true});
+  document.addEventListener('pointerup',e=>{if(sx==null)return;const dx=e.clientX-sx,dy=e.clientY-sy;sx=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3)fltStep(dx<0?1:-1);else if(onOv&&Math.abs(dx)<8&&Math.abs(dy)<8)fltDone()});
+  document.addEventListener('pointercancel',()=>{sx=null});})();
+function fltDone(){FMODE=false;const y=window.scrollY;render();window.scrollTo(0,y);if(LENS)toast(t('fltOn',fltName(LENS)))}
 function famName(f){return (t('famN')||{})[f]||f}
-function emoFam(e){if(!e)return null;if(e.fam==='none')return null;if(e.fam)return {fam:e.fam,lvl:e.lvl==null?1:e.lvl};const d=DEF_FAM[e.id];return d?{fam:d[0],lvl:d[1]}:null}
+function emoFam(e){if(!e)return null;if(e.fam==='none')return null;if(e.fam)return {fam:e.fam,lvl:e.lvl==null?1:e.lvl};const d=DEF_FAM[e.id];if(d)return {fam:d[0],lvl:d[1]};return famGuess(e)}
+const FAM_KW=[
+ ['alegria',1,'feli alegr content riure riu risa reir rie laugh joy happy diver gaudi disfrut enjoy plaer placer pleasure guai genial bien be good'],
+ ['alegria',2,'eufori entusias extasi emocion excited'],
+ ['alegria',0,'calm tranquil relax seren descans rest pau paz peace quiet sosieg plenitu satisf'],
+ [['alegria','confianza'],1,'amor love estim carino carinyo tendr tern abraz abrac afecte afecto cuddle'],
+ ['confianza',1,'confi trust segur safe agrai agrade grat gracies gracias thank acolli acogi comfort confort protegi suport apoyo support'],
+ ['confianza',2,'orgull proud admir'],
+ ['anticipacion',1,'ilusi illusi esper hope anticip ganes ganas motiva expect eager impacien project plans'],
+ ['anticipacion',0,'interes interest pensatiu pensativ reflex'],
+ ['sorpresa',1,'sorpr asombr meravell maravill wow amaz curios fascin descobr descubr inspir'],
+ [['alegria','tristeza'],1,'nostal enyor anoran morri'],
+ ['tristeza',1,'trist pena sad melancol plor llor cry dol duelo grief soled solitu lonel decep disap desil buit vacio empty desanim baj down'],
+ ['tristeza',0,'cansa tired esgota agota fatig son sueno sleep apat avorr aburr bored desgan mandra pereza lazy apagad low dormi'],
+ ['miedo',1,'preocup ansi angoix angust nervi estres stress inquiet por miedo fear worr anxi insegur temor tens agobi agobi overwhelm'],
+ ['miedo',2,'panic terror'],
+ ['ira',1,'irrit enfad enuf rabi ira anger angry frustr molest cabre empipa emprenya mal humor grumpy impot'],
+ ['ira',2,'furi fury odi odio hate'],
+ ['asco',1,'asco fastic disgust rebuig rechaz verguen vergony shame culpa guilt incomod incomfort uncomfort'],
+];
+const famNorm=x=>String(x||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[·.]/g,'').replace(/l·l|ll/g,'ll').trim();
+let FAM_IDX=null;const famCache=new Map();
+function famGuess(e){const nm=famNorm(e.name),k=nm+'|'+(e.color||'');if(famCache.has(k))return famCache.get(k);let r=null;
+  if(!FAM_IDX){FAM_IDX={};(typeof LIB!=='undefined'?LIB:[]).forEach(x=>[x[2],x[3],x[4]].forEach(n=>{FAM_IDX[famNorm(n)]=[x[0],x[1]]}))}
+  if(nm&&FAM_IDX[nm])r={fam:FAM_IDX[nm][0],lvl:FAM_IDX[nm][1],auto:1};
+  if(!r&&nm){const words=nm.split(/[^a-z0-9ñç]+/).filter(Boolean);
+    outer:for(const [f,l,kw] of FAM_KW){for(const st of kw.split(' ')){if(words.some(w=>st.length<4?w===st:w.startsWith(st))){r={fam:f,lvl:l,auto:1};break outer}}}}
+  if(!r&&e.color&&/^#[0-9a-f]{6}$/i.test(e.color)){const h=hueOf(e.color);
+    if(h.s<.14)r={fam:'tristeza',lvl:h.l>.6?0:1,auto:1};
+    else{let bi='alegria',bd=1e9;FAM_IDS.forEach(f=>{const g=hueOf(FAM[f].c);const d=Math.min(Math.abs(g.h-h.h),360-Math.abs(g.h-h.h));if(d<bd){bd=d;bi=f}});r={fam:bi,lvl:h.l>.72?0:h.l<.35?2:1,auto:1}}}
+  famCache.set(k,r);return r}
 function lvlAdj(c,l){return l===0?mixHex(c,'#FFFFFF',.42):l===2?mixHex(c,'#1C1A28',.22):c}
 function bilin(v,a){const x=(v+1)/2,y=(a+1)/2;const top=mixHex('#5D6B8F','#9CC9A6',x),bot=mixHex('#C8414B','#F2B134',x);return mixHex(top,bot,y)}
-function lensColor(e,L){const f=emoFam(e);if(!f)return null;const fs=Array.isArray(f.fam)?f.fam:[f.fam];if(!fs.every(x=>FAM[x]))return null;
+const RISO=['#FF48B0','#0078BF','#FFE800','#00A95C','#FF6C2F','#765BA7','#F15060','#00838A'];
+function hueOf(h){const [r,g,b]=hexToRgb(h).map(v=>v/255);const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;if(!d)return {h:0,s:0,l:(mx+mn)/2};let x=mx===r?((g-b)/d)%6:mx===g?(b-r)/d+2:(r-g)/d+4;return {h:(x*60+360)%360,s:d/(1-Math.abs(mx+mn-1)),l:(mx+mn)/2}}
+const RISO_H=RISO.map(hueOf);
+function lensColor(e,L){if(L==='bn'||L==='riso'){const raw=(e&&e.color)||'#888888';if(L==='bn'){const [r,g,b]=hexToRgb(raw);const y=Math.round(.299*r+.587*g+.114*b);const v=Math.round(Math.max(40,Math.min(200,(y-128)*1.25+120)));return rgbToHex([v,v,v])}
+  const h=hueOf(raw);if(h.s<.12)return h.l>.5?'#FFE800':'#765BA7';let bi=0,bd=999;RISO_H.forEach((x,i)=>{const d=Math.min(Math.abs(x.h-h.h),360-Math.abs(x.h-h.h));if(d<bd){bd=d;bi=i}});return RISO[bi]}
+  const f=emoFam(e);if(!f)return null;const fs=Array.isArray(f.fam)?f.fam:[f.fam];if(!fs.every(x=>FAM[x]))return null;
   if(L==='rus'){const v=fs.reduce((s,x)=>s+FAM[x].v,0)/fs.length,a=Math.max(-1,Math.min(1,fs.reduce((s,x)=>s+FAM[x].a,0)/fs.length+(f.lvl-1)*.3));return bilin(v,a)}
   const cs=fs.map(x=>L==='ek'?EKC[FAM[x].ek]:FAM[x].c);const c=cs.length>1?mixHex(cs[0],cs[1],.5):cs[0];return lvlAdj(c,f.lvl)}
 function lensEmo(e){if(!LENS||!e)return e;const c=lensColor(e,LENS);return c?{...e,color:c}:e}
@@ -1602,7 +1690,7 @@ function libAdd(i){const x=LIB[i];if(!x)return;const n=libName(x);if(libHas(n))r
 function lensStats(){const since=iso(addDays(new Date(),-30));const ms=vis().filter(m=>m.date>=since);const c={};let tot=0,V=0,A=0,n=0;
   ms.forEach(m=>(m.emotions||[]).forEach((id,i)=>{const f=emoFam(emo(id));if(!f)return;const w=i===0?1:.5;const fs=Array.isArray(f.fam)?f.fam:[f.fam];fs.forEach(x=>{if(!FAM[x])return;const k=LENS==='ek'?FAM[x].ek:x;c[k]=(c[k]||0)+w/fs.length;tot+=w/fs.length;V+=FAM[x].v*w;A+=(FAM[x].a+(f.lvl-1)*.3)*w;n+=w})}));
   return {c,tot,v:n?V/n:0,a:n?A/n:0}}
-function lensPhrase(){const st=lensStats();if(!st.tot)return '';
+function lensPhrase(){if(!['plut','rus','ek'].includes(LENS))return '';const st=lensStats();if(!st.tot)return '';
   if(LENS==='rus')return t('lensPh').rus(t('rusW')[(st.v>=0?'p':'n')+(st.a>=0?'a':'b')]);
   const top=Object.entries(st.c).sort((a,b)=>b[1]-a[1])[0];return t('lensPh')[LENS](famName(top[0]),Math.round(100*top[1]/st.tot))}
 function lensBarHTML(){if(!LENS)return '';const un=S.emotions.filter(e=>!emoFam(e)).length;const ph=lensPhrase();
@@ -1622,8 +1710,8 @@ function lensPickHTML(){const i=LENSES.indexOf(LENS),n=LENSES.length,p=LENSES[(i
   document.addEventListener('pointerup',e=>{if(sx==null)return;const dx=e.clientX-sx,dy=e.clientY-sy;sx=null;
     if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3){const n=LENSES.length,i=LENSES.indexOf(LENS);LENS=LENSES[(i+(dx<0?1:-1)+n)%n];lensDir=dx<0?1:-1;lensInfoOpen=false;const y=window.scrollY;render();window.scrollTo(0,y);lensDir=0}});
   document.addEventListener('pointercancel',()=>{sx=null});})();
-function famPickHTML(e){const f=e.fam==='none'?null:emoFam(e);const cur=f&&!Array.isArray(f.fam)?f.fam:'';
-  return `<label class="f">${esc(t('famQ'))} <small>${esc(t('famHint'))}</small></label>${f&&Array.isArray(f.fam)?`<p class="note" style="margin:0 0 8px">${esc(t('famMix',famName(f.fam[0]),famName(f.fam[1])))}</p>`:''}
+function famPickHTML(e){const f=e.fam==='none'?null:emoFam(e);const cur=f&&!Array.isArray(f.fam)?f.fam:'';const au=f&&f.auto;
+  return `<label class="f">${esc(t('famQ'))} <small>${esc(au?t('famAuto'):t('famHint'))}</small></label>${f&&Array.isArray(f.fam)?`<p class="note" style="margin:0 0 8px">${esc(t('famMix',famName(f.fam[0]),famName(f.fam[1])))}</p>`:''}
   <div class="row fam-pick">${FAM_IDS.map(k=>`<button class="chip" style="--c:${FAM[k].c}" data-act="emo-fam" data-id="${e.id}" data-v="${k}" aria-pressed="${cur===k}"><i></i>${esc(cap(famName(k)))}</button>`).join('')}<button class="chip" data-act="emo-fam" data-id="${e.id}" data-v="none" aria-pressed="${!f}">${esc(t('famNone'))}</button></div>
   ${f?`<div class="seg" role="group" style="margin-top:10px">${[0,1,2].map(l=>`<button data-act="emo-lvl" data-id="${e.id}" data-v="${l}" aria-pressed="${f.lvl===l}">${esc(t('lvlL')[l])}</button>`).join('')}</div>`:''}`}
 /* ---------- «Tu día»: intención por la mañana y balance por la noche ---------- */
@@ -1815,11 +1903,12 @@ function renderNav(){
   const n=$('#nav');n.setAttribute('aria-label',t('sections'));
   const tab=(v,k)=>`<button data-act="nav" data-v="${v}" aria-current="${view===v?'page':'false'}">${ICONS[v]}${t(k)}</button>`;
   const me=$('#me');if(me){const nm=(S.profile&&S.profile.name||'').trim();me.innerHTML=nm?esc(nm.charAt(0).toUpperCase()):'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4.1-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg>';me.setAttribute('aria-label',t('meBtn'));me.setAttribute('aria-current',view==='perfil'?'page':'false')}
+  const fb=$('#fltbtn');if(fb){fb.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><g style="mix-blend-mode:multiply"><circle cx="12" cy="8.6" r="5.4" fill="#E9B949" fill-opacity=".9"/><circle cx="8.6" cy="14.6" r="5.4" fill="#D9667A" fill-opacity=".85"/><circle cx="15.4" cy="14.6" r="5.4" fill="#5B8FB9" fill-opacity=".85"/></g></svg>'+(LENS?'<span class="flt-on" aria-hidden="true"></span>':'');fb.setAttribute('aria-label',t('fltBtn'));fb.title=t('fltBtn');fb.setAttribute('aria-pressed',String(FMODE));fb.classList.toggle('has',!!LENS);fb.hidden=view==='perfil'}
   n.innerHTML=tab('hoy','navHoy')+tab('archivo','navArchivo')+`<button class="plus" data-act="new" aria-label="${esc(t('navNew'))}">${ICONS.plus}<span>${t('navNew')}</span></button>`+tab('paleta','navPaleta')+tab('informe','navInforme');
 }
 function go(v){if(typeof pl!=='undefined'&&pl&&v!=='archivo')plStop();if(typeof skyFs!=='undefined'&&skyFs)skyFsSet(false);if(v==='informe'&&view!=='informe')rjAnim=true;view=v;render();window.scrollTo(0,0)}
-function render(){applyFont();
-  renderNav();
+function render(){applyFont();fltInit();
+  renderNav();renderFbar();
   const m=$('#main');const hs={};m.querySelectorAll('[data-hs]').forEach(e=>hs[e.dataset.hs]=e.scrollLeft);const sameView=m.dataset.v===view;m.dataset.v=view;
   m.dataset.arch=view==='archivo'?archMode:'';
   if(view==='hoy'){m.innerHTML=vHoy();setTimeout(setupRm,0)}
@@ -1827,7 +1916,6 @@ function render(){applyFont();
   else if(view==='paleta')m.innerHTML=vPaleta();
   else if(view==='informe')m.innerHTML=vInforme();
   else if(view==='perfil')m.innerHTML=vPerfil();
-  if(LENS&&view!=='perfil'&&view!=='paleta')m.insertAdjacentHTML('afterbegin',lensBarHTML());
   else if(view==='mapa')m.innerHTML=vMapa();
   if(sameView)m.querySelectorAll('[data-hs]').forEach(e=>{if(hs[e.dataset.hs])e.scrollLeft=hs[e.dataset.hs]});
   hydratePhotos(m);
@@ -2543,7 +2631,7 @@ function swatchesHTML(e){
   return fams+(lock?`<p class="note sw-lock">${plusBadge()} ${esc(t('why').swatch[1])}</p>`:'')+`<div class="swatches${lock?' locked':''}" role="group" aria-label="${esc(lock?t('swatchPlus'):t('swatchHint'))}">${order.map(c=>`<button data-act="emo-swatch" data-id="${e.id}" data-v="${c}" class="${used.has(c)?'used':nearEmo(c,e.id)&&(e.color||'').toUpperCase()!==c?'near':''}" style="background:${c}" aria-pressed="${(e.color||'').toUpperCase()===c}" aria-label="${c}"></button>`).join('')}${more}${lock?`<button data-act="go-plus" style="width:auto;height:auto;border-radius:999px;padding:0;box-shadow:none;border:0;background:none;opacity:1">${plusBadge()}</button>`:''}</div>`;
 }
 
-const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.34';
+const FB_EMAIL='appmemorandum@gmail.com', APP_VER='1.35';
 let fbRate=null;
 const FB_FACES=['😕','😐','🙂','😊','😍'];
 function feedbackBody(){
@@ -2614,7 +2702,7 @@ function vPaleta(){
     <p class="note" style="margin:4px 0 6px">${esc(t('typeHideNote'))}</p>
   </div>`:`
   <p class="lead">${esc(t('palLead2'))}</p>
-  ${lensPickHTML()}
+  <div class="pal-acts"><button class="link" data-act="lib-open">✦ ${esc(t('libBtn'))}</button><button class="link" data-act="flt-eq">${esc(t('fltEq'))}</button></div>
   <div class="emo-grid"><button class="emo-tile add" data-act="emo-add"><span class="emo-sw"><b>+</b></span><b>${esc(t('emoNewShort'))}</b><small>${esc(t('emoAddSub'))}</small></button>${S.emotions.map(lensEmo).map(e=>`<button class="emo-tile" style="--c:${e.color}" data-act="emo-open" data-id="${e.id}"><span class="emo-sw"></span><b>${esc(e.name)}</b><small>${esc(t('nMem',cnt(e.id)))}</small></button>`).join('')}</div>
 `);
 }
@@ -2653,6 +2741,7 @@ function lookBody(){
   <div class="ps-sub">${esc(t('langTitle'))}</div>${langChips()}
   <div class="ps-sub" style="margin-bottom:0">${esc(t('psShow'))}</div>
   ${swRow(t('dyBtnLbl'),t('dyBtnHint'),'dy-btn',showDyBtn())}
+  ${swRow(t('fltKeepLbl'),t('fltKeepHint'),'flt-keep-set',!!S.settings.lensKeep)}
   ${swRow(t('shareShowLbl'),t('shareShowHint'),'share-show',showShare())}
   ${swRow(t('tdSetLbl'),t('tdSetHint'),'td-show',tdOn())}${tdOn()?tdRemHTML():''}
   ${swRow(t('nzLbl'),t('nzHint'),'nudge-show',nudgesOn())}
@@ -4942,6 +5031,13 @@ document.addEventListener('click',e=>{
     case 'rem-ics':remIcs();break;
     case 'rem-google':remGoogle();break;
     case 'rem-how':remHowOpen=!remHowOpen;render();break;
+    case 'flt':{if(FMODE){fltDone();break}FMODE=true;const y=window.scrollY;render();window.scrollTo(0,y);break}
+    case 'flt-done':fltDone();break;
+    case 'flt-step':fltStep(+v);break;
+    case 'flt-eq':openEq();break;
+    case 'eq-l':{eqL=v;const b=$('#eq-body');if(b)b.innerHTML=eqHTML();break}
+    case 'flt-keep':{const L=v;const prev={};S.emotions.forEach(e=>{const c=lensColor(e,L);if(c){prev[e.id]=e.color;e.color=c}});S.settings.prevColors=prev;FMODE=false;LENS='';savePalette();closeDlg();render();toast(t('tLensKept'));break}
+    case 'flt-keep-set':S.settings.lensKeep=v==='on';savePalette();render();break;
     case 'dy-btn':S.settings.dyBtn=v==='on';savePalette();render();break;
     case 'share-show':S.settings.share=v==='on';savePalette();render();break;
     case 'card-save':{const k=b.dataset.k;if(k==='story'){saveCardFromCanvas(window._storyCanvas,{kind:'story',label:storySel?storySel.title:range(rep.period,rep.offset).label})}else if(shareState){const sd=shareState;let label='';if(sd.kind==='mem'){const m=memOf(sd.data);label=m?memTitle(m):''}else if(sd.kind==='day')label=fmt(sd.data);else if(sd.kind==='stat'){const d=sd.data;label=d.mode==='emo'?(emo(d.id)||{}).name:d.mode==='drawer'?(drawerOf(d.id)||{}).name:cap(typeOf(d.id).plural)}else if(sd.kind==='conn'){const a1=memOf(sd.data.a),b1=memOf(sd.data.b);label=a1&&b1?memTitle(a1)+' + '+memTitle(b1):''}else if(sd.kind==='sky')label=skyLast?cap(skyLast.label):'';else if(sd.kind==='dual'){const a=memOf((sd.data.ids||[])[0]);label=a?fmt(a.date):''}saveCardFromCanvas(window._shareCanvas,{kind:sd.kind,label:label||''})}break}
