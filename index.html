@@ -806,6 +806,7 @@ select.in{appearance:none;-webkit-appearance:none;background-image:linear-gradie
 .btn-eq .btn{padding-left:8px;padding-right:8px;text-align:center}
 .snap-x{width:34px;height:34px;padding:0;display:inline-flex;align-items:center;justify-content:center}
 .ver{font-size:13px;color:var(--muted);text-align:center;margin:22px 0 0}
+@media (hover:hover) and (pointer:fine){.pe-cam{display:none!important}}
 </style>
 </head>
 <body>
@@ -908,7 +909,7 @@ es:{
   yourCopy:'Tu copia', copyText:'Copia este texto y guárdalo en un archivo .json.', copied:'Ya la he guardado',
   due:a=>`Toca guardar tu copia ${a}.`, dueLast:d=>` La última fue el ${d}.`, dueNone:' Aún no has guardado ninguna.', later:'Recordármelo mañana',
   noName:'Sin nombre',
-  photos:'Fotos', addPhoto:'Añadir foto', removePhoto:'Quitar foto', photoAlt:'Foto del recuerdo',
+  photos:'Fotos', takePhoto:'Hacer foto', addPhoto:'Añadir foto', removePhoto:'Quitar foto', photoAlt:'Foto del recuerdo',
   photoHintFree:'1 foto por recuerdo. Con Plus, hasta 5.', photoHintPlus:n=>`Hasta 5 fotos por recuerdo (${n}/5).`,
   photoErr:'No he podido abrir esa imagen. Prueba con otra.', photoProcessing:'Preparando la foto…', exportPreparing:'Preparando la copia con tus fotos…',
   limitFree:'Con Plus puedes añadir hasta 5 fotos por recuerdo.', limitPlus:'Ya tienes 5 fotos en este recuerdo, el máximo.', limitPlusN:n=>`Solo caben 5 fotos por recuerdo: he añadido ${n===1?'1':'las '+n+' primeras'}.`,
@@ -1146,7 +1147,7 @@ en:{
   yourCopy:'Your copy', copyText:'Copy this text and save it in a .json file.', copied:"I've saved it",
   due:a=>`Time to save your ${a} copy.`, dueLast:d=>` The last one was on ${d}.`, dueNone:" You haven't saved one yet.", later:'Remind me tomorrow',
   noName:'Untitled',
-  photos:'Photos', addPhoto:'Add photo', removePhoto:'Remove photo', photoAlt:'Photo of the memory',
+  photos:'Photos', takePhoto:'Take photo', addPhoto:'Add photo', removePhoto:'Remove photo', photoAlt:'Photo of the memory',
   photoHintFree:'1 photo per memory. With Plus, up to 5.', photoHintPlus:n=>`Up to 5 photos per memory (${n}/5).`,
   photoErr:"I couldn't open that image. Try another one.", photoProcessing:'Preparing the photo…', exportPreparing:'Preparing the copy with your photos…',
   limitFree:'With Plus you can add up to 5 photos per memory.', limitPlus:'This memory already has 5 photos, the maximum.', limitPlusN:n=>`Only 5 photos fit per memory: I added ${n===1?'1':'the first '+n}.`,
@@ -1384,7 +1385,7 @@ ca:{
   yourCopy:'La teva còpia', copyText:`Copia aquest text i desa'l en un fitxer .json.`, copied:`Ja l'he desada`,
   due:a=>`Toca desar la teva còpia ${a}.`, dueLast:d=>` L'última va ser el ${d}.`, dueNone:` Encara no n'has desat cap.`, later:`Recorda-m'ho demà`,
   noName:'Sense nom',
-  photos:'Fotos', addPhoto:'Afegeix una foto', removePhoto:'Treu la foto', photoAlt:'Foto del record',
+  photos:'Fotos', takePhoto:'Fes una foto', addPhoto:'Afegeix una foto', removePhoto:'Treu la foto', photoAlt:'Foto del record',
   photoHintFree:'1 foto per record. Amb Plus, fins a 5.', photoHintPlus:n=>`Fins a 5 fotos per record (${n}/5).`,
   photoErr:`No he pogut obrir aquesta imatge. Prova'n una altra.`, photoProcessing:'Preparant la foto…', exportPreparing:'Preparant la còpia amb les teves fotos…',
   limitFree:'Amb Plus pots afegir fins a 5 fotos per record.', limitPlus:'Aquest record ja té 5 fotos, el màxim.', limitPlusN:n=>`Només hi caben 5 fotos per record: n'he afegit ${n===1?'1':'les '+n+' primeres'}.`,
@@ -3115,7 +3116,7 @@ function renderEditor(focusSel){
   <textarea class="in" id="ed-text" data-ed="text" placeholder="${esc(ty.ph)}">${esc(draft.text)}</textarea>
   ${(()=>{const sg=draft.type==='cancion';return `<label class="f" for="ed-url">${esc(t(sg?'songLink':'webLink'))} <small>${t('optional')}</small></label><input class="in" id="ed-url" type="url" inputmode="url" autocomplete="off" data-ed="link" placeholder="${esc(t(sg?'songLinkPh':'webLinkPh'))}" value="${esc(draft.link||'')}">`})()}
   <label class="f">${t('photosVoice')} <small>${esc(isPlus()?t('photoHintPlus',draft.photos.length):t('photoHintFree'))}</small></label>
-  <div class="photo-edit">${draft.photos.map(pid=>`<div class="pe"><img data-photo="${pid}" alt=""><button class="pe-x" data-act="ed-unphoto" data-v="${pid}" aria-label="${esc(t('removePhoto'))}">✕</button></div>`).join('')}${draft.photos.length<photoLimit()?`<label class="pe-add"><input type="file" accept="image/*" data-ed-photo class="vh"${photoLimit()-draft.photos.length>1&&!S.settings.onePick?' multiple':''}><span aria-hidden="true">+</span><small>${esc(t('addPhoto'))}</small></label>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('limitFree'))}"><span aria-hidden="true">+</span><small>${plusBadge()}</small></button>`:'')}${rec?`<button class="pe-add pe-rec" data-act="au-stop" aria-label="${esc(t('auStop'))}"><span aria-hidden="true">■</span><small id="au-rec-t">${fmtDur((Date.now()-rec.t0)/1000)}</small></button>`:(draft.audios||[]).length<auLim().n?`<button class="pe-add" data-act="au-rec" aria-label="${esc(t('auRec'))}"><span aria-hidden="true">🎙</span><small>${esc(t('auRecShort'))}</small></button>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('auLimitFree'))}"><span aria-hidden="true">🎙</span><small>${plusBadge()}</small></button>`:'')}</div>
+  <div class="photo-edit">${draft.photos.map(pid=>`<div class="pe"><img data-photo="${pid}" alt=""><button class="pe-x" data-act="ed-unphoto" data-v="${pid}" aria-label="${esc(t('removePhoto'))}">✕</button></div>`).join('')}${draft.photos.length<photoLimit()?`<label class="pe-add"><input type="file" accept="image/*" data-ed-photo class="vh"${photoLimit()-draft.photos.length>1&&!S.settings.onePick?' multiple':''}><span aria-hidden="true">+</span><small>${esc(t('addPhoto'))}</small></label><label class="pe-add pe-cam"><input type="file" accept="image/*" capture="environment" data-ed-photo class="vh"><span aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 8h3l1.6-2.2h6.8L17 8h3v11H4z"/><circle cx="12" cy="13.2" r="3.6"/></svg></span><small>${esc(t('takePhoto'))}</small></label>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('limitFree'))}"><span aria-hidden="true">+</span><small>${plusBadge()}</small></button>`:'')}${rec?`<button class="pe-add pe-rec" data-act="au-stop" aria-label="${esc(t('auStop'))}"><span aria-hidden="true">■</span><small id="au-rec-t">${fmtDur((Date.now()-rec.t0)/1000)}</small></button>`:(draft.audios||[]).length<auLim().n?`<button class="pe-add" data-act="au-rec" aria-label="${esc(t('auRec'))}"><span aria-hidden="true">🎙</span><small>${esc(t('auRecShort'))}</small></button>`:(!isPlus()?`<button class="pe-add" data-act="go-plus" aria-label="${esc(t('auLimitFree'))}"><span aria-hidden="true">🎙</span><small>${plusBadge()}</small></button>`:'')}</div>
   ${phErr?`<div class="err" role="alert">${esc(phErr)}</div>`:''}
   ${(draft.audios||[]).length?`<div class="au-list">${draft.audios.map(a=>auPill(a,true)).join('')}</div>`:''}
   ${!rec&&(draft.audios||[]).length<auLim().n?`<label class="au-up">${esc(t('auUpload'))} <small>${esc(isPlus()?t('auHintPlus'):t('auHintFree'))}</small><input type="file" accept="audio/*" data-ed-audio class="vh"></label>`:''}
