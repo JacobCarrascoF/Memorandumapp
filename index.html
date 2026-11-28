@@ -576,7 +576,7 @@ body.sky-fs nav.tabs,body.sky-fs header.top{visibility:hidden}
 /* ---------- Hoy, Archivo y bienvenida ---------- */
 .resurf-mini{position:relative;overflow:hidden;touch-action:pan-y;display:flex;align-items:center;gap:4px;margin:30px 0 0;border-radius:14px;padding:8px 4px 8px 8px;background:color-mix(in srgb,var(--c) 16%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 35%,var(--line))}
 .tb-view{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0}.tb-view::-webkit-scrollbar{display:none}.tb-view .chip{flex:none;font-size:15px;padding:7px 14px}
-.time-bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0 10px;margin:0 0 6px;border-bottom:1px solid var(--line)}.tb-nav{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}.tb-nav strong{font-family:var(--serif);font-weight:400;font-size:22px;min-width:0;text-align:center;flex:1}
+.time-bar{position:sticky;top:var(--hdr,0px);z-index:5;background:var(--paper);padding:8px 0 10px;margin:0 0 6px;border-bottom:1px solid var(--line)}.tb-nav{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}.tb-nav strong{font-family:var(--serif);font-weight:400;font-size:22px;min-width:0;text-align:center;flex:1}
 .rm-main{flex:1;min-width:0;display:flex;align-items:center;gap:12px;border:0;background:none;padding:0;text-align:left;transition:opacity .35s ease,transform .35s ease}
 .rm-main.rm-out{opacity:0;transform:translateY(5px)}
 .rm-main.rm-sl-l{opacity:0;transform:translateX(-28px)}
@@ -5286,6 +5286,8 @@ if(!window.claude&&navigator.storage&&navigator.storage.persist){navigator.stora
 checkPlus();
 initCloud().catch(()=>{}).finally(()=>{checkPlus().then(()=>playInit()).catch(()=>{});ensureSettings();applyLang();autoSnapshot();render();if(/[?&]shared=1/.test(location.search))checkShareInbox();else if(!S.settings.onboarded){if(lpWanted())lpShow();else openOnboarding(0)}else setTimeout(maybeRecap,700)});
 
+
+(function(){const h=document.querySelector('header.top');if(!h||!window.ResizeObserver)return;const set=()=>document.documentElement.style.setProperty('--hdr',(getComputedStyle(h).position==='sticky'?h.offsetHeight:0)+'px');new ResizeObserver(set).observe(h);set()})();
 </script>
 </body>
 </html>
